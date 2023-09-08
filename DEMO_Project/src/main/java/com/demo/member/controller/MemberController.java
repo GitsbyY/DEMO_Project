@@ -29,6 +29,15 @@ public class MemberController {
 	private MemberService memberService;
 	
 	//로그인 화면으로 이동
+		@RequestMapping(value = "/header.do", method = RequestMethod.GET)
+		public String header(HttpSession session, Model model) {
+			
+			log.info("Header??");
+			
+			return "Header";
+		}
+		
+	//로그인 화면으로 이동
 	@RequestMapping(value = "/auth/login.do", method = RequestMethod.GET)
 	public String login(HttpSession session, Model model) {
 		
