@@ -27,6 +27,12 @@ div {
 .daengFoot{
 	font-size: 10px;
 }
+
+footer {
+	position: absolute;
+	bottom: 0;
+	width:100%;
+}
 </style>
 
 <link rel="stylesheet" type="text/css" href="">
@@ -34,7 +40,7 @@ div {
 
 <body>
 
-	<div>
+	<footer>
 	<hr>
 		<div>
 			<div id="footerAddress" class="daengFoot">
@@ -44,7 +50,7 @@ div {
 			&copy; TEAM DEMO
 			</div>
 		</div>
-	</div>
+	</footer>
 </body>
 
 </html>
