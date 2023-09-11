@@ -40,12 +40,12 @@ th{
 
 #firstTh{
    border-bottom: 2px solid black;
-   width: 150px;
+   width: 200px;
    display: block;     
 }
 
 #secondTh{
-   width: 800px;   
+   width: 750px;   
 }
 
 #titleTag{
@@ -54,7 +54,7 @@ th{
 
 </style>
 <meta charset="UTF-8">
-<title>마이댕댕 메인</title>
+<title>마이댕댕 회원정보확인</title>
 <!-- <link rel="stylesheet" type="text/css" href="css/mystyles.css"> -->
 <!-- <script src="js/myscript.js"></script> -->
 </head>
@@ -63,16 +63,16 @@ th{
 	
 	<aside>
 		<h1 class="H1tag">댕댕 쇼핑</h1>
-		<a id="titleTag" class="aTag">주문목록</a><br>
+		<a class="aTag">주문목록</a><br>
 		<a class="aTag">취소내역</a><br>
 		<a class="aTag">쇼핑몰 결제관리</a><br><br>		
 		<h1 class="H1tag">댕댕 프로필</h1>
-		<a class="aTag">회원정보확인/수정</a><br>
-		<a class="aTag">결제관리</a><br> 	
+		<a id="titleTag" class="aTag">회원정보확인/수정</a><br>
+		<a class="aTag">결제관리</a><br>	
 	</aside>
 	<table id="titleTable">
       <tr>
-         <th id="firstTh">주문목록</th>
+         <th id="firstTh">회원정보 확인</th>
          <th id="secondTh"></th>      
       </tr>            
    </table>

@@ -10,7 +10,7 @@ aside{
 	width: 180px;
 	height: 600px;
 	margin-left: 17%;
-	
+	margin-right: 100px;
 }
 .aTag{
 	margin-left: 35px;
@@ -49,6 +49,10 @@ aside{
 	text-align: center;	
 }
 
+#titleTag{
+	color: blue;
+}
+
 </style>
 <meta charset="UTF-8">
 <title>쇼핑몰 메인</title>
@@ -60,7 +64,7 @@ aside{
 	
 	<aside>
 		<h1 class="H1tag">댕댕 쇼핑몰</h1>
-		<a class="aTag">전체</a><br>
+		<a id="titleTag" class="aTag">전체</a><br>
 		<a class="aTag">사료</a><br>
 		<a class="aTag">간식</a><br>
 		<a class="aTag">영양제</a><br>

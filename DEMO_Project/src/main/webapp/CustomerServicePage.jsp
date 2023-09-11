@@ -10,7 +10,7 @@ aside{
 	width: 180px;
 	height: 600px;
 	margin-left: 17%;
-	
+	margin-right: 100px;
 }
 .aTag{
 	margin-left: 35px;
@@ -23,40 +23,33 @@ aside{
 	line-height: 2.5;		
 }
 
-#input{
-	float: right;
-	margin-right: 16%;
-	margin-top: 10px;
-	height: 25px;
-	width: 220px;
-	border-radius: 5px;
-	padding-left: 20px;
-	vertical-align: middle; 
+#titleTable{
+   margin-top: 30px;
+   border: 1px solid gray;
+   border-collapse: collapse;
+   border-top: thick;
+   border-left:thick;
+   border-right:thick;
+   margin-right: 15.5%;
+   table-layout: fixed;   
+}
+th{
+   
+   font-size: 30px;
 }
 
-#titleDiv{
-	border: 2px solid black;
-	border-left:thick;
-	border-right:thick;
-	border-top:thick;
-	float: right;
-	margin-top: 10px;
-	width: 180px;
-	font-size: 30px;
-	font-weight: bold;
-	
+#firstTh{
+   border-bottom: 2px solid black;
+   width: 180px;
+   display: block;     
 }
 
-#titleSideDiv{
-	float: right;
-	width: 620px;
-	border: 1px solid gray;
-	margin-top: 10px;
-	margin-right: 245px;
-	height: 40px;
-	border-left:thick;
-	border-right:thick;
-	border-top:thick;
+#secondTh{
+   width: 770px;   
+}
+
+#titleTag{
+	color: blue;
 }
 
 </style>
@@ -70,18 +63,18 @@ aside{
 	
 	<aside>
 		<h1 class="H1tag">고객센터</h1>
-		<a class="aTag">1:1 상담문의</a><br>
+		<a id="titleTag" class="aTag">1:1 상담문의</a><br>
 		<a class="aTag">공지사항</a><br>			
 	</aside>
-	<div>
-		<div id="titleSideDiv">
-		</div>
-		<div id="titleDiv">
-			1:1 상담문의
-		</div>
+	<table id="titleTable">
+      <tr>
+         <th id="firstTh">1:1 상담문의</th>
+         <th id="secondTh"></th>      
+      </tr>            
+	</table>
 		
 	
-	</div>
+	
 	
 	
 
