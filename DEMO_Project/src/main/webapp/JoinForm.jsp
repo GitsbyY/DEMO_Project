@@ -231,8 +231,7 @@
 	var errMsgAddress = document.getElementById("userJoinMessageAddress");
 	//상세주소 div	
 	var detailAddress = document.getElementById("userJoinDetailAddress");
-	var errMsgDetailAddress = document
-			.getElementById("userJoinMessageDetailAddress");
+	var errMsgDetailAddress = document.getElementById("userJoinMessageDetailAddress");
 	
 	// 아이디 div
 	userId.addEventListener("blur", handleBlurEventForId);
@@ -305,6 +304,7 @@
 
 	// 	아이디
 	function handleBlurEventForId() {
+
 		userId.classList.remove("focusOutline");
 
 		if (userId.value.length == 0) {
@@ -315,6 +315,7 @@
 		}
 
 		if (!blankCheck.test(userId.value)) {
+			alert('1234');
 			userId.classList.add("errorOutline");
 			errMsgId.style.color = "red";
 			errMsgId.textContent = "공백은 사용할 수 없습니다.";
@@ -530,7 +531,6 @@
 		errMsgMobile.style.color = "";
 		errMsgMobile.textContent = "";
 		isValidMobile = true;
-
 
 	}
 
