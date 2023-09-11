@@ -24,6 +24,7 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 div {
 	display: block;
 }
+
 .daengFoot{
 	font-size: 10px;
 }
@@ -31,7 +32,7 @@ div {
 footer {
 	position: absolute;
 	bottom: 0;
-	width:100%;
+	width:70%;
 }
 </style>
 
@@ -43,11 +44,13 @@ footer {
 	<footer>
 	<hr>
 		<div>
-			<div id="footerAddress" class="daengFoot">
-				서울 서초구 서초대로77길 55 에이프로스퀘어 3층 이젠아카데미
-			</div>
-			<div id="footerCopyRight" class="daengFoot">
-			&copy; TEAM DEMO
+			<div id="daengFooter">
+				<div id="footerAddress" class="daengFoot">
+					서울 서초구 서초대로77길 55 에이프로스퀘어 3층 이젠아카데미
+				</div>
+				<div id="footerCopyRight" class="daengFoot">
+				&copy; TEAM DEMO
+				</div>
 			</div>
 		</div>
 	</footer>
