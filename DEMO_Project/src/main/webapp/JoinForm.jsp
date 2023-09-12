@@ -265,13 +265,13 @@
 	nickName.addEventListener("blur", handleBlurEventForNickName);
 	nickName.addEventListener("focus", handleFocusEventForNickName);
 
-	// 주소 div
-	address.addEventListener("blur", handleBlurEventForAddress);
-	address.addEventListener("focus", handleFocusEventForAddress);
+// 	// 주소 div
+// 	address.addEventListener("blur", handleBlurEventForAddress);
+// 	address.addEventListener("focus", handleFocusEventForAddress);
 
-	// 상세주소 div
-	detailAddress.addEventListener("blur", handleBlurEventForDetailAddress);
-	detailAddress.addEventListener("focus", handleFocusEventForDetailAddress);
+// 	// 상세주소 div
+// 	detailAddress.addEventListener("blur", handleBlurEventForDetailAddress);
+// 	detailAddress.addEventListener("focus", handleFocusEventForDetailAddress);
 	
 	//지역변수 전역변수 확인.
 	//영어 정규식 첫글자
@@ -293,7 +293,10 @@
 	var mobileCheck = /^010|011|017\d{3,4}\d{4}$/;
 	//공백이 존재하면 안 된다.
 	var blankCheck = /^\S*$/;
-
+	//생일 정규식 - 6자리
+	var birthCheck = /^[0-9]{2}[01][0-9][0-3]$/;
+	//생일 정규식 - 숫자
+	var numCheck /=^[0-9]+$/
 	var isValidId = false;
 	var isValidPwd = false;
 	var isValidConPwd = false;
@@ -301,7 +304,7 @@
 	var isValidUName = false;
 	var isValidMobile = false;
 	var isValidNickName = false;
-
+	var isValidBirth = false;
 	// 	아이디
 	function handleBlurEventForId() {
 
@@ -434,33 +437,7 @@
 		conPwd.classList.add("focusOutline");
 		conPwd.classList.remove("errorOutline");
 	}
-	// 	이메일확인
-	function handleBlurEventForEmail() {
-
-		email.classList.remove("focusOutline");
-		if (email.value.length == 0) {
-			email.classList.add("errorOutline");
-			errMsgEmail.style.color = "red";
-			errMsgEmail.textContent = "이메일을 입력해 주세요.";
-			return;
-		}
-
-		if (!emailCheck.test(email.value)) {
-			email.classList.add("errorOutline");
-			errMsgEmail.style.color = "red";
-			errMsgEmail.textContent = "이메일 형식을 확인해 주세요";
-			return;
-		}
-
-		email.classList.remove("errorOutline");
-		errMsgEmail.textContent = "";
-		isValidEmail = true;
-	}
-
-	function handleFocusEventForEmail() {
-		email.classList.add("focusOutline");
-		email.classList.remove("errorOutline");
-	}
+	
 
 	//이름 확인
 
@@ -499,7 +476,52 @@
 		uName.classList.add("focusOutline");
 		uName.classList.remove("errorOutline");
 	}
+	
+	//생년월일 birth errMsgbirth
+	function handleBlurEventForBirth() {
 
+		birth.classList.remove("focusOutline");
+
+		if (birth.value.length == 0) {
+			birth.classList.add("errorOutline");
+			errMsgbirth.style.color = "red";
+			errMsgbirth.textContent = "번호를 입력해주세요.";
+			return;
+		}
+
+		if (!blankCheck.test(birth.value)) {
+			birth.classList.add("errorOutline");
+			errMsgbirth.style.color = "red";
+			errMsgbirth.textContent = "공백은 사용할 수 없습니다.";
+			return;
+		}
+		
+		if (!numCheck.test(birth.value)) {
+			birth.classList.add("errorOutline");
+			errMsgbirth.style.color = "red";
+			errMsgbirth.textContent = "숫자만 사용 가능합니다.";
+			return;
+		}
+
+		if (!birthCheck.test(birth.value)) {
+			birth.classList.add("errorOutline");
+			errMsgbirth.style.color = "red";
+			errMsgbirth.textContent = "생년월일 형식을 지켜주세요 ex)881231";
+			return;
+		}
+
+		birth.classList.remove("errorOutline");
+		errMsgbirth.style.color = "";
+		errMsgbirth.textContent = "";
+		isValidBirth = true;
+
+	}
+
+	function handleFocusEventForBirth() {
+		birth.classList.add("focusOutline");
+		birth.classList.remove("errorOutline");
+	}
+	
 	//핸드폰 확인
 
 	function handleBlurEventForMobile() {
@@ -538,7 +560,35 @@
 		mobile.classList.add("focusOutline");
 		mobile.classList.remove("errorOutline");
 	}
+	
+// 	이메일확인
+	function handleBlurEventForEmail() {
 
+		email.classList.remove("focusOutline");
+		if (email.value.length == 0) {
+			email.classList.add("errorOutline");
+			errMsgEmail.style.color = "red";
+			errMsgEmail.textContent = "이메일을 입력해 주세요.";
+			return;
+		}
+
+		if (!emailCheck.test(email.value)) {
+			email.classList.add("errorOutline");
+			errMsgEmail.style.color = "red";
+			errMsgEmail.textContent = "이메일 형식을 확인해 주세요";
+			return;
+		}
+
+		email.classList.remove("errorOutline");
+		errMsgEmail.textContent = "";
+		isValidEmail = true;
+	}
+
+	function handleFocusEventForEmail() {
+		email.classList.add("focusOutline");
+		email.classList.remove("errorOutline");
+	}
+	
 	//별명 확인
 
 	function handleBlurEventForNickName() {
@@ -578,5 +628,7 @@
 		nickName.classList.add("focusOutline");
 		nickName.classList.remove("errorOutline");
 	}
+	
+	//주소 & 상세주소?
 </script>
 </html>

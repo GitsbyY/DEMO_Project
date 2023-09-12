@@ -27,8 +27,8 @@
 						</div>
 						<div class="inputWithButton">
 							<input type="text" class="inputUser" id="userJoinDogName"
-								name="dogName" placeholder="영문 4자 이상, 최대 20자"
-								value="${userJoinId}" />
+								name="dogName" placeholder="1자 이상 최대 10자"
+								value="${userJoinDogName}" />
 							<button type="button" class="btnDel"></button>
 						</div>
 						<select id="dogSexSelect">
@@ -167,8 +167,7 @@ function handleBreedSelection() {
     	otherdogTypeInput.style.display = "none";
     }
 }
-// var dogTypeSelect = document.getElementById("dogTypeSelect");
-// 	dogTypeSelect.addEventListener("change", handleBreedSelection);
+
 	var dogTypeSelect = document.getElementById("dogTypeSelect");
     dogTypeSelect.addEventListener("change", handleBreedSelection);
 </script>
