@@ -46,22 +46,33 @@ p {
 	border-radius: 2px;
 	box-sizing: border-box;
 	font-size: 12px;
+	padding-right: 30px; /* 딜리트 버튼을 고려한 우측 여백 */
 	width: 100%;
 }
-
-.inputWithButton > .btnDel {
-  /* button 스타일 */
-  position: absolute; 
-  border: 1px solid purple;
-  background-color: black;
-  background: url('../img/deleteBtn.png') no-repeat;
-  background-size: 20px 20px;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
+/* 인풋 태그와 딜리트 버튼을 감싸는 컨테이너 스타일 */
+.inputWithButton {
+    position: relative;
 }
-#verifyBtn{
-	text-align: right;
+/* .inputWithButton > .btnDel { */
+/*   button 스타일 */
+/*   position: absolute;  */
+/*   border: 1px solid purple; */
+/*   background-color: black; */
+/*   background: url('../img/deleteBtn.png') no-repeat; */
+/*   background-size: 20px 20px; */
+/*   width: 20px; */
+/*   height: 20px; */
+/*   cursor: pointer; */
+/* } */
+/* 딜리트 버튼 스타일 */
+.btnDel {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    background: url('../img/deleteBtn.png') no-repeat;
+    cursor: pointer;
+    display: none; /* 초기에는 숨깁니다. */
 }
 .changeBtn > button {
 	width: 360px;

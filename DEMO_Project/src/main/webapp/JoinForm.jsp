@@ -111,21 +111,7 @@
 						<p class="errTxtRed" id="userJoinMessagePhoneNum"
 							aria-live="assertive"></p>
 					</div>
-					<div id="verifyBtn">
-						<button type="button" class="phoneNumVerify"
-							onclick="performVerFnc()">본인인증</button>
-					</div>
-					<!-- 			인증번호와 이름 -> 본인인증이 완료되었습니다. -->
-					<div class="joinVerifiedUser">
-						<div class="inputLabel">
-							<label for="userJoinPhoneNumVerifiedNum">인증된 번호</label>
-						</div>
-						<div class="joinPhoneNumVerifiedNum"
-							id="joinUserPhoneNumVerifiedNum">
-							<input class="inputUser" type="text" name="userName"
-								id="userJoinPhoneNumVerifiedNum" disabled />
-						</div>
-					</div>
+
 					<!-- 		이메일div		 -->
 					<div class="joinEmail">
 						<div class="inputLabel">
@@ -202,12 +188,82 @@
 	</div>
 </body>
 <script type="text/javascript">
-	
+	//아이디 인풋과 딜리트 버튼
+	var userId = document.getElementById("userJoinId");
+	var userIdDeleteButton = document.querySelector(".joinId .btnDel");
+	userIdDeleteButton.addEventListener("click", function() {
+		userId.value = ""; // 아이디 인풋 값을 비웁니다.
+	});
+
+	// 비밀번호 인풋과 딜리트 버튼
+	var pwd = document.getElementById("userJoinPwd");
+	var pwdDeleteButton = document.querySelector(".joinPwd .btnDel");
+	pwdDeleteButton.addEventListener("click", function() {
+		pwd.value = ""; // 비밀번호 인풋 값을 비웁니다.
+	});
+
+	// 비밀번호 확인 인풋과 딜리트 버튼
+	var conPwd = document.getElementById("userJoinPwdConfirm");
+	var conPwdDeleteButton = document.querySelector(".joinPwdConfirm .btnDel");
+	conPwdDeleteButton.addEventListener("click", function() {
+		conPwd.value = ""; // 비밀번호 확인 인풋 값을 비웁니다.
+	});
+
+	// 이름 인풋과 딜리트 버튼
+	var uName = document.getElementById("userJoinName");
+	var uNameDeleteButton = document.querySelector(".joinUserName .btnDel");
+	uNameDeleteButton.addEventListener("click", function() {
+		uName.value = ""; // 이름 인풋 값을 비웁니다.
+	});
+
+	// 생년월일 인풋과 딜리트 버튼
+	var birth = document.getElementById("userJoinBirth");
+	var birthDeleteButton = document.querySelector(".joinUserBirth .btnDel");
+	birthDeleteButton.addEventListener("click", function() {
+		birth.value = ""; // 생년월일 인풋 값을 비웁니다.
+	});
+
+	// 휴대폰 번호 인풋과 딜리트 버튼
+	var mobile = document.getElementById("userJoinPhoneNum");
+	var mobileDeleteButton = document.querySelector(".joinPhoneNum .btnDel");
+	mobileDeleteButton.addEventListener("click", function() {
+		mobile.value = ""; // 휴대폰 번호 인풋 값을 비웁니다.
+	});
+
+	// 이메일 인풋과 딜리트 버튼
+	var email = document.getElementById("userJoinEmail");
+	var emailDeleteButton = document.querySelector(".joinEmail .btnDel");
+	emailDeleteButton.addEventListener("click", function() {
+		email.value = ""; // 이메일 인풋 값을 비웁니다.
+	});
+
+	// 닉네임 인풋과 딜리트 버튼
+	var nickName = document.getElementById("userJoinNickname");
+	var nickNameDeleteButton = document.querySelector(".joinNickname .btnDel");
+	nickNameDeleteButton.addEventListener("click", function() {
+		nickName.value = ""; // 닉네임 인풋 값을 비웁니다.
+	});
+
+	// 주소 인풋과 딜리트 버튼
+	var address = document.getElementById("userJoinAddress");
+	var addressDeleteButton = document.querySelector(".joinAddress .btnDel");
+	addressDeleteButton.addEventListener("click", function() {
+		address.value = ""; // 주소 인풋 값을 비웁니다.
+	});
+
+	// 상세주소 인풋과 딜리트 버튼
+	var detailAddress = document.getElementById("userJoinDetailAddress");
+	var detailAddressDeleteButton = document
+			.querySelector(".joinDetailAddress .btnDel");
+	detailAddressDeleteButton.addEventListener("click", function() {
+		detailAddress.value = ""; // 상세주소 인풋 값을 비웁니다.
+	});
+
 	function toDogInfoFnc() {
-		alert('toDogInfoFnc 함수 호출됨');
+
 		window.location.href = 'JoinFormDog.jsp';
 	}
-	
+
 	//아이디 div		
 	var userId = document.getElementById("userJoinId");
 	var errMsgId = document.getElementById("userJoinMessageId");
@@ -237,8 +293,9 @@
 	var errMsgAddress = document.getElementById("userJoinMessageAddress");
 	//상세주소 div	
 	var detailAddress = document.getElementById("userJoinDetailAddress");
-	var errMsgDetailAddress = document.getElementById("userJoinMessageDetailAddress");
-	
+	var errMsgDetailAddress = document
+			.getElementById("userJoinMessageDetailAddress");
+
 	// 아이디 div
 	userId.addEventListener("blur", handleBlurEventForId);
 	userId.addEventListener("focus", handleFocusEventForId);
@@ -271,14 +328,14 @@
 	nickName.addEventListener("blur", handleBlurEventForNickName);
 	nickName.addEventListener("focus", handleFocusEventForNickName);
 
-// 	// 주소 div
-// 	address.addEventListener("blur", handleBlurEventForAddress);
-// 	address.addEventListener("focus", handleFocusEventForAddress);
+	// 	// 주소 div
+	// 	address.addEventListener("blur", handleBlurEventForAddress);
+	// 	address.addEventListener("focus", handleFocusEventForAddress);
 
-// 	// 상세주소 div
-// 	detailAddress.addEventListener("blur", handleBlurEventForDetailAddress);
-// 	detailAddress.addEventListener("focus", handleFocusEventForDetailAddress);
-	
+	// 	// 상세주소 div
+	// 	detailAddress.addEventListener("blur", handleBlurEventForDetailAddress);
+	// 	detailAddress.addEventListener("focus", handleFocusEventForDetailAddress);
+
 	//지역변수 전역변수 확인.
 	//영어 정규식 첫글자
 	var firstCheck = /^[a-zA-Z].*$/;
@@ -303,8 +360,7 @@
 	var birthCheck = /^[0-9]{2}[01][0-9][0-3]$/;
 	//생일 정규식 - 숫자
 	var numCheck = /^[0-9]+$/
-	
-	
+
 	var isValidId = false;
 	var isValidPwd = false;
 	var isValidConPwd = false;
@@ -360,7 +416,7 @@
 				"background-color : blue;");
 		errMsgId.textContent = "중복확인 검사를 해주세요";
 		isValidId = true;
-// 		updateButtonState();
+		// 		updateButtonState();
 
 	}
 
@@ -445,7 +501,6 @@
 		conPwd.classList.add("focusOutline");
 		conPwd.classList.remove("errorOutline");
 	}
-	
 
 	//이름 확인
 
@@ -484,7 +539,7 @@
 		uName.classList.add("focusOutline");
 		uName.classList.remove("errorOutline");
 	}
-	
+
 	//생년월일 birth errMsgbirth
 	function handleBlurEventForBirth() {
 
@@ -503,7 +558,7 @@
 			errMsgbirth.textContent = "공백은 사용할 수 없습니다.";
 			return;
 		}
-		
+
 		if (!numCheck.test(birth.value)) {
 			birth.classList.add("errorOutline");
 			errMsgbirth.style.color = "red";
@@ -529,7 +584,7 @@
 		birth.classList.add("focusOutline");
 		birth.classList.remove("errorOutline");
 	}
-	
+
 	//핸드폰 확인
 
 	function handleBlurEventForMobile() {
@@ -568,8 +623,8 @@
 		mobile.classList.add("focusOutline");
 		mobile.classList.remove("errorOutline");
 	}
-	
-// 	이메일확인
+
+	// 	이메일확인
 	function handleBlurEventForEmail() {
 
 		email.classList.remove("focusOutline");
@@ -596,7 +651,7 @@
 		email.classList.add("focusOutline");
 		email.classList.remove("errorOutline");
 	}
-	
+
 	//별명 확인
 
 	function handleBlurEventForNickName() {
@@ -629,14 +684,13 @@
 		errMsgNickName.textContent = "";
 		isValidNickName = true;
 
-
 	}
 
 	function handleFocusEventForNickName() {
 		nickName.classList.add("focusOutline");
 		nickName.classList.remove("errorOutline");
 	}
-	
+
 	//주소 & 상세주소?
 </script>
 </html>
