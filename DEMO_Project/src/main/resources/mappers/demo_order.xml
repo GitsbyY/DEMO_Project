@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.order">
+	<resultMap type="orderDto" id="orderResultMap">
+		<id column="ORDER_NO" property="ono" />
+		<result column="MEMBER_NO" property="mno" />
+		<result column="ORDER_DATE" property="orderDate"
+			javaType="java.util.Date" />
+		<result column="ORDER_REQUEST" property="request" />
+		<result column="ORDER_STATUS" property="status" />
+		<result column="ORDER_TOTALPRICE" property="totalPrice" />
+	</resultMap>
+	
+	<resultMap type="orderProductDto" id="orderProductResultMap">
+		<id column="ORDER_NO" property="ono" />
+		<result column="PRODUCT_NO" property="pno" />
+		<result column="PRODUCT_NAME" property="name" />
+		<result column="PRODUCT_QUANTITY" property="quantity" />
+		<result column="PRODUCT_PRICE" property="price" />
+	</resultMap>
+	
+	<resultMap type="orderConfirmDto" id="orderConfirmResultMap">
+		<id column="ORDER_NO" property="ono" />
+		<result column="ORDER_CONFIRM_DATE" property="orderConfirmDate"
+			javaType="java.util.Date" />
+	</resultMap>
+	
+	<resultMap type="orderCancelDto" id="orderCancelResultMap">
+		<id column="ORDER_NO" property="ono" />
+		<result column="ORDER_CANCEL_DATE" property="orderCancelDate"
+			javaType="java.util.Date" />
+	</resultMap>
+	
+</mapper>
+
+
+

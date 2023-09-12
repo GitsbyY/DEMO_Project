@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.order">
+	<resultMap type="cartDto" id="cartResultMap">
+		<id column="PRODUCT_NO" property="pno" />
+		<result column="MEMBER_NO" property="mno" />
+		<result column="PRODUCT_NAME" property="name" />
+		<result column="PRODUCT_PRICE" property="price" />
+		<result column="PRODUCT_QUANTITY" property="quantity" />
+	</resultMap>
+	
+	<resultMap type="productDetailDto" id="productDetailResultMap">
+		<id column="PRODUCT_DETAIL_NO" property="pdno" />
+		<result column="IMG_NO" property="ino" />
+		<result column="PRODUCT_DETAIL_CONTENT" property="pdContent" />
+	</resultMap>
+	
+	<resultMap type="productDto" id="productResultMap">
+		<id column="PRODUCT_NO" property="pno" />
+		<result column="PRODUCT_DETAIL_NO" property="pdno" />
+		<result column="IMG_NO" property="ino" />
+		<result column="PRODUCT_NAME" property="name" />
+		<result column="PRODUCT_PRICE" property="price" />
+		<result column="PRODUCT_STOCK" property="stock" />
+		<result column="PRODUCT_CATEGORY" property="category" />
+		<result column="PRODUCT_CRE_DATE" property="creDate"
+			javaType="java.util.Date" />
+		<result column="REVIEW_MOD_DATE" property="modDate"
+			javaType="java.util.Date" />
+	</resultMap>
+	
+</mapper>
+
+
+

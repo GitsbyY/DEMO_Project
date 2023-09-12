@@ -2,28 +2,32 @@ package com.demo.member.dto;
 
 import java.util.Date;
 
-//Bean Spec
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class MemberDto {
 
 	private int mno;
 	private String id; 
 	private String password; 
 	private String name;
-	private Date nickName;
+	private String nickName;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthDate;
 	private String Phone;
 	private String email;
 	private String address;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date joinDate;
 	private int emoney;
 	private int point;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date modDate;
 	
 	public MemberDto() {
 		super();
 	}
 
-	public MemberDto(int mno, String id, String password, String name, Date nickName, Date birthDate, String phone,
+	public MemberDto(int mno, String id, String password, String name, String nickName, Date birthDate, String phone,
 			String email, String address, Date joinDate, int emoney, int point, Date modDate) {
 		super();
 		this.mno = mno;
@@ -73,11 +77,11 @@ public class MemberDto {
 		this.name = name;
 	}
 
-	public Date getNickName() {
+	public String getNickName() {
 		return nickName;
 	}
 
-	public void setNickName(Date nickName) {
+	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
 
@@ -153,6 +157,7 @@ public class MemberDto {
 				+ modDate + "]";
 	}
 
+	
 	
 
 	

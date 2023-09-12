@@ -21,6 +21,27 @@
 			javaType="java.util.Date" />
 	</resultMap>
 	
+	<resultMap type="petDto" id="petResultMap">
+		<id column="PET_NO" property="pno" />
+		<result column="MEMBER_NO" property="mno" />
+		<result column="PET_NAME" property="name" />
+		<result column="PET_BREED" property="breed" />
+		<result column="PET_WEIGHT" property="weight" />
+		<result column="PET_ADOPTION_DATE" property="adoptDate"
+			javaType="java.util.Date" />
+		<result column="PET_VACCINATION" property="vac" />
+		<result column="PET_VACCINATION_DATE" property="vacDate"
+			javaType="java.util.Date" />
+	</resultMap>
+	
+	<resultMap type="chargeDto" id="chargeResultMap">
+		<id column="MEMBER_CHARGE_NO" property="mcno" />
+		<result column="MEMBER_NO" property="mno" />
+		<result column="MEMBER_CHARGE_AMOUNT" property="mcAmount" />
+		<result column="MEMBER_CHARGE_DATE" property="mcDate"
+			javaType="java.util.Date" />
+	</resultMap>
+	
 </mapper>
 
 

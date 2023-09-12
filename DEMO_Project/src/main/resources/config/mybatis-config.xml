@@ -5,7 +5,29 @@
 <configuration>
  
 	<typeAliases>
+	
+		<typeAlias type="com.demo.board.dto.ReviewDto" alias="reviewDto"/>
+		<typeAlias type="com.demo.board.dto.InquiryDto" alias="inquiryDto"/>
+		<typeAlias type="com.demo.board.dto.ReplyDto" alias="replyDto"/>
+		<typeAlias type="com.demo.board.dto.NoticeDto" alias="noticeDto"/>
+		
 		<typeAlias type="com.demo.member.dto.MemberDto" alias="memberDto"/>
+		<typeAlias type="com.demo.member.dto.PetDto" alias="petDto"/>
+		<typeAlias type="com.demo.member.dto.ChargeDto" alias="chargeDto"/>
+		
+		<typeAlias type="com.demo.order.dto.OrderDto" alias="orderDto"/>
+		<typeAlias type="com.demo.order.dto.OrderProductDto"
+			alias="orderProductDto"/>
+		<typeAlias type="com.demo.order.dto.OrderConfirmDto"
+			alias="orderConfirmDto"/>
+		<typeAlias type="com.demo.order.dto.OrderCancelDto"
+			alias="orderCancelDto"/>
+			
+		<typeAlias type="com.demo.product.dto.CartDto" alias="cartDto"/>
+		<typeAlias type="com.demo.product.dto.ProductDetailDto"
+			alias="productDetailDto"/>
+		<typeAlias type="com.demo.product.dto.ProductDto" alias="productDto"/>
+			
 	</typeAliases>
 	
 </configuration>
