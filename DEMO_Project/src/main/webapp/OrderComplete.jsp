@@ -48,7 +48,7 @@ table, tr, td{
 	width: 2%;
 }
 #cancellation{
-	margin-top: 60px;
+	margin-top: 30px;
 	width: 160px;
 	height: 50px;
 	border: none;
@@ -57,7 +57,7 @@ table, tr, td{
 	float: left;
 }
 #payment{
-	margin-top: 60px;
+	margin-top: 30px;
 	width: 160px;
 	height: 50px;
 	border: none;
@@ -75,6 +75,7 @@ table, tr, td{
 	width: 70px;
 }
 #point{
+	font-weight: bold;
 	color: red;
 }
 .nextTd2{
@@ -94,10 +95,10 @@ table, tr, td{
 	
 	<div id="title">
 		<div>	
-			<p id="maintitle">주문/결제</p>	
+			<p id="maintitle">주문완료</p>	
 		</div>
 		<div>	
-			<p id="secondTitle">구매자 정보</p>	
+			<p id="secondTitle">받는사람 정보</p>	
 		</div>
 		<div>
 			<table id="memberInfo">
@@ -143,16 +144,16 @@ table, tr, td{
 				<td class="midTd"></td>
 				<td class="nextTd"></td>
 				<td id="point" class="nextTd2">
-					<input id="pointInput" type="text">P
+					10,000P
 				</td>
-				<td class="lastTd">잔액:15,000P</td>
+				<td class="lastTd">잔액:5,000P</td>
 			</tr>
 			<tr>
 				<td class="detail">결제방법</td>
 				<td class="midTd"></td>
 				<td class="nextTd"></td>
 				<td id="method" class="nextTd2">E-money</td>
-				<td class="lastTd">잔액:100,000원</td>
+				<td class="lastTd">잔액:76,500원</td>
 			</tr>
 			<tr>
 				<td class="detail">총 결제금액</td>
@@ -170,8 +171,8 @@ table, tr, td{
 			</table>
 		</div>
 		<div>
-			<input id="cancellation" type="button" value="취소">
-			<input id="payment" type="button" value="결제">
+			<input id="cancellation" type="button" value="내 장바구니">
+			<input id="payment" type="button" value="쇼핑계속하기">
 		</div>
 			
 	</div>
