@@ -191,7 +191,7 @@
 
 				<div>
 					<div class="changeBtn">
-						<button type="button">댕댕</button>
+						<button type="button" onclick="toDogInfoFnc();">댕댕</button>
 					</div>
 					<div class="submitBtn">
 						<button type="submit" disabled="disabled">회원가입</button>
@@ -202,6 +202,12 @@
 	</div>
 </body>
 <script type="text/javascript">
+	
+	function toDogInfoFnc() {
+		alert('toDogInfoFnc 함수 호출됨');
+		window.location.href = 'JoinFormDog.jsp';
+	}
+	
 	//아이디 div		
 	var userId = document.getElementById("userJoinId");
 	var errMsgId = document.getElementById("userJoinMessageId");
@@ -296,7 +302,9 @@
 	//생일 정규식 - 6자리
 	var birthCheck = /^[0-9]{2}[01][0-9][0-3]$/;
 	//생일 정규식 - 숫자
-	var numCheck /=^[0-9]+$/
+	var numCheck = /^[0-9]+$/
+	
+	
 	var isValidId = false;
 	var isValidPwd = false;
 	var isValidConPwd = false;

@@ -145,7 +145,7 @@
 
 				<div>
 					<div class="changeBtn">
-						<button type="button">회원정보</button>
+						<button type="button" onclick="toHumanInfoFnc();">회원정보</button>
 					</div>
 					<div class="submitBtn">
 						<button type="submit" disabled="disabled">회원가입</button>
@@ -156,6 +156,11 @@
 	</div>
 </body>
 <script type="text/javascript">
+
+function toHumanInfoFnc() {
+	alert('toHumanInfoFnc 함수 호출됨');
+	window.location.href = 'JoinForm.jsp';
+}
 
 function handleBreedSelection() {
     var dogTypeSelect = document.getElementById("dogTypeSelect");
