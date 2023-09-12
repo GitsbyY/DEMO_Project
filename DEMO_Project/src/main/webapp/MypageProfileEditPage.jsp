@@ -45,7 +45,7 @@ th{
 }
 
 #secondTh{
-   width: 750px;   
+   width: 850px;   
 }
 
 #titleTag{
