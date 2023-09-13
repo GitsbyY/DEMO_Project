@@ -1,0 +1,107 @@
+html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
+	pre, a, abbr, address, big, cite, code, del, dfn, em, font, img, ins, q,
+	s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, ul, ol, li,
+	dl, dt, dd, table, caption, tbody, tfoot, thead, tr, th, td, fieldset,
+	form, label, legend, input, button, textarea, select {
+	margin: 0;
+	padding: 0;
+}
+
+div {
+	display: block;
+}
+
+.daengHeader {
+	overflow: hidden; /* 이 클래스의 하위 요소들이 부모 요소를 벗어나지 않도록 설정 */
+	height: 80px; /* 높이를 원하는 값으로 설정 */
+	margin: 0 auto; /* 가운데 정렬 */
+	width : 70%;
+}
+
+.logoSide {
+	float: left; /* 왼쪽으로 띄우기 */
+	margin-right: 10px; /* 왼쪽 요소들 사이의 간격 설정 */
+	margin-left: 5px; /* 오른쪽 요소들 사이의 간격 설정 */
+	justify-content: center; /* 세로 가운데 정렬 */
+}
+
+#iconSet {
+	float: right; /* 오른쪽으로 띄우기 */
+	margin-left: 10px; /* 오른쪽 요소들 사이의 간격 설정 */
+}
+
+.buttonSide {
+	float: left; /* 왼쪽으로 띄우기 */
+	margin-left: 10px; /* 오른쪽 요소들 사이의 간격 설정 */
+	margin-right: 5px; /* 왼쪽 요소들 사이의 간격 설정 */
+	margin-bottom: 0; /*아래 마진 없앰*/
+	text-align: center; /* 내용 가운데 정렬 추가 */
+	height: 60px;
+	width: 60px;
+	justify-content: center; /* 세로 가운데 정렬 */
+}
+
+.buttonSide > img {
+	height: 30px;
+	width: 30px;
+	margin-top: 10px;
+}
+
+.buttonSide > p {
+	margin-top: 2px;
+	margin-bottom: 0px;
+	font-size: 9px
+}
+
+.buttonContainer {
+	flex-direction: row;
+	align-items: center;
+}
+
+#iconSet {
+	float: right; /* 오른쪽으로 띄우기 */
+	margin-left: 10px; /* 오른쪽 요소들 사이의 간격 설정 */
+}
+
+#bottomRow {
+	clear: both; /* 띄워진 요소들 아래로 내리기 */
+	float: right; /* 오른쪽으로 띄우기 */
+	margin-top: 7px; /*위에 마진 추가*/
+	margin-right : 12px;
+	font-size: 9px;
+	text-align: right;
+}
+
+.bottomRowButton {
+	float: left; /* 왼쪽으로 띄우기 */
+	margin-left: 5px; /* 왼쪽 요소들 사이의 간격 설정 */
+	height: 20px;
+	width: 60px;
+}
+
+
+/* aside */
+aside{
+	/* background-color: #E0EEEE; */
+	float: left;
+	width: 180px;
+	height: 600px;
+	margin-left: 17%;
+	margin-right: 100px;
+}
+.asideATag{
+	margin-left: 35px;
+	line-height: 2;
+	font-weight: bold;
+}
+
+.asideH1tag{
+	margin-left: 10px;
+	line-height: 2.5;		
+}
+
+
+#asideTitleTag{
+	color: blue;
+}
+

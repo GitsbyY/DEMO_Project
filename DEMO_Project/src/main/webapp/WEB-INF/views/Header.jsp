@@ -2,19 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
-<html>
-
-<head>
-<meta charset="UTF-8">
-<title>Header</title>
-
-<script type="text/javascript"></script>
-
-<link rel="stylesheet" type="text/css" href="./resources/css/Header.css">
-</head>
-
-<body>
 
 	<div>
 		<div id="headerSet" class="daengHeader">
@@ -59,6 +46,3 @@
 		</div>
 		<hr>
 	</div>
-</body>
-
-</html>

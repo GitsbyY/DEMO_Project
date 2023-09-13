@@ -14,6 +14,6 @@
 <!-- 	<div style='height:1000px; background-color: purple;'>1234</div> -->
 <!-- 	<div style='height:1000px; background-color: purple;'>1234</div> -->
 	
-	<jsp:include page="/WEB-INF/views/Foot.jsp"/>
+	<jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
 </html>

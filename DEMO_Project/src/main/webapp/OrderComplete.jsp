@@ -179,6 +179,6 @@ table, tr, td{
 	
 	
 	
-	<jsp:include page="/WEB-INF/views/Foot.jsp"/>
+	<jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
 </html>
