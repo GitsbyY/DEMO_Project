@@ -10,14 +10,14 @@
 
 
 <link rel="stylesheet" type="text/css"
-	href="./resources/css/JoinForm.css">
+	href="/DEMO_Project/resources/css/JoinForm.css">
 </head>
 
 <body>
 	<div>
 		<h1 style="text-align: left; color: #FFC4A3; margin-top: 10px;">DAENGDAENG</h1>
 		<div class="formContainer">
-			<form action="join" method="post">
+			<form action="/addp.do" method="post">
 				<div class="joinWrap">
 
 					<!-- 		아이디div		 -->
@@ -27,8 +27,7 @@
 						</div>
 						<div class="inputWithButton">
 							<input type="text" class="inputUser" id="userJoinId"
-								name="userId" placeholder="영문 4자 이상, 최대 20자"
-								value="${userJoinId}" />
+								name="id" placeholder="영문 4자 이상, 최대 20자"/>
 							<button type="button" class="btnDel"></button>
 						</div>
 					</div>
@@ -43,7 +42,7 @@
 						</div>
 						<div class="inputWithButton">
 							<input type="password" class="inputUser" id="userJoinPwd"
-								name="userPwd" placeholder="숫자, 영문, 특수문자 포함 최소 8자 이상" />
+								name="password" placeholder="숫자, 영문, 특수문자 포함 최소 8자 이상" />
 							<button type="button" class="btnDel"></button>
 						</div>
 					</div>
@@ -72,7 +71,7 @@
 							<label for="userJoinName">이름</label>
 						</div>
 						<div class="inputWithButton">
-							<input class="inputUser" type="text" name="userName"
+							<input class="inputUser" type="text" name="name"
 								id="userJoinName" placeholder="이름 입력" />
 							<button type="button" class="btnDel"></button>
 						</div>
@@ -87,7 +86,7 @@
 							<label for="userJoinBirth">생년월일</label>
 						</div>
 						<div class="inputWithButton">
-							<input class="inputUser" type="text" name="userBirth"
+							<input class="inputUser" type="text" name="birthDate"
 								id="userJoinBirth" placeholder="주민등록번호 앞자리 6글자를 입력 해 주세요" />
 							<button type="button" class="btnDel"></button>
 						</div>
@@ -102,7 +101,7 @@
 							<label for="userJoinPhoneNum">휴대폰 번호</label>
 						</div>
 						<div class="inputWithButton">
-							<input class="inputUser" type="text" name="phoneNum"
+							<input class="inputUser" type="text" name="Phone"
 								id="userJoinPhoneNum" placeholder="휴대폰 번호 입력" />
 							<button type="button" class="btnDel"></button>
 						</div>
@@ -122,7 +121,7 @@
 								id="userJoinEmail" placeholder="이메일 주소 입력" />
 							<button type="button" class="btnDel"></button>
 						</div>
-						<p>아이디나 비밀번호 찾기 시 필요하므로 정확하게 입력해주세요.</p>
+						<p id="emailAlert">아이디나 비밀번호 찾기 시 필요하므로 정확하게 입력해주세요.</p>
 					</div>
 					<div class="txtErrorArea" style="">
 						<p class="errTxtRed" id="userJoinMessageEmail"
@@ -159,30 +158,31 @@
 							aria-live="assertive"></p>
 					</div>
 					<!-- 	상세주소div		 -->
-					<div class="joinDetailAddress">
-						<div class="inputLabel">
-							<label for="userJoinDetailAddress">상세주소</label>
-						</div>
-						<div class="inputWithButton">
-							<input class="inputUser" type="text" name="detailAddress"
-								id="userJoinDetailAddress" placeholder="상세주소를 입력 해 주세요" />
-							<button type="button" class="btnDel"></button>
-						</div>
-					</div>
-					<div class="txt_error_area" style="">
-						<p class="err_txt" id="userJoinMessageDetailAddress"
-							aria-live="assertive"></p>
-					</div>
-				</div>
+<!-- 					<div class="joinDetailAddress"> -->
+<!-- 						<div class="inputLabel"> -->
+<!-- 							<label for="userJoinDetailAddress">상세주소</label> -->
+<!-- 						</div> -->
+<!-- 						<div class="inputWithButton"> -->
+<!-- 							<input class="inputUser" type="text" name="detailAddress" -->
+<!-- 								id="userJoinDetailAddress" placeholder="상세주소를 입력 해 주세요" /> -->
+<!-- 							<button type="button" class="btnDel"></button> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="txt_error_area" style=""> -->
+<!-- 						<p class="err_txt" id="userJoinMessageDetailAddress" -->
+<!-- 							aria-live="assertive"></p> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 
-				<div>
-					<div class="changeBtn">
-						<button type="button" onclick="toDogInfoFnc();">댕댕</button>
+					<div>
+						<div class="changeBtn">
+							<button type="submit" disabled="disabled">댕댕</button>
+						</div>
+	<!-- 					<div class="submitBtn"> -->
+	<!-- 						<button type="submit" disabled="disabled">회원가입</button> -->
+	<!-- 					</div> -->
 					</div>
-					<div class="submitBtn">
-						<button type="submit" disabled="disabled">회원가입</button>
-					</div>
-				</div>
+				</div>	
 			</form>
 		</div>
 	</div>
@@ -251,17 +251,17 @@
 		address.value = ""; // 주소 인풋 값을 비웁니다.
 	});
 
-	// 상세주소 인풋과 딜리트 버튼
-	var detailAddress = document.getElementById("userJoinDetailAddress");
-	var detailAddressDeleteButton = document
-			.querySelector(".joinDetailAddress .btnDel");
-	detailAddressDeleteButton.addEventListener("click", function() {
-		detailAddress.value = ""; // 상세주소 인풋 값을 비웁니다.
-	});
+// 	// 상세주소 인풋과 딜리트 버튼
+// 	var detailAddress = document.getElementById("userJoinDetailAddress");
+// 	var detailAddressDeleteButton = document
+// 			.querySelector(".joinDetailAddress .btnDel");
+// 	detailAddressDeleteButton.addEventListener("click", function() {
+// 		detailAddress.value = ""; // 상세주소 인풋 값을 비웁니다.
+// 	});
 
 	function toDogInfoFnc() {
 
-		window.location.href = 'JoinFormDog.jsp';
+		window.location.href = './addp.do';
 	}
 
 	//아이디 div		
@@ -291,10 +291,10 @@
 	//주소 div	
 	var address = document.getElementById("userJoinAddress");
 	var errMsgAddress = document.getElementById("userJoinMessageAddress");
-	//상세주소 div	
-	var detailAddress = document.getElementById("userJoinDetailAddress");
-	var errMsgDetailAddress = document
-			.getElementById("userJoinMessageDetailAddress");
+// 	//상세주소 div	
+// 	var detailAddress = document.getElementById("userJoinDetailAddress");
+// 	var errMsgDetailAddress = document
+// 			.getElementById("userJoinMessageDetailAddress");
 
 	// 아이디 div
 	userId.addEventListener("blur", handleBlurEventForId);
@@ -328,9 +328,9 @@
 	nickName.addEventListener("blur", handleBlurEventForNickName);
 	nickName.addEventListener("focus", handleFocusEventForNickName);
 
-	// 	// 주소 div
-	// 	address.addEventListener("blur", handleBlurEventForAddress);
-	// 	address.addEventListener("focus", handleFocusEventForAddress);
+	// 주소 div
+	address.addEventListener("blur", handleBlurEventForAddress);
+	address.addEventListener("focus", handleFocusEventForAddress);
 
 	// 	// 상세주소 div
 	// 	detailAddress.addEventListener("blur", handleBlurEventForDetailAddress);
@@ -357,10 +357,15 @@
 	//공백이 존재하면 안 된다.
 	var blankCheck = /^\S*$/;
 	//생일 정규식 - 6자리
-	var birthCheck = /^[0-9]{2}[01][0-9][0-3]$/;
+	var birthCheck = /^[0-9]{2}[01][0-9][0-3][0-9]$/;
 	//생일 정규식 - 숫자
-	var numCheck = /^[0-9]+$/
-
+	var numCheck = /^[0-9]+$/;
+	//글자가 있어야한다
+	var notNone = /^.+$/;
+	//5글자 이상이어야한다
+	var textCheck = /^.{5,}$/;
+	
+	
 	var isValidId = false;
 	var isValidPwd = false;
 	var isValidConPwd = false;
@@ -369,6 +374,7 @@
 	var isValidMobile = false;
 	var isValidNickName = false;
 	var isValidBirth = false;
+	var isValidAddress = false;
 	// 	아이디
 	function handleBlurEventForId() {
 
@@ -382,7 +388,6 @@
 		}
 
 		if (!blankCheck.test(userId.value)) {
-			alert('1234');
 			userId.classList.add("errorOutline");
 			errMsgId.style.color = "red";
 			errMsgId.textContent = "공백은 사용할 수 없습니다.";
@@ -411,10 +416,7 @@
 		}
 
 		userId.classList.remove("focusOutline");
-		document.querySelector(".existCheck").removeAttribute("disabled");
-		document.querySelector(".existCheck").setAttribute("style",
-				"background-color : blue;");
-		errMsgId.textContent = "중복확인 검사를 해주세요";
+		errMsgId.textContent = "";
 		isValidId = true;
 		// 		updateButtonState();
 
@@ -691,6 +693,68 @@
 		nickName.classList.remove("errorOutline");
 	}
 
-	//주소 & 상세주소?
+	//주소
+	function handleBlurEventForAddress() {
+
+		nickName.classList.remove("focusOutline");
+
+		if (address.value.length == 0) {
+			address.classList.add("errorOutline");
+			errMsgAddress.style.color = "red";
+			errMsgAddress.textContent = "주소를 입력 해 주세요";
+			return;
+		}
+
+		if (!textCheck.test(address.value)) {
+			address.classList.add("errorOutline");
+			errMsgAddress.style.color = "red";
+			errMsgAddress.textContent = "주소를 확인 해 주세요";
+			return;
+		}
+
+
+		address.classList.remove("errorOutline");
+		errMsgAddress.style.color = "";
+		errMsgAddress.textContent = "";
+		isValidAddress = true;
+
+	}
+
+	function handleFocusEventForAddress() {
+		address.classList.add("focusOutline");
+		address.classList.remove("errorOutline");
+	}
+	
+	// 버튼 엘리먼트를 가져옵니다.
+	var button = document.querySelector(".changeBtn button");
+
+	// 모든 입력 필드가 유효한지 확인하는 함수
+	function validateForm() {
+	    return isValidId && isValidPwd && isValidConPwd && isValidEmail &&
+	           isValidUName && isValidMobile && isValidNickName &&
+	           isValidBirth && isValidAddress;
+	}
+
+	// 입력 필드에 변화가 있을 때 버튼 상태를 업데이트합니다.
+	function updateButtonState() {
+	    if (validateForm()) {
+	        button.disabled = false; // 모든 필드가 유효하면 버튼을 활성화합니다.
+	        button.style.backgroundColor = "#FFC4A3"; // 버튼 색상 변경
+	    } else {
+	        button.disabled = true; // 하나 이상의 필드가 유효하지 않으면 버튼을 비활성화합니다.
+	        button.style.backgroundColor = "gray"; // 버튼 색상 원래대로 복구
+	    }
+	}
+
+	// 입력 필드의 변경 이벤트를 감지하여 버튼 상태를 업데이트합니다.
+	userId.addEventListener("input", updateButtonState);
+	pwd.addEventListener("input", updateButtonState);
+	conPwd.addEventListener("input", updateButtonState);
+	email.addEventListener("input", updateButtonState);
+	uName.addEventListener("input", updateButtonState);
+	mobile.addEventListener("input", updateButtonState);
+	nickName.addEventListener("input", updateButtonState);
+	birth.addEventListener("input", updateButtonState);
+	address.addEventListener("input", updateButtonState);
 </script>
 </html>
