@@ -86,8 +86,8 @@
 							<label for="userJoinBirth">생년월일</label>
 						</div>
 						<div class="inputWithButton">
-							<input class="inputUser" type="text" name="birthDate"
-								id="userJoinBirth" placeholder="주민등록번호 앞자리 6글자를 입력 해 주세요" />
+							<input class="inputUser" type="date" name="birthDate"
+								id="userJoinBirth" min="1920-01-01" max="2010-12-31" />
 							<button type="button" class="btnDel"></button>
 						</div>
 					</div>
@@ -216,13 +216,6 @@
 		uName.value = ""; // 이름 인풋 값을 비웁니다.
 	});
 
-	// 생년월일 인풋과 딜리트 버튼
-	var birth = document.getElementById("userJoinBirth");
-	var birthDeleteButton = document.querySelector(".joinUserBirth .btnDel");
-	birthDeleteButton.addEventListener("click", function() {
-		birth.value = ""; // 생년월일 인풋 값을 비웁니다.
-	});
-
 	// 휴대폰 번호 인풋과 딜리트 버튼
 	var mobile = document.getElementById("userJoinPhoneNum");
 	var mobileDeleteButton = document.querySelector(".joinPhoneNum .btnDel");
@@ -276,9 +269,7 @@
 	//이름 div	
 	var uName = document.getElementById("userJoinName");
 	var errMsgUname = document.getElementById("userJoinMessageName");
-	//생년월일 div	
-	var birth = document.getElementById("userJoinBirth");
-	var errMsgbirth = document.getElementById("userJoinMessageBirth");
+	
 	//폰번호 div	
 	var mobile = document.getElementById("userJoinPhoneNum");
 	var errMsgMobile = document.getElementById("userJoinMessagePhoneNum");
@@ -356,10 +347,7 @@
 	var mobileCheck = /^010|011|017\d{3,4}\d{4}$/;
 	//공백이 존재하면 안 된다.
 	var blankCheck = /^\S*$/;
-	//생일 정규식 - 6자리
-	var birthCheck = /^[0-9]{2}[01][0-9][0-3][0-9]$/;
-	//생일 정규식 - 숫자
-	var numCheck = /^[0-9]+$/;
+	
 	//글자가 있어야한다
 	var notNone = /^.+$/;
 	//5글자 이상이어야한다
@@ -373,8 +361,9 @@
 	var isValidUName = false;
 	var isValidMobile = false;
 	var isValidNickName = false;
-	var isValidBirth = false;
+
 	var isValidAddress = false;
+
 	// 	아이디
 	function handleBlurEventForId() {
 
@@ -542,45 +531,6 @@
 		uName.classList.remove("errorOutline");
 	}
 
-	//생년월일 birth errMsgbirth
-	function handleBlurEventForBirth() {
-
-		birth.classList.remove("focusOutline");
-
-		if (birth.value.length == 0) {
-			birth.classList.add("errorOutline");
-			errMsgbirth.style.color = "red";
-			errMsgbirth.textContent = "번호를 입력해주세요.";
-			return;
-		}
-
-		if (!blankCheck.test(birth.value)) {
-			birth.classList.add("errorOutline");
-			errMsgbirth.style.color = "red";
-			errMsgbirth.textContent = "공백은 사용할 수 없습니다.";
-			return;
-		}
-
-		if (!numCheck.test(birth.value)) {
-			birth.classList.add("errorOutline");
-			errMsgbirth.style.color = "red";
-			errMsgbirth.textContent = "숫자만 사용 가능합니다.";
-			return;
-		}
-
-		if (!birthCheck.test(birth.value)) {
-			birth.classList.add("errorOutline");
-			errMsgbirth.style.color = "red";
-			errMsgbirth.textContent = "생년월일 형식을 지켜주세요 ex)881231";
-			return;
-		}
-
-		birth.classList.remove("errorOutline");
-		errMsgbirth.style.color = "";
-		errMsgbirth.textContent = "";
-		isValidBirth = true;
-
-	}
 
 	function handleFocusEventForBirth() {
 		birth.classList.add("focusOutline");
@@ -731,8 +681,7 @@
 	// 모든 입력 필드가 유효한지 확인하는 함수
 	function validateForm() {
 	    return isValidId && isValidPwd && isValidConPwd && isValidEmail &&
-	           isValidUName && isValidMobile && isValidNickName &&
-	           isValidBirth && isValidAddress;
+	           isValidUName && isValidMobile && isValidNickName && isValidAddress;
 	}
 
 	// 입력 필드에 변화가 있을 때 버튼 상태를 업데이트합니다.
