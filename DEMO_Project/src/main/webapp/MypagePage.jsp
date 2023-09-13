@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="./resources/css/main.css">
+<link rel="stylesheet" type="text/css" href="/DEMO_Project/resources/css/main.css">
 <style type="text/css">
 
 #titleTable{
@@ -43,7 +43,8 @@ th{
 	
 	<jsp:include page="/WEB-INF/views/asideMyPage.jsp"/>
 	
-	<div id='mainContainer'>
+	<div id='divContainer'
+		style='width: 700px; height:2000px; background-color: pink;'>
 		<table id="titleTable">
 	      <tr>
 	         <th id="firstTh">주문목록</th>

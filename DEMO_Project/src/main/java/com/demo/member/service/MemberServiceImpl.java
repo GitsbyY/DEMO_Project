@@ -19,12 +19,12 @@ public class MemberServiceImpl implements MemberService{
 	@Autowired
 	public MemberDao memberDao;
 	@Override
-	public void memberInsertOne(MemberDto memberDto, Model model) {
+	public int memberInsertOne(MemberDto memberDto) {
 		// TODO Auto-generated method stub
-		memberDao.memberInsertOne(memberDto);
+		return memberDao.memberInsertOne(memberDto);
 	}
 	@Override
-	public void petInsertOne(PetDto petDto, Model model) {
+	public void petInsertOne(PetDto petDto) {
 		// TODO Auto-generated method stub
 		memberDao.petrInsertOne(petDto);
 	}

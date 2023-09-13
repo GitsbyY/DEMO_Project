@@ -26,6 +26,7 @@
 		<result column="MEMBER_NO" property="mno" />
 		<result column="PET_NAME" property="name" />
 		<result column="PET_BREED" property="breed" />
+		<result column="PET_GENDER" property="gender" />
 		<result column="PET_WEIGHT" property="weight" />
 		<result column="PET_ADOPTION_DATE" property="adoptDate"
 			javaType="java.util.Date" />
@@ -43,7 +44,7 @@
 	</resultMap>
 	
 	<insert id="memberInsertOne" parameterType="memberDto"
-		useGeneratedKeys="true" keyProperty="no"> <!-- 키 값을 생성하는데 사용한다. -->
+		useGeneratedKeys="true" keyProperty="no">
 		<selectKey keyProperty="no" resultType="int" order="BEFORE">
 			SELECT MEMBER_NO_SEQ.NEXTVAL
 			FROM DUAL
@@ -55,7 +56,7 @@
 		    MEMBER_JOIN_DATE, MEMBER_EMONEY, MEMBER_POINT, MEMBER_MOD_DATE)
 		VALUES(#{no}, #{id}, #{password}, #{name}, #{nickName},
 		    #{birthDate}, #{Phone}, #{email}, #{address}, 
-		    SYSDATE, 0, 0, SYSDATE);
+		    SYSDATE, 0, 0, SYSDATE)
 		
 	</insert>
 	
@@ -69,7 +70,8 @@
 		INSERT INTO PET
 		(PET_NO, MEMBER_NO, PET_NAME, PET_BREED, PET_GENDER, PET_WEIGHT
 		, PET_ADOPTION_DATE, PET_VACCINATION, PET_VACCINATION_DATE)
-		VALUES(#{no}, 3, #{no}, #{no}, adoptDate, '1��', '2020-03-03');
+		VALUES(#{no}, #{mno}, #{name}, #{breed}, #{gender},
+			#{adoptDate}, #{vac}, #{vacDate})
 		
 	</insert>
 	

@@ -6,81 +6,84 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class ReplyDto {
 
-	private int ino;
-	private int mno;
+	private int inquiryNo;
+	private int memberNo;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date creDate;
-	private String name;
-	private String title;
-	private String content;
+	private Date replyCreDate;
+	private String memberName;
+	private String replyTitle;
+	private String replyContent;
 	
 	public ReplyDto() {
 		super();
 	}
 
-	public ReplyDto(int ino, int mno, Date creDate, String name, String title, String content) {
+	public ReplyDto(int inquiryNo, int memberNo, Date replyCreDate, String memberName, String replyTitle,
+			String replyContent) {
 		super();
-		this.ino = ino;
-		this.mno = mno;
-		this.creDate = creDate;
-		this.name = name;
-		this.title = title;
-		this.content = content;
+		this.inquiryNo = inquiryNo;
+		this.memberNo = memberNo;
+		this.replyCreDate = replyCreDate;
+		this.memberName = memberName;
+		this.replyTitle = replyTitle;
+		this.replyContent = replyContent;
 	}
 
-	public int getIno() {
-		return ino;
+	public int getInquiryNo() {
+		return inquiryNo;
 	}
 
-	public void setIno(int ino) {
-		this.ino = ino;
+	public void setInquiryNo(int inquiryNo) {
+		this.inquiryNo = inquiryNo;
 	}
 
-	public int getMno() {
-		return mno;
+	public int getMemberNo() {
+		return memberNo;
 	}
 
-	public void setMno(int mno) {
-		this.mno = mno;
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
 
-	public Date getCreDate() {
-		return creDate;
+	public Date getReplyCreDate() {
+		return replyCreDate;
 	}
 
-	public void setCreDate(Date creDate) {
-		this.creDate = creDate;
+	public void setReplyCreDate(Date replyCreDate) {
+		this.replyCreDate = replyCreDate;
 	}
 
-	public String getName() {
-		return name;
+	public String getMemberName() {
+		return memberName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getReplyTitle() {
+		return replyTitle;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setReplyTitle(String replyTitle) {
+		this.replyTitle = replyTitle;
 	}
 
-	public String getContent() {
-		return content;
+	public String getReplyContent() {
+		return replyContent;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setReplyContent(String replyContent) {
+		this.replyContent = replyContent;
 	}
 
 	@Override
 	public String toString() {
-		return "ReplyDto [ino=" + ino + ", mno=" + mno + ", creDate=" + creDate + ", name=" + name + ", title=" + title
-				+ ", content=" + content + "]";
+		return "ReplyDto [inquiryNo=" + inquiryNo + ", memberNo=" + memberNo + ", replyCreDate=" + replyCreDate
+				+ ", memberName=" + memberName + ", replyTitle=" + replyTitle + ", replyContent=" + replyContent + "]";
 	}
+
+	
 
 	
 	

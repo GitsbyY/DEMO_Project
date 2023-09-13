@@ -17,7 +17,7 @@
 	<div>
 		<h1 style="text-align: left; color: #FFC4A3; margin-top: 10px;">DAENGDAENG</h1>
 		<div class="formContainer">
-			<form action="/addp.do" method="post">
+			<form action="./addp.do" method="get">
 				<div class="joinWrap">
 
 					<!-- 		아이디div		 -->
@@ -56,7 +56,7 @@
 							<label for="userJoinPwdConfirm">비밀번호 확인</label>
 						</div>
 						<div class="inputWithButton">
-							<input class="inputUser" type="password" name="userPwdConfirm"
+							<input class="inputUser" type="password"
 								id="userJoinPwdConfirm" placeholder="숫자, 영문, 특수문자 포함 최소 8자 이상" />
 							<button type="button" class="btnDel"></button>
 						</div>

@@ -6,71 +6,73 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class NoticeDto {
 
-	private int nno;
-	private int mno;
-	private String title;
-	private String content;
+	private int noticeNo;
+	private int memberNo;
+	private String noticeTitle;
+	private String noticeContent;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date creDate;
+	private Date noticeCreDate;
 	
 	public NoticeDto() {
 		super();
 	}
 
-	public NoticeDto(int nno, int mno, String title, String content, Date creDate) {
+	public NoticeDto(int noticeNo, int memberNo, String noticeTitle, String noticeContent, Date noticeCreDate) {
 		super();
-		this.nno = nno;
-		this.mno = mno;
-		this.title = title;
-		this.content = content;
-		this.creDate = creDate;
+		this.noticeNo = noticeNo;
+		this.memberNo = memberNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.noticeCreDate = noticeCreDate;
 	}
 
-	public int getNno() {
-		return nno;
+	public int getNoticeNo() {
+		return noticeNo;
 	}
 
-	public void setNno(int nno) {
-		this.nno = nno;
+	public void setNoticeNo(int noticeNo) {
+		this.noticeNo = noticeNo;
 	}
 
-	public int getMno() {
-		return mno;
+	public int getMemberNo() {
+		return memberNo;
 	}
 
-	public void setMno(int mno) {
-		this.mno = mno;
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getNoticeTitle() {
+		return noticeTitle;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setNoticeTitle(String noticeTitle) {
+		this.noticeTitle = noticeTitle;
 	}
 
-	public String getContent() {
-		return content;
+	public String getNoticeContent() {
+		return noticeContent;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setNoticeContent(String noticeContent) {
+		this.noticeContent = noticeContent;
 	}
 
-	public Date getCreDate() {
-		return creDate;
+	public Date getNoticeCreDate() {
+		return noticeCreDate;
 	}
 
-	public void setCreDate(Date creDate) {
-		this.creDate = creDate;
+	public void setNoticeCreDate(Date noticeCreDate) {
+		this.noticeCreDate = noticeCreDate;
 	}
 
 	@Override
 	public String toString() {
-		return "NoticeDto [nno=" + nno + ", mno=" + mno + ", title=" + title + ", content=" + content + ", creDate="
-				+ creDate + "]";
+		return "NoticeDto [noticeNo=" + noticeNo + ", memberNo=" + memberNo + ", noticeTitle=" + noticeTitle
+				+ ", noticeContent=" + noticeContent + ", noticeCreDate=" + noticeCreDate + "]";
 	}
+
+	
 
 
 	

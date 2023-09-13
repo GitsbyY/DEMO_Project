@@ -9,7 +9,8 @@ public class PetDto {
 	private int pno;
 	private int mno;
 	private String name;
-	private String breed; 
+	private String breed;
+	private char gender;
 	private double weight; 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date adoptDate;
@@ -24,13 +25,14 @@ public class PetDto {
 	}
 
 
-	public PetDto(int pno, int mno, String name, String breed, double weight, Date adoptDate, String vac,
+	public PetDto(int pno, int mno, String name, String breed, char gender, double weight, Date adoptDate, String vac,
 			Date vacDate) {
 		super();
 		this.pno = pno;
 		this.mno = mno;
 		this.name = name;
 		this.breed = breed;
+		this.gender = gender;
 		this.weight = weight;
 		this.adoptDate = adoptDate;
 		this.vac = vac;
@@ -78,6 +80,16 @@ public class PetDto {
 	}
 
 
+	public char getGender() {
+		return gender;
+	}
+
+
+	public void setGender(char gender) {
+		this.gender = gender;
+	}
+
+
 	public double getWeight() {
 		return weight;
 	}
@@ -120,11 +132,11 @@ public class PetDto {
 
 	@Override
 	public String toString() {
-		return "PetDto [pno=" + pno + ", mno=" + mno + ", name=" + name + ", breed=" + breed + ", weight=" + weight
-				+ ", adoptDate=" + adoptDate + ", vac=" + vac + ", vacDate=" + vacDate + "]";
+		return "PetDto [pno=" + pno + ", mno=" + mno + ", name=" + name + ", breed=" + breed + ", gender=" + gender
+				+ ", weight=" + weight + ", adoptDate=" + adoptDate + ", vac=" + vac + ", vacDate=" + vacDate + "]";
 	}
 
-	
+
 	
 	
 

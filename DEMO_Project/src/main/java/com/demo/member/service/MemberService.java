@@ -7,9 +7,9 @@ import com.demo.member.dto.PetDto;
 
 public interface MemberService {
 
-	void memberInsertOne(MemberDto memberDto, Model model);
+	int memberInsertOne(MemberDto memberDto);
 
-	void petInsertOne(PetDto petDto, Model model);
+	void petInsertOne(PetDto petDto);
 	
 	
 }

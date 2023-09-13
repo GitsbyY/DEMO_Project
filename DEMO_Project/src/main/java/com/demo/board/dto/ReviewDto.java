@@ -6,92 +6,96 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class ReviewDto {
 
-	private int rno;
-	private int mno;
-	private int pno;
-	private String title;
-	private String content;
+	private int reviewNo;
+	private int memberNo;
+	private int productNo;
+	private String reviewTitle;
+	private String reviewContent;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date creDate;
+	private Date reviewCreDate;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date modDate;
+	private Date reviewModDate;
 	
 	public ReviewDto() {
 		super();
 	}
 
-	public ReviewDto(int rno, int mno, int pno, String title, String content, Date creDate, Date modDate) {
+	public ReviewDto(int reviewNo, int memberNo, int productNo, String reviewTitle, String reviewContent,
+			Date reviewCreDate, Date reviewModDate) {
 		super();
-		this.rno = rno;
-		this.mno = mno;
-		this.pno = pno;
-		this.title = title;
-		this.content = content;
-		this.creDate = creDate;
-		this.modDate = modDate;
+		this.reviewNo = reviewNo;
+		this.memberNo = memberNo;
+		this.productNo = productNo;
+		this.reviewTitle = reviewTitle;
+		this.reviewContent = reviewContent;
+		this.reviewCreDate = reviewCreDate;
+		this.reviewModDate = reviewModDate;
 	}
 
-	public int getRno() {
-		return rno;
+	public int getReviewNo() {
+		return reviewNo;
 	}
 
-	public void setRno(int rno) {
-		this.rno = rno;
+	public void setReviewNo(int reviewNo) {
+		this.reviewNo = reviewNo;
 	}
 
-	public int getMno() {
-		return mno;
+	public int getMemberNo() {
+		return memberNo;
 	}
 
-	public void setMno(int mno) {
-		this.mno = mno;
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
 
-	public int getPno() {
-		return pno;
+	public int getProductNo() {
+		return productNo;
 	}
 
-	public void setPno(int pno) {
-		this.pno = pno;
+	public void setProductNo(int productNo) {
+		this.productNo = productNo;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getReviewTitle() {
+		return reviewTitle;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setReviewTitle(String reviewTitle) {
+		this.reviewTitle = reviewTitle;
 	}
 
-	public String getContent() {
-		return content;
+	public String getReviewContent() {
+		return reviewContent;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setReviewContent(String reviewContent) {
+		this.reviewContent = reviewContent;
 	}
 
-	public Date getCreDate() {
-		return creDate;
+	public Date getReviewCreDate() {
+		return reviewCreDate;
 	}
 
-	public void setCreDate(Date creDate) {
-		this.creDate = creDate;
+	public void setReviewCreDate(Date reviewCreDate) {
+		this.reviewCreDate = reviewCreDate;
 	}
 
-	public Date getModDate() {
-		return modDate;
+	public Date getReviewModDate() {
+		return reviewModDate;
 	}
 
-	public void setModDate(Date modDate) {
-		this.modDate = modDate;
+	public void setReviewModDate(Date reviewModDate) {
+		this.reviewModDate = reviewModDate;
 	}
 
 	@Override
 	public String toString() {
-		return "ReviewDto [rno=" + rno + ", mno=" + mno + ", pno=" + pno + ", title=" + title + ", content=" + content
-				+ ", creDate=" + creDate + ", modDate=" + modDate + "]";
+		return "ReviewDto [reviewNo=" + reviewNo + ", memberNo=" + memberNo + ", productNo=" + productNo
+				+ ", reviewTitle=" + reviewTitle + ", reviewContent=" + reviewContent + ", reviewCreDate="
+				+ reviewCreDate + ", reviewModDate=" + reviewModDate + "]";
 	}
+
+	
 
 	
 

@@ -161,7 +161,7 @@ p {
 	<div>
 		<h1 style="text-align: left; color: #FFC4A3; margin-top: 10px;">DAENGDAENG</h1>
 		<div class="formContainerDog">
-			<form action="join" method="post">
+			<form action="addp.do" method="post">
 				<div class="joinWrapDog">
 
 					<!-- 		강아지 이름div		 -->
@@ -294,7 +294,7 @@ p {
 <!-- 						<button type="button" onclick="toHumanInfoFnc();">회원정보</button> -->
 <!-- 					</div> -->
 					<div class="submitBtn">
-						<button type="submit" disabled="disabled">회원가입</button>
+						<button type="submit">회원가입</button>
 					</div>
 				</div>
 			</form>

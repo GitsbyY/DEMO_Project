@@ -3,25 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="/DEMO_Project/resources/css/main.css">
 <style type="text/css">
-aside{
-	/* background-color: #E0EEEE; */
-	float: left;
-	width: 180px;
-	height: 600px;
-	margin-left: 17%;
-	margin-right: 100px;
-}
-.aTag{
-	margin-left: 35px;
-	line-height: 2;
-	font-weight: bold;
-}
-
-.H1tag{
-	margin-left: 10px;
-	line-height: 2.5;		
-}
 
 #input{
 	float: right;
@@ -62,24 +45,16 @@ aside{
 <body>
 	<jsp:include page="/WEB-INF/views/Header.jsp"/>
 	
-	<aside>
-		<h1 class="H1tag">댕댕 쇼핑몰</h1>
-		<a id="titleTag" class="aTag">전체</a><br>
-		<a class="aTag">사료</a><br>
-		<a class="aTag">간식</a><br>
-		<a class="aTag">영양제</a><br>
-		<a class="aTag">미용/목욕용품</a><br>
-		<a class="aTag">장난감</a><br>
-		<a class="aTag">기타</a><br><br>
-		<h1 class="H1tag">댕댕 게시판</h1>
-		<a class="aTag">후기남겨요</a><br>	
-	</aside>
-	<input id="input" type="text" name="serch" placeholder="검색어 입력창">
-	<select id="select">
-		<option class="optionTag" value="lowPrice">낮은가격순</option>
-		<option class="optionTag" value="highPrice">높은가격순</option>
-	</select>
+	<jsp:include page="/WEB-INF/views/asideShop.jsp"/>
 	
+	<div id='divContainer'
+		style='width: 700px; height:700px'>
+		<input id="input" type="text" name="serch" placeholder="검색어 입력창">
+		<select id="select">
+			<option class="optionTag" value="lowPrice">낮은가격순</option>
+			<option class="optionTag" value="highPrice">높은가격순</option>
+		</select>
+	</div>
 
 	
 	<jsp:include page="/WEB-INF/views/Footer.jsp"/>

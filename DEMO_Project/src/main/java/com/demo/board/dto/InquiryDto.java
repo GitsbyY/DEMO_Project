@@ -6,87 +6,87 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class InquiryDto {
 
-	private int ino;
-	private int mno;
-	private String type;
-	private String name;
+	private int inquiryNo;
+	private int memberNo;
+	private String inquiryType;
+	private String inquiryName;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date creDate;
-	private String title;
-	private String content;
+	private Date inquiryCreDate;
+	private String inquiryTitle;
+	private String inquiryContent;
 	private char is_Reply;
 	
 	public InquiryDto() {
 		super();
 	}
 
-	public InquiryDto(int ino, int mno, String type, String name, Date creDate, String title, String content,
-			char is_Reply) {
+	public InquiryDto(int inquiryNo, int memberNo, String inquiryType, String inquiryName, Date inquiryCreDate,
+			String inquiryTitle, String inquiryContent, char is_Reply) {
 		super();
-		this.ino = ino;
-		this.mno = mno;
-		this.type = type;
-		this.name = name;
-		this.creDate = creDate;
-		this.title = title;
-		this.content = content;
+		this.inquiryNo = inquiryNo;
+		this.memberNo = memberNo;
+		this.inquiryType = inquiryType;
+		this.inquiryName = inquiryName;
+		this.inquiryCreDate = inquiryCreDate;
+		this.inquiryTitle = inquiryTitle;
+		this.inquiryContent = inquiryContent;
 		this.is_Reply = is_Reply;
 	}
 
-	public int getIno() {
-		return ino;
+	public int getInquiryNo() {
+		return inquiryNo;
 	}
 
-	public void setIno(int ino) {
-		this.ino = ino;
+	public void setInquiryNo(int inquiryNo) {
+		this.inquiryNo = inquiryNo;
 	}
 
-	public int getMno() {
-		return mno;
+	public int getMemberNo() {
+		return memberNo;
 	}
 
-	public void setMno(int mno) {
-		this.mno = mno;
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
 
-	public String getType() {
-		return type;
+	public String getInquiryType() {
+		return inquiryType;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setInquiryType(String inquiryType) {
+		this.inquiryType = inquiryType;
 	}
 
-	public String getName() {
-		return name;
+	public String getInquiryName() {
+		return inquiryName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setInquiryName(String inquiryName) {
+		this.inquiryName = inquiryName;
 	}
 
-	public Date getCreDate() {
-		return creDate;
+	public Date getInquiryCreDate() {
+		return inquiryCreDate;
 	}
 
-	public void setCreDate(Date creDate) {
-		this.creDate = creDate;
+	public void setInquiryCreDate(Date inquiryCreDate) {
+		this.inquiryCreDate = inquiryCreDate;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getInquiryTitle() {
+		return inquiryTitle;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setInquiryTitle(String inquiryTitle) {
+		this.inquiryTitle = inquiryTitle;
 	}
 
-	public String getContent() {
-		return content;
+	public String getInquiryContent() {
+		return inquiryContent;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setInquiryContent(String inquiryContent) {
+		this.inquiryContent = inquiryContent;
 	}
 
 	public char getIs_Reply() {
@@ -99,11 +99,12 @@ public class InquiryDto {
 
 	@Override
 	public String toString() {
-		return "InquiryDto [ino=" + ino + ", mno=" + mno + ", type=" + type + ", name=" + name + ", creDate=" + creDate
-				+ ", title=" + title + ", content=" + content + ", is_Reply=" + is_Reply + "]";
+		return "InquiryDto [inquiryNo=" + inquiryNo + ", memberNo=" + memberNo + ", inquiryType=" + inquiryType
+				+ ", inquiryName=" + inquiryName + ", inquiryCreDate=" + inquiryCreDate + ", inquiryTitle="
+				+ inquiryTitle + ", inquiryContent=" + inquiryContent + ", is_Reply=" + is_Reply + "]";
 	}
 
-
+	
 	
 	
 	

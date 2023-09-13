@@ -2,48 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.board">
-	<resultMap type="reviewDto" id="reviewResultMap">
-		<id column="REVIEW_NO" property="rno" />
-		<result column="MEMBER_NO" property="mno" />
-		<result column="PRODUCT_NO" property="pno" />
-		<result column="REVIEW_TITLE" property="title" />
-		<result column="REVIEW_CONTENT" property="content" />
-		<result column="REVIEW_CRE_DATE" property="creDate"
-			javaType="java.util.Date" />
-		<result column="REVIEW_MOD_DATE" property="creDate"
-			javaType="java.util.Date" />
-	</resultMap>
+<!-- 	<resultMap type="reviewDto" id="reviewResultMap"> -->
+<!-- 		<id column="REVIEW_NO" property="rno" /> -->
+<!-- 		<result column="MEMBER_NO" property="mno" /> -->
+<!-- 		<result column="PRODUCT_NO" property="pno" /> -->
+<!-- 		<result column="REVIEW_TITLE" property="title" /> -->
+<!-- 		<result column="REVIEW_CONTENT" property="content" /> -->
+<!-- 		<result column="REVIEW_CRE_DATE" property="creDate" -->
+<!-- 			javaType="java.util.Date" /> -->
+<!-- 		<result column="REVIEW_MOD_DATE" property="creDate" -->
+<!-- 			javaType="java.util.Date" /> -->
+<!-- 	</resultMap> -->
 	
-	<resultMap type="inquiryDto" id="inquiryResultMap">
-		<id column="INQUIRY_NO" property="ino" />
-		<result column="MEMBER_NO" property="mno" />
-		<result column="INQUIRY_TYPE" property="type" />
-		<result column="MEMBER_NAME" property="name" />
-		<result column="INQUIRY_CRE_DATE" property="creDate"
-			javaType="java.util.Date" />
-		<result column="INQUIRY_TITLE" property="title" />
-		<result column="INQUIRY_CONTENT" property="content" />
-		<result column="INQUIRY_IS_REPLY" property="is_Reply" />
-	</resultMap>
+<!-- 	<resultMap type="inquiryDto" id="inquiryResultMap"> -->
+<!-- 		<id column="INQUIRY_NO" property="ino" /> -->
+<!-- 		<result column="MEMBER_NO" property="mno" /> -->
+<!-- 		<result column="INQUIRY_TYPE" property="type" /> -->
+<!-- 		<result column="MEMBER_NAME" property="name" /> -->
+<!-- 		<result column="INQUIRY_CRE_DATE" property="creDate" -->
+<!-- 			javaType="java.util.Date" /> -->
+<!-- 		<result column="INQUIRY_TITLE" property="title" /> -->
+<!-- 		<result column="INQUIRY_CONTENT" property="content" /> -->
+<!-- 		<result column="INQUIRY_IS_REPLY" property="is_Reply" /> -->
+<!-- 	</resultMap> -->
 	
-	<resultMap type="ReplyDto" id="replyDtoResultMap">
-		<id column="INQUIRY_NO" property="ino" />
-		<result column="MEMBER_NO" property="mno" />
-		<result column="REPLY_CRE_DATE" property="creDate"
-			javaType="java.util.Date" />
-		<result column="REPLY_MEMBER_NAME" property="name" />
-		<result column="REPLY_TITLE" property="title" />
-		<result column="REPLY_CONTENT" property="content" />
-	</resultMap>
+<!-- 	<resultMap type="ReplyDto" id="replyDtoResultMap"> -->
+<!-- 		<id column="INQUIRY_NO" property="ino" /> -->
+<!-- 		<result column="MEMBER_NO" property="mno" /> -->
+<!-- 		<result column="REPLY_CRE_DATE" property="creDate" -->
+<!-- 			javaType="java.util.Date" /> -->
+<!-- 		<result column="REPLY_MEMBER_NAME" property="name" /> -->
+<!-- 		<result column="REPLY_TITLE" property="title" /> -->
+<!-- 		<result column="REPLY_CONTENT" property="content" /> -->
+<!-- 	</resultMap> -->
 	
-	<resultMap type="noticeDto" id="noticeResultMap">
-		<id column="NOTICE_NO" property="nno" />
-		<result column="MEMBER_NO" property="mno" />
-		<result column="NOTICE_TITLE" property="title" />
-		<result column="NOTICE_CONTENT" property="content" />
-		<result column="NOTICE_CRE_DATE" property="creDate"
-			javaType="java.util.Date" />
-	</resultMap>
+<!-- 	<resultMap type="noticeDto" id="noticeResultMap"> -->
+<!-- 		<id column="NOTICE_NO" property="nno" /> -->
+<!-- 		<result column="MEMBER_NO" property="mno" /> -->
+<!-- 		<result column="NOTICE_TITLE" property="title" /> -->
+<!-- 		<result column="NOTICE_CONTENT" property="content" /> -->
+<!-- 		<result column="NOTICE_CRE_DATE" property="creDate" -->
+<!-- 			javaType="java.util.Date" /> -->
+<!-- 	</resultMap> -->
 	
 	
 	

@@ -34,23 +34,25 @@ public class MemberController {
 		@RequestMapping(value = "/auth/addm.do", method = RequestMethod.GET)
 		public String memberViewFormAdd(Model model) {
 			
-			log.debug("Welcome MemberController memberAdd!");
+			log.debug("Welcome MemberController member Add!");
 			
 			return "auth/JoinForm";
 		}
+		
 		@RequestMapping(value = "/auth/addp.do", method = RequestMethod.GET)
 		public String memberPetFormAdd(MemberDto memberDto, Model model) {
-			
-			log.debug("Welcome MemberController memberAdd!");
+			log.debug("Welcome MemberController pet Add! " + memberDto);
 			model.addAttribute("memberDto", memberDto);
 			return "auth/JoinFormDog";
 		}
+		
 		@RequestMapping(value = "/auth/addp.do", method = RequestMethod.POST)
 		public String memberPAddCtr(MemberDto memberDto, PetDto petDto, Model model) {
 			
-			log.debug("Welcome MemberController memberAdd!");
-			memberService.memberInsertOne(memberDto, model);
-			memberService.petInsertOne(petDto, model);
-			return "auth/JoinFormDog";
+			log.debug("Welcome MemberController pet Add2!" + "memberDto :"+memberDto+"petDto:" +petDto +"medel: "+model);
+			int mno = memberService.memberInsertOne(memberDto);
+			petDto.setMno(mno);
+			memberService.petInsertOne(petDto);
+			return "../";
 		}
 }

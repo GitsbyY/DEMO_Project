@@ -16,9 +16,11 @@ public class MemberDaoImpl implements MemberDao{
 	String nameSpace = "com.demo.member.";
 
 	@Override
-	public void memberInsertOne(MemberDto memberDto) {
+	public int memberInsertOne(MemberDto memberDto) {
 		// TODO Auto-generated method stub
 		sqlSession.insert("com.demo.member.memberInsertOne", memberDto);
+		
+		return memberDto.getMno();
 	}
 
 	@Override
