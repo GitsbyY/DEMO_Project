@@ -10,7 +10,10 @@
 <link rel="stylesheet" type="text/css"
 	href="/DEMO_Project/resources/css/JoinFormDog.css">
 </head>
-
+<header>
+<jsp:include page="/WEB-INF/views/Header.jsp"/>
+</header>
+<main>
 <body>
 	<div>
 		<h1 style="text-align: left; color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG</h1>
@@ -109,7 +112,7 @@
 						</div>
 						<div class="inputWithButtonDog">
 							<div class="inputWithButtonDog">
-								<input class="inputDog" type="date" name="petAdoptionDate"
+								<input class="inputDog" type="date" name="petAdoptDate"
 									id="userJoinDogDate" placeholder="입양날짜를 선택해 주세요"
 									oninput="displaySelectedDate()" />
 							</div>
@@ -129,7 +132,7 @@
 							<label for="dogPillSelect">예방접종이력</label>
 						</div>
 						<div class="selectDogVaccin">
-							<select id="dogPillSelect" name="petVaccination">
+							<select id="dogPillSelect" name="petVac">
 								<option value="Vaccin1">1차</option>
 								<option value="Vaccin2">2차</option>
 								<option value="Vaccin3">3차</option>
@@ -140,7 +143,26 @@
 							</select>
 						</div>
 					</div>
-
+					<!-- 		예방접종일div		 -->
+					<div class="joinDog">
+						<div class="inputLabelDog">
+							<label for="userJoinDogVacDate">반려견 예방접종일</label>
+						</div>
+						<div class="inputWithButtonDog">
+							<div class="inputWithButtonDog">
+								<input class="inputDog" type="date" name="petVacDate"
+									id="userJoinDogVacDate" oninput="displaySelectedVacDate()" />
+							</div>
+						</div>
+					</div>
+					<!-- 선택된 날짜 표시 -->
+					<div>
+						<p id="selectedVacDateText" style="color: red; font-size: 12px;"></p>
+					</div>
+					<div class="txtErrorArea" style="">
+						<p class="errTxtRed" id="userJoinMessageDogVacDate"
+							aria-live="assertive"></p>
+					</div>
 				</div>
 
 				<div>
@@ -163,6 +185,10 @@
 			</form>
 		</div>
 	</div>
+</main>
+<footer>	
+<jsp:include page="/WEB-INF/views/Footer.jsp"/>
+</footer>
 </body>
 <script type="text/javascript">
 	//반려견 이름을 지우는 함수
@@ -229,11 +255,18 @@
 		}
 	}
 
-	// 날짜 선택시 아래에 표시하는 함수
+	// 날짜 선택시 아래에 표시하는 함수 입양
 	function displaySelectedDate() {
 		var selectedDateInput = document.getElementById("userJoinDogDate");
 		var selectedDateText = document.getElementById("selectedDateText");
 		selectedDateText.textContent = "선택된 날짜: " + selectedDateInput.value;
+	}
+	
+	// 날짜 선택시 아래에 표시하는 함수 백신
+	function displaySelectedVacDate() {
+		var selectedVacDateInput = document.getElementById("userJoinDogVacDate");
+		var selectedVacDateText = document.getElementById("selectedVacDateText");
+		selectedVacDateText.textContent = "선택된 날짜: " + selectedVacDateInput.value;
 	}
 
 	// 필수 필드 모두가 채워졌는지 확인하는 함수

@@ -9,16 +9,49 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 	padding: 0;
 }
 
+/* html, body { */
+/* 	display: flex; */
+/* 	justify-content: center; */
+/* 	align-items: center; */
+/* 	margin: 0; */
+/* } */
 html, body {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin: 0;
+/*  display: flex; */
+/* 	display:inline-block; */
+/*  justify-content: center; */
+    align-items: center;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
-
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+/* 헤더와 푸터를 고정시키기 */
+header {
+    position: fixed;
+    left: 0;
+    right: 0;
+}
+footer {
+	position: fixed;
+	left: 0;
+    right: 0;
+	bottom: 0;
+}
+/* 메인 컨텐츠 아래로 내리기 */
+main {
+    margin-top: 100px; /* 헤더의 높이만큼 여백 추가 */
+    margin-bottom: 80px; /* 푸터의 높이만큼 여백 추가 */
+}
 /* 폼 컨테이너 스타일 */
 .formContainerDog {
-	width: 600px;
+	width: 800px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -31,12 +64,12 @@ button {
 
 /* 문단 스타일 */
 p {
-	font-size: 9px;
+	font-size: 14px;
 }
 
 /* 회원가입 컨테이너 스타일 */
 .joinWrapDog {
-	width: 360px;
+	width: 400px;
 	background-color: none;
 	display: block;
 	align-items: center;
@@ -54,45 +87,49 @@ p {
 }
 
 .inputDog {
-	width: 200px;
-	height: 30px;
+	width: 300px;
+	height: 50px;
 	border: 2px solid #d9d9d9;
 	border-radius: 2px;
 	box-sizing: border-box;
-	font-size: 12px;
+	font-size: 16px;
 	margin-top: 10px;
 	text-align: right;
 	padding-right: 30px; /* 입력 필드 오른쪽에 버튼 공간을 확보 */
 }
 
 #userJoinDogName {
-	width: 160px;
+	width: 240px;
 }
 
 #dogSexSelect {
 	margin-top: 10px;
-	height: 30px;
-	width: 50px;
-	margin-left: 10px;
+	height: 50px;
+	width: 70px;
+	margin-left: 15px;
+	font-size: 20px;
 }
 /* 라벨 스타일 */
 .inputLabelDog {
 	display: inline-block;
 	margin-top: 15px;
+	margin-bottom : 15px;
 	margin-right: 10px; /* 라벨과 입력 필드 사이의 간격을 조절 */
-	font-size: 15px;
+	font-size: 18px;
 	width: 120px;
 	text-align: left; /* 라벨을 좌측 정렬로 변경 */
 	padding-right: 10px;
 }
 
 /* 셀렉트 박스 스타일 */
-.selectDogType select, .selectDogVaccin select {
+.selectDogType select
+, .selectDogVaccin select {
 	display: inline-block;
-	height: 25px;
-	width: 150px;
+	height: 40px;
+	width: 160px;
 	margin-top: 15px;
 	margin-left: 100px; /* 입력 필드와 셀렉트 박스를 우측 정렬로 변경 */
+	font-size: 20px;
 }
 
 #userJoinDogWeight, #userJoinDogDate {
@@ -105,17 +142,16 @@ p {
 
 .inputWithButtonDog>.btnDel {
 	position: absolute;
-	top: 50%; /* 버튼을 세로 중앙 정렬 */
+	top: 47%; /* 버튼을 세로 중앙 정렬 */
 	right: 5px; /* 오른쪽 여백 조절 */
 	transform: translateY(-50%); /* 세로 중앙 정렬을 위한 이동 */
 	border: none;
 	background-color: black;
-	background: url('../resources/img/deleteBtn.png') no-repeat;
+	background: url('../img/deleteBtn.png') no-repeat;
 	background-size: 20px 20px;
 	width: 20px;
 	height: 20px;
 	cursor: pointer;
-	margin-top: 5px;
 }
 
 /* 변경 버튼 스타일 */
@@ -130,8 +166,8 @@ p {
 
 /* 제출 버튼 스타일 */
 .submitBtn>button {
-	width: 360px;
-	height: 30px;
+	width: 400px;
+	height: 50px;
 	color: white;
 	background-color: #FFC4A3;
 	margin-top: 5px;
