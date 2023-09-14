@@ -6,42 +6,43 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class OrderDto {
 
-	private int ono;
-	private int mno;
+	private int orderNo;
+	private int memberNo;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date orderDate;
-	private String request;
-	private String status;
-	private int totalPrice;
+	private String orderRequest;
+	private String orderStatus;
+	private int orderTotalPrice;
 	
 	public OrderDto() {
 		super();
 	}
 
-	public OrderDto(int ono, int mno, Date orderDate, String request, String status, int totalPrice) {
+	public OrderDto(int orderNo, int memberNo, Date orderDate, String orderRequest, String orderStatus,
+			int orderTotalPrice) {
 		super();
-		this.ono = ono;
-		this.mno = mno;
+		this.orderNo = orderNo;
+		this.memberNo = memberNo;
 		this.orderDate = orderDate;
-		this.request = request;
-		this.status = status;
-		this.totalPrice = totalPrice;
+		this.orderRequest = orderRequest;
+		this.orderStatus = orderStatus;
+		this.orderTotalPrice = orderTotalPrice;
 	}
 
-	public int getOno() {
-		return ono;
+	public int getOrderNo() {
+		return orderNo;
 	}
 
-	public void setOno(int ono) {
-		this.ono = ono;
+	public void setOrderNo(int orderNo) {
+		this.orderNo = orderNo;
 	}
 
-	public int getMno() {
-		return mno;
+	public int getMemberNo() {
+		return memberNo;
 	}
 
-	public void setMno(int mno) {
-		this.mno = mno;
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
 
 	public Date getOrderDate() {
@@ -52,35 +53,38 @@ public class OrderDto {
 		this.orderDate = orderDate;
 	}
 
-	public String getRequest() {
-		return request;
+	public String getOrderRequest() {
+		return orderRequest;
 	}
 
-	public void setRequest(String request) {
-		this.request = request;
+	public void setOrderRequest(String orderRequest) {
+		this.orderRequest = orderRequest;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getOrderStatus() {
+		return orderStatus;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 
-	public int getTotalPrice() {
-		return totalPrice;
+	public int getOrderTotalPrice() {
+		return orderTotalPrice;
 	}
 
-	public void setTotalPrice(int totalPrice) {
-		this.totalPrice = totalPrice;
+	public void setOrderTotalPrice(int orderTotalPrice) {
+		this.orderTotalPrice = orderTotalPrice;
 	}
 
 	@Override
 	public String toString() {
-		return "OrderDto [ono=" + ono + ", mno=" + mno + ", orderDate=" + orderDate + ", request=" + request
-				+ ", status=" + status + ", totalPrice=" + totalPrice + "]";
+		return "OrderDto [orderNo=" + orderNo + ", memberNo=" + memberNo + ", orderDate=" + orderDate
+				+ ", orderRequest=" + orderRequest + ", orderStatus=" + orderStatus + ", orderTotalPrice="
+				+ orderTotalPrice + "]";
 	}
+
+	
 
 	
 	

@@ -4,25 +4,25 @@ import java.util.Date;
 
 public class OrderCancelDto {
 
-	private int ono;
+	private int orderNo;
 	private Date orderCancelDate;
 	
 	public OrderCancelDto() {
 		super();
 	}
 
-	public OrderCancelDto(int ono, Date orderCancelDate) {
+	public OrderCancelDto(int orderNo, Date orderCancelDate) {
 		super();
-		this.ono = ono;
+		this.orderNo = orderNo;
 		this.orderCancelDate = orderCancelDate;
 	}
 
-	public int getOno() {
-		return ono;
+	public int getOrderNo() {
+		return orderNo;
 	}
 
-	public void setOno(int ono) {
-		this.ono = ono;
+	public void setOrderNo(int orderNo) {
+		this.orderNo = orderNo;
 	}
 
 	public Date getOrderCancelDate() {
@@ -35,8 +35,10 @@ public class OrderCancelDto {
 
 	@Override
 	public String toString() {
-		return "OrderProductDto [ono=" + ono + ", orderCancelDate=" + orderCancelDate + "]";
+		return "OrderCancelDto [orderNo=" + orderNo + ", orderCancelDate=" + orderCancelDate + "]";
 	}
+
+	
 
 	
 	

@@ -36,10 +36,10 @@
 	</resultMap>
 
 	<resultMap type="chargeDto" id="chargeResultMap">
-		<id column="MEMBER_CHARGE_NO" property="mcno" />
-		<result column="MEMBER_NO" property="mno" />
-		<result column="MEMBER_CHARGE_AMOUNT" property="mcAmount" />
-		<result column="MEMBER_CHARGE_DATE" property="mcDate"
+		<id column="MEMBER_CHARGE_NO" property="chargeNo" />
+		<result column="MEMBER_NO" property="memberNo" />
+		<result column="MEMBER_CHARGE_AMOUNT" property="chagrgeAmount" />
+		<result column="MEMBER_CHARGE_DATE" property="chargeDate"
 			javaType="java.util.Date" />
 	</resultMap>
 

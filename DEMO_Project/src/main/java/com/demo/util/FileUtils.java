@@ -14,14 +14,16 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 @Component("fileUtils")
 public class FileUtils {
 
-   private static final String filePath = "C:\\upload";
+   private static final String filePath = "C:\\demo\\image";
    
-   public List<Map<String,Object>> parseInsertFileInfo(int parentSeq,
+   public List<Map<String,Object>> parseInsertFileInfo(int imgNo,
             MultipartHttpServletRequest multipartHttpServletRequest) throws Exception{
 	   								//파일이 들어가는 곳
       Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+      //멀티파트 요청
       MultipartFile multipartFile = null;
       String originalFileName = null;
+      //파일 확장자명
       String originalFileExtension = null;
       String storedFileName = null;
       						//하나의 파일을 다룰 수도 여러개를 다룰 수도 있기에 리스트로 했다
@@ -42,7 +44,7 @@ public class FileUtils {
             originalFileName = multipartFile.getOriginalFilename();
             originalFileExtension
                = originalFileName.substring(originalFileName.lastIndexOf("."));
-            
+            //저장파일이름 무작위로 생성 
             storedFileName = CommonUtils.getRandomString()+originalFileExtension;
             
             file = new File(filePath, storedFileName);
@@ -50,7 +52,7 @@ public class FileUtils {
             multipartFile.transferTo(file);
             
             fileInfoMap = new HashMap<String,Object>();
-            fileInfoMap.put("parentSeq", parentSeq); // 멤버
+            fileInfoMap.put("imgNo", imgNo); // 멤버
             fileInfoMap.put("original_file_name", originalFileName);
             fileInfoMap.put("stored_file_name", storedFileName);
             fileInfoMap.put("file_size", multipartFile.getSize());

@@ -4,25 +4,25 @@ import java.util.Date;
 
 public class OrderConfirmDto {
 
-	private int ono;
+	private int orderNo;
 	private Date orderConfirmDate;
 	
 	public OrderConfirmDto() {
 		super();
 	}
 
-	public OrderConfirmDto(int ono, Date orderConfirmDate) {
+	public OrderConfirmDto(int orderNo, Date orderConfirmDate) {
 		super();
-		this.ono = ono;
+		this.orderNo = orderNo;
 		this.orderConfirmDate = orderConfirmDate;
 	}
 
-	public int getOno() {
-		return ono;
+	public int getOrderNo() {
+		return orderNo;
 	}
 
-	public void setOno(int ono) {
-		this.ono = ono;
+	public void setOrderNo(int orderNo) {
+		this.orderNo = orderNo;
 	}
 
 	public Date getOrderConfirmDate() {
@@ -35,8 +35,10 @@ public class OrderConfirmDto {
 
 	@Override
 	public String toString() {
-		return "OrderProductDto [ono=" + ono + ", orderConfirmDate=" + orderConfirmDate + "]";
+		return "OrderConfirmDto [orderNo=" + orderNo + ", orderConfirmDate=" + orderConfirmDate + "]";
 	}
+
+	
 
 	
 	

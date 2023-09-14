@@ -2,70 +2,72 @@ package com.demo.product.dto;
 
 public class CartDto {
 
-	private int pno;
-	private int mno;
-	private String name;
-	private int price;
-	private int quantity;
+	private int productNo;
+	private int memberNo;
+	private String productName;
+	private int productPrice;
+	private int productQuantity;
 	
 	public CartDto() {
 		super();
 	}
 
-	public CartDto(int pno, int mno, String name, int price, int quantity) {
+	public CartDto(int productNo, int memberNo, String productName, int productPrice, int productQuantity) {
 		super();
-		this.pno = pno;
-		this.mno = mno;
-		this.name = name;
-		this.price = price;
-		this.quantity = quantity;
+		this.productNo = productNo;
+		this.memberNo = memberNo;
+		this.productName = productName;
+		this.productPrice = productPrice;
+		this.productQuantity = productQuantity;
 	}
 
-	public int getPno() {
-		return pno;
+	public int getProductNo() {
+		return productNo;
 	}
 
-	public void setPno(int pno) {
-		this.pno = pno;
+	public void setProductNo(int productNo) {
+		this.productNo = productNo;
 	}
 
-	public int getMno() {
-		return mno;
+	public int getMemberNo() {
+		return memberNo;
 	}
 
-	public void setMno(int mno) {
-		this.mno = mno;
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
 
-	public String getName() {
-		return name;
+	public String getProductName() {
+		return productName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
-	public int getPrice() {
-		return price;
+	public int getProductPrice() {
+		return productPrice;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setProductPrice(int productPrice) {
+		this.productPrice = productPrice;
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public int getProductQuantity() {
+		return productQuantity;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setProductQuantity(int productQuantity) {
+		this.productQuantity = productQuantity;
 	}
 
 	@Override
 	public String toString() {
-		return "CartDto [pno=" + pno + ", mno=" + mno + ", name=" + name + ", price=" + price + ", quantity=" + quantity
-				+ "]";
+		return "CartDto [productNo=" + productNo + ", memberNo=" + memberNo + ", productName=" + productName
+				+ ", productPrice=" + productPrice + ", productQuantity=" + productQuantity + "]";
 	}
+
+	
 
 
 	

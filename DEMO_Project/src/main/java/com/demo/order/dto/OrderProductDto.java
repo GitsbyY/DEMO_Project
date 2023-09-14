@@ -2,70 +2,72 @@ package com.demo.order.dto;
 
 public class OrderProductDto {
 
-	private int ono;
-	private int pno;
-	private String name;
-	private int quantity;
-	private int price;
+	private int orderNo;
+	private int productNo;
+	private String productName;
+	private int productQuantity;
+	private int productPrice;
 	
 	public OrderProductDto() {
 		super();
 	}
 
-	public OrderProductDto(int ono, int pno, String name, int quantity, int price) {
+	public OrderProductDto(int orderNo, int productNo, String productName, int productQuantity, int productPrice) {
 		super();
-		this.ono = ono;
-		this.pno = pno;
-		this.name = name;
-		this.quantity = quantity;
-		this.price = price;
+		this.orderNo = orderNo;
+		this.productNo = productNo;
+		this.productName = productName;
+		this.productQuantity = productQuantity;
+		this.productPrice = productPrice;
 	}
 
-	public int getOno() {
-		return ono;
+	public int getOrderNo() {
+		return orderNo;
 	}
 
-	public void setOno(int ono) {
-		this.ono = ono;
+	public void setOrderNo(int orderNo) {
+		this.orderNo = orderNo;
 	}
 
-	public int getPno() {
-		return pno;
+	public int getProductNo() {
+		return productNo;
 	}
 
-	public void setPno(int pno) {
-		this.pno = pno;
+	public void setProductNo(int productNo) {
+		this.productNo = productNo;
 	}
 
-	public String getName() {
-		return name;
+	public String getProductName() {
+		return productName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public int getProductQuantity() {
+		return productQuantity;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setProductQuantity(int productQuantity) {
+		this.productQuantity = productQuantity;
 	}
 
-	public int getPrice() {
-		return price;
+	public int getProductPrice() {
+		return productPrice;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setProductPrice(int productPrice) {
+		this.productPrice = productPrice;
 	}
 
 	@Override
 	public String toString() {
-		return "OrderProductDto [ono=" + ono + ", pno=" + pno + ", name=" + name + ", quantity=" + quantity + ", price="
-				+ price + "]";
+		return "OrderProductDto [orderNo=" + orderNo + ", productNo=" + productNo + ", productName=" + productName
+				+ ", productQuantity=" + productQuantity + ", productPrice=" + productPrice + "]";
 	}
+
+	
 
 	
 	

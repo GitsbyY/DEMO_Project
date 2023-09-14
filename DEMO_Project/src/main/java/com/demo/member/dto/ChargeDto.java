@@ -6,51 +6,64 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class ChargeDto {
 
-	private int mcno;
-	private int mno;
-	private int mcAmount;
+	private int chargeNo;
+	private int memberNo;
+	private int chagrgeAmount;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date mcDate;
+	private Date chargeDate;
 	
 	public ChargeDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ChargeDto(int mcno, int mno, int mcAmount, Date mcDate) {
+
+	public ChargeDto(int chargeNo, int memberNo, int chagrgeAmount, Date chargeDate) {
 		super();
-		this.mcno = mcno;
-		this.mno = mno;
-		this.mcAmount = mcAmount;
-		this.mcDate = mcDate;
+		this.chargeNo = chargeNo;
+		this.memberNo = memberNo;
+		this.chagrgeAmount = chagrgeAmount;
+		this.chargeDate = chargeDate;
 	}
-	public int getMcno() {
-		return mcno;
+
+	public int getChargeNo() {
+		return chargeNo;
 	}
-	public void setMcno(int mcno) {
-		this.mcno = mcno;
+
+	public void setChargeNo(int chargeNo) {
+		this.chargeNo = chargeNo;
 	}
-	public int getMno() {
-		return mno;
+
+	public int getMemberNo() {
+		return memberNo;
 	}
-	public void setMno(int mno) {
-		this.mno = mno;
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
-	public int getMcAmount() {
-		return mcAmount;
+
+	public int getChagrgeAmount() {
+		return chagrgeAmount;
 	}
-	public void setMcAmount(int mcAmount) {
-		this.mcAmount = mcAmount;
+
+	public void setChagrgeAmount(int chagrgeAmount) {
+		this.chagrgeAmount = chagrgeAmount;
 	}
-	public Date getMcDate() {
-		return mcDate;
+
+	public Date getChargeDate() {
+		return chargeDate;
 	}
-	public void setMcDate(Date mcDate) {
-		this.mcDate = mcDate;
+
+	public void setChargeDate(Date chargeDate) {
+		this.chargeDate = chargeDate;
 	}
+
 	@Override
 	public String toString() {
-		return "ChargeDto [mcno=" + mcno + ", mno=" + mno + ", mcAmount=" + mcAmount + ", mcDate=" + mcDate + "]";
+		return "ChargeDto [chargeNo=" + chargeNo + ", memberNo=" + memberNo + ", chagrgeAmount=" + chagrgeAmount
+				+ ", chargeDate=" + chargeDate + "]";
 	}
+	
+	
 	
 	
 	

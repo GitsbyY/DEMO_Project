@@ -2,49 +2,52 @@ package com.demo.product.dto;
 
 public class ProductDetailDto {
 
-	private int pdno;
-	private int ino;
-	private String pdContent;
+	private int productDetailNo;
+	private int imgNo;
+	private String productDetailContent;
 	
 	public ProductDetailDto() {
 		super();
 	}
 
-	public ProductDetailDto(int pdno, int ino, String pdContent) {
+	public ProductDetailDto(int productDetailNo, int imgNo, String productDetailContent) {
 		super();
-		this.pdno = pdno;
-		this.ino = ino;
-		this.pdContent = pdContent;
+		this.productDetailNo = productDetailNo;
+		this.imgNo = imgNo;
+		this.productDetailContent = productDetailContent;
 	}
 
-	public int getPdno() {
-		return pdno;
+	public int getProductDetailNo() {
+		return productDetailNo;
 	}
 
-	public void setPdno(int pdno) {
-		this.pdno = pdno;
+	public void setProductDetailNo(int productDetailNo) {
+		this.productDetailNo = productDetailNo;
 	}
 
-	public int getIno() {
-		return ino;
+	public int getImgNo() {
+		return imgNo;
 	}
 
-	public void setIno(int ino) {
-		this.ino = ino;
+	public void setImgNo(int imgNo) {
+		this.imgNo = imgNo;
 	}
 
-	public String getPdContent() {
-		return pdContent;
+	public String getProductDetailContent() {
+		return productDetailContent;
 	}
 
-	public void setPdContent(String pdContent) {
-		this.pdContent = pdContent;
+	public void setProductDetailContent(String productDetailContent) {
+		this.productDetailContent = productDetailContent;
 	}
 
 	@Override
 	public String toString() {
-		return "ProductDetailDto [pdno=" + pdno + ", ino=" + ino + ", pdContent=" + pdContent + "]";
+		return "ProductDetailDto [productDetailNo=" + productDetailNo + ", imgNo=" + imgNo + ", productDetailContent="
+				+ productDetailContent + "]";
 	}
+
+	
 
 	
 	

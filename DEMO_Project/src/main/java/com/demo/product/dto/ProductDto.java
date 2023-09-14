@@ -6,113 +6,117 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class ProductDto {
 
-	private int pno;
-	private int pdno;
-	private int ino;
-	private String name;
-	private int price;
-	private int stock;
-	private String category;
+	private int productNo;
+	private int productDetailNo;
+	private int imgNo;
+	private String productName;
+	private int productPrice;
+	private int productStock;
+	private String productCategory;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date creDate;
+	private Date productCreDate;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date modDate;
+	private Date productModDate;
 	
 	public ProductDto() {
 		super();
 	}
 
-	public ProductDto(int pno, int pdno, int ino, String name, int price, int stock, String category, Date creDate,
-			Date modDate) {
+	public ProductDto(int productNo, int productDetailNo, int imgNo, String productName, int productPrice,
+			int productStock, String productCategory, Date productCreDate, Date productModDate) {
 		super();
-		this.pno = pno;
-		this.pdno = pdno;
-		this.ino = ino;
-		this.name = name;
-		this.price = price;
-		this.stock = stock;
-		this.category = category;
-		this.creDate = creDate;
-		this.modDate = modDate;
+		this.productNo = productNo;
+		this.productDetailNo = productDetailNo;
+		this.imgNo = imgNo;
+		this.productName = productName;
+		this.productPrice = productPrice;
+		this.productStock = productStock;
+		this.productCategory = productCategory;
+		this.productCreDate = productCreDate;
+		this.productModDate = productModDate;
 	}
 
-	public int getPno() {
-		return pno;
+	public int getProductNo() {
+		return productNo;
 	}
 
-	public void setPno(int pno) {
-		this.pno = pno;
+	public void setProductNo(int productNo) {
+		this.productNo = productNo;
 	}
 
-	public int getPdno() {
-		return pdno;
+	public int getProductDetailNo() {
+		return productDetailNo;
 	}
 
-	public void setPdno(int pdno) {
-		this.pdno = pdno;
+	public void setProductDetailNo(int productDetailNo) {
+		this.productDetailNo = productDetailNo;
 	}
 
-	public int getIno() {
-		return ino;
+	public int getImgNo() {
+		return imgNo;
 	}
 
-	public void setIno(int ino) {
-		this.ino = ino;
+	public void setImgNo(int imgNo) {
+		this.imgNo = imgNo;
 	}
 
-	public String getName() {
-		return name;
+	public String getProductName() {
+		return productName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
-	public int getPrice() {
-		return price;
+	public int getProductPrice() {
+		return productPrice;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setProductPrice(int productPrice) {
+		this.productPrice = productPrice;
 	}
 
-	public int getStock() {
-		return stock;
+	public int getProductStock() {
+		return productStock;
 	}
 
-	public void setStock(int stock) {
-		this.stock = stock;
+	public void setProductStock(int productStock) {
+		this.productStock = productStock;
 	}
 
-	public String getCategory() {
-		return category;
+	public String getProductCategory() {
+		return productCategory;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+	public void setProductCategory(String productCategory) {
+		this.productCategory = productCategory;
 	}
 
-	public Date getCreDate() {
-		return creDate;
+	public Date getProductCreDate() {
+		return productCreDate;
 	}
 
-	public void setCreDate(Date creDate) {
-		this.creDate = creDate;
+	public void setProductCreDate(Date productCreDate) {
+		this.productCreDate = productCreDate;
 	}
 
-	public Date getModDate() {
-		return modDate;
+	public Date getProductModDate() {
+		return productModDate;
 	}
 
-	public void setModDate(Date modDate) {
-		this.modDate = modDate;
+	public void setProductModDate(Date productModDate) {
+		this.productModDate = productModDate;
 	}
 
 	@Override
 	public String toString() {
-		return "ProductDto [pno=" + pno + ", pdno=" + pdno + ", ino=" + ino + ", name=" + name + ", price=" + price
-				+ ", stock=" + stock + ", category=" + category + ", creDate=" + creDate + ", modDate=" + modDate + "]";
+		return "ProductDto [productNo=" + productNo + ", productDetailNo=" + productDetailNo + ", imgNo=" + imgNo
+				+ ", productName=" + productName + ", productPrice=" + productPrice + ", productStock=" + productStock
+				+ ", productCategory=" + productCategory + ", productCreDate=" + productCreDate + ", productModDate="
+				+ productModDate + "]";
 	}
+
+	
 
 
 	
