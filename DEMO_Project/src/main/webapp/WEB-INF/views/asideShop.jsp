@@ -3,7 +3,7 @@
 
 	<aside>
 		<h1 class="asideH1tag">댕댕 쇼핑몰</h1>
-		<a id="asideTitleTag" class="asideATag">전체</a><br>
+		<a class="asideATag">전체</a><br>
 		<a class="asideATag">사료</a><br>
 		<a class="asideATag">간식</a><br>
 		<a class="asideATag">영양제</a><br>

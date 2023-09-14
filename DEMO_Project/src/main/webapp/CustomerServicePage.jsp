@@ -4,25 +4,6 @@
 <html>
 <head>
 <style type="text/css">
-aside{
-	/* background-color: #E0EEEE; */
-	float: left;
-	width: 180px;
-	height: 600px;
-	margin-left: 17%;
-	margin-right: 100px;
-}
-.aTag{
-	margin-left: 35px;
-	line-height: 2;
-	font-weight: bold;
-}
-
-.H1tag{
-	margin-left: 10px;
-	line-height: 2.5;		
-}
-
 #titleTable{
    margin-top: 30px;
    border: 1px solid gray;
@@ -48,30 +29,24 @@ th{
    width: 870px;   
 }
 
-#titleTag{
-	color: blue;
-}
-
 </style>
 <meta charset="UTF-8">
 <title>고객센터 메인</title>
-<!-- <link rel="stylesheet" type="text/css" href="css/mystyles.css"> -->
-<!-- <script src="js/myscript.js"></script> -->
+<link rel="stylesheet" type="text/css" href="/DEMO_Project/resources/css/main.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/Header.jsp"/>
 	
-	<aside>
-		<h1 class="H1tag">고객센터</h1>
-		<a id="titleTag" class="aTag">1:1 상담문의</a><br>
-		<a class="aTag">공지사항</a><br>			
-	</aside>
-	<table id="titleTable">
-      <tr>
-         <th id="firstTh">1:1 상담문의</th>
-         <th id="secondTh"></th>      
-      </tr>            
-	</table>
+	<jsp:include page="/WEB-INF/views/asideCustomerService.jsp"/>
+	
+	<div id='divContainer'>
+		<table id="titleTable">
+	      <tr>
+	         <th id="firstTh">1:1 상담문의</th>
+	         <th id="secondTh"></th>      
+	      </tr>            
+		</table>
+	</div>
 		
 	
 	

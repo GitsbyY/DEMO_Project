@@ -4,25 +4,6 @@
 <html>
 <head>
 <style type="text/css">
-aside{
-	/* background-color: #E0EEEE; */
-	float: left;
-	width: 180px;
-	height: 600px;
-	margin-left: 17%;
-	margin-right: 100px;
-}
-.aTag{
-	margin-left: 35px;
-	line-height: 2;
-	font-weight: bold;
-}
-
-.H1tag{
-	margin-left: 10px;
-	line-height: 2.5;		
-}
-
 #titleTable{
    margin-top: 30px;
    border: 1px solid gray;
@@ -48,10 +29,6 @@ th{
    width: 850px;   
 }
 
-#titleTag{
-	color: blue;
-}
-
 </style>
 <meta charset="UTF-8">
 <title>회원정보 수정 페이지</title>
@@ -61,23 +38,17 @@ th{
 <body>
 	<jsp:include page="/WEB-INF/views/Header.jsp"/>
 	
-	<aside>
-		<h1 class="H1tag">댕댕 쇼핑</h1>
-		<a class="aTag">주문목록</a><br>
-		<a class="aTag">취소내역</a><br>
-		<a class="aTag">쇼핑몰 결제관리</a><br><br>		
-		<h1 class="H1tag">댕댕 프로필</h1>
-		<a id="titleTag" class="aTag">회원정보확인/수정</a><br>
-		<a class="aTag">결제관리</a><br>	
-	</aside>
-	<table id="titleTable">
-      <tr>
-         <th id="firstTh">회원정보 수정</th>
-         <th id="secondTh"></th>      
-      </tr>            
-   </table>
-	
+	<jsp:include page="/WEB-INF/views/asideMyPage.jsp"/>
 
+	<div id='divContainer'
+		style='width: 700px; height: 780px; background-color: pink;'>
+		<table id="titleTable">
+	      <tr>
+	         <th id="firstTh">회원정보 수정</th>
+	         <th id="secondTh"></th>      
+	      </tr>            
+		</table>
+	</div>
 	
 	<jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
