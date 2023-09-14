@@ -12,7 +12,8 @@
    border-left:thick;
    border-right:thick;
    margin-right: 15.5%;
-   table-layout: fixed;   
+   table-layout: fixed;
+   width: 100%;   
 }
 th{
    
@@ -21,34 +22,37 @@ th{
 
 #firstTh{
    border-bottom: 2px solid black;
-   width: 200px;
+   width: 180px;
    display: block;     
 }
 
 #secondTh{
-   width: 850px;   
+     
 }
 
 </style>
 <meta charset="UTF-8">
-<title>마이댕댕 회원정보확인</title>
-<!-- <link rel="stylesheet" type="text/css" href="css/mystyles.css"> -->
-<!-- <script src="js/myscript.js"></script> -->
+<title>고객센터 메인</title>
+<link rel="stylesheet" type="text/css" href="/DEMO_Project/resources/css/main.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/Header.jsp"/>
 	
-	<jsp:include page="/WEB-INF/views/asideMyPage.jsp"/>
+	<jsp:include page="/WEB-INF/views/asideCustomerService.jsp"/>
 	
-	<div id='divContainer'
-		style='width: 700px; height: 780px; background-color: pink;'>	
+	<div id='divContainer'>
 		<table id="titleTable">
 	      <tr>
-	         <th id="firstTh">회원정보 확인</th>
+	         <th id="firstTh">1:1 상담문의</th>
 	         <th id="secondTh"></th>      
 	      </tr>            
 		</table>
 	</div>
+		
+	
+	
+	
+	
 
 	
 	<jsp:include page="/WEB-INF/views/Footer.jsp"/>

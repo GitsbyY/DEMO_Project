@@ -5,8 +5,7 @@
 <head>
 <style type="text/css">
 #input{
-	float: right;
-	margin-right: 15.5%;
+	float: right;	
 	margin-top: 10px;
 	height: 25px;
 	width: 220px;
@@ -47,11 +46,11 @@ td{
    border-collapse: collapse;
    border-top: thick;
    border-left:thick;
-   border-right:thick;
-   margin-right: 15.5%;
+   border-right:thick;  
    table-layout: fixed;
    font-size: 30px;
-   margin-bottom: 10px;   
+   margin-bottom: 10px;
+   width: 100%;   
 }
 
 #firstTh{
@@ -61,11 +60,11 @@ td{
 }
 
 #secondTh{
-   width: 900px;   
+      
 }
 
 #mainTable{	
-	width: 760px;
+	width: 100%;
 	border: 1px solid gray;
 	border-left:thick;
 	border-right:thick;
@@ -98,30 +97,26 @@ td{
 </style>
 <meta charset="UTF-8">
 <title>후기남겨요 메인</title>
-<!-- <link rel="stylesheet" type="text/css" href="css/mystyles.css"> -->
-<!-- <script src="js/myscript.js"></script> -->
+<link rel="stylesheet" type="text/css" href="/DEMO_Project/resources/css/main.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/Header.jsp"/>
 	
 	<jsp:include page="/WEB-INF/views/asideShop.jsp"/>
 	
-	<div id='divContainer'
-		style='width: 700px; height: 780px; background-color: pink;'>
+	<div id='divContainer'>
 		<table id="titleTable">
 			<tr>
 				<th id="firstTh">후기남겨요</th>
 				<th id="secondTh"></th>      
 			</tr>            
-		</table>
-		
+		</table>		
 		<input id="input" type="text" name="serch" placeholder="검색어 입력창">
 		<select id="select">
 			<option class="optionTag" value="product">상품</option>
 			<option class="optionTag" value="kind">견종</option>
 			<option class="optionTag" value="title">제목</option>
-		</select>
-	   
+		</select>			   
 		<table id="mainTable">
 			<tr class="mainTr">
 				<th id="mainFirstTh" class="mainTh">번호</th>

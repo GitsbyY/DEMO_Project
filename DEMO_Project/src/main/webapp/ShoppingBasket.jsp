@@ -11,9 +11,7 @@
 }
 #basket{
 	height: 50px;
-	margin-top: 30px;
-	margin-left: 16%;
-	margin-right: 16%;
+	margin-top: 30px;	
 	border: 1px solid black;
 	border-top: thick;
 	border-left:thick;
@@ -27,16 +25,16 @@
 </style>
 <meta charset="UTF-8">
 <title>장바구니</title>
-<!-- <link rel="stylesheet" type="text/css" href="css/mystyles.css"> -->
-<!-- <script src="js/myscript.js"></script> -->
+<link rel="stylesheet" type="text/css" href="/DEMO_Project/resources/css/main.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/Header.jsp"/>
 	
-	<div id="basket">
-		<img id="mainImg" alt="장바구니" src="./resources/img//imgHeader/basket.jpg">
-		<span id="maintitle">장바구니</span>
-	
+	<div id="mainContainer">
+		<div id="basket" style="width: 100%;">
+			<img id="mainImg" alt="장바구니" src="./resources/img/imgHeader/basket.jpg">
+			<span id="maintitle">장바구니</span>	
+		</div>	
 	</div>
 
 	

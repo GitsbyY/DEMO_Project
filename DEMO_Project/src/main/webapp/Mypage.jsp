@@ -3,7 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="/DEMO_Project/resources/css/main.css">
 <style type="text/css">
+
 #titleTable{
    margin-top: 30px;
    border: 1px solid gray;
@@ -12,7 +14,8 @@
    border-left:thick;
    border-right:thick;
    margin-right: 15.5%;
-   table-layout: fixed;   
+   table-layout: fixed;
+   width: 100%;   
 }
 th{
    
@@ -21,37 +24,33 @@ th{
 
 #firstTh{
    border-bottom: 2px solid black;
-   width: 180px;
+   width: 150px;
    display: block;     
 }
 
 #secondTh{
-   width: 870px;   
+      
 }
+
 
 </style>
 <meta charset="UTF-8">
-<title>고객센터 메인</title>
+<title>마이댕댕 메인</title>
 <link rel="stylesheet" type="text/css" href="/DEMO_Project/resources/css/main.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/Header.jsp"/>
 	
-	<jsp:include page="/WEB-INF/views/asideCustomerService.jsp"/>
+	<jsp:include page="/WEB-INF/views/asideMyPage.jsp"/>
 	
 	<div id='divContainer'>
 		<table id="titleTable">
 	      <tr>
-	         <th id="firstTh">1:1 상담문의</th>
+	         <th id="firstTh">주문목록</th>
 	         <th id="secondTh"></th>      
 	      </tr>            
-		</table>
+	   </table>
 	</div>
-		
-	
-	
-	
-	
 
 	
 	<jsp:include page="/WEB-INF/views/Footer.jsp"/>

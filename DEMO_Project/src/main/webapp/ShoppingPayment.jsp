@@ -5,9 +5,9 @@
 <head>
 <style type="text/css">
 
-#title{
-	margin-left: 16%;
-	margin-right: 16%;
+#title{	
+	width: 100%;
+	height: 700px;
 }
 #maintitle{
 	height: 50px;
@@ -92,90 +92,92 @@ table, tr, td{
 <body>
 	<jsp:include page="/WEB-INF/views/Header.jsp"/>
 	
-	<div id="title">
-		<div>	
-			<p id="maintitle">주문/결제</p>	
+	<div id="mainContainer">
+		<div id="title">
+			<div>	
+				<p id="maintitle">주문/결제</p>	
+			</div>
+			<div>	
+				<p id="secondTitle">구매자 정보</p>	
+			</div>
+			<div>
+				<table id="memberInfo">
+				<tr>
+					<td class="detail">이름</td>
+					<td class="midTd"></td>
+					<td class="nextTd"></td>
+					<td>회원 이름</td>
+				</tr>
+				<tr>
+					<td class="detail">배송주소</td>
+					<td class="midTd"></td>
+					<td class="nextTd"></td>
+					<td>회원 주소</td>
+				</tr>
+				<tr>
+					<td class="detail">연락처</td>
+					<td class="midTd"></td>
+					<td class="nextTd"></td>
+					<td>회원 연락처</td>
+				</tr>
+				<tr>
+					<td class="detail">배송 요청사항</td>
+					<td class="midTd"></td>
+					<td class="nextTd"></td>
+					<td>문 앞에 두시고 문자 주세요</td>
+				</tr>
+				</table>
+			</div>
+			<div>	
+				<p id="thirdTitle">결제정보</p>	
+			</div>
+			<div>
+				<table id="memberInfo">
+				<tr>
+					<td class="detail">총상품 가격</td>
+					<td class="midTd"></td>
+					<td class="nextTd"></td>
+					<td id="price">33,500원</td>
+				</tr>
+				<tr>
+					<td class="detail">포인트</td>
+					<td class="midTd"></td>
+					<td class="nextTd"></td>
+					<td id="point" class="nextTd2">
+						<input id="pointInput" type="text">P
+					</td>
+					<td class="lastTd">잔액:15,000P</td>
+				</tr>
+				<tr>
+					<td class="detail">결제방법</td>
+					<td class="midTd"></td>
+					<td class="nextTd"></td>
+					<td id="method" class="nextTd2">E-money</td>
+					<td class="lastTd">잔액:100,000원</td>
+				</tr>
+				<tr>
+					<td class="detail">총 결제금액</td>
+					<td class="midTd"></td>
+					<td class="nextTd"></td>
+					<td id="balance" class="nextTd2">23,500원</td>
+					<td class="lastTd">포인트 적립 예정 1,175p</td>
+				</tr>
+				<tr>
+					<td class="detail">결제 후 잔액</td>
+					<td class="midTd"></td>
+					<td class="nextTd"></td>
+					<td id="balance2">76,500원</td>
+				</tr>
+				</table>
+			</div>
+			<div>
+				<input id="cancellation" type="button" value="취소">
+				<input id="payment" type="button" value="결제">
+			</div>
+				
 		</div>
-		<div>	
-			<p id="secondTitle">구매자 정보</p>	
-		</div>
-		<div>
-			<table id="memberInfo">
-			<tr>
-				<td class="detail">이름</td>
-				<td class="midTd"></td>
-				<td class="nextTd"></td>
-				<td>회원 이름</td>
-			</tr>
-			<tr>
-				<td class="detail">배송주소</td>
-				<td class="midTd"></td>
-				<td class="nextTd"></td>
-				<td>회원 주소</td>
-			</tr>
-			<tr>
-				<td class="detail">연락처</td>
-				<td class="midTd"></td>
-				<td class="nextTd"></td>
-				<td>회원 연락처</td>
-			</tr>
-			<tr>
-				<td class="detail">배송 요청사항</td>
-				<td class="midTd"></td>
-				<td class="nextTd"></td>
-				<td>문 앞에 두시고 문자 주세요</td>
-			</tr>
-			</table>
-		</div>
-		<div>	
-			<p id="thirdTitle">결제정보</p>	
-		</div>
-		<div>
-			<table id="memberInfo">
-			<tr>
-				<td class="detail">총상품 가격</td>
-				<td class="midTd"></td>
-				<td class="nextTd"></td>
-				<td id="price">33,500원</td>
-			</tr>
-			<tr>
-				<td class="detail">포인트</td>
-				<td class="midTd"></td>
-				<td class="nextTd"></td>
-				<td id="point" class="nextTd2">
-					<input id="pointInput" type="text">P
-				</td>
-				<td class="lastTd">잔액:15,000P</td>
-			</tr>
-			<tr>
-				<td class="detail">결제방법</td>
-				<td class="midTd"></td>
-				<td class="nextTd"></td>
-				<td id="method" class="nextTd2">E-money</td>
-				<td class="lastTd">잔액:100,000원</td>
-			</tr>
-			<tr>
-				<td class="detail">총 결제금액</td>
-				<td class="midTd"></td>
-				<td class="nextTd"></td>
-				<td id="balance" class="nextTd2">23,500원</td>
-				<td class="lastTd">포인트 적립 예정 1,175p</td>
-			</tr>
-			<tr>
-				<td class="detail">결제 후 잔액</td>
-				<td class="midTd"></td>
-				<td class="nextTd"></td>
-				<td id="balance2">76,500원</td>
-			</tr>
-			</table>
-		</div>
-		<div>
-			<input id="cancellation" type="button" value="취소">
-			<input id="payment" type="button" value="결제">
-		</div>
-			
 	</div>
-	
+
 	
 	
 	<jsp:include page="/WEB-INF/views/Footer.jsp"/>

@@ -112,15 +112,16 @@ aside{
 }
 
 footer {
-	position: relative;
-	width:100%;
+	position: relative;	
+}
+#daengFooter{
+	margin-left: 15%;
 }
 
 #mainContainer {
 	margin: 0 auto;
 	height: 700px;
-	width: 70%;
-	text-align: center;
+	width: 70%;	
 	border: 1px solid black;
 }
 

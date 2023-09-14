@@ -12,7 +12,8 @@
    border-left:thick;
    border-right:thick;
    margin-right: 15.5%;
-   table-layout: fixed;   
+   table-layout: fixed;
+   width: 100%;   
 }
 th{
    
@@ -26,7 +27,7 @@ th{
 }
 
 #secondTh{
-   width: 900px;   
+      
 }
 
 #memberInfo, .infoTr, .infoTd, .infoTd2{
@@ -60,16 +61,14 @@ th{
 </style>
 <meta charset="UTF-8">
 <title>회원 결제관리 상세페이지</title>
-<!-- <link rel="stylesheet" type="text/css" href="css/mystyles.css"> -->
-<!-- <script src="js/myscript.js"></script> -->
+<link rel="stylesheet" type="text/css" href="/DEMO_Project/resources/css/main.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/Header.jsp"/>
 	
 	<jsp:include page="/WEB-INF/views/asideMyPage.jsp"/>
 	
-	<div id='divContainer'
-		style='width: 700px; height: 780px; background-color: pink;'>
+	<div id='divContainer'>
 		<table id="titleTable">
 			<tr>
 				<th id="firstTh">결제관리</th>

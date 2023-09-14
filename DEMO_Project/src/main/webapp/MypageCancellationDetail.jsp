@@ -12,7 +12,8 @@
    border-left:thick;
    border-right:thick;
    margin-right: 15.5%;
-   table-layout: fixed;   
+   table-layout: fixed;
+   width: 100%;   
 }
 th{
    
@@ -21,34 +22,33 @@ th{
 
 #firstTh{
    border-bottom: 2px solid black;
-   width: 200px;
+   width: 150px;
    display: block;     
 }
 
 #secondTh{
-   width: 850px;   
+      
 }
 
 </style>
 <meta charset="UTF-8">
-<title>회원정보 수정 페이지</title>
-<!-- <link rel="stylesheet" type="text/css" href="css/mystyles.css"> -->
-<!-- <script src="js/myscript.js"></script> -->
+<title>취소상세 페이지</title>
+<link rel="stylesheet" type="text/css" href="/DEMO_Project/resources/css/main.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/Header.jsp"/>
 	
 	<jsp:include page="/WEB-INF/views/asideMyPage.jsp"/>
-
-	<div id='divContainer'
-		style='width: 700px; height: 780px; background-color: pink;'>
+	
+	<div id='divContainer'>
 		<table id="titleTable">
 	      <tr>
-	         <th id="firstTh">회원정보 수정</th>
+	         <th id="firstTh">취소상세</th>
 	         <th id="secondTh"></th>      
 	      </tr>            
 		</table>
 	</div>
+
 	
 	<jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
