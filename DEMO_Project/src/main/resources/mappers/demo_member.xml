@@ -81,8 +81,8 @@
 
 	</insert>
 
-	<select id="isIdAvailable" resultMap="memberResultMap" resultType="int">
-		SELECT COUNT(MEMBER_ID)
+	<select id="isIdAvailable" resultMap="memberResultMap">
+		SELECT MEMBER_ID
 		FROM MEMBER
 		WHERE MEMBER_ID = #{memberId}
 	</select>

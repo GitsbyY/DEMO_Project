@@ -36,9 +36,8 @@ public class MemberDaoImpl implements MemberDao{
 		 
 		MemberDto memberDto = sqlSession.selectOne(nameSpace + "isIdAvailable", memberId);
 		
-		int count = memberDto.();
-				
-		if (count == 0) {
+		//중복이 아닐 때는 null Exception		
+		if (memberDto == null) {
 			return true;
 		}else {
 			return false;

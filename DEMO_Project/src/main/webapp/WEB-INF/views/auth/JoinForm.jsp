@@ -213,10 +213,8 @@
 					memberId : memberId
 				},
 				success : function(response) {
-					if (response) {
-						$("#userJoinMessageId").text("사용 가능한 아이디입니다.");
-					} else {
-						$("#userJoinMessageId").text("이미 사용 중인 아이디입니다.");
+					if (!response) {
+						$("#userJoinMessageId").text("이미 사용 중인 아이디입니다.").css("color", "red");
 					}
 				}
 			});
@@ -278,19 +276,6 @@
 	addressDeleteButton.addEventListener("click", function() {
 		address.value = ""; // 주소 인풋 값을 비웁니다.
 	});
-
-	// 	// 상세주소 인풋과 딜리트 버튼
-	// 	var detailAddress = document.getElementById("userJoinDetailAddress");
-	// 	var detailAddressDeleteButton = document
-	// 			.querySelector(".joinDetailAddress .btnDel");
-	// 	detailAddressDeleteButton.addEventListener("click", function() {
-	// 		detailAddress.value = ""; // 상세주소 인풋 값을 비웁니다.
-	// 	});
-
-	function toDogInfoFnc() {
-
-		window.location.href = './addp.do';
-	}
 
 	//아이디 div		
 	var userId = document.getElementById("userJoinId");
@@ -435,7 +420,8 @@
 		}
 
 		userId.classList.remove("focusOutline");
-		errMsgId.textContent = "";
+		errMsgId.style.color = "blue";
+		errMsgId.textContent = "사용가능한 아이디입니다.";
 		isValidId = true;
 		// 		updateButtonState();
 
