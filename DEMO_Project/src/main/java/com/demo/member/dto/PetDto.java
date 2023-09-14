@@ -6,17 +6,17 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class PetDto {
 
-	private int pno;
-	private int mno;
-	private String name;
-	private String breed;
-	private char gender;
-	private double weight; 
+	private int petNo;
+	private int memberNo;
+	private String petName;
+	private String petBreed;
+	private char petGender;
+	private double petWeight; 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date adoptDate;
-	private String vac;
+	private Date petAdoptDate;
+	private String petVac;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date vacDate;
+	private Date petVacDate;
 	
 	
 	public PetDto() {
@@ -25,116 +25,120 @@ public class PetDto {
 	}
 
 
-	public PetDto(int pno, int mno, String name, String breed, char gender, double weight, Date adoptDate, String vac,
-			Date vacDate) {
+	public PetDto(int petNo, int memberNo, String petName, String petBreed, char petGender, double petWeight,
+			Date petAdoptDate, String petVac, Date petVacDate) {
 		super();
-		this.pno = pno;
-		this.mno = mno;
-		this.name = name;
-		this.breed = breed;
-		this.gender = gender;
-		this.weight = weight;
-		this.adoptDate = adoptDate;
-		this.vac = vac;
-		this.vacDate = vacDate;
+		this.petNo = petNo;
+		this.memberNo = memberNo;
+		this.petName = petName;
+		this.petBreed = petBreed;
+		this.petGender = petGender;
+		this.petWeight = petWeight;
+		this.petAdoptDate = petAdoptDate;
+		this.petVac = petVac;
+		this.petVacDate = petVacDate;
 	}
 
 
-	public int getPno() {
-		return pno;
+	public int getPetNo() {
+		return petNo;
 	}
 
 
-	public void setPno(int pno) {
-		this.pno = pno;
+	public void setPetNo(int petNo) {
+		this.petNo = petNo;
 	}
 
 
-	public int getMno() {
-		return mno;
+	public int getMemberNo() {
+		return memberNo;
 	}
 
 
-	public void setMno(int mno) {
-		this.mno = mno;
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
 
 
-	public String getName() {
-		return name;
+	public String getPetName() {
+		return petName;
 	}
 
 
-	public void setName(String name) {
-		this.name = name;
+	public void setPetName(String petName) {
+		this.petName = petName;
 	}
 
 
-	public String getBreed() {
-		return breed;
+	public String getPetBreed() {
+		return petBreed;
 	}
 
 
-	public void setBreed(String breed) {
-		this.breed = breed;
+	public void setPetBreed(String petBreed) {
+		this.petBreed = petBreed;
 	}
 
 
-	public char getGender() {
-		return gender;
+	public char getPetGender() {
+		return petGender;
 	}
 
 
-	public void setGender(char gender) {
-		this.gender = gender;
+	public void setPetGender(char petGender) {
+		this.petGender = petGender;
 	}
 
 
-	public double getWeight() {
-		return weight;
+	public double getPetWeight() {
+		return petWeight;
 	}
 
 
-	public void setWeight(double weight) {
-		this.weight = weight;
+	public void setPetWeight(double petWeight) {
+		this.petWeight = petWeight;
 	}
 
 
-	public Date getAdoptDate() {
-		return adoptDate;
+	public Date getPetAdoptDate() {
+		return petAdoptDate;
 	}
 
 
-	public void setAdoptDate(Date adoptDate) {
-		this.adoptDate = adoptDate;
+	public void setPetAdoptDate(Date petAdoptDate) {
+		this.petAdoptDate = petAdoptDate;
 	}
 
 
-	public String getVac() {
-		return vac;
+	public String getPetVac() {
+		return petVac;
 	}
 
 
-	public void setVac(String vac) {
-		this.vac = vac;
+	public void setPetVac(String petVac) {
+		this.petVac = petVac;
 	}
 
 
-	public Date getVacDate() {
-		return vacDate;
+	public Date getPetVacDate() {
+		return petVacDate;
 	}
 
 
-	public void setVacDate(Date vacDate) {
-		this.vacDate = vacDate;
+	public void setPetVacDate(Date petVacDate) {
+		this.petVacDate = petVacDate;
 	}
 
 
 	@Override
 	public String toString() {
-		return "PetDto [pno=" + pno + ", mno=" + mno + ", name=" + name + ", breed=" + breed + ", gender=" + gender
-				+ ", weight=" + weight + ", adoptDate=" + adoptDate + ", vac=" + vac + ", vacDate=" + vacDate + "]";
+		return "PetDto [petNo=" + petNo + ", memberNo=" + memberNo + ", petName=" + petName + ", petBreed=" + petBreed
+				+ ", petGender=" + petGender + ", petWeight=" + petWeight + ", petAdoptDate=" + petAdoptDate
+				+ ", petVac=" + petVac + ", petVacDate=" + petVacDate + "]";
 	}
+
+
+	
 
 
 	

@@ -51,7 +51,7 @@ public class MemberController {
 			
 			log.debug("Welcome MemberController pet Add2!" + "memberDto :"+memberDto+"petDto:" +petDto +"medel: "+model);
 			int mno = memberService.memberInsertOne(memberDto);
-			petDto.setMno(mno);
+			petDto.setMemberNo(mno);
 			memberService.petInsertOne(petDto);
 			return "../";
 		}

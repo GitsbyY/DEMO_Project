@@ -6,157 +6,160 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class MemberDto {
 
-	private int mno;
-	private String id; 
-	private String password; 
-	private String name;
-	private String nickName;
+	private int memberNo;
+	private String memberId; 
+	private String memberPassword; 
+	private String memberName;
+	private String memberNickName;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date birthDate;
-	private String Phone;
-	private String email;
-	private String address;
+	private Date memberBirthDate;
+	private String memberPhone;
+	private String memberEmail;
+	private String memberAddress;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date joinDate;
-	private int emoney;
-	private int point;
+	private Date memberJoinDate;
+	private int memberEmoney;
+	private int memberPoint;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date modDate;
+	private Date memberModDate;
 	
 	public MemberDto() {
 		super();
 	}
 
-	public MemberDto(int mno, String id, String password, String name, String nickName, Date birthDate, String phone,
-			String email, String address, Date joinDate, int emoney, int point, Date modDate) {
+	public MemberDto(int memberNo, String memberId, String memberPassword, String memberName, String memberNickName,
+			Date memberBirthDate, String memberPhone, String memberEmail, String memberAddress, Date memberJoinDate,
+			int memberEmoney, int memberPoint, Date memberModDate) {
 		super();
-		this.mno = mno;
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.nickName = nickName;
-		this.birthDate = birthDate;
-		Phone = phone;
-		this.email = email;
-		this.address = address;
-		this.joinDate = joinDate;
-		this.emoney = emoney;
-		this.point = point;
-		this.modDate = modDate;
+		this.memberNo = memberNo;
+		this.memberId = memberId;
+		this.memberPassword = memberPassword;
+		this.memberName = memberName;
+		this.memberNickName = memberNickName;
+		this.memberBirthDate = memberBirthDate;
+		this.memberPhone = memberPhone;
+		this.memberEmail = memberEmail;
+		this.memberAddress = memberAddress;
+		this.memberJoinDate = memberJoinDate;
+		this.memberEmoney = memberEmoney;
+		this.memberPoint = memberPoint;
+		this.memberModDate = memberModDate;
 	}
 
-	public int getMno() {
-		return mno;
+	public int getMemberNo() {
+		return memberNo;
 	}
 
-	public void setMno(int mno) {
-		this.mno = mno;
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
 
-	public String getId() {
-		return id;
+	public String getMemberId() {
+		return memberId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getMemberPassword() {
+		return memberPassword;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setMemberPassword(String memberPassword) {
+		this.memberPassword = memberPassword;
 	}
 
-	public String getName() {
-		return name;
+	public String getMemberName() {
+		return memberName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 
-	public String getNickName() {
-		return nickName;
+	public String getMemberNickName() {
+		return memberNickName;
 	}
 
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setMemberNickName(String memberNickName) {
+		this.memberNickName = memberNickName;
 	}
 
-	public Date getBirthDate() {
-		return birthDate;
+	public Date getMemberBirthDate() {
+		return memberBirthDate;
 	}
 
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
+	public void setMemberBirthDate(Date memberBirthDate) {
+		this.memberBirthDate = memberBirthDate;
 	}
 
-	public String getPhone() {
-		return Phone;
+	public String getMemberPhone() {
+		return memberPhone;
 	}
 
-	public void setPhone(String phone) {
-		Phone = phone;
+	public void setMemberPhone(String memberPhone) {
+		this.memberPhone = memberPhone;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getMemberEmail() {
+		return memberEmail;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setMemberEmail(String memberEmail) {
+		this.memberEmail = memberEmail;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getMemberAddress() {
+		return memberAddress;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setMemberAddress(String memberAddress) {
+		this.memberAddress = memberAddress;
 	}
 
-	public Date getJoinDate() {
-		return joinDate;
+	public Date getMemberJoinDate() {
+		return memberJoinDate;
 	}
 
-	public void setJoinDate(Date joinDate) {
-		this.joinDate = joinDate;
+	public void setMemberJoinDate(Date memberJoinDate) {
+		this.memberJoinDate = memberJoinDate;
 	}
 
-	public int getEmoney() {
-		return emoney;
+	public int getMemberEmoney() {
+		return memberEmoney;
 	}
 
-	public void setEmoney(int emoney) {
-		this.emoney = emoney;
+	public void setMemberEmoney(int memberEmoney) {
+		this.memberEmoney = memberEmoney;
 	}
 
-	public int getPoint() {
-		return point;
+	public int getMemberPoint() {
+		return memberPoint;
 	}
 
-	public void setPoint(int point) {
-		this.point = point;
+	public void setMemberPoint(int memberPoint) {
+		this.memberPoint = memberPoint;
 	}
 
-	public Date getModDate() {
-		return modDate;
+	public Date getMemberModDate() {
+		return memberModDate;
 	}
 
-	public void setModDate(Date modDate) {
-		this.modDate = modDate;
+	public void setMemberModDate(Date memberModDate) {
+		this.memberModDate = memberModDate;
 	}
 
 	@Override
 	public String toString() {
-		return "MemberDto [mno=" + mno + ", id=" + id + ", password=" + password + ", name=" + name + ", nickName="
-				+ nickName + ", birthDate=" + birthDate + ", Phone=" + Phone + ", email=" + email + ", address="
-				+ address + ", joinDate=" + joinDate + ", emoney=" + emoney + ", point=" + point + ", modDate="
-				+ modDate + "]";
+		return "MemberDto [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPassword=" + memberPassword
+				+ ", memberName=" + memberName + ", memberNickName=" + memberNickName + ", memberBirthDate="
+				+ memberBirthDate + ", memberPhone=" + memberPhone + ", memberEmail=" + memberEmail + ", memberAddress="
+				+ memberAddress + ", memberJoinDate=" + memberJoinDate + ", memberEmoney=" + memberEmoney
+				+ ", memberPoint=" + memberPoint + ", memberModDate=" + memberModDate + "]";
 	}
 
+	
 	
 	
 

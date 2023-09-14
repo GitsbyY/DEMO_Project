@@ -20,7 +20,7 @@ public class MemberDaoImpl implements MemberDao{
 		// TODO Auto-generated method stub
 		sqlSession.insert("com.demo.member.memberInsertOne", memberDto);
 		
-		return memberDto.getMno();
+		return memberDto.getMemberNo();
 	}
 
 	@Override
