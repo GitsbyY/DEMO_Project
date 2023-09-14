@@ -112,7 +112,7 @@ aside{
 }
 
 footer {
-	position: fixed;
+	position: relative;
 	width:100%;
 }
 
