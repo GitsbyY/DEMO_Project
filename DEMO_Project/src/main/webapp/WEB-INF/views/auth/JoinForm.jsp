@@ -32,7 +32,7 @@
 						</div>
 						<div class="inputWithButton">
 							<input type="text" class="inputUser" id="userJoinId"
-								name="id" placeholder="영문 4자 이상, 최대 20자"/>
+								name="memberId" placeholder="영문 4자 이상, 최대 20자"/>
 							<button type="button" class="btnDel"></button>
 						</div>
 					</div>
@@ -47,7 +47,7 @@
 						</div>
 						<div class="inputWithButton">
 							<input type="password" class="inputUser" id="userJoinPwd"
-								name="password" placeholder="숫자, 영문, 특수문자 포함 최소 8자 이상" />
+								name="memberPassword" placeholder="숫자, 영문, 특수문자 포함 최소 8자 이상" />
 							<button type="button" class="btnDel"></button>
 						</div>
 					</div>
@@ -76,7 +76,7 @@
 							<label for="userJoinName">이름</label>
 						</div>
 						<div class="inputWithButton">
-							<input class="inputUser" type="text" name="name"
+							<input class="inputUser" type="text" name="memberName"
 								id="userJoinName" placeholder="이름 입력" />
 							<button type="button" class="btnDel"></button>
 						</div>
@@ -91,7 +91,7 @@
 							<label for="userJoinBirth">생년월일</label>
 						</div>
 						<div class="inputWithButton">
-							<input class="inputUser" type="date" name="birthDate"
+							<input class="inputUser" type="date" name="memberBirthDate"
 								id="userJoinBirth" min="1920-01-01" max="2010-12-31" />
 							<button type="button" class="btnDel"></button>
 						</div>
@@ -106,7 +106,7 @@
 							<label for="userJoinPhoneNum">휴대폰 번호</label>
 						</div>
 						<div class="inputWithButton">
-							<input class="inputUser" type="text" name="Phone"
+							<input class="inputUser" type="text" name="memberPhone"
 								id="userJoinPhoneNum" placeholder="휴대폰 번호 입력" />
 							<button type="button" class="btnDel"></button>
 						</div>
@@ -122,7 +122,7 @@
 							<label for="userJoinEmail">이메일 주소</label>
 						</div>
 						<div class="inputWithButton">
-							<input class="inputUser" type="text" name="email"
+							<input class="inputUser" type="text" name="memberEmail"
 								id="userJoinEmail" placeholder="이메일 주소 입력" />
 							<button type="button" class="btnDel"></button>
 						</div>
@@ -138,7 +138,7 @@
 							<label for="userJoinNickname">닉네임</label>
 						</div>
 						<div class="inputWithButton">
-							<input class="inputUser" type="text" name="nickName"
+							<input class="inputUser" type="text" name="memberNickName"
 								id="userJoinNickname" placeholder="한글 8자, 영문 16자 까지 가능" />
 							<button type="button" class="btnDel"></button>
 						</div>
@@ -153,7 +153,7 @@
 							<label for="userJoinAddress">주소</label>
 						</div>
 						<div class="inputWithButton">
-							<input class="inputUser" type="text" name="address"
+							<input class="inputUser" type="text" name="memberAddress"
 								id="userJoinAddress" placeholder="주소" />
 							<button type="button" class="btnDel"></button>
 						</div>
@@ -313,10 +313,6 @@
 	// 이름 div
 	uName.addEventListener("blur", handleBlurEventForuName);
 	uName.addEventListener("focus", handleFocusEventForuName);
-
-	// 생년월일 div
-	birth.addEventListener("blur", handleBlurEventForBirth);
-	birth.addEventListener("focus", handleFocusEventForBirth);
 
 	// 폰번호 div
 	mobile.addEventListener("blur", handleBlurEventForMobile);
@@ -714,7 +710,6 @@
 	uName.addEventListener("input", updateButtonState);
 	mobile.addEventListener("input", updateButtonState);
 	nickName.addEventListener("input", updateButtonState);
-	birth.addEventListener("input", updateButtonState);
 	address.addEventListener("input", updateButtonState);
 </script>
 </html>

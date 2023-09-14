@@ -8,22 +8,42 @@ form, label, legend, input, button, textarea, select {
     margin: 0;
     padding: 0;
 }
-header {
-    position: sticky;
-    top: 0;
-   
-}
 footer {
- 
-    padding: 10px; /* 푸터 여백 설정 */
-    position: fixed;
-    bottom: 0;
+    background-color: #333;
+    color: white;
+    padding: 10px;
     width: 100%;
 }
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+/* 헤더와 푸터를 고정시키기 */
+header {
+    position: fixed;
+    left: 0;
+    right: 0;
+}
+footer {
+	position: fixed;
+	left: 0;
+    right: 0;
+	bottom: 0;
+}
+/* 메인 컨텐츠 아래로 내리기 */
+main {
+    margin-top: 100px; /* 헤더의 높이만큼 여백 추가 */
+    margin-bottom: 80px; /* 푸터의 높이만큼 여백 추가 */
+}
 html, body {
-/*     display: flex; */
+/*  display: flex; */
 /* 	display:inline-block; */
-/*     justify-content: center; */
+/*  justify-content: center; */
     align-items: center;
     margin: 0;
     display: flex;
@@ -33,7 +53,7 @@ html, body {
 
 /* 폼 컨테이너 스타일 */
 .formContainer {
-    width: 600px;
+    width: 800px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,7 +66,7 @@ button {
 
 /* 회원가입 컨테이너 스타일 */
 .joinWrap {
-    width: 360px;
+    width: 400px;
     background-color: none;
     display: block;
     align-items: center;
@@ -55,16 +75,19 @@ button {
 /* 입력 필드 스타일 */
 .inputUser {
 /*     position: relative; */
-    height: 25px;
+    height: 40px;
     display: inline-block;
     border: 2px solid #d9d9d9;
     border-radius: 2px;
     box-sizing: border-box;
-    font-size: 12px;
+    font-size: 18px;
     padding-right: 30px;
     width: 100%;
 }
-
+.inputLabel{
+	font-size: 18px;
+	margin-bottom: 10px;
+}
 /* 인풋 태그와 딜리트 버튼을 감싸는 컨테이너 스타일 */
 .inputWithButton {
 
@@ -89,15 +112,15 @@ button {
 
 }
 .changeBtn > button {
-	width: 360px;
-	height: 30px;
+	width: 400px;
+	height: 40px;
 	color: white;
 	background-color: grey;
 	margin-top: 10px;
 	border: none;
 }
 .submitBtn > button{
-	width: 360px;
+	width: 400px;
 	height: 30px;
 	color: white;
 	background-color :grey;

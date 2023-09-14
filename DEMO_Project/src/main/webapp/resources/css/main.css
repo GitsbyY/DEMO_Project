@@ -10,7 +10,7 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 /* header */
 .daengHeader {
 	overflow: hidden; /* 이 클래스의 하위 요소들이 부모 요소를 벗어나지 않도록 설정 */
-	height: 80px; /* 높이를 원하는 값으로 설정 */
+	height: 120px; /* 높이를 원하는 값으로 설정 */
 	margin: 0 auto; /* 가운데 정렬 */
 	width : 70%;
 }
@@ -33,21 +33,21 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 	margin-right: 5px; /* 왼쪽 요소들 사이의 간격 설정 */
 	margin-bottom: 0; /*아래 마진 없앰*/
 	text-align: center; /* 내용 가운데 정렬 추가 */
-	height: 60px;
-	width: 60px;
+	height: 80px;
+	width: 80px;
 	justify-content: center; /* 세로 가운데 정렬 */
 }
 
 .buttonSide > img {
-	height: 30px;
-	width: 30px;
+	height: 60px;
+	width: 70px;
 	margin-top: 10px;
 }
 
 .buttonSide > p {
-	margin-top: 2px;
+	margin-top: 5px;
 	margin-bottom: 0px;
-	font-size: 9px
+	font-size: 13px;
 }
 
 .buttonContainer {
@@ -63,15 +63,17 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 #bottomRow {
 	clear: both; /* 띄워진 요소들 아래로 내리기 */
 	float: right; /* 오른쪽으로 띄우기 */
-	margin-top: 7px; /*위에 마진 추가*/
-	margin-right : 12px;
-	font-size: 9px;
+	margin-top: 20px; /*위에 마진 추가*/
+	margin-right : 15px;
+	font-size: 14px;
 	text-align: right;
+	margin-left: 10px;
 }
 
 .bottomRowButton {
 	float: left; /* 왼쪽으로 띄우기 */
-	margin-left: 5px; /* 왼쪽 요소들 사이의 간격 설정 */
+	margin-left: 15px; /* 왼쪽 요소들 사이의 간격 설정 */
+	margin-top : 2px;
 	height: 20px;
 	width: 60px;
 }
@@ -106,11 +108,11 @@ aside{
 /* footer */
 
 .daengFoot{
-	font-size: 10px;
+	font-size: 12px;
 }
 
 footer {
-	position: relative;
+	position: fixed;
 	width:100%;
 }
 

@@ -151,6 +151,15 @@
 						<button type="submit">회원가입</button>
 					</div>
 				</div>
+				<input type="hidden" value="memberId" name="memberId"/>
+				<input type="hidden" value="memberPassword" name="memberPassword"/>
+				<input type="hidden" value="memberName" name="memberName"/>
+				<input type="hidden" value="memberBirthDate" name="memberBirthDate"/>
+				<input type="hidden" value="memberPhone" name="memberPhone"/>
+				<input type="hidden" value="memberEmail" name="memberEmail"/>
+				<input type="hidden" value="memberNickName" name="memberNickName"/>
+				<input type="hidden" value="memberAddress" name="memberAddress"/>
+			
 			</form>
 		</div>
 	</div>

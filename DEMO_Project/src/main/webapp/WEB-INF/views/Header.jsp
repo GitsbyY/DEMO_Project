@@ -9,11 +9,11 @@
 			<div>
 				<div id="daengLogo" class="logoSide"
 					style="height: 75px; width: 75px;">
-					<img alt="댕댕로고" src="./resources/img/imgHeader/logo.png"
-						style="height: 65px; width: 70px; margin-top: 10px;">
+					<img alt="댕댕로고" src="/DEMO_Project/resources/img/imgHeader/logo.png"
+						style="height: 80px; width: 90px; margin-top: 20px;">
 				</div>
 				<div id="daengText" class="logoSide"
-					style="height: 50px; width: 180px; margin-top: 20px;">
+					style="height: 50px; width: 180px; margin-left:10px;  margin-top: 40px;">
 					<h1>DAENGDAENG</h1>
 				</div>
 			</div>
@@ -21,19 +21,19 @@
 				<div id="iconSet">
 					<div class="buttonContainer">
 						<div id="mallIcon" class="buttonSide">
-							<img alt="쇼핑몰" src="./resources/img//imgHeader/cart.jpg">
+							<img alt="쇼핑몰" src="/DEMO_Project/resources/img/imgHeader/cart.jpg">
 							<p>쇼핑몰</p>
 						</div>
 						<div id="mallBasket" class="buttonSide">
-							<img alt="장바구니" src="./resources/img//imgHeader/basket.jpg">
+							<img alt="장바구니" src="/DEMO_Project/resources/img/imgHeader/basket.jpg">
 							<p>장바구니</p>
 						</div>
 						<div id="myDaeng" class="buttonSide">
-							<img alt="마이댕댕" src="./resources/img//imgHeader/customer.jpg">
+							<img alt="마이댕댕" src="/DEMO_Project/resources/img/imgHeader/customer.jpg">
 							<p>마이댕댕</p>
 						</div>
 						<div id="customerCenter" class="buttonSide">
-							<img alt="장바구니" src="./resources/img//imgHeader/customcenter.jpg">
+							<img alt="장바구니" src="/DEMO_Project/resources/img/imgHeader/customcenter.jpg">
 							<p>고객센터</p>
 						</div>
 					</div>
