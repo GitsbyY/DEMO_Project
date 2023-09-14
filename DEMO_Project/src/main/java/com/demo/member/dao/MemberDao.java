@@ -5,9 +5,12 @@ import com.demo.member.dto.PetDto;
 
 public interface MemberDao {
 
+
 	int memberInsertOne(MemberDto memberDto);
 
 	void petrInsertOne(PetDto petDto);
+
+	boolean isIdAvailable(String memberId);
 	
 
 

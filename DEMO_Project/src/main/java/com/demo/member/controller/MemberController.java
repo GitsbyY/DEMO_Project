@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.demo.member.dto.MemberDto;
 import com.demo.member.dto.PetDto;
@@ -21,6 +23,7 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
 	//로그인 화면으로 이동
 		@RequestMapping(value = "/auth/login.do", method = RequestMethod.GET)
 		public String login(HttpSession session, Model model) {
@@ -39,6 +42,14 @@ public class MemberController {
 			return "auth/JoinForm";
 		}
 		
+		@RequestMapping(value = "/auth/checkId.do", method = RequestMethod.POST)
+		@ResponseBody
+		public boolean checkIdAvailability(@RequestParam("memberId") String memberId) {
+		    // MemberService의 isIdAvailable 메서드를 호출하여 중복 여부를 확인
+		    boolean isAvailable = memberService.isIdAvailable(memberId);
+		    return isAvailable;
+		}
+		
 		@RequestMapping(value = "/auth/addp.do", method = RequestMethod.GET)
 		public String memberPetFormAdd(MemberDto memberDto, Model model) {
 			log.debug("Welcome MemberController pet Add! " + memberDto);
@@ -53,6 +64,6 @@ public class MemberController {
 			int mno = memberService.memberInsertOne(memberDto);
 			petDto.setMemberNo(mno);
 			memberService.petInsertOne(petDto);
-			return "../";
+			return "auth/LoginPage";
 		}
 }

@@ -29,6 +29,26 @@ public class MemberDaoImpl implements MemberDao{
 		sqlSession.insert("com.demo.member.petInsertOne", petDto);
 	}
 
+	@Override
+	public boolean isIdAvailable(String memberId) {
+		// TODO Auto-generated method stub
+		
+		 
+		MemberDto memberDto = sqlSession.selectOne(nameSpace + "isIdAvailable", memberId);
+		
+		int count = memberDto.();
+				
+		if (count == 0) {
+			return true;
+		}else {
+			return false;
+		}
+		
+		
+	}
+
+
+
 	
 
 }

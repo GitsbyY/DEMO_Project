@@ -28,6 +28,11 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		memberDao.petrInsertOne(petDto);
 	}
+	@Override
+	public boolean isIdAvailable(String memberId) {
+		// TODO Auto-generated method stub
+		return memberDao.isIdAvailable(memberId);
+	}
 	
 
 	

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 
@@ -33,8 +34,8 @@
 							<button type="button" class="btnDel" onclick="clearDogName();"></button>
 						</div>
 						<select id="dogSexSelect" name="petGender">
-							<option value="male">남</option>
-							<option value="female">여</option>
+							<option value="M">남</option>
+							<option value="W">여</option>
 						</select>
 					</div>
 					<div class="txtErrorArea" style="">
@@ -133,13 +134,13 @@
 						</div>
 						<div class="selectDogVaccin">
 							<select id="dogPillSelect" name="petVac">
-								<option value="Vaccin1">1차</option>
-								<option value="Vaccin2">2차</option>
-								<option value="Vaccin3">3차</option>
-								<option value="Vaccin4">4차</option>
-								<option value="Vaccin5">5차</option>
-								<option value="Vaccin6">6차</option>
-								<option value="VaccinNone">미정</option>
+								<option value="1차">1차</option>
+								<option value="2차">2차</option>
+								<option value="3차">3차</option>
+								<option value="4차">4차</option>
+								<option value="5차">5차</option>
+								<option value="6차">6차</option>
+								<option value="없음">미정</option>
 							</select>
 						</div>
 					</div>
@@ -173,14 +174,15 @@
 						<button type="submit">회원가입</button>
 					</div>
 				</div>
-				<input type="hidden" value="${memberId}" name="memberId"/>
-				<input type="hidden" value="${memberPassword}" name="memberPassword"/>
-				<input type="hidden" value="${memberName}" name="memberName"/>
-				<input type="hidden" value="${memberBirthDate}" name="memberBirthDate"/>
-				<input type="hidden" value="${memberPhone}" name="memberPhone"/>
-				<input type="hidden" value="${memberEmail}" name="memberEmail"/>
-				<input type="hidden" value="${memberNickName}" name="memberNickName"/>
-				<input type="hidden" value="${memberAddress}" name="memberAddress"/>
+				<input type="hidden" value="${memberDto.memberId}" name="memberId"/>
+				<input type="hidden" value="${memberDto.memberPassword}" name="memberPassword"/>
+				<input type="hidden" value="${memberDto.memberName}" name="memberName"/>
+				<fmt:formatDate value="${memberDto.memberBirthDate}" pattern="yyyy-MM-dd" var="formattedDate" />
+				<input type="hidden" value="${formattedDate}" name="memberBirthDate" />
+				<input type="hidden" value="${memberDto.memberPhone}" name="memberPhone"/>
+				<input type="hidden" value="${memberDto.memberEmail}" name="memberEmail"/>
+				<input type="hidden" value="${memberDto.memberNickName}" name="memberNickName"/>
+				<input type="hidden" value="${memberDto.memberAddress}" name="memberAddress"/>
 			
 			</form>
 		</div>

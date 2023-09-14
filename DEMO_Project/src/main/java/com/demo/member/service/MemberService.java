@@ -10,6 +10,8 @@ public interface MemberService {
 	int memberInsertOne(MemberDto memberDto);
 
 	void petInsertOne(PetDto petDto);
+
+	boolean isIdAvailable(String memberId);
 	
 	
 }
