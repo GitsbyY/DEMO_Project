@@ -11,11 +11,16 @@
 
 <link rel="stylesheet" type="text/css"
 	href="/DEMO_Project/resources/css/JoinForm.css">
+
 </head>
 
 <body>
+<header>
+<jsp:include page="/WEB-INF/views/Header.jsp"/>
+</header>
+<main>
 	<div>
-		<h1 style="text-align: left; color: #FFC4A3; margin-top: 10px;">DAENGDAENG</h1>
+		<h1 style="text-align: left; color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG</h1>
 		<div class="formContainer">
 			<form action="./addp.do" method="get">
 				<div class="joinWrap">
@@ -186,7 +191,13 @@
 			</form>
 		</div>
 	</div>
+</main>
+<footer>	
+<jsp:include page="/WEB-INF/views/Footer.jsp"/>
+</footer>
 </body>
+
+
 <script type="text/javascript">
 	//아이디 인풋과 딜리트 버튼
 	var userId = document.getElementById("userJoinId");

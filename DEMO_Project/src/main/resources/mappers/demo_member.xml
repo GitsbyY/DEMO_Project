@@ -70,8 +70,8 @@
 		INSERT INTO PET
 		(PET_NO, MEMBER_NO, PET_NAME, PET_BREED, PET_GENDER, PET_WEIGHT
 		, PET_ADOPTION_DATE, PET_VACCINATION, PET_VACCINATION_DATE)
-		VALUES(#{no}, #{mno}, #{name}, #{breed}, #{gender},
-			#{adoptDate}, #{vac}, #{vacDate})
+		VALUES(#{no}, #{mno}, #{petName}, #{petBreed}, #{petGender}, #{petWeight},
+			#{petAdoptionDate}, #{petVaccination}, #{vacDate})
 		
 	</insert>
 	

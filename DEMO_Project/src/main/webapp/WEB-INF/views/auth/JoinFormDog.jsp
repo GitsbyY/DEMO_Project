@@ -7,159 +7,13 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 
-<style type="text/css">
-/* 초기화 스타일 */
-html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
-pre, a, abbr, address, big, cite, code, del, dfn, em, font, img, ins, q,
-s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, ul, ol, li,
-dl, dt, dd, table, caption, tbody, tfoot, thead, tr, th, td, fieldset,
-form, label, legend, input, button, textarea, select {
-    margin: 0;
-    padding: 0;
-}
-
-html, body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-}
-
-/* 폼 컨테이너 스타일 */
-.formContainerDog {
-    width: 600px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* 버튼 스타일 */
-button {
-    cursor: pointer;
-}
-
-/* 문단 스타일 */
-p {
-    font-size: 9px;
-}
-
-/* 회원가입 컨테이너 스타일 */
-.joinWrapDog {
-    width: 360px;
-    background-color: none;
-    display: block;
-    align-items: center;
-}
-
-/* 회원가입 컨테이너 내부 요소 스타일 */
-.joinDog {
-    display: flex;
-}
-.inputWithButtonDog {
-    position: relative;
-    display: inline-block;
-    width: auto; /* 더 이상 100%를 사용하지 않음 */
-}
-.inputDog {
-	width : 200px;
-    height: 30px;
-    border: 2px solid #d9d9d9;
-    border-radius: 2px;
-    box-sizing: border-box;
-    font-size: 12px;
-    margin-top: 10px;
-    text-align: right;
-    padding-right: 30px; /* 입력 필드 오른쪽에 버튼 공간을 확보 */
-}
-#userJoinDogName{
-	width: 160px;
-}
-#dogSexSelect{
-	margin-top: 10px;
-	height: 30px; 
-	width: 50px;
-	margin-left: 10px;
-}
-/* 라벨 스타일 */
-.inputLabelDog {
-    display: inline-block;
-    margin-top: 15px;
-    margin-right: 10px; /* 라벨과 입력 필드 사이의 간격을 조절 */
-    font-size: 15px;
-    width: 120px;
-    text-align: left; /* 라벨을 좌측 정렬로 변경 */
-    padding-right: 10px;
-}
-
-/* 셀렉트 박스 스타일 */
-.selectDogType select,
-.selectDogVaccin select {
-    display: inline-block;
-    height: 25px;
-    width: 150px;
-    margin-top: 15px;
-    margin-left: 100px; /* 입력 필드와 셀렉트 박스를 우측 정렬로 변경 */
-}
-
-#userJoinDogWeight
-, #userJoinDogDate{
-	margin-left: 20px;
-}
-#otherDogTypeInput{
-	margin-left: 50px;
-}
-
-.inputWithButtonDog > .btnDel {
-    position: absolute;
-    top: 50%; /* 버튼을 세로 중앙 정렬 */
-    right: 5px; /* 오른쪽 여백 조절 */
-    transform: translateY(-50%); /* 세로 중앙 정렬을 위한 이동 */
-	border : none;
-    background-color: black;
-    background: url('./resources/img/deleteBtn.png') no-repeat;
-    background-size: 20px 20px;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    margin-top: 5px;
-}
-
-/* 변경 버튼 스타일 */
-.changeBtn > button {
-    width: 360px;
-    height: 30px;
-    color: white;
-    background-color: #FFC4A3;
-    margin-top: 10px;
-    border: none;
-}
-
-/* 제출 버튼 스타일 */
-.submitBtn > button {
-    width: 360px;
-    height: 30px;
-    color: white;
-    background-color: #FFC4A3;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    border: none;
-}
-
-/* 오류 테두리 스타일 */
-.errorOutline {
-    border: 1px solid red;
-}
-
-/* 포커스 테두리 스타일 */
-.focusOutline {
-    outline: 2px solid #0080ff;
-}
-</style>
+<link rel="stylesheet" type="text/css"
+	href="/DEMO_Project/resources/css/JoinFormDog.css">
 </head>
 
 <body>
 	<div>
-		<h1 style="text-align: left; color: #FFC4A3; margin-top: 10px;">DAENGDAENG</h1>
+		<h1 style="text-align: left; color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG</h1>
 		<div class="formContainerDog">
 			<form action="addp.do" method="post">
 				<div class="joinWrapDog">
@@ -171,11 +25,11 @@ p {
 						</div>
 						<div class="inputWithButtonDog">
 							<input type="text" class="inputDog" id="userJoinDogName"
-								name="name" placeholder="1자 이상 최대 10자"
+								name="petName" placeholder="1자 이상 최대 10자"
 								value="${userJoinDogName}" oninput="validateDogName()" />
-							<button type="button" class="btnDel"></button>
+							<button type="button" class="btnDel" onclick="clearDogName();"></button>
 						</div>
-						<select id="dogSexSelect">
+						<select id="dogSexSelect" name="petGender">
 							<option value="male">남</option>
 							<option value="female">여</option>
 						</select>
@@ -188,10 +42,10 @@ p {
 					<!-- 		견종선택 div		 -->
 					<div class="joinDog">
 						<div class="inputLabelDog">
-							<label for="dogTypeSelect" >견종 선택</label>
+							<label for="dogTypeSelect">견종 선택</label>
 						</div>
 						<div class="selectDogType">
-							<select id="dogTypeSelect" name="breed">
+							<select id="dogTypeSelect" name="petBreed">
 								<option value="poodle">푸들</option>
 								<option value="maltese">말티즈</option>
 								<option value="bulldog">불독</option>
@@ -237,9 +91,9 @@ p {
 						</div>
 						<div class="inputWithButtonDog">
 							<input type="text" class="inputDog" id="userJoinDogWeight"
-								name="weight" placeholder="반려견 무게를 써주세요"
+								name="petWeight" placeholder="반려견 무게를 써주세요"
 								oninput="validateDogWeight()" />
-							<button type="button" class="btnDel"></button>
+							<button type="button" class="btnDel" onclick="clearDogWeight();"></button>
 						</div>
 					</div>
 
@@ -255,7 +109,7 @@ p {
 						</div>
 						<div class="inputWithButtonDog">
 							<div class="inputWithButtonDog">
-								<input class="inputDog" type="date" name="adoptDate"
+								<input class="inputDog" type="date" name="petAdoptionDate"
 									id="userJoinDogDate" placeholder="입양날짜를 선택해 주세요"
 									oninput="displaySelectedDate()" />
 							</div>
@@ -275,7 +129,7 @@ p {
 							<label for="dogPillSelect">예방접종이력</label>
 						</div>
 						<div class="selectDogVaccin">
-							<select id="dogPillSelect" name="vac">
+							<select id="dogPillSelect" name="petVaccination">
 								<option value="Vaccin1">1차</option>
 								<option value="Vaccin2">2차</option>
 								<option value="Vaccin3">3차</option>
@@ -290,9 +144,9 @@ p {
 				</div>
 
 				<div>
-<!-- 					<div class="changeBtn"> -->
-<!-- 						<button type="button" onclick="toHumanInfoFnc();">회원정보</button> -->
-<!-- 					</div> -->
+					<!-- 					<div class="changeBtn"> -->
+					<!-- 						<button type="button" onclick="toHumanInfoFnc();">회원정보</button> -->
+					<!-- 					</div> -->
 					<div class="submitBtn">
 						<button type="submit">회원가입</button>
 					</div>
@@ -302,26 +156,18 @@ p {
 	</div>
 </body>
 <script type="text/javascript">
-	
-	//반려견 이름과 딜리트 버튼
-	var dogName = document.getElementById("userJoinDogName");
-	var dogNameDeleteButton = document.querySelector(".joinDog .btnDel");
-	dogNameDeleteButton.addEventListener("click", function() {
-		dogName.value = ""; 
-	});
-	
-
-	//반려견 무게와 딜리트 버튼
-	var dogWeight = document.getElementById("userJoinDogWeight");
-	var dogWeightDeleteButton = document.querySelector(".joinDog .btnDel");
-	dogWeightDeleteButton.addEventListener("click", function() {
-		dogWeight.value = ""; 
-	});
-	
-	function toHumanInfoFnc() {
-
-		window.location.href = './addm.do';
+	//반려견 이름을 지우는 함수
+	function clearDogName() {
+		var dogName = document.getElementById("userJoinDogName");
+		dogName.value = "";
 	}
+
+	// 반려견 무게를 지우는 함수
+	function clearDogWeight() {
+		var dogWeight = document.getElementById("userJoinDogWeight");
+		dogWeight.value = "";
+	}
+
 
 	function handleBreedSelection() {
 		var dogTypeSelect = document.getElementById("dogTypeSelect");
@@ -357,22 +203,22 @@ p {
 
 	// 반려견 무게 유효성 검사 함수
 	function validateDogWeight() {
-	    var dogWeightInput = document.getElementById("userJoinDogWeight");
-	    var dogWeightErrorMessage = document.getElementById("userJoinMessageDogWeight");
-	    var dogWeight = dogWeightInput.value;
+		var dogWeightInput = document.getElementById("userJoinDogWeight");
+		var dogWeightErrorMessage = document
+				.getElementById("userJoinMessageDogWeight");
+		var dogWeight = dogWeightInput.value;
 
-	    // 공백을 제거한 무게가 숫자와 최대 1자리의 소수점을 포함하는지 검사
-	    if (!/^\d+(\.\d{0,1})?$/.test(dogWeight.trim())) {
-	        dogWeightInput.classList.add("errorOutline");
-	        dogWeightErrorMessage.style.color = "red";
-	        dogWeightErrorMessage.textContent = "숫자와 소수점(최대 1자리)만 입력 가능하며, 공백은 허용되지 않습니다.";
-	    } else {
-	        dogWeightInput.classList.remove("errorOutline");
-	        dogWeightErrorMessage.style.color = "red";
-	        dogWeightErrorMessage.textContent = "";
-	    }
+		// 공백을 제거한 무게가 숫자와 최대 1자리의 소수점을 포함하는지 검사
+		if (!/^\d+(\.\d{0,1})?$/.test(dogWeight.trim())) {
+			dogWeightInput.classList.add("errorOutline");
+			dogWeightErrorMessage.style.color = "red";
+			dogWeightErrorMessage.textContent = "숫자와 소수점(최대 1자리)만 입력 가능하며, 공백은 허용되지 않습니다.";
+		} else {
+			dogWeightInput.classList.remove("errorOutline");
+			dogWeightErrorMessage.style.color = "red";
+			dogWeightErrorMessage.textContent = "";
+		}
 	}
-	
 
 	// 날짜 선택시 아래에 표시하는 함수
 	function displaySelectedDate() {
@@ -380,6 +226,51 @@ p {
 		var selectedDateText = document.getElementById("selectedDateText");
 		selectedDateText.textContent = "선택된 날짜: " + selectedDateInput.value;
 	}
+
+	// 필수 필드 모두가 채워졌는지 확인하는 함수
+	function checkFields() {
+		var dogName = document.getElementById("userJoinDogName").value;
+		var dogWeight = document.getElementById("userJoinDogWeight").value;
+		var adoptionDate = document.getElementById("userJoinDogDate").value;
+		var dogBreedSelect = document.getElementById("dogTypeSelect").value;
+
+		// 필수 필드 중 하나라도 비어있으면 false를 반환
+		if (dogName === "" || dogWeight === "" || adoptionDate === ""
+				|| dogBreedSelect === "none") {
+			return false;
+		}
+		return true;
+	}
+
+	// 회원가입 버튼 스타일을 변경하는 함수
+	function updateSubmitButton() {
+		var submitButton = document.querySelector(".submitBtn button");
+
+		if (checkFields()) {
+			// 필수 필드가 모두 채워졌을 때 버튼의 스타일을 변경
+			submitButton.style.backgroundColor = "#FFC4A3"; // 원래 색상으로 변경
+			submitButton.style.cursor = "pointer"; // 클릭 가능한 커서로 변경
+		} else {
+			// 필수 필드 중 하나라도 비어있을 때 버튼의 스타일을 초기화
+			submitButton.style.backgroundColor = "gray"; // 회색으로 변경
+			submitButton.style.cursor = "not-allowed"; // 클릭 불가능한 커서로 변경
+		}
+	}
+
+	// 견종 선택이 변경될 때 버튼 스타일 업데이트
+	document.getElementById("dogTypeSelect").addEventListener("change",
+			updateSubmitButton);
+
+	// 필드 값이 변경될 때마다 버튼 스타일 업데이트
+	document.getElementById("userJoinDogName").addEventListener("input",
+			updateSubmitButton);
+	document.getElementById("userJoinDogWeight").addEventListener("input",
+			updateSubmitButton);
+	document.getElementById("userJoinDogDate").addEventListener("input",
+			updateSubmitButton);
+
+	// 초기 버튼 스타일 설정
+	updateSubmitButton();
 </script>
 
 </html>
