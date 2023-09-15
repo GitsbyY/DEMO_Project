@@ -12,214 +12,206 @@
 
 <link rel="stylesheet" type="text/css"
 	href="/DEMO_Project/resources/css/JoinForm.css">
-
 </head>
 
 <body>
-	<header>
-		<jsp:include page="/WEB-INF/views/Header.jsp" />
-	</header>
-	<main>
-		<div>
-			<h1
-				style="text-align: left; color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG</h1>
-			<div class="formContainer">
-				<form action="./addp.do" method="get">
-					<div class="joinWrap">
 
-						<!-- 		아이디div		 -->
-						<div class="joinId">
-							<div class="inputLabel">
-								<label for="userJoinId">아이디</label>
-							</div>
-							<div class="inputWithButton">
-								<input type="text" class="inputUser" id="userJoinId"
-									name="memberId" placeholder="영문 4자 이상, 최대 20자" />
-								<button type="button" class="btnDel"></button>
-							</div>
-						</div>
-						<div class="txtErrorArea" style="">
-							<p class="errTxtRed" id="userJoinMessageId" aria-live="assertive"></p>
-						</div>
+	<div>
+		<h1
+			style="text-align: left; color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG</h1>
+		<div class="formContainer">
+			<form action="./addp.do" method="get">
+				<div class="joinWrap">
 
-						<!-- 		비밀번호div		 -->
-						<div class="joinPwd">
-							<div class="inputLabel">
-								<label for="userJoinPwd">비밀번호</label>
-							</div>
-							<div class="inputWithButton">
-								<input type="password" class="inputUser" id="userJoinPwd"
-									name="memberPassword" placeholder="숫자, 영문, 특수문자 포함 최소 8자 이상" />
-								<button type="button" class="btnDel"></button>
-							</div>
+					<!-- 		아이디div		 -->
+					<div class="joinId">
+						<div class="inputLabel">
+							<label for="userJoinId">아이디</label>
 						</div>
-
-						<div class="txtErrorArea" style="">
-							<p class="errTxtRed" id="userJoinMessagePwd"
-								aria-live="assertive"></p>
-						</div>
-						<!-- 		비밀번호확인div		 -->
-						<div class="joinPwdConfirm">
-							<div class="inputLabel">
-								<label for="userJoinPwdConfirm">비밀번호 확인</label>
-							</div>
-							<div class="inputWithButton">
-								<input class="inputUser" type="password" id="userJoinPwdConfirm"
-									placeholder="숫자, 영문, 특수문자 포함 최소 8자 이상" />
-								<button type="button" class="btnDel"></button>
-							</div>
-						</div>
-						<div class="txtErrorArea" style="">
-							<p class="errTxtRed" id="userJoinMessagePwdConfirm"
-								aria-live="assertive"></p>
-						</div>
-						<!-- 		이름div		 -->
-						<div class="joinUserName">
-							<div class="inputLabel">
-								<label for="userJoinName">이름</label>
-							</div>
-							<div class="inputWithButton">
-								<input class="inputUser" type="text" name="memberName"
-									id="userJoinName" placeholder="이름 입력" />
-								<button type="button" class="btnDel"></button>
-							</div>
-						</div>
-						<div class="txtErrorArea" style="">
-							<p class="errTxtRed" id="userJoinMessageName"
-								aria-live="assertive"></p>
-						</div>
-						<!-- 		생년월일div		 -->
-						<div class="joinUserBirth">
-							<div class="inputLabel">
-								<label for="userJoinBirth">생년월일</label>
-							</div>
-							<div class="inputWithButton">
-								<input class="inputUser" type="date" name="memberBirthDate"
-									id="userJoinBirth" min="1920-01-01" max="2010-12-31" />
-								<button type="button" class="btnDel"></button>
-							</div>
-						</div>
-						<div class="txtErrorArea" style="">
-							<p class="errTxtRed" id="userJoinMessageBirth"
-								aria-live="assertive"></p>
-						</div>
-						<!-- 		휴대폰번호div		 -->
-						<div class="joinPhoneNum">
-							<div class="inputLabel">
-								<label for="userJoinPhoneNum">휴대폰 번호</label>
-							</div>
-							<div class="inputWithButton">
-								<input class="inputUser" type="text" name="memberPhone"
-									id="userJoinPhoneNum" placeholder="휴대폰 번호 입력" />
-								<button type="button" class="btnDel"></button>
-							</div>
-						</div>
-						<div class="txtErrorArea" style="">
-							<p class="errTxtRed" id="userJoinMessagePhoneNum"
-								aria-live="assertive"></p>
-						</div>
-
-						<!-- 		이메일div		 -->
-						<div class="joinEmail">
-							<div class="inputLabel">
-								<label for="userJoinEmail">이메일 주소</label>
-							</div>
-							<div class="inputWithButton">
-								<input class="inputUser" type="text" name="memberEmail"
-									id="userJoinEmail" placeholder="이메일 주소 입력" />
-								<button type="button" class="btnDel"></button>
-							</div>
-							<p id="emailAlert">아이디나 비밀번호 찾기 시 필요하므로 정확하게 입력해주세요.</p>
-						</div>
-						<div class="txtErrorArea" style="">
-							<p class="errTxtRed" id="userJoinMessageEmail"
-								aria-live="assertive"></p>
-						</div>
-						<!-- 		닉네임div		 -->
-						<div class="joinNickname">
-							<div class="inputLabel">
-								<label for="userJoinNickname">닉네임</label>
-							</div>
-							<div class="inputWithButton">
-								<input class="inputUser" type="text" name="memberNickName"
-									id="userJoinNickname" placeholder="한글 8자, 영문 16자 까지 가능" />
-								<button type="button" class="btnDel"></button>
-							</div>
-						</div>
-						<div class="txt_error_area" style="">
-							<p class="err_txt" id="userJoinMessageNickname"
-								aria-live="assertive"></p>
-						</div>
-						<!-- 		주소div		 -->
-						<div class="joinAddress">
-							<div class="inputLabel">
-								<label for="userJoinAddress">주소</label>
-							</div>
-							<div class="inputWithButton">
-								<input class="inputUser" type="text" name="memberAddress"
-									id="userJoinAddress" placeholder="주소" />
-								<button type="button" class="btnDel"></button>
-							</div>
-						</div>
-						<div class="txt_error_area" style="">
-							<p class="err_txt" id="userJoinMessageAddress"
-								aria-live="assertive"></p>
-						</div>
-						<!-- 	상세주소div		 -->
-						<!-- 					<div class="joinDetailAddress"> -->
-						<!-- 						<div class="inputLabel"> -->
-						<!-- 							<label for="userJoinDetailAddress">상세주소</label> -->
-						<!-- 						</div> -->
-						<!-- 						<div class="inputWithButton"> -->
-						<!-- 							<input class="inputUser" type="text" name="detailAddress" -->
-						<!-- 								id="userJoinDetailAddress" placeholder="상세주소를 입력 해 주세요" /> -->
-						<!-- 							<button type="button" class="btnDel"></button> -->
-						<!-- 						</div> -->
-						<!-- 					</div> -->
-						<!-- 					<div class="txt_error_area" style=""> -->
-						<!-- 						<p class="err_txt" id="userJoinMessageDetailAddress" -->
-						<!-- 							aria-live="assertive"></p> -->
-						<!-- 					</div> -->
-						<!-- 				</div> -->
-
-						<div>
-							<div class="changeBtn">
-								<button type="submit" disabled="disabled">댕댕</button>
-							</div>
-							<!-- 					<div class="submitBtn"> -->
-							<!-- 						<button type="submit" disabled="disabled">회원가입</button> -->
-							<!-- 					</div> -->
+						<div class="inputWithButton">
+							<input type="text" class="inputUser" id="userJoinId"
+								name="memberId" placeholder="영문 4자 이상, 최대 20자" />
+							<button type="button" class="btnDel"></button>
 						</div>
 					</div>
-				</form>
-			</div>
+					<div class="txtErrorArea" style="">
+						<p class="errTxtRed" id="userJoinMessageId" aria-live="assertive"></p>
+					</div>
+
+					<!-- 		비밀번호div		 -->
+					<div class="joinPwd">
+						<div class="inputLabel">
+							<label for="userJoinPwd">비밀번호</label>
+						</div>
+						<div class="inputWithButton">
+							<input type="password" class="inputUser" id="userJoinPwd"
+								name="memberPassword" placeholder="숫자, 영문, 특수문자 포함 최소 8자 이상" />
+							<button type="button" class="btnDel"></button>
+						</div>
+					</div>
+
+					<div class="txtErrorArea" style="">
+						<p class="errTxtRed" id="userJoinMessagePwd" aria-live="assertive"></p>
+					</div>
+					<!-- 		비밀번호확인div		 -->
+					<div class="joinPwdConfirm">
+						<div class="inputLabel">
+							<label for="userJoinPwdConfirm">비밀번호 확인</label>
+						</div>
+						<div class="inputWithButton">
+							<input class="inputUser" type="password" id="userJoinPwdConfirm"
+								placeholder="숫자, 영문, 특수문자 포함 최소 8자 이상" />
+							<button type="button" class="btnDel"></button>
+						</div>
+					</div>
+					<div class="txtErrorArea" style="">
+						<p class="errTxtRed" id="userJoinMessagePwdConfirm"
+							aria-live="assertive"></p>
+					</div>
+					<!-- 		이름div		 -->
+					<div class="joinUserName">
+						<div class="inputLabel">
+							<label for="userJoinName">이름</label>
+						</div>
+						<div class="inputWithButton">
+							<input class="inputUser" type="text" name="memberName"
+								id="userJoinName" placeholder="이름 입력" />
+							<button type="button" class="btnDel"></button>
+						</div>
+					</div>
+					<div class="txtErrorArea" style="">
+						<p class="errTxtRed" id="userJoinMessageName"
+							aria-live="assertive"></p>
+					</div>
+					<!-- 		생년월일div		 -->
+					<div class="joinUserBirth">
+						<div class="inputLabel">
+							<label for="userJoinBirth">생년월일</label>
+						</div>
+						<div class="inputWithButton">
+							<input class="inputUser" type="date" name="memberBirthDate"
+								id="userJoinBirth" min="1920-01-01" max="2010-12-31" />
+							<button type="button" class="btnDel"></button>
+						</div>
+					</div>
+					<div class="txtErrorArea" style="">
+						<p class="errTxtRed" id="userJoinMessageBirth"
+							aria-live="assertive"></p>
+					</div>
+					<!-- 		휴대폰번호div		 -->
+					<div class="joinPhoneNum">
+						<div class="inputLabel">
+							<label for="userJoinPhoneNum">휴대폰 번호</label>
+						</div>
+						<div class="inputWithButton">
+							<input class="inputUser" type="text" name="memberPhone"
+								id="userJoinPhoneNum" placeholder="휴대폰 번호 입력" />
+							<button type="button" class="btnDel"></button>
+						</div>
+					</div>
+					<div class="txtErrorArea" style="">
+						<p class="errTxtRed" id="userJoinMessagePhoneNum"
+							aria-live="assertive"></p>
+					</div>
+
+					<!-- 		이메일div		 -->
+					<div class="joinEmail">
+						<div class="inputLabel">
+							<label for="userJoinEmail">이메일 주소</label>
+						</div>
+						<div class="inputWithButton">
+							<input class="inputUser" type="text" name="memberEmail"
+								id="userJoinEmail" placeholder="이메일 주소 입력" />
+							<button type="button" class="btnDel"></button>
+						</div>
+						<p id="emailAlert">아이디나 비밀번호 찾기 시 필요하므로 정확하게 입력해주세요.</p>
+					</div>
+					<div class="txtErrorArea" style="">
+						<p class="errTxtRed" id="userJoinMessageEmail"
+							aria-live="assertive"></p>
+					</div>
+					<!-- 		닉네임div		 -->
+					<div class="joinNickname">
+						<div class="inputLabel">
+							<label for="userJoinNickname">닉네임</label>
+						</div>
+						<div class="inputWithButton">
+							<input class="inputUser" type="text" name="memberNickName"
+								id="userJoinNickname" placeholder="한글 8자, 영문 16자 까지 가능" />
+							<button type="button" class="btnDel"></button>
+						</div>
+					</div>
+					<div class="txt_error_area" style="">
+						<p class="err_txt" id="userJoinMessageNickname"
+							aria-live="assertive"></p>
+					</div>
+					<!-- 		주소div		 -->
+					<div class="joinAddress">
+						<div class="inputLabel">
+							<label for="userJoinAddress">주소</label>
+						</div>
+						<div class="inputWithButton">
+							<input class="inputUser" type="text" name="memberAddress"
+								id="userJoinAddress" placeholder="주소" />
+							<button type="button" class="btnDel"></button>
+						</div>
+					</div>
+					<div class="txt_error_area" style="">
+						<p class="err_txt" id="userJoinMessageAddress"
+							aria-live="assertive"></p>
+					</div>
+					<!-- 	상세주소div		 -->
+					<!-- 					<div class="joinDetailAddress"> -->
+					<!-- 						<div class="inputLabel"> -->
+					<!-- 							<label for="userJoinDetailAddress">상세주소</label> -->
+					<!-- 						</div> -->
+					<!-- 						<div class="inputWithButton"> -->
+					<!-- 							<input class="inputUser" type="text" name="detailAddress" -->
+					<!-- 								id="userJoinDetailAddress" placeholder="상세주소를 입력 해 주세요" /> -->
+					<!-- 							<button type="button" class="btnDel"></button> -->
+					<!-- 						</div> -->
+					<!-- 					</div> -->
+					<!-- 					<div class="txt_error_area" style=""> -->
+					<!-- 						<p class="err_txt" id="userJoinMessageDetailAddress" -->
+					<!-- 							aria-live="assertive"></p> -->
+					<!-- 					</div> -->
+					<!-- 				</div> -->
+
+					<div>
+						<div class="changeBtn">
+							<button type="submit" disabled="disabled">댕댕</button>
+						</div>
+						<!-- 					<div class="submitBtn"> -->
+						<!-- 						<button type="submit" disabled="disabled">회원가입</button> -->
+						<!-- 					</div> -->
+					</div>
+				</div>
+			</form>
 		</div>
-	</main>
-	<footer>
-		<jsp:include page="/WEB-INF/views/Footer.jsp" />
-	</footer>
+	</div>
+
 </body>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script type="text/javascript">
 
-	$(document).ready(function() {
-		$("#userJoinId").on("blur", function() {
-			var memberId = $(this).val();
-			$.ajax({
-				url : "/DEMO_Project/auth/checkId.do",
-				method : "POST",
-				data : {
-					memberId : memberId
-				},
-				success : function(response) {
-					if (!response) {
-						$("#userJoinMessageId").text("이미 사용 중인 아이디입니다.").css("color", "red");
-					}
-				}
-			});
-		});
-	});
+// 	$(document).ready(function() {
+// 		$("#userJoinId").on("blur", function() {
+// 			var memberId = $(this).val();
+// 			$.ajax({
+// 				url : "/DEMO_Project/auth/checkId.do",
+// 				method : "POST",
+// 				data : {
+// 					memberId : memberId
+// 				},
+// 				success : function(response) {
+// 					if (!response) {
+// 						$("#userJoinMessageId").text("이미 사용 중인 아이디입니다.").css("color", "red");
+// 					}
+// 				}
+// 			});
+// 		});
+// 	});
 
 	//아이디 인풋과 딜리트 버튼
 	var userId = document.getElementById("userJoinId");
@@ -418,14 +410,31 @@
 			errMsgId.textContent = "최소 4자, 최대 20자 입니다.";
 			return;
 		}
+		
 
-		userId.classList.remove("focusOutline");
-		errMsgId.style.color = "blue";
-		errMsgId.textContent = "사용가능한 아이디입니다.";
-		isValidId = true;
-		// 		updateButtonState();
-
+        $.ajax({
+            url: "/DEMO_Project/auth/checkId.do",
+            method: "POST",
+            data: {
+                memberId: userId.value
+            },
+            success: function (response) {
+                if (!response) {
+                    userId.classList.add("errorOutline");
+                    errMsgId.style.color = "red";
+                    errMsgId.textContent = "이미 사용 중인 아이디입니다.";
+                    return
+                } else {
+                    userId.classList.remove("errorOutline");
+                    errMsgId.style.color = "blue";
+                    errMsgId.textContent = "사용가능한 아이디입니다.";
+                    isValidId = true;
+                }
+            }
+        });
+   
 	}
+		
 
 	function handleFocusEventForId() {
 		userId.classList.add("focusOutline");

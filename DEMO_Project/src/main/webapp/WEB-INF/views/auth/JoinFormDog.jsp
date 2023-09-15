@@ -11,10 +11,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/DEMO_Project/resources/css/JoinFormDog.css">
 </head>
-<header>
-<jsp:include page="/WEB-INF/views/Header.jsp"/>
-</header>
-<main>
+
 <body>
 	<div>
 		<h1 style="text-align: left; color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG</h1>
@@ -187,10 +184,7 @@
 			</form>
 		</div>
 	</div>
-</main>
-<footer>	
-<jsp:include page="/WEB-INF/views/Footer.jsp"/>
-</footer>
+
 </body>
 <script type="text/javascript">
 	//반려견 이름을 지우는 함수
