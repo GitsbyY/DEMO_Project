@@ -12,6 +12,14 @@ public interface MemberService {
 	void petInsertOne(PetDto petDto);
 
 	boolean isIdAvailable(String memberId);
+
+	MemberDto memberExist(String memeberId, String memberPassword);
+
+	MemberDto memberFindId(String memberEmail, String memberPhone);
+
+	MemberDto memberFindPassword(String memberId, String memberEmail);
+
+	
 	
 	
 }

@@ -30,7 +30,101 @@ public class MemberController {
 			
 			log.info("Welcome MemberController login!");
 			
+			session.invalidate();
+			
 			return "auth/LoginPage";
+		}
+	//로그인 버튼 클릭시	
+		@RequestMapping(value = "/auth/loginCtr.do", method = RequestMethod.POST)
+		public String loginCtr(String memberId, String memberPassword
+				, HttpSession session, Model model) {
+			
+			log.info("Welcome MemberController loginCtr!" 
+					+ memberId + ", " + memberPassword);
+			
+			MemberDto memberDto = memberService.memberExist(memberId, memberPassword);
+			
+			String viewUrl = "";
+			String loginFail = "loginFail";
+			if(memberDto != null) {
+//				회원이 존재하면 세션에 담는다
+				session.setAttribute("member", memberDto);
+				
+				viewUrl = "redirect:/index.jsp"; 
+			}else {
+				viewUrl = "auth/LoginPage";
+				session.setAttribute("loginFail", loginFail);
+			}			
+			return viewUrl;						
+		}
+		
+		// id찾기 화면으로 이동
+		@RequestMapping(value = "/auth/findId.do", method = RequestMethod.GET)
+		public String findId(HttpSession session, Model model) {
+			
+			log.info("Welcome MemberController findId!");
+								
+			return "auth/FindId";						
+		}
+		
+		// id찾기
+		@RequestMapping(value = "/auth/findIdCtr.do", method = RequestMethod.POST)
+		public String findIdCtr(String memberEmail, String memberPhone
+				, HttpSession session, Model model) {
+			
+			log.info("Welcome MemberController findIdCtr!" 
+					+ memberEmail + ", " + memberPhone);
+			
+			MemberDto memberDto = memberService.memberFindId(memberEmail, memberPhone);
+			
+			String viewUrl = "";
+			String findFail = "findFail";
+			if(memberDto != null) {
+//				회원이 존재하면 세션에 담는다
+				session.setAttribute("member", memberDto);
+				
+				viewUrl = "auth/FindIdResult"; 
+			}else {
+				viewUrl = "auth/FindId";
+				session.setAttribute("findFail", findFail);
+			}			
+			return viewUrl;						
+		}
+		
+		// 비밀번호찾기 화면으로 이동
+		@RequestMapping(value = "/auth/findPassword.do"
+					, method = RequestMethod.GET)
+		public String findPasword(HttpSession session, Model model) {
+			
+			log.info("Welcome MemberController findPassword!");
+								
+			return "auth/FindPassword";						
+		}
+		
+		// 비밀번호 찾기
+		@RequestMapping(value = "/auth/findPasswordCtr.do"
+					, method = RequestMethod.POST)
+		public String findPasswordCtr(String memberId, String memberEmail
+				, HttpSession session, Model model) {
+			
+			log.info("Welcome MemberController findIdCtr!" 
+					+ memberId + ", " + memberEmail);
+			
+			MemberDto memberDto 
+				= memberService.memberFindPassword(memberId, memberEmail);
+			
+			String viewUrl = "";
+			String findFail = "findFail";
+			if(memberDto != null) {
+//						회원이 존재하면 세션에 담는다
+				session.setAttribute("member", memberDto);
+				
+				viewUrl = "auth/FindPasswordResult"; 
+			}else {
+				viewUrl = "auth/FindPassword";
+				session.setAttribute("findFail", findFail);
+			}			
+			return viewUrl;						
 		}
 		
 		//일반.do는 단순 페이지 이동

@@ -33,7 +33,22 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return memberDao.isIdAvailable(memberId);
 	}
-	
+	@Override
+	public MemberDto memberExist(String memberId, String memberPassword) {
+		// TODO Auto-generated method stub
+		return memberDao.memberExist(memberId, memberPassword);
+	}
+	@Override
+	public MemberDto memberFindId(String memberEmail, String memberPhone) {
+		// TODO Auto-generated method stub
+		return memberDao.memberFindId(memberEmail, memberPhone);
+	}
+	@Override
+	public MemberDto memberFindPassword(String memberId, String memberEmail) {
+		// TODO Auto-generated method stub
+		return memberDao.memberFindPassword(memberId, memberEmail);
+	}
+
 
 	
 	

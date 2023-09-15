@@ -1,5 +1,7 @@
 package com.demo.member.dao;
 
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -46,7 +48,35 @@ public class MemberDaoImpl implements MemberDao{
 		
 	}
 
+	@Override
+	public MemberDto memberExist(String memberId, String memberPassword) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("memberId", memberId);
+		paramMap.put("memberPassword", memberPassword);
+		
+		return sqlSession.selectOne(nameSpace + "memberExist", paramMap);		
+	}
 
+	@Override
+	public MemberDto memberFindId(String memberEmail, String memberPhone) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("memberEmail", memberEmail);
+		paramMap.put("memberPhone", memberPhone);
+		
+		return sqlSession.selectOne(nameSpace + "memberFindId", paramMap);
+	}
+
+	@Override
+	public MemberDto memberFindPassword(String memberId, String memberEmail) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("memberId", memberId);
+		paramMap.put("memberEmail", memberEmail);
+		
+		return sqlSession.selectOne(nameSpace + "memberFindPassword", paramMap);
+	}
 
 	
 

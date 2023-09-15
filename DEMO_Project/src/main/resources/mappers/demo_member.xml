@@ -86,6 +86,28 @@
 		FROM MEMBER
 		WHERE MEMBER_ID = #{memberId}
 	</select>
+	
+	<select id="memberExist" parameterType="map" 
+		resultMap="memberResultMap">
+		SELECT MEMBER_ID, MEMBER_NAME
+		FROM MEMBER
+		WHERE MEMBER_ID = #{memberId} AND MEMBER_PASSWORD = #{memberPassword}
+	</select>
+	
+	<select id="memberFindId" parameterType="map" 
+		resultMap="memberResultMap">
+		SELECT MEMBER_EMAIL, MEMBER_PHONE, MEMBER_ID
+		FROM MEMBER
+		WHERE MEMBER_EMAIL = #{memberEmail} AND MEMBER_PHONE = #{memberPhone}
+	</select>
+	
+	<select id="memberFindPassword" parameterType="map" 
+		resultMap="memberResultMap">
+		SELECT MEMBER_EMAIL, MEMBER_PHONE, MEMBER_ID, MEMBER_PASSWORD
+		FROM MEMBER
+		WHERE MEMBER_ID = #{memberId} AND MEMBER_EMAIL = #{memberEmail}
+	</select>
+	
 </mapper>
 
 
