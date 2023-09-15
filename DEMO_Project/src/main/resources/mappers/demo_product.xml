@@ -30,17 +30,14 @@
 			javaType="java.util.Date" />
 	</resultMap>
 	
-	<select id="productSelectList" resultMap="productResultMap">
-		SELECT PRODUCT_NO, IMG_NO, PRODUCT_NAME, PRODUCT_PRICE,
-	    PRODUCT_STOCK, PRODUCT_CATEGORY, PRODUCT_CRE_DATE, PRODUCT_MOD_DATE
-		FROM PRODUCT
+	<select id="productSelectList" resultType="map">
+		SELECT P.PRODUCT_NO, I.IMG_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE,
+	    P.PRODUCT_STOCK, P.PRODUCT_CATEGORY, P.PRODUCT_CRE_DATE,
+        P.PRODUCT_MOD_DATE, I.ORIGINAL_FILE_NAME, I.STORED_FILE_NAME, I.FILE_SIZE, I.IMG_CRE_DATE
+		FROM PRODUCT P, IMG_FILE I
+		WHERE P.IMG_NO = I.IMG_NO
 	</select>
 	
-	<select id="productFileList" resultType="map">
-		SELECT IMG_NO, ORIGINAL_FILE_NAME, STORED_FILE_NAME, 
-		FILE_SIZE, IMG_CRE_DATE
-		FROM IMG_FILE;
-	</select>
 </mapper>
 
 

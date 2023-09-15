@@ -18,7 +18,7 @@ public class ProductDaoImpl implements ProductDao{
 	String nameSpace = "com.demo.product.";
 
 	@Override
-	public List<ProductDto> productSelectList() {
+	public List<Map<String, Object>> productSelectList() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(nameSpace + "productSelectList");
 	}

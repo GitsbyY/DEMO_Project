@@ -27,7 +27,7 @@ public class ProductServiceImpl implements ProductService{
 	private FileUtils fileUtils;
 
 	@Override
-	public List<ProductDto> productSelectList() {
+	public List<Map<String, Object>> productSelectList() {
 		// TODO Auto-generated method stub
 		
 		return productDao.productSelectList();
