@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <div>
 	<div id="headerSet" class="daengHeader">
 		<div>
@@ -23,21 +24,24 @@
 		<div>
 			<div id="iconSet">
 				<div class="buttonContainer">
-					<div id="mallIcon" class="buttonSide">
+					<div id="mallIcon" class="buttonSide" 
+						onclick="location.href = './shop.do';">
 						<button id="shopBtn">
 							<img alt="쇼핑몰"
 								src="/DEMO_Project/resources/img/imgHeader/cart.jpg">
 							<p>쇼핑몰</p>
 						</button>
 					</div>
-					<div id="mallBasket" class="buttonSide">
+					<div id="mallBasket" class="buttonSide" 
+						onclick="">					
 						<button id="cartBtn">
 							<img alt="장바구니"
 								src="/DEMO_Project/resources/img/imgHeader/basket.jpg">
 							<p>장바구니</p>
 						</button>
 					</div>
-					<div id="myDaeng" class="buttonSide">
+					<div id="myDaeng" class="buttonSide" 
+						onclick="location.href = '/DEMO_Project/mypage/mypage.do';">
 						<button id="myDaengBtn">
 							<img alt="마이댕댕"
 								src="/DEMO_Project/resources/img/imgHeader/customer.jpg">
@@ -53,12 +57,16 @@
 					</div>
 				</div>
 				<div id="bottomRow">
-					<a href="#" id="curEMony" class="bottomRowButton">${requsetScope.memberDto.memberPoint}포인트</a> 
-					<a href="#" id="loginName" class="bottomRowButton">${requestScope.memberDto.memberId}님</a> 
-					<a href="#" id="logoutButton" class="bottomRowButton">로그아웃</a>
+					<a href="#" id="curEMony" class="bottomRowButton">
+						${sessionScope.member.memberPoint}포인트</a> 
+					<a href="#" id="loginName" class="bottomRowButton">
+						${sessionScope.member.memberName}님</a> 
+					<a href="<%=request.getContextPath()%>/auth/logout.do"
+						 id="logoutButton" class="bottomRowButton">로그아웃</a>
 				</div>
 			</div>
 		</div>
 	</div>
 	<hr>
 </div>
+
