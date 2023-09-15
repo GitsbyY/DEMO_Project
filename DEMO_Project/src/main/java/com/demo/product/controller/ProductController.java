@@ -29,17 +29,13 @@ public class ProductController {
 			
 			log.info("shop/ShoppingMall");
 			
-			List<ProductDto> productList = productService.productSelectList();
+			List<Map<String, Object>> productList = productService.productSelectList();
 			
 			model.addAttribute("productList", productList);
 			
-			List<Map<String, Object>> imgList = productService.productFileList();
+//			List<Map<String, Object>> imgList = productService.productFileList();
 			
-//			List<Map<String, Object>> fileList 
-//				= (List<Map<String, Object>>)map.get("fileList");
-//			
-//			model.addAttribute("memberDto", memberDto);
-//			model.addAttribute("fileList", fileList);
+//			model.addAttribute("imgList", imgList);
 			
 			return "shop/ShoppingMall";
 		}

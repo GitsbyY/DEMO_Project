@@ -89,10 +89,12 @@
 		</div>
 		
 		<c:forEach var="productDto" items="${productList}">
-			<img src="">
 			<div id='productDiv'>
 				${productDto.productName}
+				${productDto.STORED_FILE_NAME}
 			</div>
+			
+			
 		</c:forEach>
 		
 	</div>

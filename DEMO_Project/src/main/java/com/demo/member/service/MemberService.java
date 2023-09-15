@@ -1,5 +1,7 @@
 package com.demo.member.service;
 
+import java.util.List;
+
 import org.springframework.ui.Model;
 
 import com.demo.member.dto.MemberDto;
@@ -18,6 +20,8 @@ public interface MemberService {
 	MemberDto memberFindId(String memberEmail, String memberPhone);
 
 	MemberDto memberFindPassword(String memberId, String memberEmail);
+
+	
 
 	
 	

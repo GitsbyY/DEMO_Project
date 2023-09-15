@@ -7,7 +7,7 @@ import com.demo.product.dto.ProductDto;
 
 public interface ProductService {
 
-	public List<ProductDto> productSelectList();
+	public List<Map<String, Object>> productSelectList();
 
 	public List<Map<String, Object>> productFileList();
 
