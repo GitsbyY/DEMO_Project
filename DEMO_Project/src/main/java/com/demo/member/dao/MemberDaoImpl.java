@@ -1,6 +1,7 @@
 package com.demo.member.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +78,8 @@ public class MemberDaoImpl implements MemberDao{
 		
 		return sqlSession.selectOne(nameSpace + "memberFindPassword", paramMap);
 	}
+
+	
 
 	
 
