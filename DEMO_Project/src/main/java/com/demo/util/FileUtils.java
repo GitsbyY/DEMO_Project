@@ -14,9 +14,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 @Component("fileUtils")
 public class FileUtils {
 
-   private static final String filePath = "C:\\demo\\image";
+   private static final String filePath = "C:\\DEMO\\image";
    
-   public List<Map<String,Object>> parseInsertFileInfo(int imgNo,
+   public List<Map<String,Object>> parseInsertFileInfo(int imgNo, String pathName,
             MultipartHttpServletRequest multipartHttpServletRequest) throws Exception{
 	   								//파일이 들어가는 곳
       Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
@@ -30,7 +30,7 @@ public class FileUtils {
       List<Map<String, Object>> fileList = new ArrayList<Map<String, Object>>();
       Map<String,Object> fileInfoMap = null;
       				//경로에있는 파일을 쓸 준비를 한다.
-      File file = new File(filePath);
+      File file = new File(filePath + "\\" + pathName);
       
       //폴더가 있는지 확인한다.
       if(file.exists() == false) {
@@ -47,7 +47,7 @@ public class FileUtils {
             //저장파일이름 무작위로 생성 
             storedFileName = CommonUtils.getRandomString()+originalFileExtension;
             
-            file = new File(filePath, storedFileName);
+            file = new File(filePath + "\\" + pathName, storedFileName);
             //하드디스크에 파일이 만들어진다
             multipartFile.transferTo(file);
             
@@ -67,10 +67,11 @@ public class FileUtils {
       
    }
    
-   public void parseUpdateFileInfo(Map<String, Object> tempFiMap) throws Exception {
+   public void parseUpdateFileInfo(String pathName, Map<String, Object> tempFiMap)
+		   throws Exception {
 	   String storedFileName = (String)tempFiMap.get("STORED_FILE_NAME");
 	   
-	   File file = new File(filePath + "/" + storedFileName);
+	   File file = new File(filePath  + "\\" + pathName + "/" + storedFileName);
 	   
 	   if(file.exists()) {
 		   //이 순간에 물리적으로 파일이 삭제가 된다.
