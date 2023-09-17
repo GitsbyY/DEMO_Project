@@ -25,7 +25,7 @@
 			<div id="iconSet">
 				<div class="buttonContainer">
 					<div id="mallIcon" class="buttonSide" 
-						onclick="location.href = './shop.do';">
+						onclick="location.href = '/DEMO_Project/shop.do';">
 						<button id="shopBtn">
 							<img alt="쇼핑몰"
 								src="/DEMO_Project/resources/img/imgHeader/cart.jpg">

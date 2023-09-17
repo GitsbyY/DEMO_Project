@@ -27,17 +27,18 @@ public class ProductServiceImpl implements ProductService{
 	private FileUtils fileUtils;
 
 	@Override
-	public List<Map<String, Object>> productSelectList() {
+	public List<Map<String, Object>> productSelectList
+		(int start, int end, String search, String category, String sort) {
 		// TODO Auto-generated method stub
 		
-		return productDao.productSelectList();
+		return productDao.productSelectList(start, end, search, category, sort);
 	}
 
 	@Override
-	public List<Map<String, Object>> productFileList() {
+	public int productSelectTotalCount() {
 		// TODO Auto-generated method stub
 		
-		return productDao.productFileList();
+		return productDao.productSelectTotalCount();
 	}
 	
 	

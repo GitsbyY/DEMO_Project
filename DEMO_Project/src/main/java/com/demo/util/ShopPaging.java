@@ -2,9 +2,9 @@ package com.demo.util;
 
 import java.io.Serializable;
 
-public class Paging implements Serializable{
-	public static final int PAGE_SCALE = 5;
-	public static final int BLOCK_SCALE = 3;
+public class ShopPaging implements Serializable{
+	public static final int PAGE_SCALE = 8;
+	public static final int BLOCK_SCALE = 5;
 	
 	private int curPage;
 	
@@ -22,7 +22,7 @@ public class Paging implements Serializable{
 	private int blockBegin;
 	private int blockEnd;
 	
-	public Paging(int count, int curPage) {
+	public ShopPaging(int count, int curPage) {
 		this.curBlock = 1;
 		this.curPage = curPage;
 		

@@ -7,9 +7,9 @@ import com.demo.product.dto.ProductDto;
 
 public interface ProductService {
 
-	public List<Map<String, Object>> productSelectList();
+	public List<Map<String, Object>> productSelectList(int start, int end, String search, String category, String sort);
 
-	public List<Map<String, Object>> productFileList();
+	public int productSelectTotalCount();
 
 	
 	

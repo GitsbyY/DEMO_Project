@@ -30,14 +30,41 @@
 			javaType="java.util.Date" />
 	</resultMap>
 	
-	<select id="productSelectList" resultType="map">
-		SELECT P.PRODUCT_NO, I.IMG_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE,
-	    P.PRODUCT_STOCK, P.PRODUCT_CATEGORY, P.PRODUCT_CRE_DATE,
-        P.PRODUCT_MOD_DATE, I.ORIGINAL_FILE_NAME, I.STORED_FILE_NAME, I.FILE_SIZE, I.IMG_CRE_DATE
-		FROM PRODUCT P, IMG_FILE I
-		WHERE P.IMG_NO = I.IMG_NO
+	<select id="productSelectList" parameterType="map"
+		resultType="map">
+		SELECT P.PRODUCT_NO, P.IMG_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE,
+        P.PRODUCT_STOCK, P.PRODUCT_CATEGORY, P.PRODUCT_CRE_DATE,
+        P.PRODUCT_MOD_DATE, P.RNUM, I.STORED_FILE_NAME
+		FROM (  
+		        SELECT ROWNUM AS RNUM, PRODUCT_NO, IMG_NO,
+		        		PRODUCT_NAME, PRODUCT_PRICE,
+		                PRODUCT_STOCK, PRODUCT_CATEGORY,
+		                PRODUCT_CRE_DATE, PRODUCT_MOD_DATE
+		        FROM (  
+		                SELECT *
+		                FROM product
+		                WHERE PRODUCT_NAME LIKE '%'||#{search}||'%'
+		                AND PRODUCT_CATEGORY LIKE #{category}||'%'
+		                ORDER BY
+		                <choose>
+			                <when test="sort == 'PRODUCT_PRICE ASC'">
+			                    PRODUCT_PRICE ASC,
+			                </when>
+			                <when test="sort == 'PRODUCT_PRICE DESC'">
+			                    PRODUCT_PRICE DESC,
+			                </when>
+			            </choose>
+			            PRODUCT_CATEGORY
+		                )
+		     ) P
+		INNER JOIN IMG_FILE I ON P.IMG_NO = I.IMG_NO
+		WHERE P.RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
+	<select id="productSelectTotalCount" resultType="int">
+		SELECT COUNT(*)
+		FROM PRODUCT
+	</select>
 </mapper>
 
 

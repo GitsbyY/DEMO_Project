@@ -1,20 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="/DEMO_Project/resources/css/main.css">
 <style type="text/css">
 
-#input{
+#search{
 	float: right;	
-	margin-top: 10px;
-	height: 25px;
+	height: 35px;
 	width: 220px;
 	border-radius: 5px;
-	padding-left: 20px;
-	vertical-align: middle; 
+	padding-left: 10px;
+	position: relative;
+	margin-left:10px;
+}
+
+#searchButton{
+	position: absolute;
+	padding-top: 3px;
+    padding-left: 310px;
 }
 
 #select{
@@ -52,6 +59,7 @@
 	width: 100%;
 	height: 40px;
 	border: 1px solid black;
+	text-align: right;
 }
 
 #productDiv{
@@ -61,13 +69,15 @@
 	width: 170px;
 	height: 200px;
 	border: 1px solid purple;
+	text-align: center;
 }
 
+#resultContainer{
+	height: 600px;
+}
 </style>
 <meta charset="UTF-8">
 <title>쇼핑몰 메인</title>
-<!-- <link rel="stylesheet" type="text/css" href="css/mystyles.css"> -->
-<!-- <script src="js/myscript.js"></script> -->
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/Header.jsp"/>
@@ -76,26 +86,65 @@
 	
 	<div id='divContainer'>
 		<div id='sortDiv'>
-			<input id="input" type="text" name="serch" placeholder="검색어 입력창">
-			<select id="select">
-				<option class="optionTag" value="lowPrice">낮은가격순</option>
-				<option class="optionTag" value="highPrice">높은가격순</option>
-			</select>
+			<form action="./shop.do" method="post" id='sortForm'>
+				<input id="search" type="text" name="search"
+					placeholder="검색어 입력창"
+					value="${pagingMap.search}"/>
+		        <img src="/DEMO_Project/resources/img/Search.png"
+		        	alt="제출" id="searchButton"/>
+		        <input type="hidden" name="category"
+		        	value="${pagingMap.category}">
+				<select id="sortSelect" name="sort">
+					<option class="optionTag"
+						value="PRODUCT_PRICE ASC"
+						<c:if test="${pagingMap.sort eq 'PRODUCT_PRICE ASC'}">
+							selected
+						</c:if>
+						>낮은가격순</option>
+					<option class="optionTag"
+						value="PRODUCT_PRICE DESC"
+						<c:if test="${pagingMap.sort eq 'PRODUCT_PRICE DESC'}">
+							selected
+						</c:if>
+						>높은가격순</option>
+				</select>
+			</form>
+		</div>
+		<div id='resultContainer'>
+			<c:forEach var="productDto" items="${productList}">
+				<div id='productDiv'>
+					<img alt="image not found" 
+							src="<c:url value='/image/Product/${productDto.STORED_FILE_NAME}.png'/>"><br/>
+					<div>
+						${productDto.PRODUCT_NAME}
+					</div>
+					<div>
+					<fmt:formatNumber value="${productDto.PRODUCT_PRICE}"
+						type="number" />원
+					</div>
+					<div>
+						남은가격:${productDto.PRODUCT_STOCK}개
+					</div>
+				</div>
+			</c:forEach>
 			<div id="btnDiv">
 				<input class="btnClass" type="button" value="전체">
 				<input class="btnClass" type="button" value="추가">
 				<input class="btnClass" type="button" value="삭제">
 			</div>
 		</div>
-		
-		<c:forEach var="productDto" items="${productList}">
-			<div id='productDiv'>
-				${productDto.productName}
-				${productDto.STORED_FILE_NAME}
-			</div>
+		<div>
+			<jsp:include page="/WEB-INF/views/common/ShopPaging.jsp">
+			<jsp:param value="${pagingMap}" name="pagingMap"/>
+			</jsp:include>
 			
-			
-		</c:forEach>
+			<!-- 	정보를 넘기기 위해서 폼을 만들었다 -->
+			<form action="./shop.do" id="pagingForm" method="post">
+			<input type="hidden" id="curPage" name="curPage"
+		         value="${pagingMap.shopPaging.curPage}">
+			</form>
+		   
+		</div>
 		
 	</div>
 	
@@ -103,4 +152,18 @@
 	
 	<jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
+
+<script type="text/javascript">
+	var sortSelectObj = document.getElementById("sortSelect");
+	
+	sortSelectObj.addEventListener("change", function() {
+		document.getElementById("sortForm").submit();
+	});
+	
+	var searchButtonObj = document.getElementById("searchButton");
+	
+	searchButtonObj.addEventListener("click", function() {
+		document.getElementById("sortForm").submit();
+	});
+</script>
 </html>

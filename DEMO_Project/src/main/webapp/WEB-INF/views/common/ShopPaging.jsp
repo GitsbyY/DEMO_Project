@@ -80,20 +80,20 @@ nav > ul > li > a:hover {
 	<nav class='jqueryTest'>
 	
 		<ul>
-			<c:if test="${pagingMap.memberPaging.prevBlock ne 1}">
+			<c:if test="${pagingMap.shopPaging.prevBlock ne 1}">
 				<li>
 <!-- 												EL 태그라서 get을 호출하는 매서드이다. -->
-					<a href="#" onclick="goPage(${pagingMap.memberPaging.prevBlock});">
+					<a href="#" onclick="goPage(${pagingMap.shopPaging.prevBlock});">
 						<span>≪</span>
 					</a>
 				</li>
 			</c:if>
 			
-			<c:forEach var="num" begin="${pagingMap.memberPaging.blockBegin}" 
-				end="${pagingMap.memberPaging.blockEnd}">
+			<c:forEach var="num" begin="${pagingMap.shopPaging.blockBegin}" 
+				end="${pagingMap.shopPaging.blockEnd}">
 				<li>
 					<a class='numClass' href="#" onclick="goPage(${num})"
-						 <c:if test="${num == pagingMap.memberPaging.curPage}">
+						 <c:if test="${num == pagingMap.shopPaging.curPage}">
 	               			style="background-color: red;"
 	           			</c:if>>
 	           			${num}
@@ -101,9 +101,9 @@ nav > ul > li > a:hover {
 				</li>
 			</c:forEach>
 
-			<c:if test="${pagingMap.memberPaging.curBlock < pagingMap.memberPaging.totBlock}">
+			<c:if test="${pagingMap.shopPaging.curBlock < pagingMap.shopPaging.totBlock}">
 				<li>
-					<a href="#" onclick="goPage(${pagingMap.memberPaging.nextBlock});">
+					<a href="#" onclick="goPage(${pagingMap.shopPaging.nextBlock});">
 						<span>≫</span>
 					</a>
 				</li>
