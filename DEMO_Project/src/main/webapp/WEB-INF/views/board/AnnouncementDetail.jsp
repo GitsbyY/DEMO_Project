@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,8 +49,57 @@
 #midDiv{
 	float: right;
 }
-
-
+#tableDiv{
+	clear: right;
+	width: 100%;
+}
+th{
+	border: 2px solid black;
+	border-left:thick;
+	border-right:thick;
+	border-bottom:thick;	
+}
+tr, td{
+	border: 1px solid black;
+	border-left:thick;
+	border-right:thick;	
+}
+table{
+	width: 100%;
+	border-left: none;
+	border-collapse: collapse;
+}
+#listColumn1{
+	width: 7%;
+	background-color: #D3D3D3;
+}
+#listColumn2{
+	width: 63%;
+	background-color: #D3D3D3;
+}
+#listColumn3{
+	width: 13%;
+	background-color: #D3D3D3;
+}
+#listColumn4{
+	width: 17%;
+	background-color: #D3D3D3;
+}
+.tdClass{
+	text-align: center;
+}
+#writeBtnDiv{	
+	margin-top: 30px;
+	float: right;
+}
+#writeBtn{
+	background-color: #FFC4A3;
+	border: none;
+	color: white;
+	width: 60px;
+	height: 30px;
+	font-size: 16px;	
+}
 </style>
 <meta charset="UTF-8">
 <title>공지사항 메인</title>
@@ -73,11 +123,34 @@
 			</select>			
 			<input id="input" type="text" name="serch" placeholder="검색어 입력창">		
 		</div>
+		<div id="tableDiv">
+			<table>
+				<tr>
+					<th id="listColumn1" class="listColumn">번호</th>
+					<th id="listColumn2" class="listColumn">제목</th>
+					<th id="listColumn3" class="listColumn">작성자</th>
+					<th id="listColumn4" class="listColumn">작성일</th>				
+				</tr>
+				
+				<c:forEach var="noticeDto" items="${noticeList}">
+				<tr>
+					<td class="tdClass">${noticeDto.NOTICE_NO}</td>
+					<td>${noticeDto.NOTICE_TITLE}</td>
+					<td class="tdClass">${noticeDto.MEMBER_NAME}</td>
+					<td class="tdClass">
+						<fmt:formatDate pattern="yyyy-MM-dd" 
+							value="${noticeDto.NOTICE_CRE_DATE}"/>
+					</td>				
+				</tr>				
+				</c:forEach>
+			</table>
+		</div>
+		<div id="writeBtnDiv">
+			<input id="writeBtn" type="button" value="글쓰기" onclick="writeFnc();">
+		</div>
+			
 						
 	</div>
-	
-				
-      
   
    <jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>

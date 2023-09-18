@@ -48,9 +48,10 @@
 							<p>마이댕댕</p>
 						</button>
 					</div>
-					<div id="customerCenter" class="buttonSide">
+					<div id="customerCenter" class="buttonSide" 
+						onclick="location.href = '/DEMO_Project/board/announcement.do';">
 						<button id="customerCenterBtn">
-							<img alt="장바구니"
+							<img alt="고객센터"
 								src="/DEMO_Project/resources/img/imgHeader/customcenter.jpg">
 							<p>고객센터</p>
 						</button>

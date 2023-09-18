@@ -45,7 +45,45 @@
 			javaType="java.util.Date" />
 	</resultMap>
 	
+	<!-- <select id="noticeSelectList" resultType="map">
+		SELECT N.NOTICE_NO, M.MEMBER_NAME, N.MEMBER_NO, N.NOTICE_TITLE
+		, N.NOTICE_CONTENT, N.NOTICE_CRE_DATE
+		FROM NOTICE N JOIN MEMBER M
+		ON N.MEMBER_NO = M.MEMBER_NO
+	</select> -->
 	
+	<select id="noticeSelectList" parameterType="map" resultType="map">	
+		SELECT 
+	    NOTICE.NOTICE_NO, 
+	    NOTICE.MEMBER_NO, 
+	    NOTICE.NOTICE_TITLE, 
+	    NOTICE.NOTICE_CONTENT, 
+	    NOTICE.NOTICE_CRE_DATE, 
+	    MEMBER.MEMBER_NAME
+		FROM (
+    	SELECT ROWNUM AS RNUM, N.NOTICE_NO, N.MEMBER_NO, N.NOTICE_TITLE
+    	, N.NOTICE_CONTENT, N.NOTICE_CRE_DATE
+    	FROM (
+        SELECT NOTICE_NO, MEMBER_NO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_CRE_DATE
+        FROM NOTICE
+        ORDER BY NOTICE_CRE_DATE DESC
+    	) N
+		) NOTICE 
+		JOIN MEMBER ON NOTICE.MEMBER_NO = MEMBER.MEMBER_NO
+		WHERE NOTICE.RNUM BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="customerServiceSelectList" resultType="map">
+		SELECT INQUIRY_NO, MEMBER_NO,INQUIRY_TYPE, MEMBER_NAME
+		, INQUIRY_CRE_DATE, INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_IS_REPLY
+		FROM INQUIRY
+		ORDER BY INQUIRY_NO DESC
+	</select>
+	
+	<select id="noticeSelectTotalCount" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM NOTICE
+	</select>
 	
 </mapper>
 
