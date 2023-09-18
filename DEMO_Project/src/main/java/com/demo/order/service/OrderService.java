@@ -10,7 +10,11 @@ import com.demo.order.dto.OrderDto;
 
 public interface OrderService {
 
-	List<Map<String, Object>> orderSelectList();
+	List<Map<String, Object>> orderSelectList(int start, int end);
+
+	Map<String, Object> orderDetailSelectOne(int orderNo);
+
+	int orderSelectListTotalCount();
 
 
 	

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,15 +36,8 @@ button{
 	height: 35px;
 	border: 1px solid black;
 	margin-bottom: 21px;
-	font-size: 20px;
-	font-weight : bold;
-	text-align: left;
 }
-#divTop div {
-    display: inline-block;
-    margin-left: 5px;
-    margin-top: 3px;
-}
+
 #firstTable {
 	width: 852px;
 	height: 196px;
@@ -58,6 +50,7 @@ button{
 #secondTable {
 	width: 852px;
 	height: 196px;
+	border-top: 3px solid black;
 	border-left: none;
 	border-right: none;
 }
@@ -65,6 +58,10 @@ button{
 table {
 	width: 100%;
 	border-collapse: collapse;
+}
+
+table, th, td {
+	border: 1px solid black;
 }
 
 th, td {
@@ -81,22 +78,22 @@ th, td {
 	<jsp:include page="/WEB-INF/views/Header.jsp" />
 
 	<jsp:include page="/WEB-INF/views/asideMyPage.jsp" />
-	<fmt:formatDate value="${orderDto.ORDER_DATE}" pattern="yyyy/MM/dd" var="formattedDate" />
+	주문번호 가져오고 주문번호로 where엮자
 
 	<div id='divContainer'>
 		<div id="divTitle">주문 상세</div>
 		<div id='divDetailContainer'>
-
+<%-- 			<c:forEach var="item" items="${orderList}"> --%>
 			<div id="divTop">
-				<div>${orderDto.ORDER_DATE}&nbsp;&nbsp;|</div>
-				<div>${orderDto.ORDER_NO}&nbsp;&nbsp;|</div>
-				<div>${orderDto.MEMBER_NO}&nbsp;&nbsp;|</div>
+				<div>${orderDto.ORDER_DATE}</div>
+				<div>${orderDto.ORDER_NO}</div>
+				<div>${orderDto.MEMBER_NO}</div>
 				<div>${orderDto.MEMBER_ID}</div>
 			</div>
 
 			<table id="firstTable">
 				<thead>
-					<tr style="border-bottom: 1px solid black;">
+					<tr>
 						<th style="width: 413px; font-size: 24px; font-weight: bold;">상품</th>
 						<th style="width: 197px; font-size: 24px; font-weight: bold;">금액</th>
 						<th style="width: 242px; font-size: 24px; font-weight: bold;">진행 상태</th>
@@ -105,12 +102,12 @@ th, td {
 				<tbody>
 				 
 					<tr>
-						<th rowspan="2" style="border-right: 1px solid black;">
+						<th rowspan="2">
 							<img src="" alt="상품 이미지">
 							<input type="text" value="텍스트박스 내용">
 						</th>
 						<th style="font-size: 24px; font-weight: bold;">1개</th>
-						<th rowspan="2" style="font-size: 24px; font-weight: bold; border-left: 1px solid black;">진행 상태</th>
+						<th rowspan="2" style="font-size: 24px; font-weight: bold;">진행 상태</th>
 					</tr>
 					<tr>
 						<th style="font-size: 24px; font-weight: bold;">금액</th>
@@ -121,23 +118,28 @@ th, td {
 			<table id="secondTable">
 				<tr>
 					<th colspan="4" style="font-size: 24px; font-weight: bold; 
-						text-align: left; margin-left: 5px; border-bottom: 3px solid black;">
+						text-align: left; margin-left: 5px;">
 					상세정보
 					</th>
 				</tr>
 				<tr>
 					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px;">주문일자</th>
-					<th style="font-size: 24px; font-weight: bold; text-align: right; border-right: 1px solid black;  padding-right: 15px;">${formattedDate}</th>
-					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px;">결제일자</th>
+					<th style="font-size: 24px; font-weight: bold; text-align: right;"></th>
+					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px;">상품금액</th>
 					<th style="font-size: 24px; font-weight: bold; text-align: right;"></th>
 				</tr>
 				<tr>
 					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px;">주문접수번호</th>
-					<th style="font-size: 24px; font-weight: bold; text-align: right; border-right: 1px solid black; padding-right: 15px;">${orderDto.ORDER_NO}</th>
-					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px;">상품금액</th>
-					<th style="font-size: 24px; font-weight: bold; text-align: right; color: blue;">${orderDto.PRODUCT_PRICE}</th>
+					<th style="font-size: 24px; font-weight: bold; text-align: right;"></th>
+					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px;">배송비</th>
+					<th style="font-size: 24px; font-weight: bold; text-align: right;"></th>
 				</tr>
-				
+				<tr>
+					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px;">결제일자</th>
+					<th style="font-size: 24px; font-weight: bold; text-align: right;"></th>
+					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px;">결제수단</th>
+					<th style="font-size: 24px; font-weight: bold; text-align: right;"></th>
+				</tr>
 				</tbody>
 			</table>
 
@@ -148,10 +150,10 @@ th, td {
 				</div>
 				<div style="margin-top: 40px;">
 					<input type="button" value="목록" 
-						style="width: 145px; height: 50px; font-size: 24px; font-weight: bold;" onclick="window.location.href='/DEMO_Project/mypage/mypage.do';">	
+						style="width: 145px; height: 50px; font-size: 24px; font-weight: bold;">	
 				</div>
 			</div>
-			
+<%-- 			</c:forEach> --%>
 		</div>
 		
 	</div>

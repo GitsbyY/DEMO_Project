@@ -23,23 +23,29 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 	font-size: 30px;
 	font-weight: bold;
 	margin-top: 60px;
-	margin-left: 50px;
+	margin-left: 30px;
+	margin-bottom: 25px;
 }
 
 .listColumnContainer {
 	width: inherit;
-	margin-top: 42px;
+	cursor: pointer;
+	margin-bottom: 10px;
+	height: 46px;
 }
-
+.listColumnContainerDefault{
+	height: 46px;
+	margin-bottom: 15px;
+}
 .listColumn {
 	float: left;
 	height: 46px;
 	font-size: 20px;
- 	background-color: grey;
 	text-align: center;
 	display: flex; /* 수직 중앙 정렬을 위해 flexbox 사용 */
 	align-items: center; /* 수직 중앙 정렬 설정 */
 	justify-content: center; /* 수평 중앙 정렬 설정 */
+ 	background-color: grey; 
 }
 
 #listColumn1 {
@@ -73,13 +79,12 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 .listColumn {
 	margin-bottom: 3px;
 }
-
-.listColumnContainer.white-bg {
-	background-color: white;
+.listColumnEven {
+    background-color: lightgrey;
 }
 
-.listColumnContainer.grey-bg {
-	background-color: grey;
+.listColumnOdd {
+    background-color: grey;
 }
 </style>
 <meta charset="UTF-8">
@@ -104,28 +109,55 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 			<div id="listColumn5" class="listColumn">아이디</div>
 			<div id="listColumn6" class="listColumn">상품명</div>
 		</div>
-
+<!-- 		루프로하면 안된다 -->
 		<c:forEach var="orderDto" items="${orderList}" varStatus="loop">
-			<div class="listColumnContainer">
-				<div id="listColumn1" class="listColumn">${loop.index + 1}</div>
-				<div id="listColumn2" class="listColumn">${orderDto.ORDER_DATE}</div>
-				<div id="listColumn3" class="listColumn">${orderDto.ORDER_NO}</div>
-				<div id="listColumn4" class="listColumn">${orderDto.MEMBER_NO}</div>
-				<div id="listColumn5" class="listColumn">${orderDto.MEMBER_ID}</div>
-				<div id="listColumn6" class="listColumn">${orderDto.PRODUCT_NAME}</div>
+			<div class="listColumnContainer" onclick="mypageDetailFnc(${orderDto.ORDER_NO})">
+				<div id="listColumn1" class="listColumn 
+					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
+						${loop.index + 1}
+				</div>
+				<div id="listColumn2" class="listColumn 
+					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
+						${orderDto.ORDER_DATE}
+				</div>
+				<div id="listColumn3" class="listColumn 
+					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
+						${orderDto.ORDER_NO}
+				</div>
+				<div id="listColumn4" class="listColumn 
+					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
+						${orderDto.MEMBER_NO}
+				</div>
+				<div id="listColumn5" class="listColumn 
+					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
+						${orderDto.MEMBER_ID}
+				</div>
+				<div id="listColumn6" class="listColumn 
+					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
+						${orderDto.PRODUCT_NAME}
+				</div>
 			</div>
 		</c:forEach>
 	</div>
 
-
+<jsp:include page="/WEB-INF/views/common/Paging.jsp">
+		<jsp:param value="${myPagingmap}" name="myPagingmap"/>
+	</jsp:include>
+	
+<!-- 	정보를 넘기기 위해서 폼을 만들었다 -->
+	<form action="./list.do" id="pagingForm" method="post">
+      <input type="hidden" id="curPage" name="curPage"
+         value="${myPagingmap.myPagePaging.curPage}">
+   </form>
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
 </body>
 <script type="text/javascript">
-	var listContainers = document.querySelectorAll('.listColumnContainer');
-	listContainers.forEach(function(container, index) {
-		var backgroundColorClass = (index + 1) % 2 === 0 ? 'grey-bg'
-				: 'white-bg';
-		container.classList.add(backgroundColorClass);
-	});
+function mypageDetailFnc(no) {
+	
+	var url = './MypageDetail.do?orderNo=' + no;
+	
+    location.href= url;
+	
+}
 </script>
 </html>

@@ -21,10 +21,22 @@ public class OrderServiceImpl implements OrderService{
 	@Autowired
 	public OrderDao orderDao;
 	@Override
-	public List<Map<String, Object>> orderSelectList() {
+	public List<Map<String, Object>> orderSelectList(int start, int end) {
 		// TODO Auto-generated method stub
-		return orderDao.orderSelectList();
+		return orderDao.orderSelectList(start, end);
 	}
 	
+	//주문목록 상세
+	@Override
+	public Map<String, Object> orderDetailSelectOne(int orderNo) {
+		// TODO Auto-generated method stub
+		return orderDao.orderDetailSelectOne(orderNo);
+	}
+
+	@Override
+	public int orderSelectListTotalCount() {
+		// TODO Auto-generated method stub
+		return orderDao.orderSelectListTotalCount();
+	}
 	
 }
