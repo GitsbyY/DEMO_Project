@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,7 @@ public class ProductController {
 
 	@RequestMapping(value = "/shop.do",
 			method = { RequestMethod.GET, RequestMethod.POST })
-	public String login(@RequestParam(defaultValue = "1") int curPage,
+	public String viewProduct(@RequestParam(defaultValue = "1") int curPage,
 			@RequestParam(defaultValue = "") String search,
 			@RequestParam(defaultValue = "") String category,
 			@RequestParam(defaultValue = "PRODUCT_PRICE ASC") String sort,
@@ -56,4 +58,12 @@ public class ProductController {
 		return "shop/ShoppingMall";
 	}
 
+	@RequestMapping(value = "/shop/add.do", method = RequestMethod.GET)
+	public String login(Model model) {
+		
+		log.info("Shoppingadd");
+		
+		return "shop/Shoppingadd";
+	}
+	
 }

@@ -125,7 +125,7 @@
 						type="number" />원
 					</div>
 					<div>
-						남은가격:${productDto.PRODUCT_STOCK}개
+						남은수량:${productDto.PRODUCT_STOCK}개
 					</div>
 				</div>
 			</c:forEach>
