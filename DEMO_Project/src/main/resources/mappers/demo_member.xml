@@ -89,7 +89,7 @@
 	
 	<select id="memberExist" parameterType="map" 
 		resultMap="memberResultMap">
-		SELECT MEMBER_ID, MEMBER_NAME
+		SELECT MEMBER_ID, MEMBER_NAME, MEMBER_NO, MEMBER_PHONE, MEMBER_EMAIL
 		FROM MEMBER
 		WHERE MEMBER_ID = #{memberId} AND MEMBER_PASSWORD = #{memberPassword}
 	</select>
