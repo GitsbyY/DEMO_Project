@@ -1,5 +1,6 @@
 package com.demo.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,11 +9,17 @@ import com.demo.order.dto.OrderDto;
 
 public interface BoardDao {
 
-	List<Map<String, Object>> customerServiceSelectList();
-
 	Map<String, Object> noticeSelectList(int start, int end);	
 
 	public int noticeSelectTotalCount();
+
+	Map<String, Object> inquirySelectList(int start, int end);
+
+	public int inquirySelectTotalCount();
+
+	public HashMap<String, Object> noticeSelectOne(int no);
+
+	List<Map<String, Object>> fileSelectList(int no);
 
 	
 	

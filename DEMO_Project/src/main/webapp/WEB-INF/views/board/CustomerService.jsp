@@ -35,12 +35,14 @@ th{
 	border: 2px solid black;
 	border-left:thick;
 	border-right:thick;
-	border-bottom:thick;	
+	border-bottom:thick;
+	height: 30px;	
 }
 tr, td{
 	border: 1px solid black;
 	border-left:thick;
-	border-right:thick;	
+	border-right:thick;
+	height: 30px;	
 }
 table{
 	width: 100%;
@@ -74,7 +76,9 @@ table{
 .tdClass{
 	text-align: center;
 }
-
+#pageDiv{
+   margin-top: 30px;
+}
 </style>
 <meta charset="UTF-8">
 <title>공지사항 메인</title>
@@ -101,7 +105,7 @@ table{
 					<th id="listColumn6" class="listColumn">상태</th>				
 				</tr>
 				
-				<c:forEach var="inquiryDto" items="${customerServiceList}">
+				<c:forEach var="inquiryDto" items="${inquiryDtoList}">
 				<tr>
 					<td class="tdClass">${inquiryDto.INQUIRY_NO}</td>
 					<td class="tdClass">${inquiryDto.INQUIRY_TYPE}</td>
@@ -116,7 +120,16 @@ table{
 				</c:forEach>
 			</table>
 		</div>
-			
+		<div id="pageDiv">
+	      <jsp:include page="/WEB-INF/views/common/BoardPaging.jsp">
+	      <jsp:param value="${pagingMap}" name="pagingMap"/>
+	      </jsp:include>
+   
+	      <form action="./customerService.do" id='pagingForm' method="post">
+	      <input type="hidden" id='curPage' name='curPage' 
+	         value="${pagingMap.boardPaging.curPage}">
+	      </form>
+      	</div>	
 						
 	</div>
 	

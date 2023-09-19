@@ -46,9 +46,6 @@
 }
 #secondTh{      
 }
-#midDiv{
-	float: right;
-}
 #tableDiv{
 	clear: right;
 	width: 100%;
@@ -88,18 +85,6 @@ table{
 .tdClass{
 	text-align: center;
 }
-#writeBtnDiv{	
-	margin-top: 30px;
-	float: right;
-}
-#writeBtn{
-	background-color: #FFC4A3;
-	border: none;
-	color: white;
-	width: 60px;
-	height: 30px;
-	font-size: 16px;	
-}
 </style>
 <meta charset="UTF-8">
 <title>공지사항 메인</title>
@@ -114,15 +99,7 @@ table{
 		<div id="titleDiv">			
 			<div id="firstDiv">공지사항</div>
 			<div id="secondDiv"></div>      			            
-		</div>
-		<div id="midDiv">
-			<select id="select">
-				<option class="optionTag" value="title">제목</option>
-				<option class="optionTag" value="">제목2</option>
-				<option class="optionTag" value="">제목3</option>
-			</select>			
-			<input id="input" type="text" name="serch" placeholder="검색어 입력창">		
-		</div>
+		</div>		
 		<div id="tableDiv">
 			<table>
 				<tr>
@@ -130,9 +107,7 @@ table{
 					<th id="listColumn2" class="listColumn">제목</th>
 					<th id="listColumn3" class="listColumn">작성자</th>
 					<th id="listColumn4" class="listColumn">작성일</th>				
-				</tr>
-				
-				<c:forEach var="noticeDto" items="${noticeList}">
+				</tr>				
 				<tr>
 					<td class="tdClass">${noticeDto.NOTICE_NO}</td>
 					<td>${noticeDto.NOTICE_TITLE}</td>
@@ -141,14 +116,10 @@ table{
 						<fmt:formatDate pattern="yyyy-MM-dd" 
 							value="${noticeDto.NOTICE_CRE_DATE}"/>
 					</td>				
-				</tr>				
-				</c:forEach>
+				</tr>								
 			</table>
 		</div>
-		<div id="writeBtnDiv">
-			<input id="writeBtn" type="button" value="글쓰기" onclick="writeFnc();">
-		</div>
-			
+					
 						
 	</div>
   

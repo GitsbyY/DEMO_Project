@@ -34,30 +34,6 @@ public class BoardController {
 	private MemberService memberService;
 
 	// 공지사항 화면으로 이동
-	/*
-	 * @RequestMapping(value = "/board/announcement.do", method = RequestMethod.GET)
-	 * public String announcement(HttpSession session, Model model) {
-	 * 
-	 * log.info("Welcome BoardController announcement!"); List<Map<String, Object>>
-	 * noticeList = boardService.noticeSelectList();
-	 * 
-	 * model.addAttribute("noticeList", noticeList);
-	 * 
-	 * return "board/Announcement"; }
-	 */
-	
-	// 상담문의 화면으로 이동
-	@RequestMapping(value = "/board/customerService.do", method = RequestMethod.GET)
-	public String customerService(HttpSession session, Model model) {
-
-		log.info("Welcome BoardController customerService!");
-		List<Map<String, Object>> customerServiceList = boardService.customerServiceSelectList();
-		
-		model.addAttribute("customerServiceList", customerServiceList);
-
-		return "board/CustomerService";
-	}
-	
 	@RequestMapping(value = "/board/announcement.do", 
 			method = {RequestMethod.GET, RequestMethod.POST})
 	public String noticeList(@RequestParam(defaultValue = "1") int curPage, Model model) {
@@ -82,6 +58,50 @@ public class BoardController {
 		model.addAttribute("pagingMap", pagingMap);
 		
 		return "board/Announcement";
-	}	
+	}
+	// 상담문의 화면으로 이동
+	@RequestMapping(value = "/board/customerService.do", 
+			method = {RequestMethod.GET, RequestMethod.POST})
+	public String inquiryList(@RequestParam(defaultValue = "1") int curPage, Model model) {
+		// Log4j 
+		log.info("Welcome BoardController list!: {}", curPage);
+			
+		int totalCount = boardService.inquirySelectTotalCount();
+		
+		BoardPaging boardPaging = new BoardPaging(totalCount, curPage);
+		
+		int start = boardPaging.getPageBegin();
+		int end = boardPaging.getPageEnd();
+		
+		Map<String, Object> inquiryList = boardService.inquirySelectList(start, end);
+		List<InquiryDto> inquiryDtoList = (List<InquiryDto>) inquiryList.get("inquiryList");
+		
+		HashMap<String, Object> pagingMap = new HashMap<>();
+		pagingMap.put("totalCount", totalCount);
+		pagingMap.put("boardPaging", boardPaging);
+		
+		model.addAttribute("inquiryDtoList", inquiryDtoList);
+		model.addAttribute("pagingMap", pagingMap);
+		
+		return "board/CustomerService";
+	}
+	
+	@RequestMapping(value = "/board/listOne.do", method = RequestMethod.GET)
+	public String noticeListOne(int no, Model model) {
+		log.debug("Welcome MemberController noticelistOne! - {}" + no);
+		
+		Map<String, Object> resultMap = boardService.noticeSelectOne(no);
+		
+		Map<String, Object> noticeDto 
+		= (Map<String, Object>) resultMap.get("noticeDto");
+				
+		List<Map<String, Object>> fileList 
+			= (List<Map<String, Object>>) resultMap.get("fileList");
+		
+		model.addAttribute("noticeDto", noticeDto);
+		model.addAttribute("fileList", fileList);
+				
+		return "board/AnnouncementDetail";
+	}
 
 }

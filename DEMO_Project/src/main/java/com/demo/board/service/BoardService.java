@@ -10,12 +10,16 @@ import com.demo.order.dto.OrderDto;
 
 
 public interface BoardService {
-		
-	List<Map<String, Object>> customerServiceSelectList();
-
+			
 	public int noticeSelectTotalCount();
 
 	Map<String, Object> noticeSelectList(int start, int end);
+
+	public int inquirySelectTotalCount();
+
+	Map<String, Object> inquirySelectList(int start, int end);
+
+	public Map<String, Object> noticeSelectOne(int no);
 
 
 	

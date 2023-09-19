@@ -1,5 +1,6 @@
 package com.demo.board.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,16 +22,12 @@ public class BoardServiceImpl implements BoardService{
 	private static final Logger log = LoggerFactory.getLogger(BoardServiceImpl.class);
 	@Autowired
 	public BoardDao boardDao;
-
+	
 	/*
-	 * @Override public List<Map<String, Object>> noticeSelectList() { // TODO
-	 * Auto-generated method stub return boardDao.noticeSelectList(); }
+	 * @Override public List<Map<String, Object>> customerServiceSelectList() { //
+	 * TODO Auto-generated method stub return boardDao.customerServiceSelectList();
+	 * }
 	 */
-	@Override
-	public List<Map<String, Object>> customerServiceSelectList() {
-		// TODO Auto-generated method stub
-		return boardDao.customerServiceSelectList();
-	}
 	@Override
 	public int noticeSelectTotalCount() {
 		// TODO Auto-generated method stub
@@ -40,6 +37,29 @@ public class BoardServiceImpl implements BoardService{
 	public Map<String, Object> noticeSelectList(int start, int end) {
 		// TODO Auto-generated method stub
 		return boardDao.noticeSelectList(start, end);
+	}
+	@Override
+	public int inquirySelectTotalCount() {
+		// TODO Auto-generated method stub
+		return boardDao.inquirySelectTotalCount();
+	}
+	@Override
+	public Map<String, Object> inquirySelectList(int start, int end) {
+		// TODO Auto-generated method stub
+		return boardDao.inquirySelectList(start, end);
+	}
+	@Override
+	public Map<String, Object> noticeSelectOne(int no) {
+		// TODO Auto-generated method stub
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		HashMap<String, Object> noticeDto = boardDao.noticeSelectOne(no);
+		resultMap.put("noticeDto", noticeDto);
+		
+		List<Map<String, Object>> fileList = boardDao.fileSelectList(no);
+		resultMap.put("fileList", fileList);
+		
+		return resultMap;
 	}
 				
 }
