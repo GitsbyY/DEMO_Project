@@ -104,6 +104,8 @@ aside{
 	margin-right: 100px;
 }
 .asideATag{
+	text-decoration: none;
+	color: black;
 	margin-left: 35px;
 	line-height: 2;
 	font-weight: bold;
@@ -114,6 +116,9 @@ aside{
 	line-height: 2.5;		
 }
 
+.curPageATag{
+	color: blue;
+}
 
 #asideTitleTag{
 	color: blue;

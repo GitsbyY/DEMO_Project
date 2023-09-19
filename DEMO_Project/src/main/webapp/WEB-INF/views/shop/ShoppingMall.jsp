@@ -20,8 +20,10 @@
 
 #searchButton{
 	position: absolute;
-	padding-top: 3px;
-    padding-left: 310px;
+	marign-top: 3px;
+    margin-left: 310px;
+    width: 18px;
+    height: 30px;
 }
 
 #select{
@@ -88,7 +90,7 @@
 		<div id='sortDiv'>
 			<form action="./shop.do" method="post" id='sortForm'>
 				<input id="search" type="text" name="search"
-					placeholder="검색어 입력창"
+					placeholder="상품명 검색"
 					value="${pagingMap.search}"/>
 		        <img src="/DEMO_Project/resources/img/Search.png"
 		        	alt="제출" id="searchButton"/>

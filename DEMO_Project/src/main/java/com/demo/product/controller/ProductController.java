@@ -53,7 +53,6 @@ public class ProductController {
 
 		model.addAttribute("productList", productList);
 		model.addAttribute("pagingMap", pagingMap);
-
 		return "shop/ShoppingMall";
 	}
 
