@@ -42,6 +42,18 @@ public class OrderDaoImpl implements OrderDao{
 		return (int)sqlSession.selectOne(nameSpace + "orderSelectListTotalCount");
 	}
 
+	@Override
+	public int orderCancelUpdate(int orderNo) {
+		// TODO Auto-generated method stub
+		return (int)sqlSession.update(nameSpace + "orderCancelUpdate", orderNo);
+	}
+
+	@Override
+	public int orderCancelInsert(int orderNo) {
+		// TODO Auto-generated method stub
+		return (int)sqlSession.insert(nameSpace + "orderCancelInsert", orderNo);
+	}
+
 	
 
 }

@@ -110,10 +110,10 @@ th, td {
 							<input type="text" value="텍스트박스 내용">
 						</th>
 						<th style="font-size: 24px; font-weight: bold;">1개</th>
-						<th rowspan="2" style="font-size: 24px; font-weight: bold; border-left: 1px solid black;">진행 상태</th>
+						<th rowspan="2" style="font-size: 24px; font-weight: bold; border-left: 1px solid black;">${orderDto.ORDER_STATUS}</th>
 					</tr>
 					<tr>
-						<th style="font-size: 24px; font-weight: bold;">금액</th>
+						<th style="font-size: 24px; font-weight: bold;">${orderDto.PRODUCT_PRICE}</th>
 					</tr>
 			
 			</table>
@@ -126,16 +126,16 @@ th, td {
 					</th>
 				</tr>
 				<tr>
-					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px;">주문일자</th>
-					<th style="font-size: 24px; font-weight: bold; text-align: right; border-right: 1px solid black;  padding-right: 15px;">${formattedDate}</th>
-					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px;">결제일자</th>
-					<th style="font-size: 24px; font-weight: bold; text-align: right;"></th>
+					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px; width: 210px;">주문일자</th>
+					<th style="font-size: 24px; font-weight: bold; text-align: right; border-right: 1px solid black;  padding-right: 15px; width: 210px;">${formattedDate}</th>
+					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px; width: 210px;">결제일자</th>
+					<th style="font-size: 24px; font-weight: bold; text-align: right; width: 210px; padding-right: 10px;"></th>
 				</tr>
 				<tr>
-					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px;">주문접수번호</th>
-					<th style="font-size: 24px; font-weight: bold; text-align: right; border-right: 1px solid black; padding-right: 15px;">${orderDto.ORDER_NO}</th>
-					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px;">상품금액</th>
-					<th style="font-size: 24px; font-weight: bold; text-align: right; color: blue;">${orderDto.PRODUCT_PRICE}</th>
+					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px; width: 210px;">주문접수번호</th>
+					<th style="font-size: 24px; font-weight: bold; text-align: right; border-right: 1px solid black; padding-right: 15px; width: 210px;">${orderDto.ORDER_NO}</th>
+					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px; width: 210px;">상품금액</th>
+					<th style="font-size: 24px; font-weight: bold; text-align: right; color: blue; width: 210px; padding-right: 10px;">${orderDto.PRODUCT_PRICE}</th>
 				</tr>
 				
 				</tbody>
@@ -143,9 +143,13 @@ th, td {
 
 			<div id="divBottom">
 				<div style="text-align: right; margin-top: 4px;">
-					<input type="button" value="주문취소" 
+				<form action="../order/orderCancelCtr.do"  onsubmit="return checkOrderStatus()" id="cancelForm" method="post">
+    				<input type="hidden" name="orderNo" value="${orderDto.ORDER_NO}">
+					<input type="submit" value="주문취소" 
 						style="width: 90px; height: 30px; font-size: 15px;">
+				</form>
 				</div>
+				
 				<div style="margin-top: 40px;">
 					<input type="button" value="목록" 
 						style="width: 145px; height: 50px; font-size: 24px; font-weight: bold;" onclick="window.location.href='/DEMO_Project/mypage/mypage.do';">	
@@ -159,4 +163,22 @@ th, td {
 
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
 </body>
+<script type="text/javascript">
+function checkOrderStatus() {
+    var orderStatus = "${orderDto.ORDER_STATUS}";
+    var orderNo = "${orderDto.ORDER_NO}";
+    if (orderStatus === '미확정') {
+        var confirmCancel = confirm("정말 주문을 취소하시겠습니까?");
+        if (confirmCancel) {
+            return window.location.href = '../order/orderCancelCtr.do?orderNo=' + orderNo;; // 주문 취소 처리 페이지로 이동
+        } else {
+            return false; // 취소하지 않음
+        }
+    } else {
+        alert("주문 취소가 불가능한 상태입니다.");
+        return false; // 취소하지 않음
+    }
+}
+
+</script>
 </html>

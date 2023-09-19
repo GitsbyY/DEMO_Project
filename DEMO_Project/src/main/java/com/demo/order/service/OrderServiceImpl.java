@@ -38,5 +38,19 @@ public class OrderServiceImpl implements OrderService{
 		// TODO Auto-generated method stub
 		return orderDao.orderSelectListTotalCount();
 	}
-	
+
+	@Override
+	public boolean orderCancelUpdate(int orderNo) {
+		// TODO Auto-generated method stub
+		try {
+			orderDao.orderCancelUpdate(orderNo);
+			orderDao.orderCancelInsert(orderNo);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+	}
+
+
 }

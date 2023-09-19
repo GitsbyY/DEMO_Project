@@ -13,6 +13,9 @@ public interface OrderDao {
 
 	int orderSelectListTotalCount();
 
+	int orderCancelUpdate(int orderNo);
+
+	int orderCancelInsert(int orderNo);
 
 
 

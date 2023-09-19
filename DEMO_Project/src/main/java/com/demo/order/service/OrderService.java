@@ -16,6 +16,7 @@ public interface OrderService {
 
 	int orderSelectListTotalCount();
 
+	boolean orderCancelUpdate(int orderNo);
 
-	
+
 }

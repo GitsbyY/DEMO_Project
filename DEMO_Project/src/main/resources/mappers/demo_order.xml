@@ -34,26 +34,29 @@
 
 	<select id="orderSelectList" parameterType="map" 
 		resultType="map">
-		SELECT L.ORDER_DATE, L.ORDER_NO, L.MEMBER_NO, L.MEMBER_ID, L.product_name
+		SELECT L.RNUM, L.ORDER_DATE, L.ORDER_NO, L.MEMBER_NO, M.MEMBER_ID, OP.PRODUCT_NAME
 		FROM(
-    		SELECT ROWNUM AS RNUM, OL.ORDER_DATE, OL.ORDER_NO, M.MEMBER_NO, M.MEMBER_ID, OP.product_name
-    		FROM ORDER_LIST OL
-    		JOIN MEMBER M ON OL.MEMBER_NO = M.MEMBER_NO
-    		JOIN ORDER_PRODUCT OP ON OL.ORDER_NO = OP.ORDER_NO
-   			ORDER BY ORDER_DATE DESC) L
+		    SELECT ROWNUM AS RNUM, OL.ORDER_DATE, OL.ORDER_NO, OL.MEMBER_NO
+		    FROM ( SELECT *
+		         FROM ORDER_LIST 
+		         ORDER BY ORDER_DATE) OL
+		         ) L
+		JOIN MEMBER M ON L.MEMBER_NO = M.MEMBER_NO
+		JOIN ORDER_PRODUCT OP ON L.ORDER_NO = OP.ORDER_NO
 		WHERE L.RNUM BETWEEN #{start} AND #{end}
+		ORDER BY L.RNUM	
 	</select>
 
 	<select id="orderDetailSelectOne" resultType="map">
 		SELECT OL.ORDER_DATE, OL.ORDER_NO, M.MEMBER_NO, M.MEMBER_ID
-		, OP.product_name, pd.img_no, pd.product_detail_content
-		, pr.product_price, ol.order_status
+		, OP.PRODUCT_NAME, PD.IMG_NO, PD.PRODUCT_DETAIL_CONTENT
+		, PR.PRODUCT_PRICE, OL.ORDER_STATUS
 		FROM ORDER_LIST OL
 		JOIN MEMBER M ON OL.MEMBER_NO = M.MEMBER_NO
 		JOIN ORDER_PRODUCT OP ON OL.ORDER_NO = OP.ORDER_NO
 		JOIN PRODUCT PR ON OP.PRODUCT_NO = PR.PRODUCT_NO
 		JOIN PRODUCT_DETAIL PD ON PR.PRODUCT_DETAIL_NO = PD.PRODUCT_DETAIL_NO
-		WHERE OL.ORDER_NO = #{orderNo}
+		WHERE OL.ORDER_NO = #{ORDERNO}
 	</select>
 	
 	
@@ -63,7 +66,20 @@
 	JOIN MEMBER M ON OL.MEMBER_NO = M.MEMBER_NO
 	JOIN ORDER_PRODUCT OP ON OL.ORDER_NO = OP.ORDER_NO
 	</select>
-
+	
+	<update id="orderCancelUpdate" parameterType="java.lang.Integer">
+	   UPDATE ORDER_LIST
+	   SET ORDER_STATUS = '취소'
+	   WHERE ORDER_NO = #{orderNo}
+	</update>
+	
+	<insert id="orderCancelInsert" parameterType="java.lang.Integer">
+	    INSERT INTO ORDER_CANCEL
+	    (ORDER_NO, ORDER_CANCEL_DATE)
+	    VALUES
+	    (#{orderNo}, SYSDATE)
+	</insert>
+	
 </mapper>
 
 

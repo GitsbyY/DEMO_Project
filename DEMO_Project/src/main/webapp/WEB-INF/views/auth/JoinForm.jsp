@@ -423,7 +423,7 @@
                     userId.classList.add("errorOutline");
                     errMsgId.style.color = "red";
                     errMsgId.textContent = "이미 사용 중인 아이디입니다.";
-                    return
+                    return;
                 } else {
                     userId.classList.remove("errorOutline");
                     errMsgId.style.color = "blue";

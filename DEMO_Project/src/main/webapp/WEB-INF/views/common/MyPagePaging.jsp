@@ -3,8 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<script type="text/javascript" src="/SpringHome/resources/js/jquery-3.7.1.js">
-
+<script type="text/javascript" src="/DEMO_Project/resources/js/jquery-3.7.1.js">
 </script>
 
 <style type="text/css">
@@ -88,13 +87,13 @@ nav > ul > li > a:hover {
 					</a>
 				</li>
 			</c:if>
-<%-- 			${myPagingmap.myPagePaging.blockBegin} / ${myPagingmap.myPagePaging.blockEnd} --%>
+
 			<c:forEach var="num" begin="${myPagingmap.myPagePaging.blockBegin}" 
 				end="${myPagingmap.myPagePaging.blockEnd}">
 				<li>
 					<a class='numClass' href="#" onclick="goPage(${num})"
 						 <c:if test="${num == myPagingmap.myPagePaging.curPage}">
-	               			style="background-color: red;"
+	               			style="background-color: grey;"
 	           			</c:if>>
 	           			${num}
 	           		</a>

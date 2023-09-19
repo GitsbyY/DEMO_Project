@@ -86,6 +86,9 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 .listColumnOdd {
     background-color: grey;
 }
+#pageForm{
+	
+}
 </style>
 <meta charset="UTF-8">
 <title>마이댕댕 메인</title>
@@ -110,11 +113,12 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 			<div id="listColumn6" class="listColumn">상품명</div>
 		</div>
 <!-- 		루프로하면 안된다 -->
+
 		<c:forEach var="orderDto" items="${orderList}" varStatus="loop">
 			<div class="listColumnContainer" onclick="mypageDetailFnc(${orderDto.ORDER_NO})">
 				<div id="listColumn1" class="listColumn 
 					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
-						${loop.index + 1}
+						${totalCount - loop.index}
 				</div>
 				<div id="listColumn2" class="listColumn 
 					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
@@ -138,17 +142,22 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 				</div>
 			</div>
 		</c:forEach>
+		<div id="pageStatus" style="margin-top: 50px;">
+			<jsp:include page="/WEB-INF/views/common/MyPagePaging.jsp">
+				<jsp:param value="${myPagingmap}" name="myPagingmap"/>
+			</jsp:include>
+		</div>
 	</div>
 
-<jsp:include page="/WEB-INF/views/common/Paging.jsp">
-		<jsp:param value="${myPagingmap}" name="myPagingmap"/>
-	</jsp:include>
+
 	
 <!-- 	정보를 넘기기 위해서 폼을 만들었다 -->
-	<form action="./list.do" id="pagingForm" method="post">
-      <input type="hidden" id="curPage" name="curPage"
-         value="${myPagingmap.myPagePaging.curPage}">
-   </form>
+
+			<form action="./mypage.do" id="pagingForm" method="post">
+		      <input type="hidden" id="curPage" name="curPage"
+		         value="${myPagingmap.myPagePaging.curPage}">
+		    </form>
+
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
 </body>
 <script type="text/javascript">
