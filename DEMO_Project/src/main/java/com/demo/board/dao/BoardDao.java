@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.demo.board.dto.InquiryDto;
 import com.demo.board.dto.NoticeDto;
 import com.demo.order.dto.OrderDto;
 
@@ -21,8 +22,16 @@ public interface BoardDao {
 
 	List<Map<String, Object>> fileSelectList(int no);
 
+	public HashMap<String, Object> inquirySelectOne(int no);
+
+	public int inquiryInsertOne(InquiryDto inquiryDto);
+
+	public int noticeInsertOne(NoticeDto noticeDto);
+
 	
-	
+
+
+
 
 
 }

@@ -76,8 +76,10 @@ table{
 .tdClass{
 	text-align: center;
 }
-#pageDiv{
-   margin-top: 30px;
+#contentTd{
+	height: 300px;
+	padding-left: 25px;
+	padding-top: 20px;
 }
 </style>
 <meta charset="UTF-8">
@@ -103,37 +105,25 @@ table{
 					<th id="listColumn4" class="listColumn">작성자</th>
 					<th id="listColumn5" class="listColumn">날짜</th>
 					<th id="listColumn6" class="listColumn">상태</th>				
-				</tr>
-				
-				<c:forEach var="inquiryDto" items="${inquiryDtoList}">
+				</tr>				
 				<tr>
 					<td class="tdClass">${inquiryDto.INQUIRY_NO}</td>
 					<td class="tdClass">${inquiryDto.INQUIRY_TYPE}</td>
-					<td>
-						<a href='./listOne2.do?no=${inquiryDto.INQUIRY_NO}'>
-	               			${inquiryDto.INQUIRY_TITLE}
-	               		</a>
-	               	</td>	
+					<td>${inquiryDto.INQUIRY_TITLE}</td>
 					<td class="tdClass">${inquiryDto.MEMBER_NAME}</td>
 					<td class="tdClass">
 						<fmt:formatDate pattern="yyyy-MM-dd" 
 							value="${inquiryDto.INQUIRY_CRE_DATE}"/>
 					</td>
 					<td class="tdClass">${inquiryDto.INQUIRY_IS_REPLY}</td>				
+				</tr>
+				<tr>
+					<td id="contentTd" colspan="6" valign="top">
+					${inquiryDto.INQUIRY_CONTENT}
+					</td>
 				</tr>				
-				</c:forEach>
 			</table>
-		</div>
-		<div id="pageDiv">
-	      <jsp:include page="/WEB-INF/views/common/BoardPaging.jsp">
-	      <jsp:param value="${pagingMap}" name="pagingMap"/>
-	      </jsp:include>
-   
-	      <form action="./customerService.do" id='pagingForm' method="post">
-	      <input type="hidden" id='curPage' name='curPage' 
-	         value="${pagingMap.boardPaging.curPage}">
-	      </form>
-      	</div>	
+		</div>			
 						
 	</div>
 	

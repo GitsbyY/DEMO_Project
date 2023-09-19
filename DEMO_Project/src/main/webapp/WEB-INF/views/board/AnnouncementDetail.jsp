@@ -6,27 +6,6 @@
 <html>
 <head>
 <style type="text/css">
-#input{	
-	margin-top: 10px;
-	height: 25px;
-	width: 220px;
-	border-radius: 5px;
-	padding-left: 20px;
-	vertical-align: middle;
-	margin-bottom: 10px; 
-}
-#select{
-	margin-right: 10px;
-	margin-top: 18px;
-	height: 20px;
-	width: 70px;
-	border-radius: 5px;
-	font-size: 12px;
-	font-weight: bold;
-}
-.optionTag{
-	text-align: center;	
-}
 #titleDiv{
    margin-top: 30px;
    border: 1px solid gray;
@@ -49,17 +28,20 @@
 #tableDiv{
 	clear: right;
 	width: 100%;
+	margin-top: 60px;
 }
 th{
 	border: 2px solid black;
 	border-left:thick;
 	border-right:thick;
-	border-bottom:thick;	
+	border-bottom:thick;
+	height: 30px;	
 }
 tr, td{
 	border: 1px solid black;
 	border-left:thick;
-	border-right:thick;	
+	border-right:thick;
+	height: 30px;	
 }
 table{
 	width: 100%;
@@ -84,6 +66,11 @@ table{
 }
 .tdClass{
 	text-align: center;
+}
+#contentTd{
+	height: 300px;
+	padding-left: 25px;
+	padding-top: 20px;
 }
 </style>
 <meta charset="UTF-8">
@@ -116,6 +103,11 @@ table{
 						<fmt:formatDate pattern="yyyy-MM-dd" 
 							value="${noticeDto.NOTICE_CRE_DATE}"/>
 					</td>				
+				</tr>
+				<tr>
+					<td id="contentTd" colspan="4" valign="top">
+					${noticeDto.NOTICE_CONTENT}
+					</td>
 				</tr>								
 			</table>
 		</div>

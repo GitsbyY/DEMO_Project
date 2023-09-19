@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.demo.board.dto.InquiryDto;
 import com.demo.board.dto.NoticeDto;
 import com.demo.order.dto.OrderDto;
 
@@ -19,7 +21,15 @@ public interface BoardService {
 
 	Map<String, Object> inquirySelectList(int start, int end);
 
-	public Map<String, Object> noticeSelectOne(int no);
+	public Map<String, Object> noticeSelectOne(int no);		
+
+	public Map<String, Object> inquirySelectOne(int no);
+
+	public void inquiryInsertOne(InquiryDto inquiryDto
+		, MultipartHttpServletRequest mulRequest) throws Exception;
+
+	public void noticeInsertOne(NoticeDto noticeDto
+		, MultipartHttpServletRequest mulRequest) throws Exception;
 
 
 	

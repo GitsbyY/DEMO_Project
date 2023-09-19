@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.demo.board.dto.InquiryDto;
 import com.demo.board.dto.NoticeDto;
@@ -85,10 +86,10 @@ public class BoardController {
 		
 		return "board/CustomerService";
 	}
-	
+	// 공지사항 상세보기
 	@RequestMapping(value = "/board/listOne.do", method = RequestMethod.GET)
-	public String noticeListOne(int no, Model model) {
-		log.debug("Welcome MemberController noticelistOne! - {}" + no);
+	public String noticeSelectOne(int no, Model model) {
+		log.debug("Welcome BoardController noticelistOne! - {}" + no);
 		
 		Map<String, Object> resultMap = boardService.noticeSelectOne(no);
 		
@@ -103,5 +104,73 @@ public class BoardController {
 				
 		return "board/AnnouncementDetail";
 	}
+	// 1:1 상담하기 상세보기
+//	@RequestMapping(value = "/board/listOne2.do", method = RequestMethod.GET)
+//	public String inquirySelectOnee(int no, Model model) {
+//		log.debug("Welcome BoardController inquirylistOne! - {}" + no);
+//		
+//		Map<String, Object> resultMap = boardService.inquirySelectOne(no);
+//		
+//		Map<String, Object> inquiryDto 
+//		= (Map<String, Object>) resultMap.get("inquiryDto");
+//				
+//		List<Map<String, Object>> fileList 
+//			= (List<Map<String, Object>>) resultMap.get("fileList");
+//		
+//		model.addAttribute("inquiryDto", inquiryDto);
+//		model.addAttribute("fileList", fileList);
+//				
+//		return "board/CustomerServiceDetail";
+//	}
+	// 단순 페이지 이동
+	@RequestMapping(value = "/board/noticeadd.do", method = RequestMethod.GET)
+	public String noticeAdd(Model model) {
+		log.debug("Welcome BoardController noticeAdd!");
+		
+		return "board/AddCustomerService";
+	}
+	// 공지사항 추가하기
+	@RequestMapping(value = "/board/noticeaddCtr.do", method = RequestMethod.POST)
+	public String noticeAdd(NoticeDto noticeDto, MultipartHttpServletRequest mulRequest
+			,Model model) {
+		log.debug("Welcome BoardController noticeAddCtr! " + noticeDto);
+		
+		try {
+			boardService.noticeInsertOne(noticeDto, mulRequest);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("오류 처리할거 있음 한다");
+			e.printStackTrace();
+		}
+				
+		return "redirect:/board/announcement.do";
+	}
+		
+	
+	// 단순 페이지 이동
+//	@RequestMapping(value = "/board/inquiryadd.do", method = RequestMethod.GET)
+//	public String inquiryAdd(Model model) {
+//		log.debug("Welcome BoardController inquiryAdd!");
+//		
+//		return "board/AddCustomerService";
+//	}
+	
+//	@RequestMapping(value = "/board/inquiryaddCtr.do", method = RequestMethod.POST)
+//	public String inquiryAdd(InquiryDto inquiryDto, MultipartHttpServletRequest mulRequest
+//			,Model model) {
+//		log.debug("Welcome BoardController inquiryAddCtr! " + inquiryDto);
+//		
+//		try {
+//			boardService.inquiryInsertOne(inquiryDto, mulRequest);
+//			
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			System.out.println("오류 처리할거 있음 한다");
+//			e.printStackTrace();
+//		}
+//				
+//		return "redirect:/board/announcement.do";
+//	}
 
 }

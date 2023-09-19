@@ -113,7 +113,8 @@
 	
 	<select id="noticeSelectOne" parameterType="int"
 		 resultType="map">
-		SELECT NOTICE_NO, N.MEMBER_NO,M.MEMBER_NAME, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_CRE_DATE
+		SELECT NOTICE_NO, N.MEMBER_NO,M.MEMBER_NAME, NOTICE_TITLE, NOTICE_CONTENT
+		, NOTICE_CRE_DATE
 		FROM NOTICE N JOIN MEMBER M
 		ON N.MEMBER_NO = M.MEMBER_NO
 		WHERE NOTICE_NO = #{no}
@@ -125,6 +126,40 @@
 		FROM IMG_FILE
 		WHERE IMG_NO = #{no}
 	</select>
+	
+	<select id="inquirySelectOne" parameterType="int"
+		 resultType="map">
+		SELECT INQUIRY_NO, MEMBER_NO, INQUIRY_TYPE, MEMBER_NAME, INQUIRY_CRE_DATE
+		, INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_IS_REPLY
+		FROM INQUIRY
+		WHERE INQUIRY_NO = #{no}				
+	</select>
+	
+	<insert id="noticeInsertOne" parameterType="noticeDto" 
+		useGeneratedKeys="true" keyProperty= "noticeNo">
+		<selectKey keyProperty="noticeNo" resultType="int" order="BEFORE">
+			SELECT NOTICE_NO_SEQ.NEXTVAL
+			FROM DUAL
+		</selectKey>
+		
+		INSERT INTO NOTICE
+		(NOTICE_NO, MEMBER_NO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_CRE_DATE)
+		VALUES(#{noticeNo}, #{memberNo}, #{noticeTitle}, #{noticeContent}, SYSDATE)
+	</insert>
+	
+	<insert id="inquiryInsertOne" parameterType="inquiryDto" 
+		useGeneratedKeys="true" keyProperty="inquiryNo">
+		<selectKey keyProperty="inquiryNo" resultType="int" order="BEFORE">
+			SELECT INQUIRY_NO_SEQ.NEXTVAL
+			FROM DUAL
+		</selectKey>
+		
+		INSERT INTO INQUIRY
+			(INQUIRY_NO, MEMBER_NO, INQUIRY_TYPE, MEMBER_NAME, INQUIRY_CRE_DATE
+			, INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_IS_REPLY)
+		VALUES(#{inquiryNo}, #{memberNo}, #{inquiryType}, #{inquiryName}, SYSDATE
+		, #{inquiryTitle}, #{inquiryContent}, #{is_Reply})
+	</insert>
 	
 </mapper>
 

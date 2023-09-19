@@ -155,7 +155,8 @@ table{
          </table>
       </div>
       <div id="writeBtnDiv">
-         <input id="writeBtn" type="button" value="글쓰기" onclick="writeFnc();">
+         <input id="writeBtn" type="button" value="글쓰기" 
+         	onclick="location.href = '/DEMO_Project/board/noticeadd.do'">
       </div>
       <div id="pageDiv">
       <jsp:include page="/WEB-INF/views/common/BoardPaging.jsp">
@@ -173,4 +174,8 @@ table{
   
    <jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
+<script type="text/javascript">
+	
+
+</script>
 </html>

@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.demo.board.dto.InquiryDto;
 import com.demo.board.dto.NoticeDto;
 import com.demo.order.dto.OrderDto;
 
@@ -80,8 +81,28 @@ public class BoardDaoImpl implements BoardDao{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(nameSpace+ "fileSelectList", no);
 	}
-	
 
+	@Override
+	public HashMap<String, Object> inquirySelectOne(int no) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("no", no);
+		resultMap = sqlSession.selectOne(nameSpace + "inquirySelectOne", map);
+		return resultMap;
+	}
+
+	@Override
+	public int inquiryInsertOne(InquiryDto inquiryDto) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(nameSpace + "inquiryInsertOne", inquiryDto);
+	}
+
+	@Override
+	public int noticeInsertOne(NoticeDto noticeDto) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(nameSpace + "noticeInsertOne", noticeDto);
+	}
 	
 
 }
