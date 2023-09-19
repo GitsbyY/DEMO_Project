@@ -17,6 +17,10 @@ public interface OrderDao {
 
 	int orderCancelInsert(int orderNo);
 
+	int cancelSelectListTotalCount();
+
+	List<Map<String, Object>> cancelSelectList(int start, int end);
+
 
 
 }

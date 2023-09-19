@@ -18,5 +18,9 @@ public interface OrderService {
 
 	boolean orderCancelUpdate(int orderNo);
 
+	int cancelSelectListTotalCount();
+
+	List<Map<String, Object>> cancelSelectList(int start, int end);
+
 
 }
