@@ -109,27 +109,27 @@ public class OrderController {
 	        }
 		}
 	 // 취소내역 화면
-//		@RequestMapping(value = "/mypage/CancelPage.do", method = {RequestMethod.GET, RequestMethod.POST})
-//		public String myPageCancel(@RequestParam(defaultValue = "1") int curPage, HttpSession session, Model model) {
-//
-//			log.info("Welcome OrderController login!");
-//			
-//			int totalCount = orderService.cancelSelectListTotalCount();
-//			
-//			MyPagePaging myPagePaging = new MyPagePaging(totalCount, curPage);
-//			
-//			int start = myPagePaging.getPageBegin();
-//			int end = myPagePaging.getPageEnd();
-//			
-//			List<Map<String, Object>> orderList = orderService.cancelSelectList(start, end);
-//			
-//			HashMap<String, Object> myPagingmap = new HashMap<>();
-//			myPagingmap.put("totalCount", totalCount);
-//			myPagingmap.put("myPagePaging", myPagePaging);
-//			
-//			model.addAttribute("totalCount", totalCount);
-//			model.addAttribute("orderList", orderList);
-//			model.addAttribute("myPagingmap", myPagingmap);
-//			return "mypage/MypageCancellation";
-//		}
+		@RequestMapping(value = "/mypage/CancelPage.do", method = {RequestMethod.GET, RequestMethod.POST})
+		public String myPageCancel(@RequestParam(defaultValue = "1") int curPage, HttpSession session, Model model) {
+
+			log.info("Welcome OrderController login!");
+			
+			int totalCount = orderService.cancelSelectListTotalCount();
+			
+			MyPagePaging myPagePaging = new MyPagePaging(totalCount, curPage);
+			
+			int start = myPagePaging.getPageBegin();
+			int end = myPagePaging.getPageEnd();
+			
+			List<Map<String, Object>> orderList = orderService.cancelSelectList(start, end);
+			
+			HashMap<String, Object> myPagingmap = new HashMap<>();
+			myPagingmap.put("totalCount", totalCount);
+			myPagingmap.put("myPagePaging", myPagePaging);
+			
+			model.addAttribute("totalCount", totalCount);
+			model.addAttribute("orderList", orderList);
+			model.addAttribute("myPagingmap", myPagingmap);
+			return "mypage/MypageCancellation";
+		}
 }

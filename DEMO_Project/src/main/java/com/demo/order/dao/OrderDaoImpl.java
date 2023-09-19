@@ -54,6 +54,18 @@ public class OrderDaoImpl implements OrderDao{
 		return (int)sqlSession.insert(nameSpace + "orderCancelInsert", orderNo);
 	}
 
+	@Override
+	public int cancelSelectListTotalCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Map<String, Object>> cancelSelectList(int start, int end) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }

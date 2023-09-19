@@ -52,5 +52,17 @@ public class OrderServiceImpl implements OrderService{
 		}
 	}
 
+	@Override
+	public int cancelSelectListTotalCount() {
+		// TODO Auto-generated method stub
+		return orderDao.cancelSelectListTotalCount();
+	}
+
+	@Override
+	public List<Map<String, Object>> cancelSelectList(int start, int end) {
+		// TODO Auto-generated method stub
+		return orderDao.cancelSelectList(start, end);
+	}
+
 
 }
