@@ -18,7 +18,7 @@
       <id column="INQUIRY_NO" property="inquiryNo" />
       <result column="MEMBER_NO" property="memberNo" />
       <result column="INQUIRY_TYPE" property="inquiryType" />
-      <result column="MEMBER_NAME" property="inquiryName" />
+      <result column="MEMBER_NAME" property="memberName" />
       <result column="INQUIRY_CRE_DATE" property="inquiryCreDate"
          javaType="java.util.Date" />
       <result column="INQUIRY_TITLE" property="inquiryTitle" />
@@ -66,12 +66,33 @@
       WHERE NOTICE.RNUM BETWEEN #{start} AND #{end}
    </select>
    
-   <select id="customerServiceSelectList" resultType="map">
-      SELECT INQUIRY_NO, MEMBER_NO,INQUIRY_TYPE, MEMBER_NAME
-      , INQUIRY_CRE_DATE, INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_IS_REPLY
-      FROM INQUIRY
-      ORDER BY INQUIRY_CRE_DATE DESC
-   </select>
+   <select id="reviewSelectList" parameterType="map" resultType="map">   
+      SELECT 
+       REVIEW.REVIEW_NO, 
+       REVIEW.MEMBER_NO, 
+       REVIEW.PRODUCT_NO, 
+       REVIEW.REVIEW_TITLE, 
+       REVIEW.REVIEW_CONTENT, 
+       REVIEW.REVIEW_CRE_DATE, 
+       REVIEW.REVIEW_MOD_DATE, 
+       PRODUCT.PRODUCT_NAME, 
+       MEMBER.MEMBER_NAME, 
+       PET.PET_BREED
+      FROM (
+       SELECT ROWNUM AS RNUM, R.REVIEW_NO, R.MEMBER_NO, R.PRODUCT_NO
+       , R.REVIEW_TITLE, R.REVIEW_CONTENT, R.REVIEW_CRE_DATE, R.REVIEW_MOD_DATE
+       FROM (
+        SELECT REVIEW_NO, MEMBER_NO, PRODUCT_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_CRE_DATE, REVIEW_MOD_DATE
+        FROM REVIEW
+        ORDER BY REVIEW_CRE_DATE DESC
+       ) R
+      ) REVIEW 
+      JOIN PRODUCT 
+      ON REVIEW.PRODUCT_NO = PRODUCT.PRODUCT_NO
+      JOIN MEMBER ON REVIEW.MEMBER_NO = MEMBER.MEMBER_NO
+      JOIN PET ON MEMBER.MEMBER_NO = PET.MEMBER_NO
+      WHERE REVIEW.RNUM BETWEEN #{start} AND #{end}
+   </select>   
    
    <select id="inquirySelectList" parameterType="map" resultType="map">   
       SELECT 
@@ -111,6 +132,11 @@
       FROM INQUIRY
    </select>
    
+   <select id="reviewSelectTotalCount" resultType="java.lang.Integer">
+      SELECT COUNT(*)
+      FROM REVIEW
+   </select>
+   
    <select id="noticeSelectOne" parameterType="int"
        resultType="map">
       SELECT NOTICE_NO, N.MEMBER_NO,M.MEMBER_NAME, NOTICE_TITLE, NOTICE_CONTENT
@@ -118,6 +144,35 @@
       FROM NOTICE N JOIN MEMBER M
       ON N.MEMBER_NO = M.MEMBER_NO
       WHERE NOTICE_NO = #{no}
+   </select>
+   
+   <select id="reviewSelectOne" parameterType="int"
+       resultType="map">
+      SELECT 
+       REVIEW.REVIEW_NO, 
+       REVIEW.MEMBER_NO, 
+       REVIEW.PRODUCT_NO, 
+       REVIEW.REVIEW_TITLE, 
+       REVIEW.REVIEW_CONTENT, 
+       REVIEW.REVIEW_CRE_DATE, 
+       REVIEW.REVIEW_MOD_DATE, 
+       PRODUCT.PRODUCT_NAME, 
+       MEMBER.MEMBER_NAME, 
+       PET.PET_BREED
+      FROM (
+       SELECT ROWNUM AS RNUM, R.REVIEW_NO, R.MEMBER_NO, R.PRODUCT_NO
+       , R.REVIEW_TITLE, R.REVIEW_CONTENT, R.REVIEW_CRE_DATE, R.REVIEW_MOD_DATE
+       FROM (
+        SELECT REVIEW_NO, MEMBER_NO, PRODUCT_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_CRE_DATE, REVIEW_MOD_DATE
+        FROM REVIEW
+        ORDER BY REVIEW_CRE_DATE DESC
+       ) R
+      ) REVIEW 
+      JOIN PRODUCT 
+      ON REVIEW.PRODUCT_NO = PRODUCT.PRODUCT_NO
+      JOIN MEMBER ON REVIEW.MEMBER_NO = MEMBER.MEMBER_NO
+      JOIN PET ON MEMBER.MEMBER_NO = PET.MEMBER_NO
+      WHERE REVIEW.REVIEW_NO = #{no}
    </select>
    
    <select id="fileSelectList" parameterType="int" resultType="map">
@@ -157,8 +212,8 @@
       INSERT INTO INQUIRY
          (INQUIRY_NO, MEMBER_NO, INQUIRY_TYPE, MEMBER_NAME, INQUIRY_CRE_DATE
          , INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_IS_REPLY)
-      VALUES(#{inquiryNo}, #{memberNo}, #{inquiryType}, #{inquiryName}, SYSDATE
-      , #{inquiryTitle}, #{inquiryContent}, #{is_Reply})
+      VALUES(#{inquiryNo}, #{memberNo}, #{inquiryType}, #{memberName}, SYSDATE
+      , #{inquiryTitle}, #{inquiryContent}, 'N')
    </insert>
    
    <update id="noticeUpdateOne" parameterType="noticeDto">

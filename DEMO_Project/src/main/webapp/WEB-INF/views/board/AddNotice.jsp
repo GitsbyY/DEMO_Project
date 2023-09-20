@@ -130,10 +130,9 @@ td input{
          <div id="btnDiv">
             <input id="registrationBtn" type="submit" value="등록">
             <input id="cancellationBtn" type="button" value="취소" 
-               onclick="location.href = '/DEMO_Project/inquiryadd.do'">   
+               onclick="location.href = 'javascript:window.history.back();'">   
          </div>
-      </form>         
-                  
+      </form>                          
    </div>
    
             

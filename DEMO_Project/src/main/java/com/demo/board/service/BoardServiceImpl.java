@@ -51,6 +51,11 @@ public class BoardServiceImpl implements BoardService{
       return boardDao.inquirySelectList(start, end);
    }
    @Override
+	public Map<String, Object> reviewSelectList(int start, int end) {
+		// TODO Auto-generated method stub
+		return boardDao.reviewSelectList(start, end);
+	}
+   @Override
    public Map<String, Object> noticeSelectOne(int no) {
       // TODO Auto-generated method stub
       Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -76,6 +81,19 @@ public class BoardServiceImpl implements BoardService{
       
       return resultMap;
    }
+   @Override
+	public Map<String, Object> reviewSelectOne(int no) {
+		// TODO Auto-generated method stub
+	   Map<String, Object> resultMap = new HashMap<String, Object>();
+	      
+	   HashMap<String, Object> reviewDto = boardDao.reviewSelectOne(no);
+	   resultMap.put("reviewDto", reviewDto);
+	      
+	   List<Map<String, Object>> fileList = boardDao.fileSelectList(no);
+	   resultMap.put("fileList", fileList);
+	      
+	   return resultMap;
+	}
    @Override
    public void inquiryInsertOne(InquiryDto inquiryDto
       , MultipartHttpServletRequest mulRequest) throws Exception {
@@ -135,5 +153,12 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 		return boardDao.noticeDeleteOne(no);
 	}
+	@Override
+	public int reviewSelectTotalCount() {
+		// TODO Auto-generated method stub
+		return boardDao.reviewSelectTotalCount();
+	}
+	
+	
             
 }

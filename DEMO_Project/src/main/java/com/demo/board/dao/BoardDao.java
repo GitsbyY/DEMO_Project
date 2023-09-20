@@ -17,6 +17,8 @@ public interface BoardDao {
    Map<String, Object> inquirySelectList(int start, int end);
 
    public int inquirySelectTotalCount();
+   
+   Map<String, Object> reviewSelectList(int start, int end);
 
    public HashMap<String, Object> noticeSelectOne(int no);
 
@@ -35,6 +37,12 @@ public interface BoardDao {
    void fileDelete(int parentSeq);
    
    public int noticeDeleteOne(int no);
+   
+   public int reviewSelectTotalCount();
+   
+   public HashMap<String, Object> reviewSelectOne(int no);
+
+
 
    
 

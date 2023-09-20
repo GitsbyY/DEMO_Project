@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.demo.board.dto.InquiryDto;
 import com.demo.board.dto.NoticeDto;
 import com.demo.order.dto.OrderDto;
+import com.demo.board.dto.ReviewDto;
 
 
 
@@ -48,17 +49,33 @@ public class BoardDaoImpl implements BoardDao{
    @Override
    public HashMap<String, Object> inquirySelectList(int start, int end) {
       HashMap<String, Object> resultMap = new HashMap<>();
-       HashMap<String, Object> map = new HashMap<String, Object>();
-       map.put("start", start);
-       map.put("end", end);
+      HashMap<String, Object> map = new HashMap<String, Object>();
+      map.put("start", start);
+      map.put("end", end);
 
-       List<NoticeDto> inquiryList = sqlSession.selectList(nameSpace + "inquirySelectList", map);
+      List<NoticeDto> inquiryList = sqlSession.selectList(nameSpace + "inquirySelectList", map);
        
-       resultMap.put("inquiryList", inquiryList);
+      resultMap.put("inquiryList", inquiryList);
        // 여기에 필요한 다른 데이터들을 추가할 수 있습니다.
 
-       return resultMap;
+      return resultMap;
    }
+   
+   @Override
+	public Map<String, Object> reviewSelectList(int start, int end) {
+		// TODO Auto-generated method stub
+	   	HashMap<String, Object> resultMap = new HashMap<>();
+	    HashMap<String, Object> map = new HashMap<String, Object>();
+	    map.put("start", start);
+	    map.put("end", end);
+
+	    List<ReviewDto> reviewList = sqlSession.selectList(nameSpace + "reviewSelectList", map);
+	       
+	    resultMap.put("reviewList", reviewList);
+	     // 여기에 필요한 다른 데이터들을 추가할 수 있습니다.
+
+	    return resultMap;
+	}
 
    @Override
    public int inquirySelectTotalCount() {
@@ -91,6 +108,16 @@ public class BoardDaoImpl implements BoardDao{
       resultMap = sqlSession.selectOne(nameSpace + "inquirySelectOne", map);
       return resultMap;
    }
+   
+   @Override
+	public HashMap<String, Object> reviewSelectOne(int no) {
+		// TODO Auto-generated method stub
+      HashMap<String, Object> resultMap = new HashMap<>();
+      HashMap<String, Object> map = new HashMap<String, Object>();
+      map.put("no", no);
+      resultMap = sqlSession.selectOne(nameSpace + "reviewSelectOne", map);
+      return resultMap;
+	}
 
    @Override
    public int inquiryInsertOne(InquiryDto inquiryDto) {
@@ -127,6 +154,16 @@ public class BoardDaoImpl implements BoardDao{
 		// TODO Auto-generated method stub
 		return sqlSession.delete(nameSpace + "noticeDeleteOne", no);
 	}
+
+	@Override
+	public int reviewSelectTotalCount() {
+		// TODO Auto-generated method stub
+		return (int)sqlSession.selectOne(nameSpace + "reviewSelectTotalCount");
+	}
+
+	
+
+	
    
 
 }

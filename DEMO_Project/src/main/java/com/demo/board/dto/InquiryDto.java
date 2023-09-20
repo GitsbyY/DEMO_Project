@@ -9,7 +9,7 @@ public class InquiryDto {
 	private int inquiryNo;
 	private int memberNo;
 	private String inquiryType;
-	private String inquiryName;
+	private String memberName;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date inquiryCreDate;
 	private String inquiryTitle;
@@ -20,13 +20,13 @@ public class InquiryDto {
 		super();
 	}
 
-	public InquiryDto(int inquiryNo, int memberNo, String inquiryType, String inquiryName, Date inquiryCreDate,
+	public InquiryDto(int inquiryNo, int memberNo, String inquiryType, String memberName, Date inquiryCreDate,
 			String inquiryTitle, String inquiryContent, char is_Reply) {
 		super();
 		this.inquiryNo = inquiryNo;
 		this.memberNo = memberNo;
 		this.inquiryType = inquiryType;
-		this.inquiryName = inquiryName;
+		this.memberName = memberName;
 		this.inquiryCreDate = inquiryCreDate;
 		this.inquiryTitle = inquiryTitle;
 		this.inquiryContent = inquiryContent;
@@ -57,12 +57,12 @@ public class InquiryDto {
 		this.inquiryType = inquiryType;
 	}
 
-	public String getInquiryName() {
-		return inquiryName;
+	public String getMemberName() {
+		return memberName;
 	}
 
-	public void setInquiryName(String inquiryName) {
-		this.inquiryName = inquiryName;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 
 	public Date getInquiryCreDate() {
@@ -100,7 +100,7 @@ public class InquiryDto {
 	@Override
 	public String toString() {
 		return "InquiryDto [inquiryNo=" + inquiryNo + ", memberNo=" + memberNo + ", inquiryType=" + inquiryType
-				+ ", inquiryName=" + inquiryName + ", inquiryCreDate=" + inquiryCreDate + ", inquiryTitle="
+				+ ", memberName=" + memberName + ", inquiryCreDate=" + inquiryCreDate + ", inquiryTitle="
 				+ inquiryTitle + ", inquiryContent=" + inquiryContent + ", is_Reply=" + is_Reply + "]";
 	}
 

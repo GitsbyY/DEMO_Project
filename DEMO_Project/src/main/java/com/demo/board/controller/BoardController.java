@@ -23,6 +23,7 @@ import com.demo.board.service.BoardService;
 import com.demo.member.dto.MemberDto;
 import com.demo.member.service.MemberService;
 import com.demo.util.BoardPaging;
+import com.demo.board.dto.ReviewDto;
 
 @Controller
 public class BoardController {
@@ -92,6 +93,36 @@ public class BoardController {
       
       return "board/CustomerService";
    }
+   
+   // 후기남겨요 화면으로 이동
+   @RequestMapping(value = "/board/review.do", 
+         method = {RequestMethod.GET, RequestMethod.POST})
+   public String reviewList(@RequestParam(defaultValue = "1") int curPage, Model model
+		   , HttpSession session) {
+      // Log4j 
+      log.info("Welcome BoardController review!: {}", curPage);
+         
+      int totalCount = boardService.reviewSelectTotalCount();
+      
+      BoardPaging boardPaging = new BoardPaging(totalCount, curPage);
+      
+      int start = boardPaging.getPageBegin();
+      int end = boardPaging.getPageEnd();
+      
+      Map<String, Object> reviewList = boardService.reviewSelectList(start, end);
+      List<ReviewDto> reviewDtoList = (List<ReviewDto>) reviewList.get("reviewList");
+      
+      HashMap<String, Object> pagingMap = new HashMap<>();
+      pagingMap.put("totalCount", totalCount);
+      pagingMap.put("boardPaging", boardPaging);
+      
+      model.addAttribute("reviewDtoList", reviewDtoList);
+      model.addAttribute("pagingMap", pagingMap);
+      
+      session.setAttribute("customAside", "review");
+      
+      return "board/Review";
+   }
    // 공지사항 상세보기
    @RequestMapping(value = "/board/listOne.do", method = RequestMethod.GET)
    public String noticeSelectOne(int no, Model model) {
@@ -128,6 +159,25 @@ public class BoardController {
             
       return "board/CustomerServiceDetail";
    }
+   
+   // 후기남겨요 상세보기
+   @RequestMapping(value = "/board/listOne3.do", method = RequestMethod.GET)
+   public String reviewSelectOne(int no, Model model) {
+      log.debug("Welcome BoardController reviewlistOne! - {}" + no);
+      
+      Map<String, Object> resultMap = boardService.reviewSelectOne(no);
+      
+      Map<String, Object> reviewDto 
+      = (Map<String, Object>) resultMap.get("reviewDto");
+            
+      List<Map<String, Object>> fileList 
+         = (List<Map<String, Object>>) resultMap.get("fileList");
+      
+      model.addAttribute("reviewDto", reviewDto);
+      model.addAttribute("fileList", fileList);
+            
+      return "board/ReviewDetail";
+   }
    // 공지사항 작성 페이지 이동
    @RequestMapping(value = "/board/noticeadd.do", method = RequestMethod.GET)
    public String noticeAdd(Model model) {
@@ -135,7 +185,14 @@ public class BoardController {
       
       return "board/AddNotice";
    }
-   // 공지사항 추가하기
+   // 1:1 상담문의 작성 페이지 이동
+   @RequestMapping(value = "/board/inquiryadd.do", method = RequestMethod.GET)
+   public String inquiryAdd(Model model) {
+      log.debug("Welcome BoardController inquiryAdd!");
+      
+      return "board/AddInquiry";
+   }
+   // 공지사항 등록하기
    @RequestMapping(value = "/board/noticeaddCtr.do", method = RequestMethod.POST)
    public String noticeAdd(NoticeDto noticeDto, MultipartHttpServletRequest mulRequest
          ,Model model) {
@@ -151,7 +208,25 @@ public class BoardController {
       }
             
       return "redirect:/board/announcement.do";
-   }      
+   }
+   
+   // 1:1 상담문의 등록하기
+   @RequestMapping(value = "/board/inquiryaddCtr.do", method = RequestMethod.POST)
+   public String inquiryAdd(InquiryDto inquiryDto, MultipartHttpServletRequest mulRequest
+         ,Model model) {
+      log.debug("Welcome BoardController inquiryAddCtr! " + inquiryDto);
+      
+      try {
+         boardService.inquiryInsertOne(inquiryDto, mulRequest);
+         
+      } catch (Exception e) {
+         // TODO: handle exception
+         System.out.println("오류 처리할거 있음 한다");
+         e.printStackTrace();
+      }
+            
+      return "redirect:/board/customerService.do";
+   }
    // 공지사항 수정 화면으로
    @RequestMapping(value = "/board/update.do", method = RequestMethod.GET)
    public String noticeUpdate(@RequestParam(name = "no"

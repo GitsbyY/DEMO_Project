@@ -36,6 +36,12 @@ public interface BoardService {
       , int fileIdx) throws Exception;
    
    public int noticeDeleteOne(int no);
+   
+   public int reviewSelectTotalCount();
+   
+   Map<String, Object> reviewSelectList(int start, int end);
+   
+   public Map<String, Object> reviewSelectOne(int no);
 
 
    

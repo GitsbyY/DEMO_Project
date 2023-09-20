@@ -119,7 +119,7 @@ table{
             </tr>
             <tr>
                <td id="contentTd" colspan="6" valign="top">
-               ${inquiryDto.INQUIRY_CONTENT}
+               		<pre>${inquiryDto.INQUIRY_CONTENT}</pre>
                </td>
             </tr>            
          </table>

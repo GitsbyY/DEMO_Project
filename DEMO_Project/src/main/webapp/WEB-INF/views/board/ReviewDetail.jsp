@@ -20,16 +20,15 @@
 }
 #firstDiv{
    border-bottom: 2px solid black;
-   width: 180px;
+   width: 150px;
    display: block;     
 }
 #secondTh{      
 }
-
 #tableDiv{
-   margin-top: 60px;
    clear: right;
    width: 100%;
+   margin-top: 60px;
 }
 th{
    border: 2px solid black;
@@ -54,109 +53,113 @@ table{
    background-color: #D3D3D3;
 }
 #listColumn2{
-   width: 10%;
+   width: 15%;
    background-color: #D3D3D3;
 }
 #listColumn3{
-   width: 50%;
+   width: 40%;
    background-color: #D3D3D3;
 }
 #listColumn4{
-   width: 10%;
+   width: 13%;
    background-color: #D3D3D3;
 }
 #listColumn5{
-   width: 10%;
+   width: 15%;
    background-color: #D3D3D3;
 }
 #listColumn6{
    width: 10%;
    background-color: #D3D3D3;
-}
+}   
 .tdClass{
    text-align: center;
 }
-#pageDiv{
-   margin-top: 30px;
-   clear: right;
+#contentTd{
+   height: 300px;
+   padding-left: 25px;
+   padding-top: 20px;
 }
-#writeBtnDiv{   
-   margin-top: 30px;
-   float: right;
-}
-#writeBtn{
-   background-color: #FFC4A3;
-   border: none;
-   color: white;
-   width: 80px;
+#listBtn{
+   float: left;
    height: 30px;
-   font-size: 16px;   
+}
+#btnDiv{
+   margin-top: 10px;
+}
+.rightBtn{
+   float: right;
+   margin-left: 10px;
+   height: 30px;
+   width: 50px;
 }
 </style>
 <meta charset="UTF-8">
-<title>공지사항 메인</title>
+<title>후기남겨요 상세페이지</title>
 <link rel="stylesheet" type="text/css" href="/DEMO_Project/resources/css/main.css">
 </head>
 <body>
    <jsp:include page="/WEB-INF/views/Header.jsp"/>
    
-   <jsp:include page="/WEB-INF/views/asideCustomerService.jsp"/>
+   <jsp:include page="/WEB-INF/views/asideShop.jsp"/>
    
    <div id='divContainer'>
       <div id="titleDiv">         
-         <div id="firstDiv">1:1 상담문의</div>
+         <div id="firstDiv">후기남겨요</div>
          <div id="secondDiv"></div>                           
-      </div>      
+      </div>
+      <form action='./update.do' method='get'>      
       <div id="tableDiv">
          <table>
             <tr>
                <th id="listColumn1" class="listColumn">번호</th>
-               <th id="listColumn2" class="listColumn">질문유형</th>
+               <th id="listColumn2" class="listColumn">상품</th>
                <th id="listColumn3" class="listColumn">제목</th>
                <th id="listColumn4" class="listColumn">작성자</th>
-               <th id="listColumn5" class="listColumn">날짜</th>
-               <th id="listColumn6" class="listColumn">상태</th>            
-            </tr>
-            
-            <c:forEach var="inquiryDto" items="${inquiryDtoList}">
+               <th id="listColumn5" class="listColumn">견종</th>
+               <th id="listColumn6" class="listColumn">작성일</th>            
+            </tr>            
             <tr>
-               <td class="tdClass">${inquiryDto.INQUIRY_NO}</td>
-               <td class="tdClass">${inquiryDto.INQUIRY_TYPE}</td>
-               <td>
-                  <a href='./listOne2.do?no=${inquiryDto.INQUIRY_NO}'>
-                           ${inquiryDto.INQUIRY_TITLE}
-                        </a>
-                     </td>   
-               <td class="tdClass">${inquiryDto.MEMBER_NAME}</td>
+               <td class="tdClass">${reviewDto.REVIEW_NO}</td>
+               <td class="tdClass">${reviewDto.PRODUCT_NAME}</td>
+               <td>${reviewDto.REVIEW_TITLE}</td>
+               <td class="tdClass">${reviewDto.MEMBER_NAME}</td>
+               <td class="tdClass">${reviewDto.PET_BREED}</td>
                <td class="tdClass">
                   <fmt:formatDate pattern="yyyy-MM-dd" 
-                     value="${inquiryDto.INQUIRY_CRE_DATE}"/>
+                     value="${reviewDto.REVIEW_CRE_DATE}"/>
+               </td>            
+            </tr>
+            <tr>
+               <td id="contentTd" colspan="6" valign="top">
+                  <pre>${reviewDto.REVIEW_CONTENT}</pre>
                </td>
-               <td class="tdClass">${inquiryDto.INQUIRY_IS_REPLY}</td>            
-            </tr>            
-            </c:forEach>
+            </tr>                        
          </table>
       </div>
-      <div id="writeBtnDiv">
-         <input id="writeBtn" type="button" value="문의하기" 
-            onclick="location.href = '/DEMO_Project/board/inquiryadd.do'">
+      <div id="btnDiv">
+         <input id="listBtn" type="button" value="뒤로가기" 
+         onclick="goBack();">
+         <input type="hidden" name="no" value="${reviewDto.REVIEW_NO}">
+         <input class="rightBtn" type="submit" value="수정">
+         <input class="rightBtn" type="button" value="삭제" 
+         	onclick='pageMoveDeleteFnc(${reviewDto.NREVIEW_NO});'>
       </div>
-      <div id="pageDiv">
-         <jsp:include page="/WEB-INF/views/common/BoardPaging.jsp">
-         <jsp:param value="${pagingMap}" name="pagingMap"/>
-         </jsp:include>
-   
-         <form action="./customerService.do" id='pagingForm' method="post">
-         <input type="hidden" id='curPage' name='curPage' 
-            value="${pagingMap.boardPaging.curPage}">
-         </form>
-         </div>   
-                  
+      </form>                           
    </div>
-   
-            
-      
   
    <jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
+<script type="text/javascript">
+	function goBack() {
+		window.history.back();
+	}
+   
+	function pageMoveDeleteFnc(no) {
+		
+		var url = './delete.do?no=' + no;
+			
+		location.href = url;
+	}
+</script>
 </html>

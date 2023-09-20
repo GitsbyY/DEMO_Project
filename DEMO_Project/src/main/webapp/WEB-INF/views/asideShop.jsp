@@ -22,5 +22,5 @@
     </c:forEach>
 
     <h1 class="asideH1tag">댕댕 게시판</h1>
-    <a class="asideATag">후기남겨요</a><br>
+    <a class="asideATag" href="/DEMO_Project/board/review.do">후기남겨요</a><br>
 </aside>

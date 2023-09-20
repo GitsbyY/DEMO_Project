@@ -46,12 +46,10 @@
 }
 #secondTh{      
 }
-#midDiv{
-   float: right;
-}
-#tableDiv{
+#tableDiv{	
    clear: right;
    width: 100%;
+   margin-top: 60px;
 }
 th{
    border: 2px solid black;
@@ -120,15 +118,7 @@ table{
       <div id="titleDiv">         
          <div id="firstDiv">공지사항</div>
          <div id="secondDiv"></div>                           
-      </div>
-      <div id="midDiv">
-         <select id="select">
-            <option class="optionTag" value="title">제목</option>
-            <option class="optionTag" value="">제목2</option>
-            <option class="optionTag" value="">제목3</option>
-         </select>         
-         <input id="input" type="text" name="serch" placeholder="검색어 입력창">      
-      </div>
+      </div>     
       <div id="tableDiv">
          <table>
             <tr>
