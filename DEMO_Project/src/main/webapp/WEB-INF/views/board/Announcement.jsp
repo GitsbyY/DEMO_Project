@@ -104,6 +104,7 @@ table{
 }
 #pageDiv{
    margin-top: 30px;
+   clear: right;
 }
 </style>
 <meta charset="UTF-8">
@@ -141,9 +142,9 @@ table{
             <tr>
                <td class="tdClass">${noticeDto.NOTICE_NO}</td>
                <td>
-               		<a href='./listOne.do?no=${noticeDto.NOTICE_NO}'>
-               			${noticeDto.NOTICE_TITLE}
-               		</a>
+                     <a href='./listOne.do?no=${noticeDto.NOTICE_NO}'>
+                        ${noticeDto.NOTICE_TITLE}
+                     </a>
                </td>
                <td class="tdClass">${noticeDto.MEMBER_NAME}</td>
                <td class="tdClass">
@@ -156,7 +157,7 @@ table{
       </div>
       <div id="writeBtnDiv">
          <input id="writeBtn" type="button" value="글쓰기" 
-         	onclick="location.href = '/DEMO_Project/board/noticeadd.do'">
+            onclick="location.href = '/DEMO_Project/board/noticeadd.do'">
       </div>
       <div id="pageDiv">
       <jsp:include page="/WEB-INF/views/common/BoardPaging.jsp">
@@ -175,7 +176,7 @@ table{
    <jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
 <script type="text/javascript">
-	
+   
 
 </script>
 </html>

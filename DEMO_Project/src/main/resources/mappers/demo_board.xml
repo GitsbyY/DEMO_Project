@@ -1,90 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.board">
-	<resultMap type="reviewDto" id="reviewResultMap">
-		<id column="REVIEW_NO" property="reviewNo" />
-		<result column="MEMBER_NO" property="memberNo" />
-		<result column="PRODUCT_NO" property="productNo" />
-		<result column="REVIEW_TITLE" property="reviewTitle" />
-		<result column="REVIEW_CONTENT" property="reviewContent" />
-		<result column="REVIEW_CRE_DATE" property="reviewCreDate"
-			javaType="java.util.Date" />
-		<result column="REVIEW_MOD_DATE" property="reviewModDate"
-			javaType="java.util.Date" />
-	</resultMap>
-	
-	<resultMap type="inquiryDto" id="inquiryResultMap">
-		<id column="INQUIRY_NO" property="inquiryNo" />
-		<result column="MEMBER_NO" property="memberNo" />
-		<result column="INQUIRY_TYPE" property="inquiryType" />
-		<result column="MEMBER_NAME" property="inquiryName" />
-		<result column="INQUIRY_CRE_DATE" property="inquiryCreDate"
-			javaType="java.util.Date" />
-		<result column="INQUIRY_TITLE" property="inquiryTitle" />
-		<result column="INQUIRY_CONTENT" property="inquiryContent" />
-		<result column="INQUIRY_IS_REPLY" property="is_Reply" />
-	</resultMap>
-	
-	<resultMap type="ReplyDto" id="replyDtoResultMap">
-		<id column="INQUIRY_NO" property="inquiryNo" />
-		<result column="MEMBER_NO" property="memberNo" />
-		<result column="REPLY_CRE_DATE" property="replyCreDate"
-			javaType="java.util.Date" />
-		<result column="REPLY_MEMBER_NAME" property="memberName" />
-		<result column="REPLY_TITLE" property="replyTitle" />
-		<result column="REPLY_CONTENT" property="replyContent" />
-	</resultMap>
-	
-	<resultMap type="noticeDto" id="noticeResultMap">
-		<id column="NOTICE_NO" property="noticeNo" />
-		<result column="MEMBER_NO" property="memberNo" />
-		<result column="NOTICE_TITLE" property="noticeTitle" />
-		<result column="NOTICE_CONTENT" property="noticeContent" />
-		<result column="NOTICE_CRE_DATE" property="noticeCreDate"
-			javaType="java.util.Date" />
-	</resultMap>
-		
-	<select id="noticeSelectList" parameterType="map" resultType="map">	
-		SELECT 
-	    NOTICE.NOTICE_NO, 
-	    NOTICE.MEMBER_NO, 
-	    NOTICE.NOTICE_TITLE, 
-	    NOTICE.NOTICE_CONTENT, 
-	    NOTICE.NOTICE_CRE_DATE, 
-	    MEMBER.MEMBER_NAME
-		FROM (
-    	SELECT ROWNUM AS RNUM, N.NOTICE_NO, N.MEMBER_NO, N.NOTICE_TITLE
-    	, N.NOTICE_CONTENT, N.NOTICE_CRE_DATE
-    	FROM (
+   <resultMap type="reviewDto" id="reviewResultMap">
+      <id column="REVIEW_NO" property="reviewNo" />
+      <result column="MEMBER_NO" property="memberNo" />
+      <result column="PRODUCT_NO" property="productNo" />
+      <result column="REVIEW_TITLE" property="reviewTitle" />
+      <result column="REVIEW_CONTENT" property="reviewContent" />
+      <result column="REVIEW_CRE_DATE" property="reviewCreDate"
+         javaType="java.util.Date" />
+      <result column="REVIEW_MOD_DATE" property="reviewModDate"
+         javaType="java.util.Date" />
+   </resultMap>
+   
+   <resultMap type="inquiryDto" id="inquiryResultMap">
+      <id column="INQUIRY_NO" property="inquiryNo" />
+      <result column="MEMBER_NO" property="memberNo" />
+      <result column="INQUIRY_TYPE" property="inquiryType" />
+      <result column="MEMBER_NAME" property="inquiryName" />
+      <result column="INQUIRY_CRE_DATE" property="inquiryCreDate"
+         javaType="java.util.Date" />
+      <result column="INQUIRY_TITLE" property="inquiryTitle" />
+      <result column="INQUIRY_CONTENT" property="inquiryContent" />
+      <result column="INQUIRY_IS_REPLY" property="is_Reply" />
+   </resultMap>
+   
+   <resultMap type="ReplyDto" id="replyDtoResultMap">
+      <id column="INQUIRY_NO" property="inquiryNo" />
+      <result column="MEMBER_NO" property="memberNo" />
+      <result column="REPLY_CRE_DATE" property="replyCreDate"
+         javaType="java.util.Date" />
+      <result column="REPLY_MEMBER_NAME" property="memberName" />
+      <result column="REPLY_TITLE" property="replyTitle" />
+      <result column="REPLY_CONTENT" property="replyContent" />
+   </resultMap>
+   
+   <resultMap type="noticeDto" id="noticeResultMap">
+      <id column="NOTICE_NO" property="noticeNo" />
+      <result column="MEMBER_NO" property="memberNo" />
+      <result column="NOTICE_TITLE" property="noticeTitle" />
+      <result column="NOTICE_CONTENT" property="noticeContent" />
+      <result column="NOTICE_CRE_DATE" property="noticeCreDate"
+         javaType="java.util.Date" />
+   </resultMap>
+      
+   <select id="noticeSelectList" parameterType="map" resultType="map">   
+      SELECT 
+       NOTICE.NOTICE_NO, 
+       NOTICE.MEMBER_NO, 
+       NOTICE.NOTICE_TITLE, 
+       NOTICE.NOTICE_CONTENT, 
+       NOTICE.NOTICE_CRE_DATE, 
+       MEMBER.MEMBER_NAME
+      FROM (
+       SELECT ROWNUM AS RNUM, N.NOTICE_NO, N.MEMBER_NO, N.NOTICE_TITLE
+       , N.NOTICE_CONTENT, N.NOTICE_CRE_DATE
+       FROM (
         SELECT NOTICE_NO, MEMBER_NO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_CRE_DATE
         FROM NOTICE
         ORDER BY NOTICE_CRE_DATE DESC
-    	) N
-		) NOTICE 
-		JOIN MEMBER ON NOTICE.MEMBER_NO = MEMBER.MEMBER_NO
-		WHERE NOTICE.RNUM BETWEEN #{start} AND #{end}
-	</select>
-	
-	<select id="customerServiceSelectList" resultType="map">
-		SELECT INQUIRY_NO, MEMBER_NO,INQUIRY_TYPE, MEMBER_NAME
-		, INQUIRY_CRE_DATE, INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_IS_REPLY
-		FROM INQUIRY
-		ORDER BY INQUIRY_CRE_DATE DESC
-	</select>
-	
-	<select id="inquirySelectList" parameterType="map" resultType="map">	
-		SELECT 
-	    INQUIRY_NO, 
-	    MEMBER_NO,
-	    INQUIRY_TYPE, 
-	    MEMBER_NAME,
-	    INQUIRY_CRE_DATE,
-	    INQUIRY_TITLE,
-	    INQUIRY_CONTENT,
-	    INQUIRY_IS_REPLY
-		FROM (
-    	SELECT 
+       ) N
+      ) NOTICE 
+      JOIN MEMBER ON NOTICE.MEMBER_NO = MEMBER.MEMBER_NO
+      WHERE NOTICE.RNUM BETWEEN #{start} AND #{end}
+   </select>
+   
+   <select id="customerServiceSelectList" resultType="map">
+      SELECT INQUIRY_NO, MEMBER_NO,INQUIRY_TYPE, MEMBER_NAME
+      , INQUIRY_CRE_DATE, INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_IS_REPLY
+      FROM INQUIRY
+      ORDER BY INQUIRY_CRE_DATE DESC
+   </select>
+   
+   <select id="inquirySelectList" parameterType="map" resultType="map">   
+      SELECT 
+       INQUIRY_NO, 
+       MEMBER_NO,
+       INQUIRY_TYPE, 
+       MEMBER_NAME,
+       INQUIRY_CRE_DATE,
+       INQUIRY_TITLE,
+       INQUIRY_CONTENT,
+       INQUIRY_IS_REPLY
+      FROM (
+       SELECT 
         INQUIRY_NO, 
         MEMBER_NO,
         INQUIRY_TYPE, 
@@ -94,74 +94,88 @@
         INQUIRY_CONTENT,
         INQUIRY_IS_REPLY,
         ROW_NUMBER() OVER (ORDER BY INQUIRY_CRE_DATE DESC) AS RNUM
-    	FROM 
+       FROM 
         INQUIRY
-		)
-		WHERE 
-    	RNUM BETWEEN #{start} AND #{end}
-	</select>
-	
-	<select id="noticeSelectTotalCount" resultType="java.lang.Integer">
-		SELECT COUNT(*)
-		FROM NOTICE
-	</select>
-	
-	<select id="inquirySelectTotalCount" resultType="java.lang.Integer">
-		SELECT COUNT(*)
-		FROM INQUIRY
-	</select>
-	
-	<select id="noticeSelectOne" parameterType="int"
-		 resultType="map">
-		SELECT NOTICE_NO, N.MEMBER_NO,M.MEMBER_NAME, NOTICE_TITLE, NOTICE_CONTENT
-		, NOTICE_CRE_DATE
-		FROM NOTICE N JOIN MEMBER M
-		ON N.MEMBER_NO = M.MEMBER_NO
-		WHERE NOTICE_NO = #{no}
-	</select>
-	
-	<select id="fileSelectList" parameterType="int" resultType="map">
-		SELECT IMG_NO, ORIGINAL_FILE_NAME, STORED_FILE_NAME
-		, ROUND(FILE_SIZE/1024, 1) AS FILE_SIZE, IMG_CRE_DATE
-		FROM IMG_FILE
-		WHERE IMG_NO = #{no}
-	</select>
-	
-	<select id="inquirySelectOne" parameterType="int"
-		 resultType="map">
-		SELECT INQUIRY_NO, MEMBER_NO, INQUIRY_TYPE, MEMBER_NAME, INQUIRY_CRE_DATE
-		, INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_IS_REPLY
-		FROM INQUIRY
-		WHERE INQUIRY_NO = #{no}				
-	</select>
-	
-	<insert id="noticeInsertOne" parameterType="noticeDto" 
-		useGeneratedKeys="true" keyProperty= "noticeNo">
-		<selectKey keyProperty="noticeNo" resultType="int" order="BEFORE">
-			SELECT NOTICE_NO_SEQ.NEXTVAL
-			FROM DUAL
-		</selectKey>
-		
-		INSERT INTO NOTICE
-		(NOTICE_NO, MEMBER_NO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_CRE_DATE)
-		VALUES(#{noticeNo}, #{memberNo}, #{noticeTitle}, #{noticeContent}, SYSDATE)
-	</insert>
-	
-	<insert id="inquiryInsertOne" parameterType="inquiryDto" 
-		useGeneratedKeys="true" keyProperty="inquiryNo">
-		<selectKey keyProperty="inquiryNo" resultType="int" order="BEFORE">
-			SELECT INQUIRY_NO_SEQ.NEXTVAL
-			FROM DUAL
-		</selectKey>
-		
-		INSERT INTO INQUIRY
-			(INQUIRY_NO, MEMBER_NO, INQUIRY_TYPE, MEMBER_NAME, INQUIRY_CRE_DATE
-			, INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_IS_REPLY)
-		VALUES(#{inquiryNo}, #{memberNo}, #{inquiryType}, #{inquiryName}, SYSDATE
-		, #{inquiryTitle}, #{inquiryContent}, #{is_Reply})
-	</insert>
-	
+      )
+      WHERE 
+       RNUM BETWEEN #{start} AND #{end}
+   </select>
+   
+   <select id="noticeSelectTotalCount" resultType="java.lang.Integer">
+      SELECT COUNT(*)
+      FROM NOTICE
+   </select>
+   
+   <select id="inquirySelectTotalCount" resultType="java.lang.Integer">
+      SELECT COUNT(*)
+      FROM INQUIRY
+   </select>
+   
+   <select id="noticeSelectOne" parameterType="int"
+       resultType="map">
+      SELECT NOTICE_NO, N.MEMBER_NO,M.MEMBER_NAME, NOTICE_TITLE, NOTICE_CONTENT
+      , NOTICE_CRE_DATE
+      FROM NOTICE N JOIN MEMBER M
+      ON N.MEMBER_NO = M.MEMBER_NO
+      WHERE NOTICE_NO = #{no}
+   </select>
+   
+   <select id="fileSelectList" parameterType="int" resultType="map">
+      SELECT IMG_NO, ORIGINAL_FILE_NAME, STORED_FILE_NAME
+      , ROUND(FILE_SIZE/1024, 1) AS FILE_SIZE, IMG_CRE_DATE
+      FROM IMG_FILE
+      WHERE IMG_NO = #{no}
+   </select>
+   
+   <select id="inquirySelectOne" parameterType="int"
+       resultType="map">
+      SELECT INQUIRY_NO, MEMBER_NO, INQUIRY_TYPE, MEMBER_NAME, INQUIRY_CRE_DATE
+      , INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_IS_REPLY
+      FROM INQUIRY
+      WHERE INQUIRY_NO = #{no}            
+   </select>
+   
+   <insert id="noticeInsertOne" parameterType="noticeDto" 
+      useGeneratedKeys="true" keyProperty= "noticeNo">
+      <selectKey keyProperty="noticeNo" resultType="int" order="BEFORE">
+         SELECT NOTICE_NO_SEQ.NEXTVAL
+         FROM DUAL
+      </selectKey>
+      
+      INSERT INTO NOTICE
+      (NOTICE_NO, MEMBER_NO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_CRE_DATE)
+      VALUES(#{noticeNo}, #{memberNo}, #{noticeTitle}, #{noticeContent}, SYSDATE)
+   </insert>
+   
+   <insert id="inquiryInsertOne" parameterType="inquiryDto" 
+      useGeneratedKeys="true" keyProperty="inquiryNo">
+      <selectKey keyProperty="inquiryNo" resultType="int" order="BEFORE">
+         SELECT INQUIRY_NO_SEQ.NEXTVAL
+         FROM DUAL
+      </selectKey>
+      
+      INSERT INTO INQUIRY
+         (INQUIRY_NO, MEMBER_NO, INQUIRY_TYPE, MEMBER_NAME, INQUIRY_CRE_DATE
+         , INQUIRY_TITLE, INQUIRY_CONTENT, INQUIRY_IS_REPLY)
+      VALUES(#{inquiryNo}, #{memberNo}, #{inquiryType}, #{inquiryName}, SYSDATE
+      , #{inquiryTitle}, #{inquiryContent}, #{is_Reply})
+   </insert>
+   
+   <update id="noticeUpdateOne" parameterType="noticeDto">
+      UPDATE NOTICE
+      <set>
+         <if test="noticeTitle != null">NOTICE_TITLE = #{noticeTitle},</if>
+         <if test="noticeContent != null">NOTICE_CONTENT = #{noticeContent},</if>
+         NOTICE_CRE_DATE = SYSDATE
+      </set>
+      WHERE NOTICE_NO = #{noticeNo}
+   </update>
+   
+   <delete id="noticeDeleteOne" parameterType="int">
+		DELETE FROM NOTICE
+		WHERE NOTICE_NO = #{value}
+	</delete>
+   
 </mapper>
-
 
 

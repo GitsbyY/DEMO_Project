@@ -12,25 +12,31 @@ import com.demo.order.dto.OrderDto;
 
 
 public interface BoardService {
-			
-	public int noticeSelectTotalCount();
+         
+   public int noticeSelectTotalCount();
 
-	Map<String, Object> noticeSelectList(int start, int end);
+   Map<String, Object> noticeSelectList(int start, int end);
 
-	public int inquirySelectTotalCount();
+   public int inquirySelectTotalCount();
 
-	Map<String, Object> inquirySelectList(int start, int end);
+   Map<String, Object> inquirySelectList(int start, int end);
 
-	public Map<String, Object> noticeSelectOne(int no);		
+   public Map<String, Object> noticeSelectOne(int no);      
 
-	public Map<String, Object> inquirySelectOne(int no);
+   public Map<String, Object> inquirySelectOne(int no);
 
-	public void inquiryInsertOne(InquiryDto inquiryDto
-		, MultipartHttpServletRequest mulRequest) throws Exception;
+   public void inquiryInsertOne(InquiryDto inquiryDto
+      , MultipartHttpServletRequest mulRequest) throws Exception;
 
-	public void noticeInsertOne(NoticeDto noticeDto
-		, MultipartHttpServletRequest mulRequest) throws Exception;
+   public void noticeInsertOne(NoticeDto noticeDto
+      , MultipartHttpServletRequest mulRequest) throws Exception;
+
+   public int noticeUpdateOne(NoticeDto noticeDto
+      , MultipartHttpServletRequest mulRequest
+      , int fileIdx) throws Exception;
+   
+   public int noticeDeleteOne(int no);
 
 
-	
+   
 }

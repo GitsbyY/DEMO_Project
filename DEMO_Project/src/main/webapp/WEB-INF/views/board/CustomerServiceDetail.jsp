@@ -27,59 +27,59 @@
 }
 
 #tableDiv{
-	margin-top: 60px;
-	clear: right;
-	width: 100%;
+   margin-top: 60px;
+   clear: right;
+   width: 100%;
 }
 th{
-	border: 2px solid black;
-	border-left:thick;
-	border-right:thick;
-	border-bottom:thick;
-	height: 30px;	
+   border: 2px solid black;
+   border-left:thick;
+   border-right:thick;
+   border-bottom:thick;
+   height: 30px;   
 }
 tr, td{
-	border: 1px solid black;
-	border-left:thick;
-	border-right:thick;
-	height: 30px;	
+   border: 1px solid black;
+   border-left:thick;
+   border-right:thick;
+   height: 30px;   
 }
 table{
-	width: 100%;
-	border-left: none;
-	border-collapse: collapse;
+   width: 100%;
+   border-left: none;
+   border-collapse: collapse;
 }
 #listColumn1{
-	width: 7%;
-	background-color: #D3D3D3;
+   width: 7%;
+   background-color: #D3D3D3;
 }
 #listColumn2{
-	width: 10%;
-	background-color: #D3D3D3;
+   width: 10%;
+   background-color: #D3D3D3;
 }
 #listColumn3{
-	width: 50%;
-	background-color: #D3D3D3;
+   width: 50%;
+   background-color: #D3D3D3;
 }
 #listColumn4{
-	width: 10%;
-	background-color: #D3D3D3;
+   width: 10%;
+   background-color: #D3D3D3;
 }
 #listColumn5{
-	width: 10%;
-	background-color: #D3D3D3;
+   width: 10%;
+   background-color: #D3D3D3;
 }
 #listColumn6{
-	width: 10%;
-	background-color: #D3D3D3;
+   width: 10%;
+   background-color: #D3D3D3;
 }
 .tdClass{
-	text-align: center;
+   text-align: center;
 }
 #contentTd{
-	height: 300px;
-	padding-left: 25px;
-	padding-top: 20px;
+   height: 300px;
+   padding-left: 25px;
+   padding-top: 20px;
 }
 </style>
 <meta charset="UTF-8">
@@ -91,43 +91,43 @@ table{
    
    <jsp:include page="/WEB-INF/views/asideCustomerService.jsp"/>
    
-	<div id='divContainer'>
-		<div id="titleDiv">			
-			<div id="firstDiv">1:1 상담문의</div>
-			<div id="secondDiv"></div>      			            
-		</div>		
-		<div id="tableDiv">
-			<table>
-				<tr>
-					<th id="listColumn1" class="listColumn">번호</th>
-					<th id="listColumn2" class="listColumn">질문유형</th>
-					<th id="listColumn3" class="listColumn">제목</th>
-					<th id="listColumn4" class="listColumn">작성자</th>
-					<th id="listColumn5" class="listColumn">날짜</th>
-					<th id="listColumn6" class="listColumn">상태</th>				
-				</tr>				
-				<tr>
-					<td class="tdClass">${inquiryDto.INQUIRY_NO}</td>
-					<td class="tdClass">${inquiryDto.INQUIRY_TYPE}</td>
-					<td>${inquiryDto.INQUIRY_TITLE}</td>
-					<td class="tdClass">${inquiryDto.MEMBER_NAME}</td>
-					<td class="tdClass">
-						<fmt:formatDate pattern="yyyy-MM-dd" 
-							value="${inquiryDto.INQUIRY_CRE_DATE}"/>
-					</td>
-					<td class="tdClass">${inquiryDto.INQUIRY_IS_REPLY}</td>				
-				</tr>
-				<tr>
-					<td id="contentTd" colspan="6" valign="top">
-					${inquiryDto.INQUIRY_CONTENT}
-					</td>
-				</tr>				
-			</table>
-		</div>			
-						
-	</div>
-	
-				
+   <div id='divContainer'>
+      <div id="titleDiv">         
+         <div id="firstDiv">1:1 상담문의</div>
+         <div id="secondDiv"></div>                           
+      </div>      
+      <div id="tableDiv">
+         <table>
+            <tr>
+               <th id="listColumn1" class="listColumn">번호</th>
+               <th id="listColumn2" class="listColumn">질문유형</th>
+               <th id="listColumn3" class="listColumn">제목</th>
+               <th id="listColumn4" class="listColumn">작성자</th>
+               <th id="listColumn5" class="listColumn">날짜</th>
+               <th id="listColumn6" class="listColumn">상태</th>            
+            </tr>            
+            <tr>
+               <td class="tdClass">${inquiryDto.INQUIRY_NO}</td>
+               <td class="tdClass">${inquiryDto.INQUIRY_TYPE}</td>
+               <td>${inquiryDto.INQUIRY_TITLE}</td>
+               <td class="tdClass">${inquiryDto.MEMBER_NAME}</td>
+               <td class="tdClass">
+                  <fmt:formatDate pattern="yyyy-MM-dd" 
+                     value="${inquiryDto.INQUIRY_CRE_DATE}"/>
+               </td>
+               <td class="tdClass">${inquiryDto.INQUIRY_IS_REPLY}</td>            
+            </tr>
+            <tr>
+               <td id="contentTd" colspan="6" valign="top">
+               ${inquiryDto.INQUIRY_CONTENT}
+               </td>
+            </tr>            
+         </table>
+      </div>         
+                  
+   </div>
+   
+            
       
   
    <jsp:include page="/WEB-INF/views/Footer.jsp"/>
