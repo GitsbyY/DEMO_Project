@@ -4,6 +4,7 @@
 
 	<aside>
     <h1 class="asideH1tag">댕댕 쇼핑몰</h1>
+    <c:set var="cssReview" value="${sessionScope.customAside eq 'review' ? 'curPageATag' : ''}" />
     <c:forEach var="category" begin="0" end="60" step="10">
         <c:set var="categoryName">
 			<c:if test="${category eq 0}">전체</c:if>
@@ -16,11 +17,11 @@
         </c:set>
         <c:set var="cssClass" value="${category eq 0 ? 'curPageATag' : ''}" />
         <c:set var="cssClass" value="${category eq pagingMap.category ? 'curPageATag' : ''}" />
-        <a class="asideATag ${cssClass}" href="./shop.do?category=${category eq 0 ? '' : category}">
+        <a class="asideATag ${cssClass}" href="/DEMO_Project/shop.do?category=${category eq 0 ? '' : category}">
             ${categoryName}
         </a><br>
     </c:forEach>
 
     <h1 class="asideH1tag">댕댕 게시판</h1>
-    <a class="asideATag" href="/DEMO_Project/board/review.do">후기남겨요</a><br>
+    <a class="asideATag ${cssReview}" href="/DEMO_Project/board/review.do">후기남겨요</a><br>
 </aside>

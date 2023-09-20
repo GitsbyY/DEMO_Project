@@ -32,7 +32,7 @@ public class ProductController {
 			@RequestParam(defaultValue = "") String search,
 			@RequestParam(defaultValue = "") String category,
 			@RequestParam(defaultValue = "PRODUCT_PRICE ASC") String sort,
-			Model model) {
+			HttpSession session, Model model) {
 
 		log.info("shop/ShoppingMall" + sort);
 
@@ -55,6 +55,8 @@ public class ProductController {
 
 		model.addAttribute("productList", productList);
 		model.addAttribute("pagingMap", pagingMap);
+		
+		session.removeAttribute("customAside");
 		return "shop/ShoppingMall";
 	}
 
