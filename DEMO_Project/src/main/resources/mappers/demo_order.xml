@@ -9,15 +9,7 @@
 			javaType="java.util.Date" />
 		<result column="ORDER_REQUEST" property="orderRequest" />
 		<result column="ORDER_STATUS" property="orderStatus" />
-		<result column="ORDER_TOTALPRICE" property="orderTotalPrice" />
-	</resultMap>
-
-	<resultMap type="orderProductDto" id="orderProductResultMap">
-		<id column="ORDER_NO" property="orderNo" />
-		<result column="PRODUCT_NO" property="productNo" />
-		<result column="PRODUCT_NAME" property="productName" />
 		<result column="PRODUCT_QUANTITY" property="productQuantity" />
-		<result column="PRODUCT_PRICE" property="productPrice" />
 	</resultMap>
 
 	<resultMap type="orderConfirmDto" id="orderConfirmResultMap">

@@ -16,8 +16,6 @@
 		<typeAlias type="com.demo.member.dto.ChargeDto" alias="chargeDto"/>
 		
 		<typeAlias type="com.demo.order.dto.OrderDto" alias="orderDto"/>
-		<typeAlias type="com.demo.order.dto.OrderProductDto"
-			alias="orderProductDto"/>
 		<typeAlias type="com.demo.order.dto.OrderConfirmDto"
 			alias="orderConfirmDto"/>
 		<typeAlias type="com.demo.order.dto.OrderCancelDto"

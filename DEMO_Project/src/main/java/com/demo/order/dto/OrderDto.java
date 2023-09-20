@@ -12,21 +12,21 @@ public class OrderDto {
 	private Date orderDate;
 	private String orderRequest;
 	private String orderStatus;
-	private int orderTotalPrice;
+	private int productQuantity;
 	
 	public OrderDto() {
 		super();
 	}
 
 	public OrderDto(int orderNo, int memberNo, Date orderDate, String orderRequest, String orderStatus,
-			int orderTotalPrice) {
+			int productQuantity) {
 		super();
 		this.orderNo = orderNo;
 		this.memberNo = memberNo;
 		this.orderDate = orderDate;
 		this.orderRequest = orderRequest;
 		this.orderStatus = orderStatus;
-		this.orderTotalPrice = orderTotalPrice;
+		this.productQuantity = productQuantity;
 	}
 
 	public int getOrderNo() {
@@ -69,23 +69,22 @@ public class OrderDto {
 		this.orderStatus = orderStatus;
 	}
 
-	public int getOrderTotalPrice() {
-		return orderTotalPrice;
+	public int getProductQuantity() {
+		return productQuantity;
 	}
 
-	public void setOrderTotalPrice(int orderTotalPrice) {
-		this.orderTotalPrice = orderTotalPrice;
+	public void setProductQuantity(int productQuantity) {
+		this.productQuantity = productQuantity;
 	}
 
 	@Override
 	public String toString() {
 		return "OrderDto [orderNo=" + orderNo + ", memberNo=" + memberNo + ", orderDate=" + orderDate
-				+ ", orderRequest=" + orderRequest + ", orderStatus=" + orderStatus + ", orderTotalPrice="
-				+ orderTotalPrice + "]";
+				+ ", orderRequest=" + orderRequest + ", orderStatus=" + orderStatus + ", productQuantity="
+				+ productQuantity + "]";
 	}
 
 	
-
 	
 	
 
