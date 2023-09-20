@@ -132,7 +132,7 @@
 		FROM MEMBER
 		)
 		WHERE RN BETWEEN #{start} AND #{end}
-		ORDER BY RN;
+		ORDER BY RN
 	</select>
 
 	<select id="memberPaymentSelectList" parameterType="map"

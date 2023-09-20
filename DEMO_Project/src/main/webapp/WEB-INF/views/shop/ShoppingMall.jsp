@@ -131,7 +131,8 @@
 			</c:forEach>
 			<div id="btnDiv">
 				<input class="btnClass" type="button" value="전체">
-				<input class="btnClass" type="button" value="추가">
+				<input class="btnClass" type="button" value="추가"
+					onclick="location.href='./shop/add.do'">
 				<input class="btnClass" type="button" value="삭제">
 			</div>
 		</div>
