@@ -2,6 +2,7 @@ package com.demo.member.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +78,32 @@ public class MemberDaoImpl implements MemberDao{
 		paramMap.put("memberEmail", memberEmail);
 		
 		return sqlSession.selectOne(nameSpace + "memberFindPassword", paramMap);
+	}
+
+	@Override
+	public int memberSelectListTotalCount() {
+		// TODO Auto-generated method stub
+		return (int)sqlSession.selectOne(nameSpace + "memberSelectListTotalCount");
+	}
+
+	@Override
+	public List<Map<String, Object>> memberInfoSelectList(int start, int end) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		
+		return sqlSession.selectList(nameSpace + "memberInfoSelectList", map);
+	}
+
+	@Override
+	public List<Map<String, Object>> memberPaymentSelectList(int start, int end) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		
+		return sqlSession.selectList(nameSpace + "memberPaymentSelectList", map);
 	}
 
 	

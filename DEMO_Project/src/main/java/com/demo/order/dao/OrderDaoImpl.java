@@ -57,13 +57,23 @@ public class OrderDaoImpl implements OrderDao{
 	@Override
 	public int cancelSelectListTotalCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return (int)sqlSession.selectOne(nameSpace + "cancelSelectListTotalCount");
 	}
 
 	@Override
 	public List<Map<String, Object>> cancelSelectList(int start, int end) {
 		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		
+		return sqlSession.selectList(nameSpace + "cancelSelectList", map);
+	}
+
+	@Override
+	public Map<String, Object> orderCancelDetailSelectOne(int orderNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + "orderCancelDetailSelectOne", orderNo);
 	}
 
 	

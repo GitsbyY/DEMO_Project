@@ -54,11 +54,15 @@
 		INSERT INTO MEMBER
 		(MEMBER_NO, MEMBER_ID, MEMBER_PASSWORD, MEMBER_NAME,
 		MEMBER_NICKNAME,
-		MEMBER_BIRTH_DATE, MEMBER_PHONE, MEMBER_EMAIL, MEMBER_ADDRESS,
-		MEMBER_JOIN_DATE, MEMBER_EMONEY, MEMBER_POINT, MEMBER_MOD_DATE)
+		MEMBER_BIRTH_DATE, MEMBER_PHONE, MEMBER_EMAIL,
+		MEMBER_ADDRESS,
+		MEMBER_JOIN_DATE, MEMBER_EMONEY, MEMBER_POINT,
+		MEMBER_MOD_DATE)
 		VALUES(#{memberNo},
-		#{memberId}, #{memberPassword}, #{memberName}, #{memberNickName},
-		#{memberBirthDate}, #{memberPhone}, #{memberEmail}, #{memberAddress},
+		#{memberId}, #{memberPassword},
+		#{memberName}, #{memberNickName},
+		#{memberBirthDate}, #{memberPhone},
+		#{memberEmail}, #{memberAddress},
 		SYSDATE, 0, 0, SYSDATE)
 
 	</insert>
@@ -86,28 +90,67 @@
 		FROM MEMBER
 		WHERE MEMBER_ID = #{memberId}
 	</select>
-	
-	<select id="memberExist" parameterType="map" 
+
+	<select id="memberExist" parameterType="map"
 		resultMap="memberResultMap">
-		SELECT MEMBER_ID, MEMBER_NAME, MEMBER_NO, MEMBER_PHONE, MEMBER_EMAIL
+		SELECT MEMBER_ID, MEMBER_NAME, MEMBER_NO, MEMBER_PHONE,
+		MEMBER_EMAIL
 		FROM MEMBER
-		WHERE MEMBER_ID = #{memberId} AND MEMBER_PASSWORD = #{memberPassword}
+		WHERE MEMBER_ID = #{memberId} AND
+		MEMBER_PASSWORD = #{memberPassword}
 	</select>
-	
-	<select id="memberFindId" parameterType="map" 
+
+	<select id="memberFindId" parameterType="map"
 		resultMap="memberResultMap">
 		SELECT MEMBER_EMAIL, MEMBER_PHONE, MEMBER_ID
 		FROM MEMBER
 		WHERE MEMBER_EMAIL = #{memberEmail} AND MEMBER_PHONE = #{memberPhone}
 	</select>
-	
-	<select id="memberFindPassword" parameterType="map" 
+
+	<select id="memberFindPassword" parameterType="map"
 		resultMap="memberResultMap">
-		SELECT MEMBER_EMAIL, MEMBER_PHONE, MEMBER_ID, MEMBER_PASSWORD
+		SELECT MEMBER_EMAIL, MEMBER_PHONE, MEMBER_ID,
+		MEMBER_PASSWORD
 		FROM MEMBER
-		WHERE MEMBER_ID = #{memberId} AND MEMBER_EMAIL = #{memberEmail}
+		WHERE MEMBER_ID = #{memberId} AND
+		MEMBER_EMAIL = #{memberEmail}
 	</select>
-	
+
+	<select id="memberSelectListTotalCount"
+		resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM MEMBER
+	</select>
+
+	<select id="memberInfoSelectList" parameterType="map"
+		resultType="map">
+		SELECT ROWNUM, MEMBER_NO, MEMBER_ID, MEMBER_NAME,
+		MEMBER_EMAIL, MEMBER_JOIN_DATE
+		FROM (
+		SELECT ROWNUM AS RN, MEMBER_NO, MEMBER_ID, MEMBER_NAME, MEMBER_EMAIL,
+		MEMBER_JOIN_DATE
+		FROM MEMBER
+		)
+		WHERE RN BETWEEN #{start} AND #{end}
+		ORDER BY RN;
+	</select>
+
+	<select id="memberPaymentSelectList" parameterType="map"
+		resultType="map">
+		SELECT ROWNUM, M.MEMBER_NO, M.MEMBER_ID, M.MEMBER_NAME,
+		M.MEMBER_EMAIL
+		, M.MEMBER_JOIN_DATE, OP.PRODUCT_QUANTITY,
+		M.MEMBER_EMONEY
+		, M.MEMBER_POINT
+		FROM MEMBER M
+		JOIN ORDER_LIST OL ON
+		M.MEMBER_NO = OL.MEMBER_NO
+		JOIN ORDER_PRODUCT OP ON OL.ORDER_NO =
+		OP.ORDER_NO
+		WHERE ROWNUM BETWEEN #{start} AND #{end}
+		ORDER BY ROWNUM
+	</select>
+
 </mapper>
 
 

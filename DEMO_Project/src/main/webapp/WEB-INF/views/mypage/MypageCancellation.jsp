@@ -122,7 +122,7 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 				</div>
 				<div id="listColumn2" class="listColumn 
 					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
-						${orderDto.ORDER_DATE}
+						${orderDto.ORDER_CANCEL_DATE}
 				</div>
 				<div id="listColumn3" class="listColumn 
 					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
@@ -153,7 +153,7 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 	
 <!-- 	정보를 넘기기 위해서 폼을 만들었다 -->
 
-			<form action="./mypage.do" id="pagingForm" method="post">
+			<form action="./cancelPage.do" id="pagingForm" method="post">
 		      <input type="hidden" id="curPage" name="curPage"
 		         value="${myPagingmap.myPagePaging.curPage}">
 		    </form>

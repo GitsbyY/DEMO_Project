@@ -1,6 +1,7 @@
 package com.demo.member.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.ui.Model;
 
@@ -20,6 +21,12 @@ public interface MemberService {
 	MemberDto memberFindId(String memberEmail, String memberPhone);
 
 	MemberDto memberFindPassword(String memberId, String memberEmail);
+
+	int memberSelectListTotalCount();
+
+	List<Map<String, Object>> memberInfoSelectList(int start, int end);
+
+	List<Map<String, Object>> memberPaymentSelectList(int start, int end);
 
 	
 

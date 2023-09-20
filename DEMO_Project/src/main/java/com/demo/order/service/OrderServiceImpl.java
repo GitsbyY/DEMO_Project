@@ -64,5 +64,11 @@ public class OrderServiceImpl implements OrderService{
 		return orderDao.cancelSelectList(start, end);
 	}
 
+	@Override
+	public Map<String, Object> orderCancelDetailSelectOne(int orderNo) {
+		// TODO Auto-generated method stub
+		return orderDao.orderCancelDetailSelectOne(orderNo);
+	}
+
 
 }

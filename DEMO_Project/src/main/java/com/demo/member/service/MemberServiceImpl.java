@@ -1,6 +1,7 @@
 package com.demo.member.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,6 +50,21 @@ public class MemberServiceImpl implements MemberService{
 	public MemberDto memberFindPassword(String memberId, String memberEmail) {
 		// TODO Auto-generated method stub
 		return memberDao.memberFindPassword(memberId, memberEmail);
+	}
+	@Override
+	public int memberSelectListTotalCount() {
+		// TODO Auto-generated method stub
+		return memberDao.memberSelectListTotalCount();
+	}
+	@Override
+	public List<Map<String, Object>> memberInfoSelectList(int start, int end) {
+		// TODO Auto-generated method stub
+		return memberDao.memberInfoSelectList(start, end);
+	}
+	@Override
+	public List<Map<String, Object>> memberPaymentSelectList(int start, int end) {
+		// TODO Auto-generated method stub
+		return memberDao.memberPaymentSelectList(start, end);
 	}
 	
 

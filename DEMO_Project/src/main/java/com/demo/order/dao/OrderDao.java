@@ -21,6 +21,8 @@ public interface OrderDao {
 
 	List<Map<String, Object>> cancelSelectList(int start, int end);
 
+	Map<String, Object> orderCancelDetailSelectOne(int orderNo);
+
 
 
 }
