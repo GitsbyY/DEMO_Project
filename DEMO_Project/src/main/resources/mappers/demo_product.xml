@@ -65,6 +65,39 @@
 		SELECT COUNT(*)
 		FROM PRODUCT
 	</select>
+	
+	<select id="createNewImgNo" parameterType="int" resultType="int">
+		SELECT IMG_NO_SEQ.NEXTVAL
+		FROM DUAL
+	</select>
+	
+	<insert id="insertFile" parameterType="map">
+		INSERT INTO IMG_FILE
+			(IMG_NO, ORIGINAL_FILE_NAME, STORED_FILE_NAME, FILE_SIZE, IMG_CRE_DATE)
+		VALUES(#{imgNo}, #{original_file_name}, #{stored_file_name}, #{file_size}, SYSDATE)
+	</insert>
+	
+	<select id="fileSelectList" parameterType="int" resultType="map">
+		SELECT IDX, ORIGINAL_FILE_NAME, STORED_FILE_NAME
+			, ROUND(FILE_SIZE/1024, 1) AS FILE_SIZE
+		FROM TB_FILE
+		WHERE PARENT_SEQ = #{no}
+		
+		
+	</select>
+	
+	<select id="fileSelectStoredFileName" parameterType="int"
+		resultType="map">
+		SELECT IDX, STORED_FILE_NAME
+		FROM TB_FILE
+		WHERE PARENT_SEQ = #{parentSeq}
+	</select>
+	
+	<delete id="fileDelete" parameterType="int">
+		DELETE FROM TB_FILE
+		WHERE PARENT_SEQ = #{no}
+	</delete>
+	
 </mapper>
 
 

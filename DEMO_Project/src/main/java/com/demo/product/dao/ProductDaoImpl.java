@@ -40,7 +40,17 @@ public class ProductDaoImpl implements ProductDao{
 		return sqlSession.selectOne(nameSpace + "productSelectTotalCount");
 	}
 
+	@Override
+	public int createNewImgNo() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + "createNewImgNo");
+	}
 
+	@Override
+	public void insertFile(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		sqlSession.insert(nameSpace + "insertFile", map);
+	}
 
 
 	

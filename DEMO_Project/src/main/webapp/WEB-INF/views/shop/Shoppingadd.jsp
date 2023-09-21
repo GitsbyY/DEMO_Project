@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -162,10 +163,17 @@ select{
 			<div id='bodyContainer'>
 				<div id='imgContainer'>
 					<div id='productImgContainer'>
-						<img id='productImg' alt='이미지를 첨부해주세요'>
+						<c:set var="row" value="${fileList}"/>
+						<img id='productImg' alt='이미지를 첨부해주세요'
+							src="<c:url value='/image/Product/${row.STORED_FILE_NAME}'/>">
 					</div>
 					<br/>
-					<button>이미지 첨부</button>
+					<input type="file" name="file" id="fileInput" style="display:none"
+						onchange="fileSelected(${row.STORED_FILE_NAME})">
+					<label for="fileInput" style="background-color: white;
+						border:2px solid black;">
+						이미지 첨부
+					</label>
 					
 				</div>
 				
@@ -263,7 +271,7 @@ select{
 <script>
 	let oEditors = []
 	
-	smartEditor = function() {
+	function smartEditor() {
 		console.log("Naver SmartEdtior")
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef: oEditors,
@@ -273,12 +281,36 @@ select{
 		})
 		
 	}
+	function fileSelected() {
+		var fileInputObj = document.getElementById("fileInput");
+		var file = fileInput.files[0];
+        var formData = new FormData();
+        formData.append('file', file);
+		$.ajax({
+			url : "/DEMO_Project/shop/imgInsert.do",
+			method : "POST",
+			data : formData,
+			processData: false,
+            contentType: false,
+			
+			success: function(fileList) {
+				// 요청이 성공하면 결과를 화면에 표시
+				alert('성공');
+				console.log(fileList);
+				var file = fileList[0].stored_file_name;
+		        var productImgContainer = document.getElementById("productImgContainer");
+
+		        productImgContainer.innerHTML =
+			        '<img id="productImg" alt="이미지를 첨부해주세요5" ' +
+			        'src=\'<c:url value="/image/Product/' + file + '"/>\'>';
+			},
+			error: function() {
+				alert('실패');
+             }
+		});
+	}
 	
-	$(document).ready(function() {
-		smartEditor()
-	})
-	
-	submitPost = function() {
+	function submitPost() {
 		oEditor.getById["productDetailContent"].exec("UPDATE_CONTENTS_FIELD", [])
 		let content = document.getElementById("productDetailContent").value
 		
@@ -290,5 +322,9 @@ select{
 			console.log(content)
 		}
 	}
+	
+	$(document).ready(function() {
+		smartEditor()
+	})
 </script>
 </html>

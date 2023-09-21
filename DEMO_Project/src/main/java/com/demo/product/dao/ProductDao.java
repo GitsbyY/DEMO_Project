@@ -11,6 +11,11 @@ public interface ProductDao {
 
 	int productSelectTotalCount();
 
+	int createNewImgNo();
+
+	void insertFile(Map<String, Object> map);
+
+
 	
 
 
