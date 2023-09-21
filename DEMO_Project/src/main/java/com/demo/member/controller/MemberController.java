@@ -209,7 +209,7 @@ public class MemberController {
 		model.addAttribute("memberDto", memberDto);
 		model.addAttribute("petDto", petDto);
 
-		session.setAttribute("myPageAside", "memberPay");
+		session.setAttribute("myPageAside", "memberInfo");
 
 		return "mypage/MypageProfileEdit";
 	}
@@ -250,7 +250,7 @@ public class MemberController {
 		log.info("Welcome MemberController login!");
 
 		Map<String, Object> memberDto = memberService.memberPaymentDeatilSelectOne(memberNo);
-		Map<String, Object> memberChargeDto = memberService.memberPaymentDeatilChargeSelectOne(memberNo);
+		List<Map<String, Object>> memberChargeDto = memberService.memberPaymentDeatilChargeSelectList(memberNo);
 
 		model.addAttribute("memberDto", memberDto);
 		model.addAttribute("memberChargeDto", memberChargeDto);

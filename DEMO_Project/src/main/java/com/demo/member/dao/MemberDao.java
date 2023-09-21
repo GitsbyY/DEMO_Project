@@ -29,11 +29,13 @@ public interface MemberDao {
 
 	Map<String, Object> memberPaymentDeatilSelectOne(int memberNo);
 
-	Map<String, Object> memberPaymentDeatilChargeSelectOne(int memberNo);
+	List<Map<String, Object>> memberPaymentDeatilChargeSelectList(int memberNo);
 
 	Map<String, Object> myPageProfileDetailMemberSelectOne(int memberNo);
 
 	Map<String, Object> myPageProfileDetailPetSelectOne(int memberNo);
+
+	
 
 
 

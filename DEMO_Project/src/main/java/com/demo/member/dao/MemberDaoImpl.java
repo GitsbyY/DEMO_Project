@@ -113,9 +113,9 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public Map<String, Object> memberPaymentDeatilChargeSelectOne(int memberNo) {
+	public List<Map<String, Object>> memberPaymentDeatilChargeSelectList(int memberNo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(nameSpace + "memberPaymentDeatilChargeSelectOne" , memberNo);
+		return sqlSession.selectList(nameSpace + "memberPaymentDeatilChargeSelectList" , memberNo);
 	}
 
 	@Override

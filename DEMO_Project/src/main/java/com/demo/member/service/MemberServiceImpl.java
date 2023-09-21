@@ -72,10 +72,11 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.memberPaymentDeatilSelectOne(memberNo);
 	}
 	@Override
-	public Map<String, Object> memberPaymentDeatilChargeSelectOne(int memberNo) {
+	public List<Map<String, Object>> memberPaymentDeatilChargeSelectList(int memberNo) {
 		// TODO Auto-generated method stub
-		return memberDao.memberPaymentDeatilChargeSelectOne(memberNo);
+		return memberDao.memberPaymentDeatilChargeSelectList(memberNo);
 	}
+
 	@Override
 	public Map<String, Object> myPageProfileDetailMemberSelectOne(int memberNo) {
 		// TODO Auto-generated method stub
@@ -86,6 +87,7 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return memberDao.myPageProfileDetailPetSelectOne(memberNo);
 	}
+	
 	
 
 	

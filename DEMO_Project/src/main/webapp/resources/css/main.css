@@ -12,7 +12,7 @@ button{
 /* header */
 .daengHeader {
 	overflow: hidden; /* 이 클래스의 하위 요소들이 부모 요소를 벗어나지 않도록 설정 */
-	height: 120px; /* 높이를 원하는 값으로 설정 */
+	height: 150px; /* 높이를 원하는 값으로 설정 */
 	margin: 0 auto; /* 가운데 정렬 */
 	width : 70%;
 }
@@ -22,6 +22,7 @@ button{
 	margin-right: 10px; /* 왼쪽 요소들 사이의 간격 설정 */
 	margin-left: 5px; /* 오른쪽 요소들 사이의 간격 설정 */
 	justify-content: center; /* 세로 가운데 정렬 */
+	margin-top: 10px;
 }
 .daengHeader > button, 
 .logoSide > button {
@@ -31,6 +32,7 @@ button{
 #iconSet {
 	float: right; /* 오른쪽으로 띄우기 */
 	margin-left: 10px; /* 오른쪽 요소들 사이의 간격 설정 */
+	margin-top: 5px;
 }
 
 .buttonSide {
@@ -75,7 +77,7 @@ button{
 #bottomRow {
 	clear: both; /* 띄워진 요소들 아래로 내리기 */
 	float: right; /* 오른쪽으로 띄우기 */
-	margin-top: 20px; /*위에 마진 추가*/
+	margin-top: 40px; /*위에 마진 추가*/
 	margin-right : 15px;
 	font-size: 14px;
 	text-align: right;
@@ -91,8 +93,13 @@ button{
 	text-decoration: none; /* 밑줄 제거 */
     color: black; /* 텍스트 색상을 검은색으로 설정 */
 }
-
-
+a.bottomRowButton:hover {
+    color: #FFAB7C;
+}
+.buttonSide p:hover {
+    color: #FFAB7C;
+    cursor: pointer;
+}
 /* aside */
 aside{
 	/* background-color: #E0EEEE; */
@@ -131,12 +138,17 @@ aside{
 }
 
 footer {
-	position: relative;	
+	bottom: 10px;
+    position: fixed;
+    width: 100%;
 }
 #daengFooter{
 	margin-left: 15%;
+	
 }
-
+.daengFoot{
+	font-size: 16px;
+}
 #mainContainer {
 	margin: 0 auto;
 	width: 70%;	

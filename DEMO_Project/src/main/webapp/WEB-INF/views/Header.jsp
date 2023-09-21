@@ -8,15 +8,15 @@
 		<div>
 			<div id="daengLogo" class="logoSide"
 				style="height: 75px; width: 75px;">
-				<button id="daengLogoBtn">
+				<button id="daengLogoBtn" onclick="goHomeFnc()">
 					<img alt="댕댕로고"
 						src="/DEMO_Project/resources/img/imgHeader/logo.png"
-						style="height: 80px; width: 90px; margin-top: 20px;">
+						style="height: 80px; width: 90px; margin-top: 30px;">
 				</button>
 			</div>
 			<div id="daengText" class="logoSide"
-				style="height: 50px; width: 180px; margin-left: 10px; margin-top: 40px;">
-				<button id="daengTxtBtn">
+				style="height: 50px; width: 180px; margin-left: 10px; margin-top: 65px;">
+				<button id="daengTxtBtn" onclick="goHomeFnc()">
 					<h1>DAENGDAENG</h1>
 				</button>
 			</div>
@@ -70,4 +70,11 @@
 	</div>
 	<hr>
 </div>
-
+<script type="text/javascript">
+function goHomeFnc() {
+	
+	var url = '/DEMO_Project/board/announcement.do';
+	
+    location.href= url;
+}  
+</script>
