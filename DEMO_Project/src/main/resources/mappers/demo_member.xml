@@ -134,6 +134,20 @@
 		WHERE RN BETWEEN #{start} AND #{end}
 		ORDER BY RN
 	</select>
+	
+	<select id="myPageProfileDetailMemberSelectOne" resultType="map">
+		SELECT MEMBER_ID, MEMBER_NAME, MEMBER_BIRTH_DATE
+		, MEMBER_PHONE, MEMBER_EMAIL, MEMBER_ADDRESS
+		FROM MEMBER
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<select id="myPageProfileDetailPetSelectOne" resultType="map">
+		SELECT PET_NAME, PET_BREED, PET_WEIGHT, PET_ADOPTION_DATE, PET_VACCINATION
+		FROM PET
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
 
 	<select id="memberPaymentSelectList" parameterType="map"
 		resultType="map">
@@ -149,6 +163,23 @@
 		OP.ORDER_NO
 		WHERE ROWNUM BETWEEN #{start} AND #{end}
 		ORDER BY ROWNUM
+	</select>
+	
+	<select id="memberPaymentDeatilSelectOne" resultType="map">
+		SELECT M.MEMBER_NO, M.MEMBER_ID, M.MEMBER_NAME, M.MEMBER_JOIN_DATE, M.MEMBER_POINT, M.MEMBER_EMONEY, O.TotalOrders
+		FROM MEMBER M
+		LEFT JOIN (
+		    SELECT MEMBER_NO, COUNT(ORDER_NO) AS TotalOrders
+		    FROM ORDER_LIST
+		    GROUP BY MEMBER_NO
+		) O ON M.MEMBER_NO = O.MEMBER_NO
+		WHERE M.MEMBER_NO =  #{memberNo}
+	</select>
+	
+	<select id="memberPaymentDeatilChargeSelectOne" resultType="map">
+		SELECT MEMBER_CHARGE_AMOUNT, MEMBER_CHARGE_DATE 
+		FROM MEMBER_CHARGE
+		WHERE MEMBER_NO = #{memberNo}
 	</select>
 
 </mapper>

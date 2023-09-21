@@ -66,6 +66,26 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return memberDao.memberPaymentSelectList(start, end);
 	}
+	@Override
+	public Map<String, Object> memberPaymentDeatilSelectOne(int memberNo) {
+		// TODO Auto-generated method stub
+		return memberDao.memberPaymentDeatilSelectOne(memberNo);
+	}
+	@Override
+	public Map<String, Object> memberPaymentDeatilChargeSelectOne(int memberNo) {
+		// TODO Auto-generated method stub
+		return memberDao.memberPaymentDeatilChargeSelectOne(memberNo);
+	}
+	@Override
+	public Map<String, Object> myPageProfileDetailMemberSelectOne(int memberNo) {
+		// TODO Auto-generated method stub
+		return memberDao.myPageProfileDetailMemberSelectOne(memberNo);
+	}
+	@Override
+	public Map<String, Object> myPageProfileDetailPetSelectOne(int memberNo) {
+		// TODO Auto-generated method stub
+		return memberDao.myPageProfileDetailPetSelectOne(memberNo);
+	}
 	
 
 	

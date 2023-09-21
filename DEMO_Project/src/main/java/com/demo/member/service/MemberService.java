@@ -28,6 +28,15 @@ public interface MemberService {
 
 	List<Map<String, Object>> memberPaymentSelectList(int start, int end);
 
+	Map<String, Object> memberPaymentDeatilSelectOne(int memberNo);
+
+	Map<String, Object> memberPaymentDeatilChargeSelectOne(int memberNo);
+
+	Map<String, Object> myPageProfileDetailMemberSelectOne(int memberNo);
+
+	Map<String, Object> myPageProfileDetailPetSelectOne(int memberNo);
+
+
 	
 
 	

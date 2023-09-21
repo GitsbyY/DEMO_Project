@@ -1,148 +1,134 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css"
+	href="/DEMO_Project/resources/css/main.css">
 <style type="text/css">
-#titleTable{
-   margin-top: 30px;
-   border: 1px solid gray;
-   border-collapse: collapse;
-   border-top: thick;
-   border-left:thick;
-   border-right:thick;
-   margin-right: 15.5%;
-   table-layout: fixed;
-   width: 100%;   
-}
-th{
-   
-   font-size: 30px;
+html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
+	pre, a, abbr, address, big, cite, code, del, dfn, em, font, img, ins, q,
+	s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, ul, ol, li,
+	dl, dt, dd, table, caption, tbody, tfoot, thead, tr, th, td, fieldset,
+	form, label, legend, input, button, textarea, select {
+	margin: 0;
+	padding: 0;
 }
 
-#firstTh{
-   border-bottom: 2px solid black;
-   width: 150px;
-   display: block;     
-}
-
-#secondTh{
-      
-}
-
-#memberInfo, .infoTr, .infoTd, .infoTd2{
-	border: 1px solid #C0C0C0;
-	border-collapse: collapse;
-	margin-top: 80px;
-	padding-left: 20px;
-	font-size: 20px;
+#firstTitle {
+	width: 400px;
+	display: block;
+	font-size: 30px;
 	font-weight: bold;
+	margin-top: 60px;
+	margin-left: 10px;
+	margin-bottom: 25px;
 }
-.infoTd, .infoTd2{
-	width: 150px;
+tr, td{
+	border: 1px solid black;
 }
-.infoTd{
-	background-color: #DCDCDC;
+
+#infoContainer{
+	display: flex;
 }
-#infoTd{
-	width: 250px;
+
+#infoTable{
+	margin-right: 40px;
+	margin-left: 40px;
 }
-.inputEdit{
-	width: 50px;
-	height: 30px;
-	font-size: 16px;
-	font-weight: bold;
-	float: right;
-	margin-right: 30px;
+
+.infoTabalTR{
+	height: 51px;
 }
-.infoTr{
-	height: 50px;
+.infoTabalTdDefault{
+	width: 157px;
+	background-color: grey;
+	font-size: 24px;
+	text-align: center;
+}
+.infoTabalTdData{
+	width: 247px;
+}
+.emoneyListTitle{
+	width: 461px;
+	height: 51px;
+	font-size: 24px;
+	text-align: center;
 }
 </style>
 <meta charset="UTF-8">
-<title>회원 결제관리 상세페이지</title>
-<link rel="stylesheet" type="text/css" href="/DEMO_Project/resources/css/main.css">
+<title>마이댕댕 메인</title>
+<link rel="stylesheet" type="text/css"
+	href="/DEMO_Project/resources/css/main.css">
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/Header.jsp"/>
-	
-	<jsp:include page="/WEB-INF/views/asideMyPage.jsp"/>
-	
-	<div id='divContainer'>
-		<table id="titleTable">
-			<tr>
-				<th id="firstTh">결제관리</th>
-				<th id="secondTh"></th>      
-			</tr>            
-		</table>
-		<div>
-			<table id="memberInfo">
-				<tr class="infoTr">
-					<td class="infoTd">
-						회원 번호
-					</td>
-					<td class="infoTd2" id="infoTd">
-						회원 번호
-					</td>
-				</tr>
-				<tr class="infoTr">
-					<td class="infoTd">
-						회원 아이디
-					</td>
-					<td class="infoTd2">
-						회원 아이디
-					</td>
-				</tr>
-				<tr class="infoTr">
-					<td class="infoTd">
-						회원 이름
-					</td>
-					<td class="infoTd2">
-						회원 이름
-					</td>
-				</tr>
-				<tr class="infoTr">
-					<td class="infoTd">
-						가입일
-					</td>
-					<td class="infoTd2">
-						가입일
-					</td>
-				</tr>
-				<tr class="infoTr">
-					<td class="infoTd">
-						주문 건수
-					</td>
-					<td class="infoTd2">
-						2건
-					</td>
-				</tr>
-				<tr class="infoTr">
-					<td class="infoTd">
-						포인트
-					</td>
-					<td class="infoTd2">
-						1,000P
-						<input class="inputEdit" type="button" value="수정">
-					</td>
-				</tr>
-				<tr class="infoTr">
-					<td class="infoTd">
-						이머니
-					</td> 
-					<td class="infoTd2">
-						100,000원
-						<input class="inputEdit" type="button" value="수정">
-					</td>
-				</tr>
-			</table>
-	   
-		</div>
-	</div>
-   
-	
+	<jsp:include page="/WEB-INF/views/Header.jsp" />
 
-	
-	<jsp:include page="/WEB-INF/views/Footer.jsp"/>
+	<jsp:include page="/WEB-INF/views/asideMyPage.jsp" />
+
+	<div id='divContainer'>
+		<div class="title">
+			<div id="firstTitle" style="color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG FAMILY</div>
+		</div>
+		<div id="infoContainer">
+
+			<div id="infoTable">
+				<table>
+					<tr class="infoTabalTR">
+						<td class="infoTabalTdDefault">회원번호</td>
+						<td class="infoTabalTdData">${memberDto.MEMBER_NO}</td>
+					</tr>
+					<tr class="infoTabalTR">
+						<td class="infoTabalTdDefault">회원아이디</td>
+						<td class="infoTabalTdData">${memberDto.MEMBER_ID}</td>
+					</tr>
+					<tr class="infoTabalTR">
+						<td class="infoTabalTdDefault">회원이름</td>
+						<td class="infoTabalTdData">${memberDto.MEMBER_NAME}</td>
+					</tr>
+					<tr class="infoTabalTR">
+						<td class="infoTabalTdDefault">가입일</td>
+						<td class="infoTabalTdData">${memberDto.MEMBER_JOIN_DATE}</td>
+					</tr>
+					<tr class="infoTabalTR">
+						<td class="infoTabalTdDefault">주문건수</td>
+						<td class="infoTabalTdData">${memberDto.PRODUCT_QUANTITY}</td>
+					</tr>
+					<tr class="infoTabalTR">
+						<td class="infoTabalTdDefault">포인트</td>
+						<td class="infoTabalTdData">${memberDto.MEMBER_POINT}</td>
+					</tr>
+					<tr class="infoTabalTR">
+						<td class="infoTabalTdDefault">이머니</td>
+						<td class="infoTabalTdData">${memberDto.MEMBER_EMONEY}</td>
+					</tr>
+				</table>
+			</div>
+			<div id="emoneyChargeList">
+				<table>
+					<tr>
+						<td colspan="2" class="emoneyListTitle">이머니 충전 내역</td>
+					</tr>
+					<c:forEach var="memberChargeDto" items="${memberChargeList}" varStatus="loop">
+					<tr>
+						<td>${memberChargeList.MEMBER_CHARGE_AMOUNT}</td>
+						<td>${memberChargeList.MEMBER_CHARGE_DATE}</td>
+					</c:forEach>
+				</table>
+			</div>
+		</div>
+		
+	</div>
+	<jsp:include page="/WEB-INF/views/Footer.jsp" />
 </body>
+<script type="text/javascript">
+function MypageProfilePaymentMemberDetailFnc(no) {
+	
+	var url = './MypageProfilePaymentMemberDetail.do?memberNo=' + no;
+	
+    location.href= url;
+	
+}
+</script>
 </html>

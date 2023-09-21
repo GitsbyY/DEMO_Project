@@ -17,8 +17,7 @@
 <body>
 
 	<div>
-		<h1
-			style="text-align: left; color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG</h1>
+		<h1 style="text-align: left; color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG</h1>
 		<div class="formContainer">
 			<form action="./addp.do" method="get">
 				<div class="joinWrap">

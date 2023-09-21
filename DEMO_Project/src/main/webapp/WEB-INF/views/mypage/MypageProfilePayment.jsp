@@ -17,13 +17,12 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 }
 
 #firstTitle {
-	border-bottom: 3px solid black;
-	width: 150px;
+	width: 400px;
 	display: block;
 	font-size: 30px;
 	font-weight: bold;
 	margin-top: 60px;
-	margin-left: 30px;
+	margin-left: 10px;
 	margin-bottom: 25px;
 }
 
@@ -105,7 +104,7 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 
 	<div id='divContainer'>
 		<div class="title">
-			<div id="firstTitle">DAENGDAENG FAMILY</div>
+			<div id="firstTitle" style="color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG FAMILY</div>
 		</div>
 		<div class="listColumnContainerDefault">
 			<div id="listColumn1" class="listColumn">번호</div>
@@ -119,7 +118,7 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 <!-- 		루프로하면 안된다 -->
 
 		<c:forEach var="memberDto" items="${memberList}" varStatus="loop">
-			<div class="listColumnContainer" onclick="mypageProfileDetailFnc(${memberDto.MEMBER_NO})">
+			<div class="listColumnContainer" onclick="MypageProfilePaymentMemberDetailFnc(${memberDto.MEMBER_NO})">
 				<div id="listColumn1" class="listColumn 
 					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
 						${totalCount - loop.index}
@@ -165,7 +164,7 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
 </body>
 <script type="text/javascript">
-function mypageDetailFnc(no) {
+function MypageProfilePaymentMemberDetailFnc(no) {
 	
 	var url = './MypageProfilePaymentMemberDetail.do?memberNo=' + no;
 	

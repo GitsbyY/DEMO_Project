@@ -169,7 +169,7 @@ public class MemberController {
 		return "auth/LoginPage";
 	}
 
-	// 마이페이지 화면
+	// 회원정보관리
 	@RequestMapping(value = "/mypage/mypageProfile.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myPageProfile(@RequestParam(defaultValue = "1") int curPage, HttpSession session, Model model) {
 
@@ -195,6 +195,23 @@ public class MemberController {
 		session.setAttribute("myPageAside", "memberInfo");
 
 		return "mypage/MypageProfile";
+	}
+
+	// 회원정보 상세 화면
+	@RequestMapping(value = "/mypage/MypageProfileEdit.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String myPageProfileDetail(int memberNo, HttpSession session, Model model) {
+
+		log.info("Welcome MemberController login!");
+
+		Map<String, Object> memberDto = memberService.myPageProfileDetailMemberSelectOne(memberNo);
+		Map<String, Object> petDto = memberService.myPageProfileDetailPetSelectOne(memberNo);
+
+		model.addAttribute("memberDto", memberDto);
+		model.addAttribute("petDto", petDto);
+
+		session.setAttribute("myPageAside", "memberPay");
+
+		return "mypage/MypageProfileEdit";
 	}
 
 	// 마이페이지결제 화면
@@ -223,6 +240,24 @@ public class MemberController {
 		session.setAttribute("myPageAside", "memberPay");
 
 		return "mypage/MypageProfilePayment";
+	}
+
+	// 마이페이지결제 상세 화면
+	@RequestMapping(value = "/mypage/MypageProfilePaymentMemberDetail.do", method = { RequestMethod.GET,
+			RequestMethod.POST })
+	public String myPageProfilPaymentDetail(int memberNo, HttpSession session, Model model) {
+
+		log.info("Welcome MemberController login!");
+
+		Map<String, Object> memberDto = memberService.memberPaymentDeatilSelectOne(memberNo);
+		Map<String, Object> memberChargeDto = memberService.memberPaymentDeatilChargeSelectOne(memberNo);
+
+		model.addAttribute("memberDto", memberDto);
+		model.addAttribute("memberChargeDto", memberChargeDto);
+
+		session.setAttribute("myPageAside", "memberPay");
+
+		return "mypage/MypageProfilePaymentMemberDetail";
 	}
 
 }

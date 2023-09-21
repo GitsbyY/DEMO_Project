@@ -102,7 +102,7 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 
 	<div id='divContainer'>
 		<div class="title">
-			<div id="firstTitle">주문목록</div>
+			<div id="firstTitle">취소내역</div>
 		</div>
 		<div class="listColumnContainerDefault">
 			<div id="listColumn1" class="listColumn">번호</div>

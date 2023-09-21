@@ -106,6 +106,30 @@ public class MemberDaoImpl implements MemberDao{
 		return sqlSession.selectList(nameSpace + "memberPaymentSelectList", map);
 	}
 
+	@Override
+	public Map<String, Object> memberPaymentDeatilSelectOne(int memberNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + "memberPaymentDeatilSelectOne" , memberNo);
+	}
+
+	@Override
+	public Map<String, Object> memberPaymentDeatilChargeSelectOne(int memberNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + "memberPaymentDeatilChargeSelectOne" , memberNo);
+	}
+
+	@Override
+	public Map<String, Object> myPageProfileDetailMemberSelectOne(int memberNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + "myPageProfileDetailMemberSelectOne" , memberNo);
+	}
+
+	@Override
+	public Map<String, Object> myPageProfileDetailPetSelectOne(int memberNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + "myPageProfileDetailPetSelectOne" , memberNo);
+	}
+
 	
 
 	
