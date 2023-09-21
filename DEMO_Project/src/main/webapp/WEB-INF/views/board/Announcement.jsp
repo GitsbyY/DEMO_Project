@@ -68,6 +68,7 @@ table{
    width: 100%;
    border-left: none;
    border-collapse: collapse;
+   font-size: 16px;
 }
 #listColumn1{
    width: 10%;

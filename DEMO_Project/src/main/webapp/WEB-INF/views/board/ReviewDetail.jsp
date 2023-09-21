@@ -47,6 +47,7 @@ table{
    width: 100%;
    border-left: none;
    border-collapse: collapse;
+   font-size: 16px;
 }
 #listColumn1{
    width: 7%;
@@ -143,7 +144,7 @@ table{
          <input type="hidden" name="no" value="${reviewDto.REVIEW_NO}">
          <input class="rightBtn" type="submit" value="수정">
          <input class="rightBtn" type="button" value="삭제" 
-         	onclick='pageMoveDeleteFnc(${reviewDto.NREVIEW_NO});'>
+         	onclick='pageMoveDeleteFnc(${reviewDto.REVIEW_NO});'>
       </div>
       </form>                           
    </div>
@@ -157,7 +158,7 @@ table{
    
 	function pageMoveDeleteFnc(no) {
 		
-		var url = './delete.do?no=' + no;
+		var url = './reviewdelete.do?no=' + no;
 			
 		location.href = url;
 	}

@@ -12,6 +12,7 @@ import com.demo.board.dto.InquiryDto;
 import com.demo.board.dto.NoticeDto;
 import com.demo.order.dto.OrderDto;
 import com.demo.board.dto.ReviewDto;
+import com.demo.member.dto.MemberDto;
 
 
 
@@ -159,6 +160,40 @@ public class BoardDaoImpl implements BoardDao{
 	public int reviewSelectTotalCount() {
 		// TODO Auto-generated method stub
 		return (int)sqlSession.selectOne(nameSpace + "reviewSelectTotalCount");
+	}
+
+	@Override
+	public int inquiryDeleteOne(int no) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete(nameSpace + "inquiryDeleteOne", no);
+	}
+
+	@Override
+	public int inquiryUpdateOne(InquiryDto inquiryDto) {
+		// TODO Auto-generated method stub
+		return sqlSession.update(nameSpace + "inquiryUpdateOne", inquiryDto);
+	}
+
+	@Override
+	public HashMap<String, Object> memberInfo(int memberNo) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new HashMap<>();
+	    HashMap<String, Object> map = new HashMap<String, Object>();
+	    map.put("memberNo", memberNo);
+	    resultMap = sqlSession.selectOne(nameSpace + "memberInfo", map);
+	    return resultMap;
+	}
+
+	@Override
+	public int reviewInsertOne(ReviewDto reviewDto) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert(nameSpace + "reviewInsertOne", reviewDto);
+	}
+
+	@Override
+	public int reviewDeleteOne(int no) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete(nameSpace + "reviewDeleteOne", no);
 	}
 
 	

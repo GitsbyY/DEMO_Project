@@ -43,6 +43,7 @@ table{
    width: 100%;   
    border-left: none;   
    border-collapse: collapse;
+   font-size: 16px;
 }
 .firstTd{
    width: 12%;   

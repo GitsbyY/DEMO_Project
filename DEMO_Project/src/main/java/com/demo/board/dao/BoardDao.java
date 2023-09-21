@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.demo.board.dto.InquiryDto;
 import com.demo.board.dto.NoticeDto;
+import com.demo.board.dto.ReviewDto;
+import com.demo.member.dto.MemberDto;
 import com.demo.order.dto.OrderDto;
 
 public interface BoardDao {
@@ -41,6 +43,16 @@ public interface BoardDao {
    public int reviewSelectTotalCount();
    
    public HashMap<String, Object> reviewSelectOne(int no);
+   
+   public int inquiryDeleteOne(int no);
+   
+   public int inquiryUpdateOne(InquiryDto inquiryDto);
+   
+   public HashMap<String, Object> memberInfo(int memberNo);
+   
+   public int reviewInsertOne(ReviewDto reviewDto);
+   
+   public int reviewDeleteOne(int no);
 
 
 

@@ -146,6 +146,19 @@
       WHERE NOTICE_NO = #{no}
    </select>
    
+   <select id="memberInfo" parameterType="int"
+       resultType="map">
+      	SELECT P.PRODUCT_NAME, T.PET_BREED, M.MEMBER_NO, P.PRODUCT_NO
+		FROM PET T JOIN MEMBER M
+		ON T.MEMBER_NO = M.MEMBER_NO
+		JOIN ORDER_LIST O
+		ON M.MEMBER_NO = O.MEMBER_NO
+		JOIN PRODUCT P
+		ON O.PRODUCT_NO = P.PRODUCT_NO
+		WHERE M.MEMBER_NO = #{memberNo}
+      
+   </select>
+   
    <select id="reviewSelectOne" parameterType="int"
        resultType="map">
       SELECT 
@@ -202,6 +215,20 @@
       VALUES(#{noticeNo}, #{memberNo}, #{noticeTitle}, #{noticeContent}, SYSDATE)
    </insert>
    
+   <insert id="reviewInsertOne" parameterType="reviewDto" 
+      useGeneratedKeys="true" keyProperty= "reviewNo">
+      <selectKey keyProperty="reviewNo" resultType="int" order="BEFORE">
+         SELECT REVIEW_NO_SEQ.NEXTVAL
+         FROM DUAL
+      </selectKey>
+      
+      INSERT INTO REVIEW
+      (REVIEW_NO, MEMBER_NO, PRODUCT_NO, REVIEW_TITLE, REVIEW_CONTENT,
+    	REVIEW_CRE_DATE, REVIEW_MOD_DATE)
+      VALUES(#{reviewNo}, #{memberNo}, 1, #{reviewTitle}, #{reviewContent}
+      , SYSDATE, SYSDATE)
+   </insert>
+   
    <insert id="inquiryInsertOne" parameterType="inquiryDto" 
       useGeneratedKeys="true" keyProperty="inquiryNo">
       <selectKey keyProperty="inquiryNo" resultType="int" order="BEFORE">
@@ -226,11 +253,30 @@
       WHERE NOTICE_NO = #{noticeNo}
    </update>
    
+   <update id="inquiryUpdateOne" parameterType="inquiryDto">
+      UPDATE INQUIRY
+      <set>
+         <if test="inquiryTitle != null">INQUIRY_TITLE = #{inquiryTitle},</if>
+         <if test="inquiryContent != null">INQUIRY_CONTENT = #{inquiryContent},</if>
+         INQUIRY_CRE_DATE = SYSDATE
+      </set>
+      WHERE INQUIRY_NO = #{inquiryNo}
+   </update>
+   
    <delete id="noticeDeleteOne" parameterType="int">
 		DELETE FROM NOTICE
 		WHERE NOTICE_NO = #{value}
 	</delete>
    
+   <delete id="inquiryDeleteOne" parameterType="int">
+		DELETE FROM INQUIRY
+		WHERE INQUIRY_NO = #{value}
+	</delete>
+   
+   <delete id="reviewDeleteOne" parameterType="int">
+		DELETE FROM REVIEW
+		WHERE REVIEW_NO = #{value}
+	</delete>
 </mapper>
 
 

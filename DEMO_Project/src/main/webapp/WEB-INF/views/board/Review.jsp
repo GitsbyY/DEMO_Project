@@ -58,6 +58,7 @@ table{
    width: 100%;
    border-left: none;
    border-collapse: collapse;
+   font-size: 16px;
 }
 #titleDiv{
    margin-top: 30px;
@@ -111,6 +112,22 @@ a{
 	text-decoration-line: none;
 	color: black;
 }
+#writeBtnDiv{   
+   margin-top: 30px;
+   float: right;
+}
+#writeBtn{
+   background-color: #FFC4A3;
+   border: none;
+   color: white;
+   width: 60px;
+   height: 30px;
+   font-size: 16px;   
+}
+#pageDiv{
+   margin-top: 30px;
+   clear: right;
+}
 </style>
 <meta charset="UTF-8">
 <title>후기남겨요 메인</title>
@@ -163,6 +180,21 @@ a{
             </tr>            
             </c:forEach>
          </table>
+      </div>
+      <div id="writeBtnDiv">
+         <input id="writeBtn" type="button" value="글쓰기" 
+            onclick="location.href = '/DEMO_Project/board/reviewadd.do'">
+         <input type="hidden" name="reviewDto" value="${reviewDtoList}">   
+      </div>      	
+      <div id="pageDiv">
+      <jsp:include page="/WEB-INF/views/common/BoardPaging.jsp">
+      <jsp:param value="${pagingMap}" name="pagingMap"/>
+      </jsp:include>
+   
+      <form action="./review.do" id='pagingForm' method="post">
+      <input type="hidden" id='curPage' name='curPage' 
+         value="${pagingMap.boardPaging.curPage}">
+      </form>
       </div>
 	</div>				   
 	

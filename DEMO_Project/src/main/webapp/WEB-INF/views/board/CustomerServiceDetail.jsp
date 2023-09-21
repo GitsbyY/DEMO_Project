@@ -48,6 +48,7 @@ table{
    width: 100%;
    border-left: none;
    border-collapse: collapse;
+   font-size: 16px;
 }
 #listColumn1{
    width: 7%;
@@ -81,6 +82,19 @@ table{
    padding-left: 25px;
    padding-top: 20px;
 }
+#listBtn{
+   float: left;
+   height: 30px;
+}
+#btnDiv{
+   margin-top: 10px;
+}
+.rightBtn{
+   float: right;
+   margin-left: 10px;
+   height: 30px;
+   width: 50px;
+}
 </style>
 <meta charset="UTF-8">
 <title>공지사항 메인</title>
@@ -95,7 +109,8 @@ table{
       <div id="titleDiv">         
          <div id="firstDiv">1:1 상담문의</div>
          <div id="secondDiv"></div>                           
-      </div>      
+      </div>
+      <form action='./inquiryupdate.do' method='get'>      
       <div id="tableDiv">
          <table>
             <tr>
@@ -122,8 +137,17 @@ table{
                		<pre>${inquiryDto.INQUIRY_CONTENT}</pre>
                </td>
             </tr>            
-         </table>
-      </div>         
+         </table>         
+		</div>
+         <div id="btnDiv">
+         <input id="listBtn" type="button" value="뒤로가기" 
+         onclick="goBack();">
+         <input type="hidden" name="no" value="${inquiryDto.INQUIRY_NO}">
+         <input class="rightBtn" type="submit" value="수정">
+         <input class="rightBtn" type="button" value="삭제" 
+         	onclick='pageMoveDeleteFnc(${inquiryDto.INQUIRY_NO});'>
+      	</div>
+      	</form>     	        
                   
    </div>
    
@@ -132,4 +156,16 @@ table{
   
    <jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
+<script type="text/javascript">
+	function goBack() {
+		window.history.back();
+	}
+   
+	function pageMoveDeleteFnc(no) {
+		
+		var url = './inquirydelete.do?no=' + no;
+			
+		location.href = url;
+	}
+</script>
 </html>

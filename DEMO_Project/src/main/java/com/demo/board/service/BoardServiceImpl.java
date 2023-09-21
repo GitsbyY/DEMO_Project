@@ -16,6 +16,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.demo.board.dao.BoardDao;
 import com.demo.board.dto.InquiryDto;
 import com.demo.board.dto.NoticeDto;
+import com.demo.board.dto.ReviewDto;
+import com.demo.member.dto.MemberDto;
 import com.demo.util.FileUtils;
 
 @Service
@@ -157,6 +159,67 @@ public class BoardServiceImpl implements BoardService{
 	public int reviewSelectTotalCount() {
 		// TODO Auto-generated method stub
 		return boardDao.reviewSelectTotalCount();
+	}
+	@Override
+	public int inquiryDeleteOne(int no) {
+		// TODO Auto-generated method stub
+		return boardDao.inquiryDeleteOne(no);
+	}
+	@Override
+	public int inquiryUpdateOne(InquiryDto inquiryDto
+			, MultipartHttpServletRequest mulRequest
+			, int fileIdx) throws Exception {
+		// TODO Auto-generated method stub
+		int resultNum = 0;
+	      
+	      try {
+	         resultNum = boardDao.inquiryUpdateOne(inquiryDto);
+	         
+	         int parentSeq = inquiryDto.getInquiryNo();
+	         Map<String, Object> tempFileMap 
+	            = boardDao.fileSelectStoredFileName(parentSeq);
+	         
+//	         List<Map<String, Object>> list 
+//	            = fileUtils.parseInsertFileInfo(parentSeq, multipartHttpServletRequest);
+//	         
+//	         // 오로지 하나만 관리
+//	         if (list.isEmpty() == false) {
+//	            if(tempFileMap != null) {
+//	               boardDao.fileDelete(parentSeq);
+//	               fileUtils.parseUpdateFileInfo(tempFileMap);
+//	            }
+//	            
+//	            for (Map<String, Object> map : list) {
+//	               boardDao.insertFile(map);
+//	               
+//	            }
+//	         }else if (fileIdx == -1) {
+//	            if (tempFileMap != null) {
+//	               boardDao.fileDelete(parentSeq);
+//	               fileUtils.parseUpdateFileInfo(tempFileMap);
+//	            }
+//	         }
+	         
+	      } catch (Exception e) {
+	         TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+	      }
+	      return resultNum;
+	}
+	@Override
+	public HashMap<String, Object> memberInfo(int memberNo) {
+		// TODO Auto-generated method stub
+		return boardDao.memberInfo(memberNo);
+	}
+	@Override
+	public void reviewInsertOne(ReviewDto reviewDto
+		, MultipartHttpServletRequest mulRequest) throws Exception {
+		// TODO Auto-generated method stub
+		boardDao.reviewInsertOne(reviewDto);
+	}
+	@Override
+	public int reviewDeleteOne(int no) {
+		// TODO Auto-generated method stub
+		return boardDao.reviewDeleteOne(no);
 	}
 	
 	

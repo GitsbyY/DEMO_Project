@@ -95,7 +95,7 @@ td input{
 	background-color: #FFC4A3;
 	border: none;
 	color: white;
-	width: 60px;
+	width: 80px;
 	height: 30px;
 	font-size: 16px;   
 }
@@ -114,9 +114,10 @@ td input{
          <div id="firstDiv">1:1 상담문의</div>
          <div id="secondDiv"></div>                           
       </div>
-      <form action='./inquiryaddCtr.do' method='post' enctype="multipart/form-data">      
+      <form action='./inquiryupdateCtr.do' method='post' enctype="multipart/form-data">      
          <input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}">
-         <input type="hidden" name="memberName" value="${sessionScope.member.memberName}">        
+         <input type="hidden" name="memberName" value="${sessionScope.member.memberName}">
+         <input type="hidden" name="inquiryNo" value="${inquiryDto.INQUIRY_NO}">        
          <div id="tableDiv">
             <table>
                <tr id="firstTr">
@@ -132,7 +133,8 @@ td input{
                <tr id="secondTr">
                   <td id="secondTd" class="firstTd">제목</td>   
                   <td id="titleInputTd">
-                     <input id="titleInput" type="text" name="inquiryTitle">
+                     <input id="titleInput" type="text" name="inquiryTitle" 
+                     	value="${inquiryDto.INQUIRY_TITLE}">
                   </td>      
                </tr>                           
                <tr id="thirdTr">
@@ -142,14 +144,13 @@ td input{
                <tr id=fourthTr">
                   <td id="fourthTd" class="firstTd">내용</td>   
                   <td id="contentInputTd">
-                     <textarea id="contentInput" type="text" name="inquiryContent"></textarea>
-                     <input type="hidden" name="inquiryContent" value="${inquiryDto.INQUIRY_CONTENT}">                  
+                     <textarea id="contentInput" type="text" name="inquiryContent">${inquiryDto.INQUIRY_CONTENT}</textarea>                                      
                   </td>
                </tr>            
             </table>
          </div>
          <div id="btnDiv">
-            <input id="registrationBtn" type="submit" value="등록">
+            <input id="registrationBtn" type="submit" value="수정완료">
             <input id="cancellationBtn" type="button" value="취소" 
                onclick="location.href = 'javascript:window.history.back();'">   
          </div>

@@ -20,7 +20,7 @@
 }
 #firstDiv{
 	border-bottom: 2px solid black;
-	width: 180px;
+	width: 150px;
 	display: block;     
 }
 #secondTh{      
@@ -59,11 +59,12 @@ td input{
     padding-left: 10px; /* 원하는 만큼의 여백 크기를 지정합니다. */    
 }
 #titleInputTd{
-	padding-left: 10px;   
+	padding-left: 10px;
+	width: 40%;   
 }
 #titleInput{
 	height: 30px;
-	width: 500px;
+	width: 90%;
 }
 #typeSelect{
 	height: 30px;
@@ -99,6 +100,9 @@ td input{
 	height: 30px;
 	font-size: 16px;   
 }
+#petBreed{
+	padding-left: 10px;
+}
 </style>
 <meta charset="UTF-8">
 <title>공지사항 메인</title>
@@ -107,43 +111,42 @@ td input{
 <body>
    <jsp:include page="/WEB-INF/views/Header.jsp"/>
    
-   <jsp:include page="/WEB-INF/views/asideCustomerService.jsp"/>
+   <jsp:include page="/WEB-INF/views/asideShop.jsp"/>
    
    <div id='divContainer'>
       <div id="titleDiv">         
-         <div id="firstDiv">1:1 상담문의</div>
+         <div id="firstDiv">후기남겨요</div>
          <div id="secondDiv"></div>                           
       </div>
-      <form action='./inquiryaddCtr.do' method='post' enctype="multipart/form-data">      
-         <input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}">
-         <input type="hidden" name="memberName" value="${sessionScope.member.memberName}">        
+      <form action='./reviewaddCtr.do' method='post' enctype="multipart/form-data">
          <div id="tableDiv">
-            <table>
+            <table>                       
                <tr id="firstTr">
-                  <td id="firstTd" class="firstTd">상담유형</td>   
+                  <td id="firstTd" class="firstTd">상품명</td>   
                   <td id="titleInputTd">
-                     <!-- <input id="titleInput" type="text" name="inquiryType"> -->
-                     <select id="typeSelect" name="inquiryType">
-                     	<option>회원
-                     	<option>상품
-                     </select>
+                  	${memberInfo.PRODUCT_NAME}
+                  </td>
+                  <td class="firstTd">견종</td>
+                  <td id="petBreed">
+                  	${memberInfo.PET_BREED}
                   </td>      
                </tr>
                <tr id="secondTr">
                   <td id="secondTd" class="firstTd">제목</td>   
-                  <td id="titleInputTd">
-                     <input id="titleInput" type="text" name="inquiryTitle">
+                  <td id="titleInputTd" colspan="3">
+                     <input id="titleInput" type="text" name="reviewTitle">
                   </td>      
                </tr>                           
                <tr id="thirdTr">
                   <td id="thirdTd" class="firstTd">작성자</td>   
-                  <td id="nameTd">${sessionScope.member.memberName}</td>                        
+                  <td id="nameTd" colspan="3">${sessionScope.member.memberName}</td>                        
                </tr>
                <tr id=fourthTr">
                   <td id="fourthTd" class="firstTd">내용</td>   
-                  <td id="contentInputTd">
-                     <textarea id="contentInput" type="text" name="inquiryContent"></textarea>
-                     <input type="hidden" name="inquiryContent" value="${inquiryDto.INQUIRY_CONTENT}">                  
+                  <td id="contentInputTd" colspan="3">
+                     <textarea id="contentInput" type="text" name="reviewContent"></textarea>
+                     <input type="hidden" name="reviewContent" value="${memberInfo.INQUIRY_CONTENT}">
+                     <input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}">                  
                   </td>
                </tr>            
             </table>

@@ -13,8 +13,8 @@
 		<h1 class="asideH1tag">고객센터</h1>
 		<c:set var="cssinquiry" value="${sessionScope.customAside eq 'inquiry' ? 'curPageATag' : ''}" />
 		<c:set var="cssannouncement" value="${sessionScope.customAside eq 'announcement' ? 'curPageATag' : ''}" />
-		<a class="asideATag ${cssinquiry}" href="/DEMO_Project/board/customerService.do">1:1 상담문의</a><br>
 		<a class="asideATag ${cssannouncement}" href="/DEMO_Project/board/announcement.do">공지사항</a><br>         
+		<a class="asideATag ${cssinquiry}" href="/DEMO_Project/board/customerService.do">1:1 상담문의</a><br>
 	</aside>
 	
 		<%-- <a class="asideATag ${varName}" href="./shop.do?category=${category eq 0 ? '' : category}">
