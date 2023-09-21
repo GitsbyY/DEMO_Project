@@ -49,6 +49,11 @@ tr, td{
 }
 .infoTabalTdData{
 	width: 247px;
+	font-size: 24px;
+}
+.infoTabalTdData{
+	font-size: 24px;
+	margin-left: 10px;
 }
 .emoneyListTitle{
 	width: 461px;
@@ -97,11 +102,17 @@ tr, td{
 					</tr>
 					<tr class="infoTabalTR">
 						<td class="infoTabalTdDefault">포인트</td>
-						<td class="infoTabalTdData">${memberDto.MEMBER_POINT}</td>
+						<td class="infoTabalTdData">
+							${memberDto.MEMBER_POINT}
+							<button style="float: right; width: 40px; height: 30px; margin-right: 10px;">수정</button>
+						</td>
 					</tr>
 					<tr class="infoTabalTR">
 						<td class="infoTabalTdDefault">이머니</td>
-						<td class="infoTabalTdData">${memberDto.MEMBER_EMONEY}</td>
+						<td class="infoTabalTdData">
+							${memberDto.MEMBER_EMONEY}
+							<button style="float: right; width: 40px; height: 30px; margin-right: 10px;">수정</button>
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -123,12 +134,6 @@ tr, td{
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
 </body>
 <script type="text/javascript">
-function MypageProfilePaymentMemberDetailFnc(no) {
-	
-	var url = './MypageProfilePaymentMemberDetail.do?memberNo=' + no;
-	
-    location.href= url;
-	
-}
+
 </script>
 </html>
