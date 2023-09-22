@@ -92,34 +92,45 @@
       JOIN MEMBER ON REVIEW.MEMBER_NO = MEMBER.MEMBER_NO
       JOIN PET ON MEMBER.MEMBER_NO = PET.MEMBER_NO
       WHERE REVIEW.RNUM BETWEEN #{start} AND #{end}
+
    </select>   
    
    <select id="inquirySelectList" parameterType="map" resultType="map">   
-      SELECT 
-       INQUIRY_NO, 
-       MEMBER_NO,
-       INQUIRY_TYPE, 
-       MEMBER_NAME,
-       INQUIRY_CRE_DATE,
-       INQUIRY_TITLE,
-       INQUIRY_CONTENT,
-       INQUIRY_IS_REPLY
-      FROM (
-       SELECT 
-        INQUIRY_NO, 
-        MEMBER_NO,
-        INQUIRY_TYPE, 
-        MEMBER_NAME,
-        INQUIRY_CRE_DATE,
-        INQUIRY_TITLE,
-        INQUIRY_CONTENT,
-        INQUIRY_IS_REPLY,
-        ROW_NUMBER() OVER (ORDER BY INQUIRY_CRE_DATE DESC) AS RNUM
-       FROM 
-        INQUIRY
-      )
-      WHERE 
-       RNUM BETWEEN #{start} AND #{end}
+     SELECT 
+	  SUBQUERY.INQUIRY_NO, 
+	  SUBQUERY.MEMBER_NO, 
+	  SUBQUERY.INQUIRY_TYPE, 
+	  SUBQUERY.MEMBER_NAME, 
+	  SUBQUERY.INQUIRY_CRE_DATE, 
+	  SUBQUERY.INQUIRY_TITLE, 
+	  SUBQUERY.INQUIRY_CONTENT, 
+	  SUBQUERY.INQUIRY_IS_REPLY, 
+	  SUBQUERY.REPLY_CONTENT,
+	  SUBQUERY.REPLY_CRE_DATE
+	FROM (
+ 	 SELECT 
+    I.INQUIRY_NO, 
+    I.MEMBER_NO, 
+    I.INQUIRY_TYPE, 
+    I.MEMBER_NAME, 
+    I.INQUIRY_CRE_DATE, 
+    I.INQUIRY_TITLE, 
+    I.INQUIRY_CONTENT, 
+    I.INQUIRY_IS_REPLY, 
+    R.REPLY_CRE_DATE, 
+    R.REPLY_MEMBER_NAME, 
+    R.REPLY_TITLE, 
+    R.REPLY_CONTENT,
+    ROW_NUMBER() OVER (ORDER BY I.INQUIRY_CRE_DATE DESC) AS RNUM
+  	FROM 
+    INQUIRY I
+ 	 LEFT JOIN 
+    REPLY R 
+ 	 ON 
+    I.INQUIRY_NO = R.INQUIRY_NO
+	) SUBQUERY
+	WHERE 
+  SUBQUERY.RNUM BETWEEN #{start} AND #{end}
    </select>
    
    <select id="noticeSelectTotalCount" resultType="java.lang.Integer">
@@ -146,16 +157,25 @@
       WHERE NOTICE_NO = #{no}
    </select>
    
+   <select id="replySelectOne" parameterType="int"
+       resultType="map">
+		SELECT I.INQUIRY_NO, R.MEMBER_NO, R.REPLY_CRE_DATE, R.REPLY_MEMBER_NAME
+		, R.REPLY_CONTENT, R.REPLY_TITLE
+		FROM REPLY R JOIN INQUIRY I
+		ON R.INQUIRY_NO = I.INQUIRY_NO
+		WHERE R.INQUIRY_NO = #{no}
+   </select>
+   
    <select id="memberInfo" parameterType="int"
        resultType="map">
-      	SELECT P.PRODUCT_NAME, T.PET_BREED, M.MEMBER_NO, P.PRODUCT_NO
-		FROM PET T JOIN MEMBER M
-		ON T.MEMBER_NO = M.MEMBER_NO
-		JOIN ORDER_LIST O
-		ON M.MEMBER_NO = O.MEMBER_NO
-		JOIN PRODUCT P
-		ON O.PRODUCT_NO = P.PRODUCT_NO
-		WHERE M.MEMBER_NO = #{memberNo}
+         SELECT P.PRODUCT_NAME, T.PET_BREED, M.MEMBER_NO, P.PRODUCT_NO
+      FROM PET T JOIN MEMBER M
+      ON T.MEMBER_NO = M.MEMBER_NO
+      JOIN ORDER_LIST O
+      ON M.MEMBER_NO = O.MEMBER_NO
+      JOIN PRODUCT P
+      ON O.PRODUCT_NO = P.PRODUCT_NO
+      WHERE M.MEMBER_NO = #{memberNo}
       
    </select>
    
@@ -176,7 +196,8 @@
        SELECT ROWNUM AS RNUM, R.REVIEW_NO, R.MEMBER_NO, R.PRODUCT_NO
        , R.REVIEW_TITLE, R.REVIEW_CONTENT, R.REVIEW_CRE_DATE, R.REVIEW_MOD_DATE
        FROM (
-        SELECT REVIEW_NO, MEMBER_NO, PRODUCT_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_CRE_DATE, REVIEW_MOD_DATE
+        SELECT REVIEW_NO, MEMBER_NO, PRODUCT_NO, REVIEW_TITLE, REVIEW_CONTENT
+        , REVIEW_CRE_DATE, REVIEW_MOD_DATE
         FROM REVIEW
         ORDER BY REVIEW_CRE_DATE DESC
        ) R
@@ -215,6 +236,15 @@
       VALUES(#{noticeNo}, #{memberNo}, #{noticeTitle}, #{noticeContent}, SYSDATE)
    </insert>
    
+   <insert id="replyInsertOne" parameterType="replyDto">
+      
+      INSERT INTO REPLY
+		(INQUIRY_NO, MEMBER_NO, REPLY_CRE_DATE, REPLY_MEMBER_NAME, REPLY_TITLE, REPLY_CONTENT)
+		VALUES(#{inquiryNo}, #{memberNo}, SYSDATE, #{memberName}
+		, #{replyTitle}, #{replyContent})
+            
+   </insert>
+   
    <insert id="reviewInsertOne" parameterType="reviewDto" 
       useGeneratedKeys="true" keyProperty= "reviewNo">
       <selectKey keyProperty="reviewNo" resultType="int" order="BEFORE">
@@ -224,7 +254,7 @@
       
       INSERT INTO REVIEW
       (REVIEW_NO, MEMBER_NO, PRODUCT_NO, REVIEW_TITLE, REVIEW_CONTENT,
-    	REVIEW_CRE_DATE, REVIEW_MOD_DATE)
+       REVIEW_CRE_DATE, REVIEW_MOD_DATE)
       VALUES(#{reviewNo}, #{memberNo}, 1, #{reviewTitle}, #{reviewContent}
       , SYSDATE, SYSDATE)
    </insert>
@@ -253,6 +283,14 @@
       WHERE NOTICE_NO = #{noticeNo}
    </update>
    
+   <update id="inquiryUpdateReply" parameterType="replyDto">
+      UPDATE INQUIRY
+      <set>        
+         INQUIRY_IS_REPLY = 'Y'
+      </set>
+      WHERE INQUIRY_NO = #{inquiryNo}
+   </update>
+      
    <update id="inquiryUpdateOne" parameterType="inquiryDto">
       UPDATE INQUIRY
       <set>
@@ -263,20 +301,29 @@
       WHERE INQUIRY_NO = #{inquiryNo}
    </update>
    
+   <update id="reviewUpdateOne" parameterType="reviewDto">
+      UPDATE REVIEW
+      <set>
+         <if test="reviewTitle != null">REVIEW_TITLE = #{reviewTitle},</if>
+         <if test="reviewContent != null">REVIEW_CONTENT = #{reviewContent},</if>
+         REVIEW_CRE_DATE = SYSDATE
+      </set>
+      WHERE REVIEW_NO = #{reviewNo}
+   </update>
+   
    <delete id="noticeDeleteOne" parameterType="int">
-		DELETE FROM NOTICE
-		WHERE NOTICE_NO = #{value}
-	</delete>
+      DELETE FROM NOTICE
+      WHERE NOTICE_NO = #{value}
+   </delete>
    
    <delete id="inquiryDeleteOne" parameterType="int">
-		DELETE FROM INQUIRY
-		WHERE INQUIRY_NO = #{value}
-	</delete>
+      DELETE FROM INQUIRY
+      WHERE INQUIRY_NO = #{value}
+   </delete>
    
    <delete id="reviewDeleteOne" parameterType="int">
-		DELETE FROM REVIEW
-		WHERE REVIEW_NO = #{value}
-	</delete>
+      DELETE FROM REVIEW
+      WHERE REVIEW_NO = #{value}
+   </delete>
 </mapper>
-
 

@@ -6,40 +6,40 @@
 <html>
 <head>
 <style type="text/css">
-#input{	
-	margin-top: 10px;
-	height: 25px;
-	width: 220px;
-	border-radius: 5px;
-	padding-left: 20px;
-	vertical-align: middle;
-	margin-bottom: 10px; 
+#input{   
+   margin-top: 10px;
+   height: 25px;
+   width: 220px;
+   border-radius: 5px;
+   padding-left: 20px;
+   vertical-align: middle;
+   margin-bottom: 10px; 
 }
 #select{
-	margin-right: 10px;
-	margin-top: 18px;
-	height: 20px;
-	width: 70px;
-	border-radius: 5px;
-	font-size: 12px;
-	font-weight: bold;
+   margin-right: 10px;
+   margin-top: 18px;
+   height: 20px;
+   width: 70px;
+   border-radius: 5px;
+   font-size: 12px;
+   font-weight: bold;
 }
 .optionTag{
-	text-align: center;	
+   text-align: center;   
 }
 .mainTh, .mainTr{
-	border: 1px solid black;
-	border-left:thick;
-	border-right:thick;
-	font-size: 14px;	
+   border: 1px solid black;
+   border-left:thick;
+   border-right:thick;
+   font-size: 14px;   
 }
-#midDiv{	
-	float: right;
+#midDiv{   
+   float: right;
 }
 #tableDiv{
-	clear: right;
-	width: 100%;
-	margin-top: 100px;
+   clear: right;
+   width: 100%;
+   margin-top: 100px;
 }
 th{
    border: 2px solid black;
@@ -109,8 +109,8 @@ table{
    text-align: center;
 }
 a{
-	text-decoration-line: none;
-	color: black;
+   text-decoration-line: none;
+   color: black;
 }
 #writeBtnDiv{   
    margin-top: 30px;
@@ -134,24 +134,24 @@ a{
 <link rel="stylesheet" type="text/css" href="/DEMO_Project/resources/css/main.css">
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/Header.jsp"/>
-	
-	<jsp:include page="/WEB-INF/views/asideShop.jsp"/>
-	
-	<div id='divContainer'>
-		<div id="titleDiv">			
-			<div id="firstDiv">후기남겨요</div>
-			<div id="secondDiv"></div>      			            
-		</div>		
-		<div id="midDiv">
-			<select id="select">
-				<option class="optionTag" value="product">상품</option>
-				<option class="optionTag" value="kind">견종</option>
-				<option class="optionTag" value="title">제목</option>
-			</select>			
-			<input id="input" type="text" name="serch" placeholder="검색어 입력창">		
-		</div>
-		<div id="tableDiv">
+   <jsp:include page="/WEB-INF/views/Header.jsp"/>
+   
+   <jsp:include page="/WEB-INF/views/asideShop.jsp"/>
+   
+   <div id='divContainer'>
+      <div id="titleDiv">         
+         <div id="firstDiv">후기남겨요</div>
+         <div id="secondDiv"></div>                           
+      </div>      
+      <div id="midDiv">
+         <select id="select">
+            <option class="optionTag" value="product">상품</option>
+            <option class="optionTag" value="kind">견종</option>
+            <option class="optionTag" value="title">제목</option>
+         </select>         
+         <input id="input" type="text" name="serch" placeholder="검색어 입력창">      
+      </div>
+      <div id="tableDiv">
          <table>
             <tr>
                <th id="listColumn1" class="listColumn">번호</th>
@@ -185,7 +185,7 @@ a{
          <input id="writeBtn" type="button" value="글쓰기" 
             onclick="location.href = '/DEMO_Project/board/reviewadd.do'">
          <input type="hidden" name="reviewDto" value="${reviewDtoList}">   
-      </div>      	
+      </div>         
       <div id="pageDiv">
       <jsp:include page="/WEB-INF/views/common/BoardPaging.jsp">
       <jsp:param value="${pagingMap}" name="pagingMap"/>
@@ -196,9 +196,9 @@ a{
          value="${pagingMap.boardPaging.curPage}">
       </form>
       </div>
-	</div>				   
-	
-	
-	<jsp:include page="/WEB-INF/views/Footer.jsp"/>
+   </div>               
+   
+   
+   <jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
 </html>

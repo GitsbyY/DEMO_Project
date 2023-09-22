@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.demo.board.dao.BoardDao;
 import com.demo.board.dto.InquiryDto;
 import com.demo.board.dto.NoticeDto;
+import com.demo.board.dto.ReplyDto;
 import com.demo.board.dto.ReviewDto;
 import com.demo.member.dto.MemberDto;
 import com.demo.util.FileUtils;
@@ -53,10 +54,10 @@ public class BoardServiceImpl implements BoardService{
       return boardDao.inquirySelectList(start, end);
    }
    @Override
-	public Map<String, Object> reviewSelectList(int start, int end) {
-		// TODO Auto-generated method stub
-		return boardDao.reviewSelectList(start, end);
-	}
+   public Map<String, Object> reviewSelectList(int start, int end) {
+      // TODO Auto-generated method stub
+      return boardDao.reviewSelectList(start, end);
+   }
    @Override
    public Map<String, Object> noticeSelectOne(int no) {
       // TODO Auto-generated method stub
@@ -78,24 +79,27 @@ public class BoardServiceImpl implements BoardService{
       HashMap<String, Object> inquiryDto = boardDao.inquirySelectOne(no);
       resultMap.put("inquiryDto", inquiryDto);
       
+      HashMap<String, Object> replyDto = boardDao.replySelectOne(no);
+      resultMap.put("replyDto", replyDto);            
+      
       List<Map<String, Object>> fileList = boardDao.fileSelectList(no);
       resultMap.put("fileList", fileList);
       
       return resultMap;
    }
    @Override
-	public Map<String, Object> reviewSelectOne(int no) {
-		// TODO Auto-generated method stub
-	   Map<String, Object> resultMap = new HashMap<String, Object>();
-	      
-	   HashMap<String, Object> reviewDto = boardDao.reviewSelectOne(no);
-	   resultMap.put("reviewDto", reviewDto);
-	      
-	   List<Map<String, Object>> fileList = boardDao.fileSelectList(no);
-	   resultMap.put("fileList", fileList);
-	      
-	   return resultMap;
-	}
+   public Map<String, Object> reviewSelectOne(int no) {
+      // TODO Auto-generated method stub
+      Map<String, Object> resultMap = new HashMap<String, Object>();
+         
+      HashMap<String, Object> reviewDto = boardDao.reviewSelectOne(no);
+      resultMap.put("reviewDto", reviewDto);
+         
+      List<Map<String, Object>> fileList = boardDao.fileSelectList(no);
+      resultMap.put("fileList", fileList);
+         
+      return resultMap;
+   }
    @Override
    public void inquiryInsertOne(InquiryDto inquiryDto
       , MultipartHttpServletRequest mulRequest) throws Exception {
@@ -150,78 +154,125 @@ public class BoardServiceImpl implements BoardService{
       }
       return resultNum;
    }
+   @Override
+   public int noticeDeleteOne(int no) {
+      // TODO Auto-generated method stub
+      return boardDao.noticeDeleteOne(no);
+   }
+   @Override
+   public int reviewSelectTotalCount() {
+      // TODO Auto-generated method stub
+      return boardDao.reviewSelectTotalCount();
+   }
+   @Override
+   public int inquiryDeleteOne(int no) {
+      // TODO Auto-generated method stub
+      return boardDao.inquiryDeleteOne(no);
+   }
+   @Override
+   public int inquiryUpdateOne(InquiryDto inquiryDto
+         , MultipartHttpServletRequest mulRequest
+         , int fileIdx) throws Exception {
+      // TODO Auto-generated method stub
+      int resultNum = 0;
+         
+         try {
+            resultNum = boardDao.inquiryUpdateOne(inquiryDto);
+            
+            int parentSeq = inquiryDto.getInquiryNo();
+            Map<String, Object> tempFileMap 
+               = boardDao.fileSelectStoredFileName(parentSeq);
+            
+//            List<Map<String, Object>> list 
+//               = fileUtils.parseInsertFileInfo(parentSeq, multipartHttpServletRequest);
+//            
+//            // 오로지 하나만 관리
+//            if (list.isEmpty() == false) {
+//               if(tempFileMap != null) {
+//                  boardDao.fileDelete(parentSeq);
+//                  fileUtils.parseUpdateFileInfo(tempFileMap);
+//               }
+//               
+//               for (Map<String, Object> map : list) {
+//                  boardDao.insertFile(map);
+//                  
+//               }
+//            }else if (fileIdx == -1) {
+//               if (tempFileMap != null) {
+//                  boardDao.fileDelete(parentSeq);
+//                  fileUtils.parseUpdateFileInfo(tempFileMap);
+//               }
+//            }
+            
+         } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+         }
+         return resultNum;
+   }
+   @Override
+   public HashMap<String, Object> memberInfo(int memberNo) {
+      // TODO Auto-generated method stub
+      return boardDao.memberInfo(memberNo);
+   }
+   @Override
+   public void reviewInsertOne(ReviewDto reviewDto
+      , MultipartHttpServletRequest mulRequest) throws Exception {
+      // TODO Auto-generated method stub
+      boardDao.reviewInsertOne(reviewDto);
+   }
+   @Override
+   public int reviewDeleteOne(int no) {
+      // TODO Auto-generated method stub
+      return boardDao.reviewDeleteOne(no);
+   }
+   @Override
+   public int reviewUpdateOne(ReviewDto reviewDto
+         , MultipartHttpServletRequest mulRequest
+         , int fileIdx) throws Exception {
+      // TODO Auto-generated method stub
+      int resultNum = 0;
+         
+         try {
+            resultNum = boardDao.reviewUpdateOne(reviewDto);
+            
+            int parentSeq = reviewDto.getReviewNo();
+            Map<String, Object> tempFileMap 
+               = boardDao.fileSelectStoredFileName(parentSeq);
+            
+//            List<Map<String, Object>> list 
+//               = fileUtils.parseInsertFileInfo(parentSeq, multipartHttpServletRequest);
+//            
+//            // 오로지 하나만 관리
+//            if (list.isEmpty() == false) {
+//               if(tempFileMap != null) {
+//                  boardDao.fileDelete(parentSeq);
+//                  fileUtils.parseUpdateFileInfo(tempFileMap);
+//               }
+//               
+//               for (Map<String, Object> map : list) {
+//                  boardDao.insertFile(map);
+//                  
+//               }
+//            }else if (fileIdx == -1) {
+//               if (tempFileMap != null) {
+//                  boardDao.fileDelete(parentSeq);
+//                  fileUtils.parseUpdateFileInfo(tempFileMap);
+//               }
+//            }
+            
+         } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+         }
+         return resultNum;
+   }
 	@Override
-	public int noticeDeleteOne(int no) {
+	public void replyInsertOne(ReplyDto replyDto
+			, MultipartHttpServletRequest mulRequest) throws Exception {
 		// TODO Auto-generated method stub
-		return boardDao.noticeDeleteOne(no);
+		boardDao.replyInsertOne(replyDto);
+		boardDao.inquiryUpdateReply(replyDto);
 	}
-	@Override
-	public int reviewSelectTotalCount() {
-		// TODO Auto-generated method stub
-		return boardDao.reviewSelectTotalCount();
-	}
-	@Override
-	public int inquiryDeleteOne(int no) {
-		// TODO Auto-generated method stub
-		return boardDao.inquiryDeleteOne(no);
-	}
-	@Override
-	public int inquiryUpdateOne(InquiryDto inquiryDto
-			, MultipartHttpServletRequest mulRequest
-			, int fileIdx) throws Exception {
-		// TODO Auto-generated method stub
-		int resultNum = 0;
-	      
-	      try {
-	         resultNum = boardDao.inquiryUpdateOne(inquiryDto);
-	         
-	         int parentSeq = inquiryDto.getInquiryNo();
-	         Map<String, Object> tempFileMap 
-	            = boardDao.fileSelectStoredFileName(parentSeq);
-	         
-//	         List<Map<String, Object>> list 
-//	            = fileUtils.parseInsertFileInfo(parentSeq, multipartHttpServletRequest);
-//	         
-//	         // 오로지 하나만 관리
-//	         if (list.isEmpty() == false) {
-//	            if(tempFileMap != null) {
-//	               boardDao.fileDelete(parentSeq);
-//	               fileUtils.parseUpdateFileInfo(tempFileMap);
-//	            }
-//	            
-//	            for (Map<String, Object> map : list) {
-//	               boardDao.insertFile(map);
-//	               
-//	            }
-//	         }else if (fileIdx == -1) {
-//	            if (tempFileMap != null) {
-//	               boardDao.fileDelete(parentSeq);
-//	               fileUtils.parseUpdateFileInfo(tempFileMap);
-//	            }
-//	         }
-	         
-	      } catch (Exception e) {
-	         TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-	      }
-	      return resultNum;
-	}
-	@Override
-	public HashMap<String, Object> memberInfo(int memberNo) {
-		// TODO Auto-generated method stub
-		return boardDao.memberInfo(memberNo);
-	}
-	@Override
-	public void reviewInsertOne(ReviewDto reviewDto
-		, MultipartHttpServletRequest mulRequest) throws Exception {
-		// TODO Auto-generated method stub
-		boardDao.reviewInsertOne(reviewDto);
-	}
-	@Override
-	public int reviewDeleteOne(int no) {
-		// TODO Auto-generated method stub
-		return boardDao.reviewDeleteOne(no);
-	}
-	
-	
+   
+   
             
 }

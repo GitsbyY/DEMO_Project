@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.demo.board.dto.InquiryDto;
 import com.demo.board.dto.NoticeDto;
+import com.demo.board.dto.ReplyDto;
 import com.demo.board.dto.ReviewDto;
 import com.demo.member.dto.MemberDto;
 import com.demo.order.dto.OrderDto;
@@ -49,15 +50,22 @@ public interface BoardService {
    public int inquiryDeleteOne(int no);
 
    public int inquiryUpdateOne(InquiryDto inquiryDto
-		   , MultipartHttpServletRequest mulRequest
-		   , int fileIdx) throws Exception;
+         , MultipartHttpServletRequest mulRequest
+         , int fileIdx) throws Exception;
    
    public HashMap<String, Object> memberInfo(int memberNo);
    
    public void reviewInsertOne(ReviewDto reviewDto
-		   , MultipartHttpServletRequest mulRequest) throws Exception;
+         , MultipartHttpServletRequest mulRequest) throws Exception;
 
    public int reviewDeleteOne(int no);
+   
+   public int reviewUpdateOne(ReviewDto reviewDto
+         , MultipartHttpServletRequest mulRequest
+         , int fileIdx) throws Exception;
+
+   public void replyInsertOne(ReplyDto replyDto
+		   , MultipartHttpServletRequest mulRequest) throws Exception;
 
 
    

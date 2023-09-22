@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.demo.board.dto.InquiryDto;
 import com.demo.board.dto.NoticeDto;
+import com.demo.board.dto.ReplyDto;
 import com.demo.order.dto.OrderDto;
 import com.demo.board.dto.ReviewDto;
 import com.demo.member.dto.MemberDto;
@@ -63,20 +64,20 @@ public class BoardDaoImpl implements BoardDao{
    }
    
    @Override
-	public Map<String, Object> reviewSelectList(int start, int end) {
-		// TODO Auto-generated method stub
-	   	HashMap<String, Object> resultMap = new HashMap<>();
-	    HashMap<String, Object> map = new HashMap<String, Object>();
-	    map.put("start", start);
-	    map.put("end", end);
+   public Map<String, Object> reviewSelectList(int start, int end) {
+      // TODO Auto-generated method stub
+         HashMap<String, Object> resultMap = new HashMap<>();
+       HashMap<String, Object> map = new HashMap<String, Object>();
+       map.put("start", start);
+       map.put("end", end);
 
-	    List<ReviewDto> reviewList = sqlSession.selectList(nameSpace + "reviewSelectList", map);
-	       
-	    resultMap.put("reviewList", reviewList);
-	     // 여기에 필요한 다른 데이터들을 추가할 수 있습니다.
+       List<ReviewDto> reviewList = sqlSession.selectList(nameSpace + "reviewSelectList", map);
+          
+       resultMap.put("reviewList", reviewList);
+        // 여기에 필요한 다른 데이터들을 추가할 수 있습니다.
 
-	    return resultMap;
-	}
+       return resultMap;
+   }
 
    @Override
    public int inquirySelectTotalCount() {
@@ -111,14 +112,14 @@ public class BoardDaoImpl implements BoardDao{
    }
    
    @Override
-	public HashMap<String, Object> reviewSelectOne(int no) {
-		// TODO Auto-generated method stub
+   public HashMap<String, Object> reviewSelectOne(int no) {
+      // TODO Auto-generated method stub
       HashMap<String, Object> resultMap = new HashMap<>();
       HashMap<String, Object> map = new HashMap<String, Object>();
       map.put("no", no);
       resultMap = sqlSession.selectOne(nameSpace + "reviewSelectOne", map);
       return resultMap;
-	}
+   }
 
    @Override
    public int inquiryInsertOne(InquiryDto inquiryDto) {
@@ -150,55 +151,85 @@ public class BoardDaoImpl implements BoardDao{
       sqlSession.delete(nameSpace + "fileDelete", parentSeq);
    }
 
+   @Override
+   public int noticeDeleteOne(int no) {
+      // TODO Auto-generated method stub
+      return sqlSession.delete(nameSpace + "noticeDeleteOne", no);
+   }
+
+   @Override
+   public int reviewSelectTotalCount() {
+      // TODO Auto-generated method stub
+      return (int)sqlSession.selectOne(nameSpace + "reviewSelectTotalCount");
+   }
+
+   @Override
+   public int inquiryDeleteOne(int no) {
+      // TODO Auto-generated method stub
+      return sqlSession.delete(nameSpace + "inquiryDeleteOne", no);
+   }
+
+   @Override
+   public int inquiryUpdateOne(InquiryDto inquiryDto) {
+      // TODO Auto-generated method stub
+      return sqlSession.update(nameSpace + "inquiryUpdateOne", inquiryDto);
+   }
+
+   @Override
+   public HashMap<String, Object> memberInfo(int memberNo) {
+      // TODO Auto-generated method stub
+      HashMap<String, Object> resultMap = new HashMap<>();
+       HashMap<String, Object> map = new HashMap<String, Object>();
+       map.put("memberNo", memberNo);
+       resultMap = sqlSession.selectOne(nameSpace + "memberInfo", map);
+       return resultMap;
+   }
+
+   @Override
+   public int reviewInsertOne(ReviewDto reviewDto) {
+      // TODO Auto-generated method stub
+      return sqlSession.insert(nameSpace + "reviewInsertOne", reviewDto);
+   }
+
+   @Override
+   public int reviewDeleteOne(int no) {
+      // TODO Auto-generated method stub
+      return sqlSession.delete(nameSpace + "reviewDeleteOne", no);
+   }
+
+   @Override
+   public int reviewUpdateOne(ReviewDto reviewDto) {
+      // TODO Auto-generated method stub
+      return sqlSession.update(nameSpace + "reviewUpdateOne", reviewDto);
+   }
+
 	@Override
-	public int noticeDeleteOne(int no) {
+	public int replyInsertOne(ReplyDto replyDto) {
 		// TODO Auto-generated method stub
-		return sqlSession.delete(nameSpace + "noticeDeleteOne", no);
+		return sqlSession.insert(nameSpace + "replyInsertOne", replyDto);
 	}
 
 	@Override
-	public int reviewSelectTotalCount() {
-		// TODO Auto-generated method stub
-		return (int)sqlSession.selectOne(nameSpace + "reviewSelectTotalCount");
-	}
-
-	@Override
-	public int inquiryDeleteOne(int no) {
-		// TODO Auto-generated method stub
-		return sqlSession.delete(nameSpace + "inquiryDeleteOne", no);
-	}
-
-	@Override
-	public int inquiryUpdateOne(InquiryDto inquiryDto) {
-		// TODO Auto-generated method stub
-		return sqlSession.update(nameSpace + "inquiryUpdateOne", inquiryDto);
-	}
-
-	@Override
-	public HashMap<String, Object> memberInfo(int memberNo) {
+	public HashMap<String, Object> replySelectOne(int no) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> resultMap = new HashMap<>();
 	    HashMap<String, Object> map = new HashMap<String, Object>();
-	    map.put("memberNo", memberNo);
-	    resultMap = sqlSession.selectOne(nameSpace + "memberInfo", map);
+	    map.put("no", no);
+	    resultMap = sqlSession.selectOne(nameSpace + "replySelectOne", map);
 	    return resultMap;
 	}
 
 	@Override
-	public int reviewInsertOne(ReviewDto reviewDto) {
+	public int inquiryUpdateReply(ReplyDto replyDto) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert(nameSpace + "reviewInsertOne", reviewDto);
+		return sqlSession.update(nameSpace + "inquiryUpdateReply", replyDto);
 	}
 
-	@Override
-	public int reviewDeleteOne(int no) {
-		// TODO Auto-generated method stub
-		return sqlSession.delete(nameSpace + "reviewDeleteOne", no);
-	}
 
-	
 
-	
+   
+
+   
    
 
 }

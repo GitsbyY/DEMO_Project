@@ -59,7 +59,7 @@ table{
    background-color: #D3D3D3;
 }
 #listColumn3{
-   width: 50%;
+   width: 35%;
    background-color: #D3D3D3;
 }
 #listColumn4{
@@ -67,11 +67,11 @@ table{
    background-color: #D3D3D3;
 }
 #listColumn5{
-   width: 10%;
+   width: 20%;
    background-color: #D3D3D3;
 }
 #listColumn6{
-   width: 10%;
+   width: 15%;
    background-color: #D3D3D3;
 }
 .tdClass{
@@ -130,10 +130,22 @@ table{
                      </td>   
                <td class="tdClass">${inquiryDto.MEMBER_NAME}</td>
                <td class="tdClass">
-                  <fmt:formatDate pattern="yyyy-MM-dd" 
+                  <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" 
                      value="${inquiryDto.INQUIRY_CRE_DATE}"/>
                </td>
-               <td class="tdClass">${inquiryDto.INQUIRY_IS_REPLY}</td>            
+               <td class="tdClass">
+               <c:choose>
+				    <c:when test="${inquiryDto.INQUIRY_IS_REPLY eq 'N'}">
+				        답변 대기중
+				    </c:when>
+				    <c:when test="${inquiryDto.INQUIRY_IS_REPLY eq 'Y'}">
+				        답변 완료
+				    </c:when>
+				    <c:otherwise>
+				        
+				    </c:otherwise>
+				</c:choose>
+               </td>            
             </tr>            
             </c:forEach>
          </table>

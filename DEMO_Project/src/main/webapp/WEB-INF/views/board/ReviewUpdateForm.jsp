@@ -96,7 +96,7 @@ td input{
    background-color: #FFC4A3;
    border: none;
    color: white;
-   width: 60px;
+   width: 80px;
    height: 30px;
    font-size: 16px;   
 }
@@ -118,7 +118,8 @@ td input{
          <div id="firstDiv">후기남겨요</div>
          <div id="secondDiv"></div>                           
       </div>
-      <form action='./reviewaddCtr.do' method='post' enctype="multipart/form-data">
+      <form action='./reviewUpdateCtr.do' method='post' enctype="multipart/form-data">
+      <input type="hidden" name="reviewNo" value="${reviewDto.REVIEW_NO}">
          <div id="tableDiv">
             <table>                       
                <tr id="firstTr">
@@ -134,7 +135,7 @@ td input{
                <tr id="secondTr">
                   <td id="secondTd" class="firstTd">제목</td>   
                   <td id="titleInputTd" colspan="3">
-                     <input id="titleInput" type="text" name="reviewTitle">
+                     <input id="titleInput" type="text" name="reviewTitle" value="${reviewDto.REVIEW_TITLE}">
                   </td>      
                </tr>                           
                <tr id="thirdTr">
@@ -144,15 +145,15 @@ td input{
                <tr id=fourthTr">
                   <td id="fourthTd" class="firstTd">내용</td>   
                   <td id="contentInputTd" colspan="3">
-                     <textarea id="contentInput" type="text" name="reviewContent"></textarea>
+                     <textarea id="contentInput" type="text" name="reviewContent">${reviewDto.REVIEW_CONTENT}</textarea>
                      <input type="hidden" name="reviewContent" value="${memberInfo.REVIEW_CONTENT}">
-                     <input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}">                                      
+                     <input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}">                  
                   </td>
                </tr>            
             </table>
          </div>
          <div id="btnDiv">
-            <input id="registrationBtn" type="submit" value="등록">
+            <input id="registrationBtn" type="submit" value="수정완료">
             <input id="cancellationBtn" type="button" value="취소" 
                onclick="location.href = 'javascript:window.history.back();'">   
          </div>

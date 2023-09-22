@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.demo.board.dto.InquiryDto;
 import com.demo.board.dto.NoticeDto;
+import com.demo.board.dto.ReplyDto;
 import com.demo.board.dto.ReviewDto;
 import com.demo.board.service.BoardService;
 import com.demo.member.dto.MemberDto;
@@ -39,7 +40,7 @@ public class BoardController {
    @RequestMapping(value = "/board/announcement.do", 
          method = {RequestMethod.GET, RequestMethod.POST})
    public String noticeList(@RequestParam(defaultValue = "1") int curPage, Model model
-		   , HttpSession session) {
+         , HttpSession session) {
       // Log4j 
       log.info("Welcome BoardController list!: {}", curPage);
          
@@ -68,7 +69,7 @@ public class BoardController {
    @RequestMapping(value = "/board/customerService.do", 
          method = {RequestMethod.GET, RequestMethod.POST})
    public String inquiryList(@RequestParam(defaultValue = "1") int curPage, Model model
-		   , HttpSession session) {
+         , HttpSession session) {
       // Log4j 
       log.info("Welcome BoardController list!: {}", curPage);
          
@@ -98,7 +99,7 @@ public class BoardController {
    @RequestMapping(value = "/board/review.do", 
          method = {RequestMethod.GET, RequestMethod.POST})
    public String reviewList(@RequestParam(defaultValue = "1") int curPage, Model model
-		   , HttpSession session) {
+         , HttpSession session) {
       // Log4j 
       log.info("Welcome BoardController review!: {}", curPage);
          
@@ -151,11 +152,15 @@ public class BoardController {
       
       Map<String, Object> inquiryDto 
       = (Map<String, Object>) resultMap.get("inquiryDto");
+      
+      Map<String, Object> replyDto 
+      = (Map<String, Object>) resultMap.get("replyDto");
             
       List<Map<String, Object>> fileList 
          = (List<Map<String, Object>>) resultMap.get("fileList");
       
       model.addAttribute("inquiryDto", inquiryDto);
+      model.addAttribute("replyDto", replyDto);
       model.addAttribute("fileList", fileList);
             
       return "board/CustomerServiceDetail";
@@ -207,6 +212,24 @@ public class BoardController {
       log.debug("Welcome BoardController inquiryAdd!");
       
       return "board/AddInquiry";
+   }
+   
+   // 1:1문의 답변 등록하기
+   @RequestMapping(value = "/board/inquiryReplyddCtr.do", method = RequestMethod.POST)
+   public String inquiryReplyAdd(ReplyDto replyDto, MultipartHttpServletRequest mulRequest
+         ,Model model) {
+      log.debug("Welcome BoardController replyDtoAddCtr! " + replyDto);
+      
+      try {
+         boardService.replyInsertOne(replyDto, mulRequest);
+         
+      } catch (Exception e) {
+         // TODO: handle exception
+         System.out.println("오류 처리할거 있음 한다");
+         e.printStackTrace();
+      }
+            
+      return "common/InquiryReplySuccessPage";
    }
    
    // 후기남겨요 등록하기
@@ -261,11 +284,38 @@ public class BoardController {
             
       return "common/InquirySuccessPage";
    }
+   
+   // 후기남겨요 수정 화면으로
+   @RequestMapping(value = "/board/reviewupdate.do", method = RequestMethod.GET)
+   public String reviewUpdate(@RequestParam(name = "no"
+      , required = false, defaultValue = "0") int no, Model model, HttpSession session) {
+      log.debug("Welcome BoardController reviewUpdate! - {}" + no);
+      
+      MemberDto memberDto = (MemberDto) session.getAttribute("member");
+      
+      int memberNo = memberDto.getMemberNo();
+            
+      Map<String, Object> memberInfo = boardService.memberInfo(memberNo);
+      
+      model.addAttribute("memberInfo", memberInfo);
+      
+      Map<String, Object> resultMap = boardService.reviewSelectOne(no);
+            
+      Map<String, Object> reviewDto 
+      = (Map<String, Object>) resultMap.get("reviewDto");
+      
+      List<Map<String, Object>> fileList 
+         = (List<Map<String, Object>>) resultMap.get("fileList");
+      model.addAttribute("reviewDto", reviewDto);      
+      model.addAttribute("fileList", fileList);
+            
+      return "board/ReviewUpdateForm";
+   }
    // 공지사항 수정 화면으로
    @RequestMapping(value = "/board/update.do", method = RequestMethod.GET)
    public String noticeUpdate(@RequestParam(name = "no"
       , required = false, defaultValue = "0") int no, Model model) {
-      log.debug("Welcome BoardController noticelistOne! - {}" + no);
+      log.debug("Welcome BoardController noticeUpdate! - {}" + no);
       
       Map<String, Object> resultMap = boardService.noticeSelectOne(no);
       
@@ -285,7 +335,7 @@ public class BoardController {
    @RequestMapping(value = "/board/inquiryupdate.do", method = RequestMethod.GET)
    public String inquiryUpdate(@RequestParam(name = "no"
       , required = false, defaultValue = "0") int no, Model model) {
-      log.debug("Welcome BoardController inquirylistOne! - {}" + no);
+      log.debug("Welcome BoardController inquiryUpdate! - {}" + no);
       
       Map<String, Object> resultMap = boardService.inquirySelectOne(no);
       
@@ -299,6 +349,27 @@ public class BoardController {
       model.addAttribute("fileList", fileList);
             
       return "board/InquiryUpdateForm";
+   }
+   
+   //후기남겨요 수정
+   @RequestMapping(value = "/board/reviewUpdateCtr.do", method = RequestMethod.POST)
+   public String reviewUpdateCtr(ReviewDto reviewDto
+      , @RequestParam(value = "fileIdx", defaultValue = "-1") int fileIdx
+      , MultipartHttpServletRequest mulRequest
+      , Model model) {
+      log.info("Welcome BoardController inquiryUpdateCtr! noticeDto: {}\n fileIdx: {}"
+            , reviewDto, fileIdx);
+      
+      int resultNum = 0;
+      
+      try {
+         resultNum = boardService.reviewUpdateOne(reviewDto, mulRequest, fileIdx);
+      } catch (Exception e) {
+         // TODO: handle exception
+         e.printStackTrace();
+      }
+      
+      return "common/ReviewSuccessPage";
    }
    //1:1 문의사항 수정
    @RequestMapping(value = "/board/inquiryupdateCtr.do", method = RequestMethod.POST)
@@ -343,37 +414,37 @@ public class BoardController {
    }
    
  //공지사항 삭제
- 	@RequestMapping(value = "/board/delete.do", method = RequestMethod.GET)
- 	public String noticeDelete(int no, Model model) {
- 		log.info("Welcome BoardController noticeDelete! " + no);
+    @RequestMapping(value = "/board/delete.do", method = RequestMethod.GET)
+    public String noticeDelete(int no, Model model) {
+       log.info("Welcome BoardController noticeDelete! " + no);
 
- 		boardService.noticeDeleteOne(no);
- 		
- 		
- 		return "redirect:/board/announcement.do";
- 	}
- 	
- 	 //1:1 상담문의 삭제
- 	@RequestMapping(value = "/board/inquirydelete.do", method = RequestMethod.GET)
- 	public String inquiryDelete(int no, Model model) {
- 		log.info("Welcome BoardController inquiryDelete! " + no);
+       boardService.noticeDeleteOne(no);
+       
+       
+       return "redirect:/board/announcement.do";
+    }
+    
+     //1:1 상담문의 삭제
+    @RequestMapping(value = "/board/inquirydelete.do", method = RequestMethod.GET)
+    public String inquiryDelete(int no, Model model) {
+       log.info("Welcome BoardController inquiryDelete! " + no);
 
- 		boardService.inquiryDeleteOne(no);
- 		
- 		
- 		return "redirect:/board/customerService.do";
- 	}
- 	
- 	 //후기남겨요 삭제
- 	@RequestMapping(value = "/board/reviewdelete.do", method = RequestMethod.GET)
- 	public String reviewDelete(int no, Model model) {
- 		log.info("Welcome BoardController reviewDelete! " + no);
+       boardService.inquiryDeleteOne(no);
+       
+       
+       return "redirect:/board/customerService.do";
+    }
+    
+     //후기남겨요 삭제
+    @RequestMapping(value = "/board/reviewdelete.do", method = RequestMethod.GET)
+    public String reviewDelete(int no, Model model) {
+       log.info("Welcome BoardController reviewDelete! " + no);
 
- 		boardService.reviewDeleteOne(no);
- 		
- 		
- 		return "redirect:/board/review.do";
- 	} 
+       boardService.reviewDeleteOne(no);
+       
+       
+       return "redirect:/board/review.do";
+    } 
       
    
    // 단순 페이지 이동

@@ -109,7 +109,7 @@ table{
          <div id="firstDiv">후기남겨요</div>
          <div id="secondDiv"></div>                           
       </div>
-      <form action='./update.do' method='get'>      
+      <form action='./reviewupdate.do' method='get'>      
       <div id="tableDiv">
          <table>
             <tr>
@@ -132,9 +132,10 @@ table{
                </td>            
             </tr>
             <tr>
-               <td id="contentTd" colspan="6" valign="top">
+               <td id="contentTd" colspan="6" valign="top" name="reviewContent">
                   <pre>${reviewDto.REVIEW_CONTENT}</pre>
                </td>
+               <input type="hidden" name="reviewContent" value="${reviewDto.REVIEW_CONTENT}">
             </tr>                        
          </table>
       </div>
@@ -144,7 +145,7 @@ table{
          <input type="hidden" name="no" value="${reviewDto.REVIEW_NO}">
          <input class="rightBtn" type="submit" value="수정">
          <input class="rightBtn" type="button" value="삭제" 
-         	onclick='pageMoveDeleteFnc(${reviewDto.REVIEW_NO});'>
+            onclick='pageMoveDeleteFnc(${reviewDto.REVIEW_NO});'>
       </div>
       </form>                           
    </div>
@@ -152,15 +153,15 @@ table{
    <jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
 <script type="text/javascript">
-	function goBack() {
-		window.history.back();
-	}
+   function goBack() {
+      window.history.back();
+   }
    
-	function pageMoveDeleteFnc(no) {
-		
-		var url = './reviewdelete.do?no=' + no;
-			
-		location.href = url;
-	}
+   function pageMoveDeleteFnc(no) {
+      
+      var url = './reviewdelete.do?no=' + no;
+         
+      location.href = url;
+   }
 </script>
 </html>
