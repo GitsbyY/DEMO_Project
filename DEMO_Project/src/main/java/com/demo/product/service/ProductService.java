@@ -16,6 +16,8 @@ public interface ProductService {
 
 	public List<Map<String, Object>> productImgInsert(MultipartFile multfile, String pathName) throws Exception;
 
+	public void productImgDelete(String storedFileName, String pathName) throws Exception;
+
 
 	
 	

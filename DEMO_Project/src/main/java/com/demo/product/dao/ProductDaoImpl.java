@@ -52,6 +52,12 @@ public class ProductDaoImpl implements ProductDao{
 		sqlSession.insert(nameSpace + "insertFile", map);
 	}
 
+	@Override
+	public void DeleteFile(String storedFileName) {
+		// TODO Auto-generated method stub
+		sqlSession.delete(nameSpace + "deleteFile", storedFileName);
+	}
+
 
 	
 

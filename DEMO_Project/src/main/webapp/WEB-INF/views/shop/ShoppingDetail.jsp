@@ -28,7 +28,7 @@
 	text-align: center;
 }
 
-#productImgName {
+#productImg {
 	line-height: 150px;
 	width: 300px;
 	height: 300px;
@@ -59,7 +59,7 @@ select{
 }
 .inputName{
 	height: 40px;
-	width: 400px;
+	width: 300px;
 	font-size: 20px;
 }
 .btn{
@@ -117,34 +117,33 @@ select{
 	clear: right;
 	text-align: center;
 	font-size: 25px;
-	margin-bottom: 100px;
 }
 #reviewSpan{
 	color: blue;
 }
-#productDetailText{
+#productDetailDiv{
 	text-align:center;
 	font-size: 32px;
 }
 
-#productDetailDivCtr{
-	width: 700px;
-	height: 50px;
+#smarteditorContainer{
 	margin: 0px auto;
-	border: 1px solid black;
 	text-align: center;
+	width: 860px;
+}
+#productDetailContent{
+	display: flex;
+	justify-content: center;
+	align-content: center;
 }
 
-#productDetailDiv{
-	width: 700px;
-	height: 700px;
-	margin: 0px auto;
-	border: 1px solid black;
-}
 </style>
 <script type="text/javascript" src="/DEMO_Project/resources/js/jquery-3.7.1.js">
 </script>
+<script type="text/javascript" src="/DEMO_Project/resources/smarteditor2-2.8.2.3/js/HuskyEZCreator.js"
+	charset="utf-8">
 
+</script>
 <meta charset="UTF-8">
 <title>상품추가</title>
 </head>
@@ -152,7 +151,7 @@ select{
 	<jsp:include page="/WEB-INF/views/Header.jsp"/>
 	
 	<div id="mainContainer">		
-		<form id="productForm" action="./addCtr.do" method="post">
+		<form action="./addCtr.do" method="post">
 			<div id='routeDiv'>
 				<a id='routeA'>댕댕홈</a>
 				<a id='routeA'> > </a>
@@ -164,8 +163,9 @@ select{
 			<div id='bodyContainer'>
 				<div id='imgContainer'>
 					<div id='productImgContainer'>
-						<img id="productImgName" alt="이미지를 첨부해주세요"
-			        		src=''>
+						<c:set var="row" value="${fileList}"/>
+						<img id='productImg' alt='이미지를 첨부해주세요'
+							src="<c:url value='/image/Product/${row.STORED_FILE_NAME}'/>">
 					</div>
 					<br/>
 					<input type="file" name="file" id="fileInput" style="display:none"
@@ -181,8 +181,9 @@ select{
 					<table id="type">
 						<tr class="inputTable">
 							<td id="typeTd">상품 유형</td>
+							<td class="midTd"></td>
 							<td>
-								<select name="productCategory">
+								<select name="productSort">
 									<option>상품 유형을 선택해주세요</option>
 									<option>사료</option>
 									<option>간식</option>
@@ -197,50 +198,71 @@ select{
 							<td>
 								상품명을 등록해주세요
 							</td>
+							<td class="midTd"></td>
 							<td>
-								<input class="inputName" name="productName" id="inputProductName"
+								<input class="inputName" id="inputProductName"
 									type="text" placeholder="상품명을 입력해주세요">
+								<input class="btn" type="button" value="확인">
 							</td>				
 						</tr>
 						<tr>
-							<td>
-								상품가격을 입력해주세요
+							<td id="price">
+								0원
 							</td>
-							<td>
-								<input class="inputName" name="productPrice" id="inputProductPrice"
+							<td class="midTd"></td>
+							<td rowspan="2">
+								<input class="inputName" id="inputProductPrice"
 									type="text" placeholder="가격을 입력해주세요">
+								<input class="btn" type="button" value="확인">
 							</td>				
 						</tr>
-						<tr class="inputTable">
-							<td>
-								상품재고를 입력해주세요
+						<tr>
+							<td id="pointAccumulate">
+								최대 0P 적립
 							</td>
+							<td class="midTd"></td>
+						</tr>
+						<tr class="inputTable">
+							<td id="inventory">
+								상품재고: 0개
+							</td>
+							<td class="midTd"></td>
 							<td>
-								<input class="inputName" name="productStock" id="inputProductStock"
+								<input class="inputName" id="inputProductStock"
 									type="text" placeholder="수량을 입력해주세요">
+								<input class="btn" type="button" value="확인">
 							</td>				
 						</tr>				
 					</table>
-					<input id="imgName" type="hidden" value="사진이름들어갈곳">
+					<table id="totalPrice">
+						<tr>
+							<td id="totalPriceTd" class="totalTd">
+								총 상품금액
+							</td>
+							<td class="totalTd">
+								0원
+							</td>
+						</tr>			
+					</table>
 					<div id="adminBtn">
-						<input class="adminBtn" type="button" value="뒤로가기">
-						<input class="adminBtn" type="button" value="등록"
-							onclick="submitForm();">
+						<input class="adminBtn" type="button" value="수정">
+						<input class="adminBtn" type="button" value="삭제">
+						<input class="adminBtn" type="button" value="등록">
 					</div>
 				</div>
 			</div>
 			<div id="goReview">
 				<span>해당상품 후기 </span>
 				<span id="reviewSpan">보러가기</span>
+				
 			</div>
-			<div id="productDetailText">상품 상세 설명</div>
-			<div id="productDetailDivCtr">
-				<button id="registBtn" type="button"
-					onclick="registDetailFnc();">등록</button>
-			</div>
-			<input type="hidden" name="productDetailContent" id="productDetailInput">
-			<div id="productDetailDiv" contenteditable="true">
-				입력하요
+			<div id="productDetailDiv">상품 상세 설명</div>
+			<div id="smarteditorContainer">
+				
+				<textarea name="productDetailContent" id="productDetailContent"
+					rows="20" cols="10"
+					placeholder="내용을 입력해주세요"></textarea>
+				
 			</div>
 		</form>
 	</div>
@@ -250,8 +272,20 @@ select{
 </body>
 
 <script>
+	let oEditors = []
+	
+	function smartEditor() {
+		console.log("Naver SmartEdtior")
+		nhn.husky.EZCreator.createInIFrame({
+			oAppRef: oEditors,
+			elPlaceHolder:"productDetailContent",
+			sSkinURI: "/DEMO_Project/resources/smarteditor2-2.8.2.3/SmartEditor2Skin.html",
+			fCreator: "createSEditor2"
+		})
+		
+	}
 	function fileSelected() {
-		var imgSrc = document.getElementById('productImgName').getAttribute('src');
+		var imgSrc = document.getElementById('productImg').getAttribute('src');
 		var parts = imgSrc.split('/');
 		var storedFileName = parts[parts.length - 1];
 		var fileInputObj = document.getElementById("fileInput");
@@ -274,11 +308,8 @@ select{
 		        var productImgContainer = document.getElementById("productImgContainer");
 
 		        productImgContainer.innerHTML =
-			        '<img id="productImgName" alt="이미지를 첨부해주세요5" ' +
+			        '<img id="productImg" alt="이미지를 첨부해주세요5" ' +
 			        'src=\'<c:url value="/image/Product/' + file + '"/>\'>';
-			   
-			    var imgNameInput = document.getElementById("imgName");
-			    imgNameInput.value = file;
 			},
 			error: function() {
 				alert('이미지 업로드 실패');
@@ -286,26 +317,22 @@ select{
 		});
 	}
 	
-	function registDetailFnc(){
-		var registBtnObj = document.getElementById("registBtn");
-		var productDetailDivObj = document.getElementById("productDetailDiv");
+	function submitPost() {
+		oEditor.getById["productDetailContent"].exec("UPDATE_CONTENTS_FIELD", [])
+		let content = document.getElementById("productDetailContent").value
 		
-		if(productDetailDivObj.contentEditable == "true"){
-			productDetailDivObj.contentEditable = "false";
-			registBtnObj.innerHTML = "수정"
-		}else {
-			productDetailDivObj.contentEditable = "true"
-			registBtnObj.innerHTML = "등록"
+		if(content == ''){
+			alert("내용을 입력해주세요.")
+			oEditors.getById["productDetailContent"].exec("FOCUS")
+			return
+		} else {
+			console.log(content)
 		}
 	}
 	
-	function submitForm() {
-	    // <div>의 내용을 가져와서 숨겨진 필드에 설정합니다
-	    var divContent = document.getElementById("productDetailDiv").innerHTML;
-	    document.getElementById("productDetailInput").value = divContent;
-	    
-	    // 폼 제출
-	    document.getElementById("productForm").submit();
-	}
+	$(document).ready(function() {
+		smartEditor()
+	})
+	
 </script>
 </html>

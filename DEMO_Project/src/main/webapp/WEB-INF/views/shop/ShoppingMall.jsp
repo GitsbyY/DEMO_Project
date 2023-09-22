@@ -116,7 +116,7 @@
 			<c:forEach var="productDto" items="${productList}">
 				<div id='productDiv'>
 					<img alt="image not found" 
-							src="<c:url value='/image/Product/${productDto.STORED_FILE_NAME}.png'/>"><br/>
+							src="<c:url value='/image/Product/${productDto.STORED_FILE_NAME}'/>"><br/>
 					<div>
 						${productDto.PRODUCT_NAME}
 					</div>

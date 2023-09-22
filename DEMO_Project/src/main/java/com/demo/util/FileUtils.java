@@ -123,5 +123,17 @@ public class FileUtils {
 	    		//파일은 존재하지 않고, 데이터베이스와 매핑 된 정보만 남았다
 	    return fileList;
 	}
+	
+	public void fileDelete(String storedFileName, String pathName) throws Exception {
+
+		File file = new File(filePath + "\\" + pathName, storedFileName);
+
+		if (file.exists()) {
+			// 이 순간에 물리적으로 파일이 삭제가 된다.
+			file.delete();
+		} else {
+			System.out.println("file dose not exist");
+		}
+	}
    
 }

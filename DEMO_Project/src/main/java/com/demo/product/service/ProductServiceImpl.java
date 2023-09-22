@@ -58,6 +58,14 @@ public class ProductServiceImpl implements ProductService{
 		
 		return list;
 	}
+
+	@Override
+	public void productImgDelete(String storedFileName, String pathName) throws Exception {
+		// TODO Auto-generated method stub
+		fileUtils.fileDelete(storedFileName, pathName);
+		
+		productDao.DeleteFile(storedFileName);
+	}
 	
 	
 

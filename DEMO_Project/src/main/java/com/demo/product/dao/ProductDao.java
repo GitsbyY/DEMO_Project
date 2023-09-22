@@ -15,6 +15,8 @@ public interface ProductDao {
 
 	void insertFile(Map<String, Object> map);
 
+	void DeleteFile(String storedFileName);
+
 
 	
 

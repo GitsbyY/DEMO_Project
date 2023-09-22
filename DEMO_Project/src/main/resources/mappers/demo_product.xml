@@ -93,9 +93,9 @@
 		WHERE PARENT_SEQ = #{parentSeq}
 	</select>
 	
-	<delete id="fileDelete" parameterType="int">
-		DELETE FROM TB_FILE
-		WHERE PARENT_SEQ = #{no}
+	<delete id="deleteFile" parameterType="String">
+		DELETE FROM IMG_FILE
+		WHERE STORED_FILE_NAME = #{storedFileName}
 	</delete>
 	
 </mapper>
