@@ -36,6 +36,7 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 .listColumnContainerDefault{
 	height: 46px;
 	margin-bottom: 15px;
+	background-color: #FFBA69; 
 }
 .listColumn {
 	float: left;
@@ -45,7 +46,6 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 	display: flex; /* 수직 중앙 정렬을 위해 flexbox 사용 */
 	align-items: center; /* 수직 중앙 정렬 설정 */
 	justify-content: center; /* 수평 중앙 정렬 설정 */
- 	background-color: grey; 
 }
 
 #listColumn1 {
@@ -80,11 +80,11 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 	margin-bottom: 3px;
 }
 .listColumnEven {
-    background-color: lightgrey;
+    background-color: #F6F6F6;
 }
 
 .listColumnOdd {
-    background-color: grey;
+    background-color: white;
 }
 #pageForm{
 	

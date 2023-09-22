@@ -34,12 +34,12 @@
 		FROM ( SELECT *
 		FROM ORDER_LIST
 		ORDER BY
-		ORDER_DATE DESC) OL
+		ORDER_DATE) OL
 		) L
 		JOIN MEMBER M ON L.MEMBER_NO = M.MEMBER_NO
 		JOIN PRODUCT P ON L.PRODUCT_NO = P.PRODUCT_NO
 		WHERE L.RNUM BETWEEN #{start} AND #{end}
-		ORDER BY L.RNUM
+		ORDER BY L.RNUM DESC
 	</select>
 
 	<select id="orderDetailSelectOne" resultType="map">

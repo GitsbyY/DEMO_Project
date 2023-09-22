@@ -35,6 +35,7 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 .listColumnContainerDefault{
 	height: 46px;
 	margin-bottom: 15px;
+	background-color: #FFBA69; 
 }
 .listColumn {
 	float: left;
@@ -44,7 +45,6 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 	display: flex; /* 수직 중앙 정렬을 위해 flexbox 사용 */
 	align-items: center; /* 수직 중앙 정렬 설정 */
 	justify-content: center; /* 수평 중앙 정렬 설정 */
- 	background-color: grey; 
 }
 
 #listColumn1 {
@@ -82,14 +82,11 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 	margin-bottom: 3px;
 }
 .listColumnEven {
-    background-color: lightgrey;
+    background-color: #F6F6F6;
 }
 
 .listColumnOdd {
-    background-color: grey;
-}
-#pageForm{
-	
+    background-color: white;
 }
 </style>
 <meta charset="UTF-8">
@@ -133,13 +130,17 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 				</div>
 				<div id="listColumn4" class="listColumn 
 					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
-						${memberDto.PRODUCT_QUANTITY}
+						${memberDto.MEMBER_NAME}
 				</div>
 				<div id="listColumn5" class="listColumn 
 					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
-						${memberDto.MEMBER_EMONEY}
+						${memberDto.TOTAL_ORDERS}
 				</div>
 				<div id="listColumn6" class="listColumn 
+					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
+						${memberDto.MEMBER_EMONEY}
+				</div>
+				<div id="listColumn7" class="listColumn 
 					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
 						${memberDto.MEMBER_POINT}
 				</div>

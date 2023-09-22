@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,18 +43,24 @@ tr, td{
 	height: 51px;
 }
 .infoTabalTdDefault{
-	width: 157px;
-	background-color: grey;
+	width: 120px;
+	background-color: #FFBA69; 
 	font-size: 24px;
-	text-align: center;
+	text-align: left;
+	margin-left: 5px;
 }
 .infoTabalTdData{
-	width: 247px;
+	width: 400x;
+	font-size: 24px;
 }
 .emoneyListTitle{
 	width: 461px;
 	height: 51px;
 	font-size: 24px;
+	text-align: center;
+}
+.emonyList{
+	font-size: 24px;	
 	text-align: center;
 }
 </style>
@@ -66,6 +73,9 @@ tr, td{
 	<jsp:include page="/WEB-INF/views/Header.jsp" />
 
 	<jsp:include page="/WEB-INF/views/asideMyPage.jsp" />
+	
+	<fmt:formatDate value="${memberDto.MEMBER_JOIN_DATE}" pattern="yy/MM/dd HH:mm:ss" var="formattedDate" />
+	<fmt:formatDate value="${memberChargeList.MEMBER_CHARGE_DATE}" pattern="yy/MM/dd HH:mm:ss" var="formattedDateCharge" />
 
 	<div id='divContainer'>
 		<div class="title">
@@ -89,7 +99,7 @@ tr, td{
 					</tr>
 					<tr class="infoTabalTR">
 						<td class="infoTabalTdDefault">가입일</td>
-						<td class="infoTabalTdData">${memberDto.MEMBER_JOIN_DATE}</td>
+						<td class="infoTabalTdData">${formattedDate}</td>
 					</tr>
 					<tr class="infoTabalTR">
 						<td class="infoTabalTdDefault">주문건수</td>
@@ -112,8 +122,8 @@ tr, td{
 					</tr>
 					<c:forEach var="memberChargeDto" items="${memberChargeList}" varStatus="loop">
 					<tr>
-						<td>${memberChargeList.MEMBER_CHARGE_AMOUNT}</td>
-						<td>${memberChargeList.MEMBER_CHARGE_DATE}</td>
+						<td class="emonyList">${memberChargeList.MEMBER_CHARGE_AMOUNT}</td>
+						<td class="emonyList">${formattedDateCharge}</td>
 					</c:forEach>
 				</table>
 			</div>

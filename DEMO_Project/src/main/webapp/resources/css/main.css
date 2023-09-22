@@ -100,13 +100,15 @@ a.bottomRowButton:hover {
     color: #FFAB7C;
     cursor: pointer;
 }
+/*----------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------*/
 /* aside */
 aside{
-	/* background-color: #E0EEEE; */
+/* 	background-color: #FFE4D0; */
 	display:block;
 	float: left;
 	width: 180px;
-	height: 600px;
+	height: 620px;
 	margin-left: 17%;
 	margin-right: 100px;
 }
@@ -131,15 +133,13 @@ aside{
 	color: blue;
 }
 
+
+/*----------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------*/
 /* footer */
-
-.daengFoot{
-	font-size: 12px;
-}
-
 footer {
-	bottom: 10px;
-    position: fixed;
+	bottom: 0;
+    position: relative;
     width: 100%;
 }
 #daengFooter{
@@ -158,5 +158,5 @@ footer {
 #divContainer {
 	display: inline-block;
 	width: 1020px;
-	height: 730px;	
+	height: 780px;	
 }

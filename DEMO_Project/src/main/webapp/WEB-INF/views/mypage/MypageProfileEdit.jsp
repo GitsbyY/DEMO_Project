@@ -56,12 +56,21 @@ button {
 	height: 50px;
 	border: 1px solid black;
 	border-collapse: collapse;
+	font-size: 24px;
 }
+.memberInfoName{
+	width: 150px;
+	text-align: left;
 
+}
+.memberInfoValue{
+	width: 250px;
+	text-align: right;
+}
 #memberOrPetContainer{
 	margin-bottom: 5px; 
 	width: 400px; 
-	height: 50px;"
+	height: 50px;
 }
 .memberOrPet{
 	background-color: #FFC4A3;
@@ -101,14 +110,44 @@ button {
 					<button class="memberOrPet" onclick="showPetInfo()">반려견</button>
 				</div>
 				<div id="memberInfoContainer">
-					<div class="memberInfo">${memberDto.MEMBER_ID}</div>
-					<div class="memberInfo">비밀번호 확인? 비밀번호 변경?</div>
-					<div class="memberInfo">${memberDto.MEMBER_NAME}</div>
-					<div class="memberInfo">${memberDto.MEMBER_BIRTH_DATE}</div>
-					<div class="memberInfo">${memberDto.MEMBER_PHONE}</div>
-					<div class="memberInfo">${memberDto.MEMBER_EMAIL}</div>
-					<div class="memberInfo">${memberDto.MEMBER_ADDRESS}</div>
+				
+					<div class="memberInfo">
+						<div class="memberInfoName">아이디</div>
+						<div class="memberInfoValue">${memberDto.MEMBER_ID}</div>
+					</div>
+					
+					<div class="memberInfo">
+						<div class="memberInfo">비밀번호 변경?</div>
+						<div class="memberInfoName">비밀번호 확인?</div> 
+					</div>
+					
+					<div class="memberInfo">
+						<div class="memberInfoName">이름</div>
+						<div class="memberInfoValue">${memberDto.MEMBER_NAME}</div>
+					</div>
+					
+					<div class="memberInfo">
+						<div class="memberInfoName">생년월일</div>
+						<div class="memberInfoValue">${memberDto.MEMBER_BIRTH_DATE}</div>
+					</div>
+					
+					<div class="memberInfo">
+						<div class="memberInfoName">휴대폰 번호</div>
+						<div class="memberInfoValue">${memberDto.MEMBER_PHONE}</div>
+					</div>
+					
+					<div class="memberInfo">
+						<div class="memberInfoName">이메일</div>
+						<div class="memberInfoValue">${memberDto.MEMBER_EMAIL}</div>
+					</div>
+					
+					<div class="memberInfo">
+						<div class="memberInfoName">주소</div>
+						<div class="memberInfoValue">${memberDto.MEMBER_ADDRESS}</div>
+					</div>
+					
 				</div>
+				
 				<div id="petInfoContainer">
 					<div class="petInfo">${petDto.PET_NAME}</div>
 					<div class="petInfo">${petDto.PET_BREED}</div>
