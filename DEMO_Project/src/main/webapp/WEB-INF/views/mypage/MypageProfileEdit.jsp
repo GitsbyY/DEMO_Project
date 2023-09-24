@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,9 +26,7 @@ tr, td{
 button {
     cursor: pointer;
 }
-#infoWrap{
-	display: flex;
-}
+
 
 #firstTitle {
 	width: 400px;
@@ -39,16 +38,17 @@ button {
 	margin-bottom: 25px;
 	display: flex;
 }
-
+.titleContainer{
+	height: 70px;
+}
 
 #infoContainer {
-    display: flex;
+    display: flex;    
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 400px;
-    height: 700px;
-    margin-top: 20px; /* 위 여백 추가 */
+    width: 800px;
+    height: 500px;
 }
 
 .memberInfo{
@@ -57,21 +57,37 @@ button {
 	border: 1px solid black;
 	border-collapse: collapse;
 	font-size: 24px;
+	display: flex;
+	justify-content: space-between;
 }
 .memberInfoName{
 	width: 150px;
 	text-align: left;
+	margin-left: 10px;
+	margin-top: 10px;
 
 }
 .memberInfoValue{
 	width: 250px;
 	text-align: right;
+	margin-right: 10px;
+	margin-top: 10px;
+
 }
+
+.memberInfoValueInput{
+	width: 200px;
+	text-align: right;
+	font-size: 24px;
+	height: 25px;
+}
+
 #memberOrPetContainer{
 	margin-bottom: 5px; 
 	width: 400px; 
 	height: 50px;
 }
+
 .memberOrPet{
 	background-color: #FFC4A3;
 	width: 200px;
@@ -86,6 +102,51 @@ button {
 	height: 50px;
 	border: 1px solid black;
 	border-collapse: collapse;
+	font-size: 24px;
+	display: flex;
+	justify-content: space-between;
+}
+.petInfoName{
+	width: 180px;
+	text-align: left;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+.petInfoValue{
+	width: 220px;
+	text-align: right;
+	margin-right: 10px;
+	margin-top: 10px;
+}
+.petInfoValueInput{
+	width: 150px;
+	text-align: right;
+	font-size: 24px;
+	height: 25px;
+}
+#buttonContainer{
+	display: flex;
+	margin-top: 20px;
+	margin-left: 610px;
+}
+#updateInfo{
+	margin-right: 20px;
+}
+#updateInfo > button{
+	background-color: #FFC4A3;
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
+	border: none;
+	border-radius: 3px;
+}
+#deleteInfo > button{
+	background-color: #FFC4A3;
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
+	border: none;
+	border-radius: 3px;
 }
 </style>
 <meta charset="UTF-8">
@@ -98,9 +159,11 @@ button {
 
 	<jsp:include page="/WEB-INF/views/asideMyPage.jsp" />
 
+	<fmt:formatDate value="${memberDto.MEMBER_BIRTH_DATE}" pattern="yyyy/MM/dd" var="formattedBirthDate" />
+	<fmt:formatDate value="${petDto.PET_ADOPTION_DATE}" pattern="yyyy/MM/dd" var="formattedAdoptionDate" />
 
 		<div id="infoWrap">
-			<div class="title">
+			<div class="titleContainer">
 				<div id="firstTitle" style="color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG FAMILY</div>
 			</div>
 			
@@ -117,8 +180,10 @@ button {
 					</div>
 					
 					<div class="memberInfo">
-						<div class="memberInfo">비밀번호 변경?</div>
-						<div class="memberInfoName">비밀번호 확인?</div> 
+						<div class="memberInfoName">비밀번호</div>
+						<div class="memberInfoValue">
+							<input class="memberInfoValueInput" type="text" placeholder="수정하시겠습니까?"/>
+						</div> 
 					</div>
 					
 					<div class="memberInfo">
@@ -128,7 +193,7 @@ button {
 					
 					<div class="memberInfo">
 						<div class="memberInfoName">생년월일</div>
-						<div class="memberInfoValue">${memberDto.MEMBER_BIRTH_DATE}</div>
+						<div class="memberInfoValue">${formattedBirthDate}</div>
 					</div>
 					
 					<div class="memberInfo">
@@ -138,22 +203,54 @@ button {
 					
 					<div class="memberInfo">
 						<div class="memberInfoName">이메일</div>
-						<div class="memberInfoValue">${memberDto.MEMBER_EMAIL}</div>
+						<div class="memberInfoValue">
+							<input class="memberInfoValueInput" type="text" value="${memberDto.MEMBER_EMAIL}"/>
+						</div>
 					</div>
 					
 					<div class="memberInfo">
 						<div class="memberInfoName">주소</div>
-						<div class="memberInfoValue">${memberDto.MEMBER_ADDRESS}</div>
+						<div class="memberInfoValue">
+							<input class="memberInfoValueInput" type="text" value="${memberDto.MEMBER_ADDRESS}"/>
+						</div>
 					</div>
 					
 				</div>
 				
 				<div id="petInfoContainer">
-					<div class="petInfo">${petDto.PET_NAME}</div>
-					<div class="petInfo">${petDto.PET_BREED}</div>
-					<div class="petInfo">${petDto.PET_WEIGHT}</div>
-					<div class="petInfo">${petDto.PET_ADOPTION_DATE}</div>
-					<div class="petInfo">${petDto.PET_VACCINATION}</div>
+					<div class="petInfo">
+						<div class="petInfoName">이름</div>
+						<div class="petInfoValue">
+							<input class="petInfoValueInput" type="text" value="${petDto.PET_NAME}"/>
+						</div>
+					</div>
+					<div class="petInfo">
+						<div class="petInfoName">반려견 종</div>
+						<div class="petInfoValue">${petDto.PET_BREED}</div>
+					</div>
+					<div class="petInfo">
+						<div class="petInfoName">무게</div>
+						<div class="petInfoValue">
+							<input class="petInfoValueInput" type="text" value="${petDto.PET_WEIGHT}&nbsp;Kg"/>
+						</div>
+					</div>
+					<div class="petInfo">
+						<div class="petInfoName">입양일</div>
+						<div class="petInfoValue">${formattedAdoptionDate}</div>
+					</div>
+					<div class="petInfo">
+						<div class="petInfoName">예방접종차시</div>
+						<div class="petInfoValue">${petDto.PET_VACCINATION}</div>
+					</div>
+				</div>
+				
+				<div id="buttonContainer">
+					<div id="updateInfo">
+						<button type="button">수정</button>
+					</div>
+					<div id="deleteInfo">
+						<button type="button">탈퇴</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -178,5 +275,6 @@ function showPetInfo() {
 
 // 페이지 로드 시 자동으로 회원 정보 표시
 window.onload = showMemberInfo;
+
 </script>
 </html>

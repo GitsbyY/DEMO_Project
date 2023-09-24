@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import com.demo.member.dao.MemberDao;
@@ -87,9 +88,12 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return memberDao.myPageProfileDetailPetSelectOne(memberNo);
 	}
-	
-	
+	@Override
+	@Transactional
+	public boolean memberPointUpdate(int memberNo, int pointStatus) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
-	
-	
+		
 }

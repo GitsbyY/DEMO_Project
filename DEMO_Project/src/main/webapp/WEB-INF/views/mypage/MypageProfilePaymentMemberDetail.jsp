@@ -50,7 +50,10 @@ tr, td{
 	margin-left: 5px;
 }
 .infoTabalTdData{
-	width: 400x;
+	width: 300x;
+	font-size: 24px;
+}
+.infoTabalTdDataInput{
 	font-size: 24px;
 }
 .emoneyListTitle{
@@ -82,7 +85,7 @@ tr, td{
 			<div id="firstTitle" style="color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG FAMILY</div>
 		</div>
 		<div id="infoContainer">
-
+		<input type="hidden" name="memberNo" value="${memberDto.MEMBER_NO}"/>
 			<div id="infoTable">
 				<table>
 					<tr class="infoTabalTR">
@@ -103,15 +106,25 @@ tr, td{
 					</tr>
 					<tr class="infoTabalTR">
 						<td class="infoTabalTdDefault">주문건수</td>
-						<td class="infoTabalTdData">${memberDto.PRODUCT_QUANTITY}</td>
+						<td class="infoTabalTdData">${memberDto.TOTAL_ORDERS}</td>
 					</tr>
 					<tr class="infoTabalTR">
 						<td class="infoTabalTdDefault">포인트</td>
-						<td class="infoTabalTdData">${memberDto.MEMBER_POINT}</td>
+						<td class="infoTabalTdData">
+							<form action="../mypage/MypageProfilePaymentMemberDetailPointCtr.do" 
+							onsubmit="return checkPointStatus()" id="PointForm" method="post">
+							<input type="text" id="PointChangeInput" class="infoTabalTdDataInput" 
+								name="pointStatus" value="${memberDto.MEMBER_POINT}"/>
+							<button type="submit">수정</button>
+							</form>
+						</td>
 					</tr>
 					<tr class="infoTabalTR">
 						<td class="infoTabalTdDefault">이머니</td>
-						<td class="infoTabalTdData">${memberDto.MEMBER_EMONEY}</td>
+						<td class="infoTabalTdData">
+							<input type="text" class="infoTabalTdDataInput" value="${memberDto.MEMBER_EMONEY}"/>
+							<button type="button">수정</button>
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -127,12 +140,56 @@ tr, td{
 					</c:forEach>
 				</table>
 			</div>
+			
 		</div>
 		
 	</div>
+	
+	<div id="divBottom">
+				<div style="text-align: right; margin-top: 4px;">
+				<form action="../order/orderCancelCtr.do"  onsubmit="return checkOrderStatus()" 
+				id="cancelForm" method="post">
+    				<input type="hidden" name="orderNo" value="${orderDto.ORDER_NO}">
+					<input type="submit" value="주문취소" 
+						style="width: 90px; height: 30px; font-size: 15px;">
+				</form>
+				</div>
+				
+				<div style="margin-top: 40px;">
+					<input type="button" value="목록" 
+						style="width: 145px; height: 50px; font-size: 24px; font-weight: bold;" onclick="window.location.href='/DEMO_Project/mypage/mypage.do';">	
+				</div>
+			</div>
+	
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
 </body>
 <script type="text/javascript">
-
+function checkOrderStatus() {
+    var orderStatus = "${orderDto.ORDER_STATUS}";
+    var memberNo = "${memberDto.MEMBER_NO}";
+    var confirmPointChange = confirm("정말 주문을 취소하시겠습니까?");
+        if (confirmCancel) {
+            return window.location.href = '../order/orderCancelCtr.do?orderNo=' + orderNo; // 주문 취소 처리 페이지로 이동
+        } else {
+            return false; // 취소하지 않음
+        }
+    } else {
+        alert("주문 취소가 불가능한 상태입니다.");
+        return false; // 취소하지 않음
+    }
+}
+function checkPointStatus() {
+    var pointStatus = "${memberDto.MEMBER_POINT}";
+    var memberNo = "${memberDto.MEMBER_NO}";
+    var changePointStatus = document.getElementById("PointChangeInput");
+    var confirmPointChange = confirm(changePointStatus + "포인트를 " + pointStatus + " 로 바꾸시겠습니까?" );
+        if (confirmPointChange) {
+            return window.location.href = '../mypage/MypageProfilePaymentMemberDetailPointCtr.do?memberNo=' 
+            		+ memberNo; 
+        } else {
+            return false; 
+        }
+    }
+}
 </script>
 </html>

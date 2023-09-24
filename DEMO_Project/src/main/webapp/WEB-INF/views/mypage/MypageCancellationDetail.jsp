@@ -40,6 +40,7 @@ button{
 	font-size: 20px;
 	font-weight : bold;
 	text-align: left;
+	background-color: #FFBA69; 
 }
 #divTop div {
     display: inline-block;

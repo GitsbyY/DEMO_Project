@@ -260,4 +260,30 @@ public class MemberController {
 		return "mypage/MypageProfilePaymentMemberDetail";
 	}
 
+	 //포인트 변경
+	@RequestMapping(value = "//mypage/MypageProfilePaymentMemberDetailPointCtr", method = RequestMethod.POST)
+	public String orderCancel(@RequestParam(defaultValue = "-1") int memberNo, int pointStatus, HttpSession session, Model model) {
+		
+		 	System.out.println(memberNo);
+			System.out.println(pointStatus);
+			// 포인트 변화를 추가한다. update/select
+			boolean pointUpdate = memberService.memberPointUpdate(memberNo, pointStatus);
+			System.out.println(memberNo);
+			System.out.println(pointStatus);
+			if (pointUpdate) {
+				model.addAttribute("result", "success"); // 성공 시 'success' 값을 모델에 추가
+			} else {
+				model.addAttribute("result", "fail"); // 실패 시 'fail' 값을 모델에 추가
+			}
+
+			Map<String, Object> memberDto = memberService.memberPaymentDeatilSelectOne(memberNo);
+
+			model.addAttribute("memberDto", memberDto);
+			session.setAttribute("myPageAside", "memberPay");
+
+//	        		return "redirect:/mypage/MypageDetail.do"; // 리다이렉트할 경로로 이동
+			return "mypage/MypageProfilePaymentMemberDetail";
+
+		} 
+
 }

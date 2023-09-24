@@ -36,6 +36,9 @@ public interface MemberService {
 
 	Map<String, Object> myPageProfileDetailPetSelectOne(int memberNo);
 
+	boolean memberPointUpdate(int memberNo, int pointStatus);
+
+	
 
 
 
