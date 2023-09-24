@@ -9,7 +9,7 @@
 <script type="text/javascript">
 	alert('성공적으로 처리했습니다');
 					//공통단은 언제 어디서나 가야하기 때문에 상대경로가 아닌 절대경로
-	location.href = '/SpringHome/member/list.do';
+	location.href = '/DEMO_Project/shop.do';
 </script>
 
 </head>

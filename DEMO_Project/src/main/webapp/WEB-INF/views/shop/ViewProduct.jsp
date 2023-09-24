@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="/DEMO_Project/resources/css/main.css">
 <style type="text/css">
+
+table tr td{
+	margin: 0px 50px;
+}
 
 #routeDiv{
 	width: 200px;
@@ -50,16 +55,16 @@
 	font-weight: bold;
 }
 #typeTd{
-	width: 220px;
+	width: 250px;
 }
 select{
 	height: 30px;
-	width: 400px;
+	width: 250px;
 	font-size: 16px;
 }
 .inputName{
 	height: 40px;
-	width: 400px;
+	width: 250px;
 	font-size: 20px;
 }
 .btn{
@@ -73,6 +78,7 @@ select{
 	border-radius: 15px;
 	font-size: 15px;
 	text-align: center;
+	width: 150px;
 }
 .midTd{
 	width: 50px;
@@ -113,15 +119,6 @@ select{
 	border: none;
 	color: white;
 }
-#goReview{
-	clear: right;
-	text-align: center;
-	font-size: 25px;
-	margin-bottom: 100px;
-}
-#reviewSpan{
-	color: blue;
-}
 #productDetailText{
 	text-align:center;
 	font-size: 32px;
@@ -141,6 +138,16 @@ select{
 	margin: 0px auto;
 	border: 1px solid black;
 }
+
+#goReview{
+	clear: right;
+	text-align: center;
+	font-size: 25px;
+}
+#reviewSpan{
+	color: blue;
+}
+
 </style>
 <script type="text/javascript" src="/DEMO_Project/resources/js/jquery-3.7.1.js">
 </script>
@@ -152,7 +159,11 @@ select{
 	<jsp:include page="/WEB-INF/views/Header.jsp"/>
 	
 	<div id="mainContainer">		
-		<form id="productForm" action="./addCtr.do" method="post">
+		<form id="productForm" action="./updateCtr.do" method="post">
+			<input type="hidden" id="productNo" name="productNo"
+				value="${productDto.PRODUCT_NO}">
+			<input type="hidden" name="productDetailNo"
+				value="${productDto.PRODUCT_DETAIL_NO}">
 			<div id='routeDiv'>
 				<a id='routeA'>댕댕홈</a>
 				<a id='routeA'> > </a>
@@ -165,11 +176,11 @@ select{
 				<div id='imgContainer'>
 					<div id='productImgContainer'>
 						<img id="productImgName" alt="이미지를 첨부해주세요"
-			        		src=''>
+			        		src="<c:url value='/image/Product/${productDto.STORED_FILE_NAME}'/>">
 					</div>
 					<br/>
 					<input type="file" name="file" id="fileInput" style="display:none"
-						onchange="fileSelected(${row.STORED_FILE_NAME})">
+						onchange="fileSelected()">
 					<label for="fileInput" style="background-color: white;
 						border:2px solid black;">
 						이미지 첨부
@@ -182,46 +193,79 @@ select{
 						<tr class="inputTable">
 							<td id="typeTd">상품 유형</td>
 							<td>
-								<select name="productCategory">
-									<option>상품 유형을 선택해주세요</option>
-									<option>사료</option>
-									<option>간식</option>
-									<option>영양제</option>
-									<option>미용/목욕용품</option>
-									<option>장난감</option>
-									<option>기타</option>
+								<select id="productCategory"
+									name="productCategory">
+									<option value="0">상품 유형을 선택해주세요</option>
+									<option value="10"
+										<c:if test="${productDto.PRODUCT_CATEGORY eq 10}">
+											selected
+										</c:if>
+										>사료</option>
+									<option value="20"
+										<c:if test="${productDto.PRODUCT_CATEGORY eq 20}">
+											selected
+										</c:if>
+										>간식</option>
+									<option value="30"
+										<c:if test="${productDto.PRODUCT_CATEGORY eq 30}">
+											selected
+										</c:if>
+										>영양제</option>
+									<option value="40"
+										<c:if test="${productDto.PRODUCT_CATEGORY eq 40}">
+											selected
+										</c:if>
+										>미용/목욕용품</option>
+									<option value="50"
+										<c:if test="${productDto.PRODUCT_CATEGORY eq 50}">
+											selected
+										</c:if>
+										>장난감</option>
+									<option value="60"
+										<c:if test="${productDto.PRODUCT_CATEGORY eq 60}">
+											selected
+										</c:if>
+										>기타</option>
 								</select>
 							</td>
 						</tr>
 						<tr class="inputTable">
-							<td>
-								상품명을 등록해주세요
+							<td >
+								${productDto.PRODUCT_NAME}
 							</td>
 							<td>
-								<input class="inputName" name="productName" id="inputProductName"
-									type="text" placeholder="상품명을 입력해주세요">
-							</td>				
+								<input class="inputName" name="productName" id="productName"
+									type="text" placeholder="상품명을 입력해주세요"
+									value="${productDto.PRODUCT_NAME}">
+							</td>			
 						</tr>
 						<tr>
 							<td>
-								상품가격을 입력해주세요
+								<div id="price">
+									${productDto.PRODUCT_PRICE}
+								</div>
+								<div id="pointAccumulate">
+									1234
+								</div>
 							</td>
 							<td>
-								<input class="inputName" name="productPrice" id="inputProductPrice"
-									type="text" placeholder="가격을 입력해주세요">
+								<input class="inputName" name="productPrice" id="productPrice"
+									type="text" placeholder="가격을 입력해주세요"
+									value="${productDto.PRODUCT_PRICE}">
 							</td>				
 						</tr>
 						<tr class="inputTable">
 							<td>
-								상품재고를 입력해주세요
+								${productDto.PRODUCT_STOCK}
 							</td>
 							<td>
-								<input class="inputName" name="productStock" id="inputProductStock"
-									type="text" placeholder="수량을 입력해주세요">
+								<input class="inputName" name="productStock" id="productStock"
+									type="text" placeholder="수량을 입력해주세요"
+									value="${productDto.PRODUCT_STOCK}">
 							</td>				
 						</tr>				
 					</table>
-					<input id="imgName" type="hidden" value="사진이름들어갈곳">
+					<input id="imgName" name="pImgName" type="hidden" value="사진이름들어갈곳">
 					<div id="adminBtn">
 						<input class="adminBtn" type="button" value="뒤로가기">
 						<input class="adminBtn" type="button" value="등록"
@@ -240,7 +284,7 @@ select{
 			</div>
 			<input type="hidden" name="productDetailContent" id="productDetailInput">
 			<div id="productDetailDiv" contenteditable="true">
-				입력하요
+				${productDto.PRODUCT_DETAIL_CONTENT}
 			</div>
 		</form>
 	</div>
@@ -250,8 +294,14 @@ select{
 </body>
 
 <script>
+	var namePattern = /^.{1,30}$/;
+	var pricePattern = /^[0-9]{1,8}$/;
+	var stockPattern = /^[0-9]{1,5}$/;
+	var detailPattern = /^.{1,3000}$/;
+	
 	function fileSelected() {
 		var imgSrc = document.getElementById('productImgName').getAttribute('src');
+		var productNo = document.getElementById('productNo').value;
 		var parts = imgSrc.split('/');
 		var storedFileName = parts[parts.length - 1];
 		var fileInputObj = document.getElementById("fileInput");
@@ -259,8 +309,9 @@ select{
         var formData = new FormData();
         formData.append('file', file);
         formData.append('storedFileName', storedFileName);
+        formData.append('productNo', productNo)
 		$.ajax({
-			url : "/DEMO_Project/shop/imgInsert.do",
+			url : "/DEMO_Project/shop/imgUpdate.do",
 			method : "POST",
 			data : formData,
 			processData: false,
@@ -274,11 +325,11 @@ select{
 		        var productImgContainer = document.getElementById("productImgContainer");
 
 		        productImgContainer.innerHTML =
-			        '<img id="productImgName" alt="이미지를 첨부해주세요5" ' +
+			        '<img id="productImgName" alt="이미지를 첨부해주세요" ' +
 			        'src=\'<c:url value="/image/Product/' + file + '"/>\'>';
 			   
-			    var imgNameInput = document.getElementById("imgName");
-			    imgNameInput.value = file;
+// 			    var imgNameInput = document.getElementById("imgName");
+// 			    imgNameInput.value = file;
 			},
 			error: function() {
 				alert('이미지 업로드 실패');
@@ -301,8 +352,68 @@ select{
 	
 	function submitForm() {
 	    // <div>의 내용을 가져와서 숨겨진 필드에 설정합니다
-	    var divContent = document.getElementById("productDetailDiv").innerHTML;
-	    document.getElementById("productDetailInput").value = divContent;
+	    var divContentObj = document.getElementById("productDetailDiv").innerHTML.trim();
+	    document.getElementById("productDetailInput").value = divContentObj;
+	    // 상품카테고리
+	    var productCategoryObj = document.getElementById("productCategory");
+	    // 상품이름
+	    var productNameObj = document.getElementById("productName");
+	    // 상품가격
+	    var productPriceObj = document.getElementById("productPrice");
+	    // 상품재고
+	    var productStockObj = document.getElementById("productStock");
+	    // 상품이미지
+	    var imgSrcObj = document.getElementById('productImgName').getAttribute('src');
+	    // 상품 상세 설명 버튼
+	    var registBtnObj = document.getElementById("registBtn");
+	    
+	    var parts = imgSrcObj.split('/');
+		var storedFileName = parts[parts.length - 1];
+	    var imgNameInput = document.getElementById("imgName");
+	    imgNameInput.value = storedFileName;
+	    
+	    if(productCategoryObj.value == "0"){
+	    	alert('상품 유형을 선택해주세요.');
+	    	return ;
+	    }
+	    if(productNameObj.value.trim().length == 0){
+	    	alert('상품 이름을 입력해주세요.');
+	    	return ;
+	    }
+	    if(!namePattern.test(productNameObj.value)){
+	    	alert('상품 이름은 30자 까지만 가능합니다.');
+	    	return ;
+	    }
+	    
+	    if(productPriceObj.value.length == 0){
+	    	alert('상품 가격을 입력해주세요.');
+	    	return ;
+	    }
+	    if(!pricePattern.test(productPrice.value)){
+	    	alert('1억 미만의 숫자만 가능합니다.');
+	    	return ;
+	    }
+	    if(productStockObj.value.length == 0){
+	    	alert('상품 재고를 입력해주세요.');
+	    	return ;
+	    }
+	    if(!stockPattern.test(productStockObj.value)){
+	    	alert('재고는 10만개 미만 가능합니다.');
+	    	return ;
+	    }
+	    if(imgSrcObj === ""){
+	    	alert('이미지를 등록해주세요.');
+	    	return ;
+	    }
+	    
+	    if(registBtnObj.innerHTML == "등록"){
+	    	alert('상품 상세 설명을 등록해주세요.');
+	    	return ;
+	    }
+	    if(!detailPattern.test(divContentObj)){
+	    	alert('상품 상세 설명은 3000자까지만 가능합니다.');
+	    	return ;
+	    }
 	    
 	    // 폼 제출
 	    document.getElementById("productForm").submit();

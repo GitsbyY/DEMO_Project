@@ -77,20 +77,11 @@
 		VALUES(#{imgNo}, #{original_file_name}, #{stored_file_name}, #{file_size}, SYSDATE)
 	</insert>
 	
-	<select id="fileSelectList" parameterType="int" resultType="map">
-		SELECT IDX, ORIGINAL_FILE_NAME, STORED_FILE_NAME
-			, ROUND(FILE_SIZE/1024, 1) AS FILE_SIZE
-		FROM TB_FILE
-		WHERE PARENT_SEQ = #{no}
-		
-		
-	</select>
-	
-	<select id="fileSelectStoredFileName" parameterType="int"
-		resultType="map">
-		SELECT IDX, STORED_FILE_NAME
-		FROM TB_FILE
-		WHERE PARENT_SEQ = #{parentSeq}
+	<select id="selectImgNo" parameterType="String"
+		resultType="int">
+		SELECT IMG_NO
+		FROM IMG_FILE
+		WHERE STORED_FILE_NAME = #{pImgName}
 	</select>
 	
 	<delete id="deleteFile" parameterType="String">
@@ -98,6 +89,62 @@
 		WHERE STORED_FILE_NAME = #{storedFileName}
 	</delete>
 	
+	<insert id="insertProductDetail" parameterType="productDetailDto"
+		useGeneratedKeys="true" keyProperty="productDetailNo">
+		<selectKey keyProperty="productDetailNo" resultType="int"
+			order="BEFORE">
+			SELECT PRODUCT_DETAIL_NO_SEQ.NEXTVAL
+			FROM DUAL
+		</selectKey>
+		INSERT INTO PRODUCT_DETAIL
+			(PRODUCT_DETAIL_NO, IMG_NO, PRODUCT_DETAIL_CONTENT)
+		VALUES(#{productDetailNo},
+			<if test="imgNo != 0">#{imgNo},</if>
+			<if test="imgNo == 0">null,</if>
+			#{productDetailContent})
+	</insert>
+	
+	<insert id="insertProduct" parameterType="productDto">
+		INSERT INTO PRODUCT
+			(PRODUCT_NO, PRODUCT_DETAIL_NO, IMG_NO,
+			PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_STOCK,
+			PRODUCT_CATEGORY, PRODUCT_CRE_DATE, PRODUCT_MOD_DATE)
+		VALUES(PRODUCT_NO_SEQ.NEXTVAL, #{productDetailNo}, #{imgNo},
+			#{productName}, #{productPrice}, #{productStock},
+		    #{productCategory}, SYSDATE, SYSDATE)
+	</insert>
+	
+	<select id="selectProductOne" parameterType="int"
+		resultType="map">
+		SELECT *
+		FROM product P
+		INNER JOIN product_detail PD ON P.product_detail_no = PD.product_detail_no
+        INNER JOIN IMG_FILE I ON P.IMG_NO = I.IMG_NO
+		WHERE P.product_no = #{no}
+	</select>
+	
+	<update id="productImgUpdate" parameterType="map">
+		UPDATE PRODUCT
+		SET IMG_NO = #{imgNo}
+		WHERE PRODUCT_NO = #{productNo}
+	</update>
+	
+	<update id="updateProductDetail" parameterType="productDetailDto">
+		UPDATE PRODUCT_DETAIL
+		SET PRODUCT_DETAIL_CONTENT = #{productDetailContent}
+		<if test="imgNo != 0">,IMG_NO = #{imgNo}</if>
+		WHERE PRODUCT_DETAIL_NO = #{productDetailNo}
+	</update>
+	
+	<update id="updateProduct" parameterType="productDto">
+		UPDATE PRODUCT
+		SET PRODUCT_NAME = #{productName},
+			PRODUCT_PRICE = #{productPrice},
+			PRODUCT_STOCK = #{productStock},
+			PRODUCT_CATEGORY = #{productCategory},
+			PRODUCT_MOD_DATE = SYSDATE
+		WHERE PRODUCT_NO = #{productNo}
+	</update>
 </mapper>
 
 

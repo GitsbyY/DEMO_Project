@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.demo.product.dao.ProductDao;
+import com.demo.product.dto.ProductDetailDto;
+import com.demo.product.dto.ProductDto;
 import com.demo.util.FileUtils;
 
 @Service
@@ -55,7 +57,7 @@ public class ProductServiceImpl implements ProductService{
 			productDao.insertFile(list.get(i));
 			
 		}
-		
+		System.out.println("insertFile완료");
 		return list;
 	}
 
@@ -66,7 +68,50 @@ public class ProductServiceImpl implements ProductService{
 		
 		productDao.DeleteFile(storedFileName);
 	}
+
+
+	@Override
+	public int productDetailInsert(ProductDetailDto productDetailDto, String pdImgName) {
+		// TODO Auto-generated method stub
+		if(pdImgName == "") {
+			int imgNo = productDao.selectImgNo(pdImgName);
+			productDetailDto.setImgNo(imgNo);
+		}
+		return productDao.insertProductDetail(productDetailDto);
+	}
 	
+	@Override
+	public void productInsert(ProductDto productDto, String pImgName) {
+		// TODO Auto-generated method stub
+		int imgNo = productDao.selectImgNo(pImgName);
+		productDto.setImgNo(imgNo);
+		productDao.insertProduct(productDto);
+	}
+
+	@Override
+	public Map<String, Object> selectProductOne(int no) {
+		// TODO Auto-generated method stub
+		
+		return productDao.selectProductOne(no);
+	}
+
+	@Override
+	public void productImgUpdate(String productNo, int imgNo) {
+		// TODO Auto-generated method stub
+		productDao.productImgUpdate(productNo, imgNo);
+	}
+
+	@Override
+	public void updateProductDetail(ProductDetailDto productDetailDto) {
+		// TODO Auto-generated method stub
+		productDao.updateProductDetail(productDetailDto);
+	}
+
+	@Override
+	public void updateProduct(ProductDto productDto) {
+		// TODO Auto-generated method stub
+		productDao.updateProduct(productDto);
+	}
 	
 
 	

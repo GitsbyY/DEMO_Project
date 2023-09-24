@@ -67,11 +67,16 @@
 #productDiv{
 	float: left;
 	margin: 15px 10px;
-	padding: 30px;
+	padding: 10px;
 	width: 170px;
-	height: 200px;
+	height: 230px;
 	border: 1px solid purple;
 	text-align: center;
+}
+
+#productImg{
+	width: 150px;
+	height: 150px;
 }
 
 #resultContainer{
@@ -114,8 +119,9 @@
 		</div>
 		<div id='resultContainer'>
 			<c:forEach var="productDto" items="${productList}">
-				<div id='productDiv'>
-					<img alt="image not found" 
+				<div id='productDiv' onclick="viewProduct(${productDto.PRODUCT_NO})">
+					<input type="hidden" name="productNo" value="${productDto.PRODUCT_NO}">
+					<img alt="image not found" id="productImg" 
 							src="<c:url value='/image/Product/${productDto.STORED_FILE_NAME}'/>"><br/>
 					<div>
 						${productDto.PRODUCT_NAME}
@@ -168,5 +174,9 @@
 	searchButtonObj.addEventListener("click", function() {
 		document.getElementById("sortForm").submit();
 	});
+	
+	function viewProduct(no){
+		location.href="./shop/viewProduct.do?no=" + no;
+	}
 </script>
 </html>
