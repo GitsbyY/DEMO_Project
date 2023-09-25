@@ -136,7 +136,17 @@ public class MemberDaoImpl implements MemberDao{
       return sqlSession.update(nameSpace + "memberPwdChange", memberDto);
    }
 
-   
+   @Override
+	public void memberPointUpdate(MemberDto memberDto) {
+		// TODO Auto-generated method stub
+		sqlSession.update(nameSpace + "memberPointUpdate", memberDto);
+	}
+
+	@Override
+	public void memberEmoneyUpdate(MemberDto memberDto) {
+		// TODO Auto-generated method stub
+		sqlSession.update(nameSpace + "memberEmoneyUpdate", memberDto);
+	}
 
    
 

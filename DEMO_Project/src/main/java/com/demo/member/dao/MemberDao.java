@@ -37,7 +37,9 @@ public interface MemberDao {
 
    int memberPwdChange(MemberDto memberDto);
 
-   
+   void memberPointUpdate(MemberDto memberDto);
+
+   void memberEmoneyUpdate(MemberDto memberDto);
 
 
 

@@ -26,44 +26,52 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 	margin-left: 10px;
 	margin-bottom: 25px;
 }
-tr, td{
+
+tr, td {
 	border: 1px solid black;
 }
 
-#infoContainer{
+#infoContainer {
 	display: flex;
 }
 
-#infoTable{
+#infoTable {
 	margin-right: 40px;
 	margin-left: 40px;
 }
 
-.infoTabalTR{
+.infoTabalTR {
 	height: 51px;
 }
-.infoTabalTdDefault{
+
+.infoTabalTdDefault {
 	width: 120px;
-	background-color: #FFBA69; 
+	background-color: #FFBA69;
 	font-size: 24px;
 	text-align: left;
 	margin-left: 5px;
 }
-.infoTabalTdData{
-	width: 300x;
+
+.infoTabalTdData {
+	width: 240x;
 	font-size: 24px;
+	margin-left: 10px;
 }
-.infoTabalTdDataInput{
+
+.infoTabalTdDataInput {
 	font-size: 24px;
+	width: 200px;
 }
-.emoneyListTitle{
+
+.emoneyListTitle {
 	width: 461px;
 	height: 51px;
 	font-size: 24px;
 	text-align: center;
 }
-.emonyList{
-	font-size: 24px;	
+
+.emonyList {
+	font-size: 24px;
 	text-align: center;
 }
 </style>
@@ -76,16 +84,20 @@ tr, td{
 	<jsp:include page="/WEB-INF/views/Header.jsp" />
 
 	<jsp:include page="/WEB-INF/views/asideMyPage.jsp" />
-	
-	<fmt:formatDate value="${memberDto.MEMBER_JOIN_DATE}" pattern="yy/MM/dd HH:mm:ss" var="formattedDate" />
-	<fmt:formatDate value="${memberChargeList.MEMBER_CHARGE_DATE}" pattern="yy/MM/dd HH:mm:ss" var="formattedDateCharge" />
+
+	<fmt:formatDate value="${memberDto.MEMBER_JOIN_DATE}"
+		pattern="yy/MM/dd HH:mm:ss" var="formattedDate" />
+	<fmt:formatDate value="${memberChargeList.MEMBER_CHARGE_DATE}"
+		pattern="yy/MM/dd HH:mm:ss" var="formattedDateCharge" />
 
 	<div id='divContainer'>
 		<div class="title">
-			<div id="firstTitle" style="color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG FAMILY</div>
+			<div id="firstTitle"
+				style="color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG
+				FAMILY</div>
 		</div>
 		<div id="infoContainer">
-		<input type="hidden" name="memberNo" value="${memberDto.MEMBER_NO}"/>
+			
 			<div id="infoTable">
 				<table>
 					<tr class="infoTabalTR">
@@ -106,24 +118,33 @@ tr, td{
 					</tr>
 					<tr class="infoTabalTR">
 						<td class="infoTabalTdDefault">주문건수</td>
-						<td class="infoTabalTdData">${memberDto.TOTAL_ORDERS}</td>
+						<td class="infoTabalTdData">${memberDto.TOTALORDERS}</td>
 					</tr>
 					<tr class="infoTabalTR">
 						<td class="infoTabalTdDefault">포인트</td>
 						<td class="infoTabalTdData">
-							<form action="../mypage/MypageProfilePaymentMemberDetailPointCtr.do" 
-							onsubmit="return checkPointStatus()" id="PointForm" method="post">
-							<input type="text" id="PointChangeInput" class="infoTabalTdDataInput" 
-								name="pointStatus" value="${memberDto.MEMBER_POINT}"/>
-							<button type="submit">수정</button>
+							<form action="../mypage/MypageProfilePaymentMemberDetailPointCtr.do"
+								onsubmit="return checkPointStatus()" id="pointForm"
+								method="post">
+								<input type="hidden" name="memberNo" value="${memberDto.MEMBER_NO}" />
+								<input type="text" id="pointChangeInput"
+									class="infoTabalTdDataInput" name="memberPoint" style="text-align: right;"
+									value="${memberDto.MEMBER_POINT}" />
+								<input type="submit" value="수정">
 							</form>
 						</td>
 					</tr>
 					<tr class="infoTabalTR">
-						<td class="infoTabalTdDefault">이머니</td>
+						<td class="infoTabalTdDefault">E-money</td>
 						<td class="infoTabalTdData">
-							<input type="text" class="infoTabalTdDataInput" value="${memberDto.MEMBER_EMONEY}"/>
-							<button type="button">수정</button>
+							<form action="../mypage/MypageProfilePaymentMemberDetailEmoneyCtr.do"
+								onsubmit="return checkEmoneyStatus()" id="emoneyForm"
+								method="post">
+								<input type="hidden" name="memberNo" value="${memberDto.MEMBER_NO}" />
+								<input type="text" class="infoTabalTdDataInput" id="pointEmoneyInput" 
+								name="memberEmoney" value="${memberDto.MEMBER_EMONEY}" style="text-align: right;" />
+								<input type="submit" value="수정">
+							</form>
 						</td>
 					</tr>
 				</table>
@@ -133,63 +154,50 @@ tr, td{
 					<tr>
 						<td colspan="2" class="emoneyListTitle">이머니 충전 내역</td>
 					</tr>
-					<c:forEach var="memberChargeDto" items="${memberChargeList}" varStatus="loop">
-					<tr>
-						<td class="emonyList">${memberChargeList.MEMBER_CHARGE_AMOUNT}</td>
-						<td class="emonyList">${formattedDateCharge}</td>
+					<c:forEach var="memberChargeDto" items="${memberChargeList}"
+						varStatus="loop">
+						<tr>
+							<td class="emonyList">${memberChargeList.MEMBER_CHARGE_AMOUNT}</td>
+							<td class="emonyList">${formattedDateCharge}</td>
 					</c:forEach>
 				</table>
 			</div>
-			
+
 		</div>
-		
+
 	</div>
-	
-	<div id="divBottom">
-				<div style="text-align: right; margin-top: 4px;">
-				<form action="../order/orderCancelCtr.do"  onsubmit="return checkOrderStatus()" 
-				id="cancelForm" method="post">
-    				<input type="hidden" name="orderNo" value="${orderDto.ORDER_NO}">
-					<input type="submit" value="주문취소" 
-						style="width: 90px; height: 30px; font-size: 15px;">
-				</form>
-				</div>
-				
-				<div style="margin-top: 40px;">
-					<input type="button" value="목록" 
-						style="width: 145px; height: 50px; font-size: 24px; font-weight: bold;" onclick="window.location.href='/DEMO_Project/mypage/mypage.do';">	
-				</div>
-			</div>
-	
+
+
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
 </body>
 <script type="text/javascript">
-function checkOrderStatus() {
-    var orderStatus = "${orderDto.ORDER_STATUS}";
+
+function checkPointStatus(){
+	var pointStatus = "${memberDto.MEMBER_POINT}";
     var memberNo = "${memberDto.MEMBER_NO}";
-    var confirmPointChange = confirm("정말 주문을 취소하시겠습니까?");
-        if (confirmCancel) {
-            return window.location.href = '../order/orderCancelCtr.do?orderNo=' + orderNo; // 주문 취소 처리 페이지로 이동
-        } else {
-            return false; // 취소하지 않음
-        }
-    } else {
-        alert("주문 취소가 불가능한 상태입니다.");
-        return false; // 취소하지 않음
-    }
-}
-function checkPointStatus() {
-    var pointStatus = "${memberDto.MEMBER_POINT}";
-    var memberNo = "${memberDto.MEMBER_NO}";
-    var changePointStatus = document.getElementById("PointChangeInput");
-    var confirmPointChange = confirm(changePointStatus + "포인트를 " + pointStatus + " 로 바꾸시겠습니까?" );
+    var changePointStatus = document.getElementById("pointChangeInput").value;
+    
+    var confirmPointChange = confirm(pointStatus+ " 포인트를 " + changePointStatus + " 로 바꾸시겠습니까?" );
         if (confirmPointChange) {
-            return window.location.href = '../mypage/MypageProfilePaymentMemberDetailPointCtr.do?memberNo=' 
-            		+ memberNo; 
+        	return true;
         } else {
             return false; 
         }
     }
-}
+
+
+function checkEmoneyStatus(){
+	 var emoneyStatus = "${memberDto.MEMBER_EMONEY}";
+	 var memberNo = "${memberDto.MEMBER_NO}";
+	 var changeEmoneyStatus = document.getElementById("pointEmoneyInput").value;
+	 var confirmEmoneyChange = confirm(emoneyStatus + "이머니를 " + changeEmoneyStatus + " 로 바꾸시겠습니까?" );
+  
+	 if (confirmEmoneyChange) {
+         return true; 
+     } else {
+         return false; 
+     }
+ }
+	
 </script>
 </html>

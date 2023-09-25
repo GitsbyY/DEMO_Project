@@ -276,5 +276,50 @@ public class MemberController {
 
       return "mypage/MypageProfilePaymentMemberDetail";
    }
+   
+   //포인트 변경
+  	@RequestMapping(value = "/mypage/MypageProfilePaymentMemberDetailPointCtr", method = RequestMethod.POST)
+  	public String memberPointChange(MemberDto memberDto, HttpSession session, Model model) {
+  		
+  		 	System.out.println(memberDto);
+  			
+  			// 포인트 변화를 추가한다. update/select
+  			try {
+  				memberService.memberPointUpdate(memberDto);
+  				model.addAttribute("result", "success"); // 성공 시 'success' 값을 모델에 추가
+  			} catch (Exception e) {
+  				// TODO: handle exception
+  				model.addAttribute("result", "fail"); // 실패 시 'fail' 값을 모델에 추가
+  			}
+  			System.out.println(memberDto);
+  		
+  			session.setAttribute("myPageAside", "memberPay");
 
+//  	        		return "redirect:/mypage/MypageDetail.do"; // 리다이렉트할 경로로 이동
+  			return "redirect:/mypage/MypageProfilePaymentMemberDetail.do?memberNo=" + memberDto.getMemberNo();
+
+  		} 
+  	
+  	 //Emoney 변경
+  		@RequestMapping(value = "/mypage/MypageProfilePaymentMemberDetailEmoneyCtr", method = RequestMethod.POST)
+  		public String memberEmoneyChange(MemberDto memberDto, HttpSession session, Model model) {
+  			
+  			 	System.out.println(memberDto);
+  				
+  				// 포인트 변화를 추가한다. update/select
+  				try {
+  					memberService.memberEmoneyUpdate(memberDto);
+  					model.addAttribute("result", "success"); // 성공 시 'success' 값을 모델에 추가
+  				} catch (Exception e) {
+  					// TODO: handle exception
+  					model.addAttribute("result", "fail"); // 실패 시 'fail' 값을 모델에 추가
+  				}
+  				System.out.println(memberDto);
+  			
+  				session.setAttribute("myPageAside", "memberPay");
+
+//  		        		return "redirect:/mypage/MypageDetail.do"; // 리다이렉트할 경로로 이동
+  				return "redirect:/mypage/MypageProfilePaymentMemberDetail.do?memberNo=" + memberDto.getMemberNo();
+
+  			} 
 }

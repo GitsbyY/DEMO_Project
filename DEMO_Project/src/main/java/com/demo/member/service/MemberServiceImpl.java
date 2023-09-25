@@ -93,7 +93,16 @@ public class MemberServiceImpl implements MemberService{
       return memberDao.memberPwdChange(memberDto);
    }
    
-   
+   @Override
+	public void memberPointUpdate(MemberDto memberDto) {
+		// TODO Auto-generated method stub
+		memberDao.memberPointUpdate(memberDto);
+	}
+	@Override
+	public void memberEmoneyUpdate(MemberDto memberDto) {
+		// TODO Auto-generated method stub
+		memberDao.memberEmoneyUpdate(memberDto);
+	}
 
    
    
