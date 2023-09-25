@@ -58,8 +58,9 @@ div {
 	border: none;
 	background-color: window;
 	font-size: 12px;
-	margin-right: 5px;
-	margin-top: 2px;
+	margin-right: 20px;
+	margin-top: 3px;
+	font-weight: bold;
 }
 .boxSnsJoin{
 	clear: both; /* clear:both 추가 */

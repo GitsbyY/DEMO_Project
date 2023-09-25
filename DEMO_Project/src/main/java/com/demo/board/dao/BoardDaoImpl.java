@@ -63,21 +63,19 @@ public class BoardDaoImpl implements BoardDao{
       return resultMap;
    }
    
-   @Override
-   public Map<String, Object> reviewSelectList(int start, int end) {
-      // TODO Auto-generated method stub
-         HashMap<String, Object> resultMap = new HashMap<>();
-       HashMap<String, Object> map = new HashMap<String, Object>();
-       map.put("start", start);
-       map.put("end", end);
-
-       List<ReviewDto> reviewList = sqlSession.selectList(nameSpace + "reviewSelectList", map);
-          
-       resultMap.put("reviewList", reviewList);
-        // 여기에 필요한 다른 데이터들을 추가할 수 있습니다.
-
-       return resultMap;
-   }
+	/*
+	 * @Override public Map<String, Object> reviewSelectList(int start, int end) {
+	 * // TODO Auto-generated method stub HashMap<String, Object> resultMap = new
+	 * HashMap<>(); HashMap<String, Object> map = new HashMap<String, Object>();
+	 * map.put("start", start); map.put("end", end);
+	 * 
+	 * List<ReviewDto> reviewList = sqlSession.selectList(nameSpace +
+	 * "reviewSelectList", map);
+	 * 
+	 * resultMap.put("reviewList", reviewList); // 여기에 필요한 다른 데이터들을 추가할 수 있습니다.
+	 * 
+	 * return resultMap; }
+	 */
 
    @Override
    public int inquirySelectTotalCount() {
@@ -157,11 +155,12 @@ public class BoardDaoImpl implements BoardDao{
       return sqlSession.delete(nameSpace + "noticeDeleteOne", no);
    }
 
-   @Override
-   public int reviewSelectTotalCount() {
-      // TODO Auto-generated method stub
-      return (int)sqlSession.selectOne(nameSpace + "reviewSelectTotalCount");
+	
+   @Override public int reviewSelectTotalCount() {
+	   // TODO Auto-generated method stub 
+	   return (int)sqlSession.selectOne(nameSpace + "reviewSelectTotalCount");
    }
+	 
 
    @Override
    public int inquiryDeleteOne(int no) {
@@ -225,9 +224,26 @@ public class BoardDaoImpl implements BoardDao{
       return sqlSession.update(nameSpace + "inquiryUpdateReply", replyDto);
    }
 
+@Override
+public Map<String, Object> reviewSelectList(int start, int end, String search
+		, String select) {
+	// TODO Auto-generated method stub
+	  HashMap<String, Object> resultMap = new HashMap<>();
+      HashMap<String, Object> map = new HashMap<String, Object>();
+      map.put("start", start);
+      map.put("end", end);
+      map.put("search", search);
+      map.put("select", select);
 
+      List<ReviewDto> reviewList = sqlSession.selectList(nameSpace + "reviewSelectList", map);
+         
+      resultMap.put("reviewList", reviewList);
+       // 여기에 필요한 다른 데이터들을 추가할 수 있습니다.
 
-   
+      return resultMap;
+	
+}
+  
 
    
    

@@ -83,7 +83,7 @@ td input{
    float: right;
 }
 #registrationBtn, #cancellationBtn{
-   background-color: #FFC4A3;
+   background-color: red;
    border: none;
    color: white;
    width: 60px;

@@ -51,27 +51,27 @@ table{
 }
 #listColumn1{
    width: 7%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn2{
    width: 15%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn3{
    width: 40%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn4{
    width: 13%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn5{
    width: 15%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn6{
    width: 10%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }   
 .tdClass{
    text-align: center;
@@ -93,6 +93,53 @@ table{
    margin-left: 10px;
    height: 30px;
    width: 50px;
+   background-color: #FFC4A3;
+   font-weight: bold;
+   border: none;
+   color: white;
+}
+#listBtn{
+	background-color: #FFC4A3;
+	font-weight: bold;
+	border: none;
+	color: white;
+	width: 65px;
+	margin-bottom: 30px;
+}
+#reviewReplyDiv{
+	clear: both;
+	width: 100%;
+	border: 2px solid gray;
+	border-radius: 5px;
+	height: 130px;		
+	flex-direction: column;	
+}
+#replyText{
+	width: 95%;
+	height: 50px;
+	margin: auto;
+	display: block;
+	margin-bottom: 5px;
+	border: none;
+	background-color: transparent;
+	outline: none;
+	resize: none;
+}
+#reviewReplyName{
+	text-align: left;
+	margin-left: 25px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+#submit{
+	float: right;
+	margin-right: 25px;
+	background-color: #FFC4A3;
+	border: none;
+	color: white;
+	height: 25px;
+	width: 40px;
 }
 </style>
 <meta charset="UTF-8">
@@ -140,7 +187,7 @@ table{
          </table>
       </div>
       <div id="btnDiv">
-         <input id="listBtn" type="button" value="뒤로가기" 
+         <input id="listBtn" type="button" value="목록으로" 
          onclick="goBack();">
          <c:choose>            
             <c:when test="${sessionScope.member.memberNo eq reviewDto.MEMBER_NO}">
@@ -161,7 +208,18 @@ table{
          
          
       </div>
-      </form>                           
+      </form> 
+      <div id="reviewReplyDiv">
+      	<div id="reviewReplyName">
+      		${sessionScope.member.memberName}
+      	</div>
+      	
+      	<textarea id="replyText" rows="" cols=""></textarea>
+      	<div>
+      		<input id="submit" type="button" value="등록">
+      	</div>
+      
+      </div>                          
    </div>
   
    <jsp:include page="/WEB-INF/views/Footer.jsp"/>

@@ -53,11 +53,7 @@ public class BoardServiceImpl implements BoardService{
       // TODO Auto-generated method stub
       return boardDao.inquirySelectList(start, end);
    }
-   @Override
-   public Map<String, Object> reviewSelectList(int start, int end) {
-      // TODO Auto-generated method stub
-      return boardDao.reviewSelectList(start, end);
-   }
+   
    @Override
    public Map<String, Object> noticeSelectOne(int no) {
       // TODO Auto-generated method stub
@@ -272,6 +268,13 @@ public class BoardServiceImpl implements BoardService{
 		boardDao.replyInsertOne(replyDto);
 		boardDao.inquiryUpdateReply(replyDto);
 	}
+	@Override
+	public Map<String, Object> reviewSelectList(int start, int end, String search, String select) {
+		// TODO Auto-generated method stub
+		return boardDao.reviewSelectList(start, end, search, select);
+	}
+	
+	
    
    
             

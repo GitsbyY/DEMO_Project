@@ -98,8 +98,10 @@ public class BoardController {
    // 후기남겨요 화면으로 이동
    @RequestMapping(value = "/board/review.do", 
          method = {RequestMethod.GET, RequestMethod.POST})
-   public String reviewList(@RequestParam(defaultValue = "1") int curPage, Model model
-         , HttpSession session) {
+   public String reviewList(@RequestParam(defaultValue = "1") int curPage, 
+		@RequestParam(defaultValue = "") String search,
+		@RequestParam(defaultValue = "PRODUCT_NAME") String select,
+		Model model, HttpSession session) {
       // Log4j 
       log.info("Welcome BoardController review!: {}", curPage);
          
@@ -110,12 +112,16 @@ public class BoardController {
       int start = boardPaging.getPageBegin();
       int end = boardPaging.getPageEnd();
       
-      Map<String, Object> reviewList = boardService.reviewSelectList(start, end);
+      Map<String, Object> reviewList 
+      	= boardService.reviewSelectList(start, end, search, select);
+      
       List<ReviewDto> reviewDtoList = (List<ReviewDto>) reviewList.get("reviewList");
       
       HashMap<String, Object> pagingMap = new HashMap<>();
       pagingMap.put("totalCount", totalCount);
       pagingMap.put("boardPaging", boardPaging);
+      pagingMap.put("search", search);
+      pagingMap.put("select", select);
       
       model.addAttribute("reviewDtoList", reviewDtoList);
       model.addAttribute("pagingMap", pagingMap);

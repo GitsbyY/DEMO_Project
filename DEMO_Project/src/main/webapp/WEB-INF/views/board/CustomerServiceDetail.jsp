@@ -45,14 +45,14 @@ th {
    border-left: thick;
    border-right: thick;
    border-bottom: thick;
-   height: 30px;
+   height: 40px;
 }
 
 tr, td {
    border: 1px solid black;
    border-left: thick;
    border-right: thick;
-   height: 30px;
+   height: 40px;
 }
 
 table {
@@ -64,32 +64,32 @@ table {
 
 #listColumn1 {
    width: 7%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 
 #listColumn2 {
    width: 10%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 
 #listColumn3 {
    width: 40%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 
 #listColumn4 {
    width: 10%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 
 #listColumn5 {
    width: 20%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 
 #listColumn6 {
    width: 10%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 
 .tdClass {
@@ -117,6 +117,17 @@ table {
    margin-left: 10px;
    height: 30px;
    width: 50px;
+   background-color: #FFC4A3;
+   color: white;
+   font-weight: bold;
+   border: none;
+}
+#listBtn{
+	background-color: #FFC4A3;
+	color: white;
+	font-weight: bold;
+	border: none;
+	width: 65px;
 }
 
 #replyTableDiv {
@@ -295,7 +306,8 @@ td input {
                     <c:choose>
                         <c:when test="${inquiryDto.INQUIRY_IS_REPLY eq 'N'}">
                             
-                            <input class="rightBtn" type="button" value="답변" onclick="showReplyForm();">
+                            <input style="background-color: red; color: white; border: none;" 
+                            	class="rightBtn" type="button" value="답변" onclick="showReplyForm();">
                         </c:when>
                         <c:otherwise>
                             
@@ -384,16 +396,16 @@ td input {
                   <div id="replyMidDiv">답변</div>
                   <table id="replyTable">
                      <tr id="firstTr" class="replyTableRow">
-                        <td id="firstTd" class="firstTd">제목</td>
+                        <td id="firstTd" class="firstTd" style="background-color: #FFC4A3;">제목</td>
                         <td id="titleInputTd" class="secondTd"><input id="titleInput"
                            type="text" name="replyTitle"></td>
                      </tr>
                      <tr id="secondTr" class="replyTableRow">
-                        <td id="secondTd" class="firstTd">작성자</td>
+                        <td id="secondTd" class="firstTd" style="background-color: #FFC4A3;">작성자</td>
                         <td id="nameTd" class="secondTd">${sessionScope.member.memberName}</td>
                      </tr>
                      <tr id="thirdTr" class="replyTableRow">
-                        <td id="thirdTd" class="firstTd">내용</td>
+                        <td id="thirdTd" class="firstTd" style="background-color: #FFC4A3;">내용</td>
                         <td id="contentInputTd" class="secondTd"><textarea
                               id="contentInput" type="text" name="replyContent"></textarea></td>
                      </tr>
@@ -405,7 +417,8 @@ td input {
                      <input type="hidden" name="inquiryNo" value="${inquiryDto.INQUIRY_NO}">
                      <input type="hidden" name="memberName" value="${inquiryDto.MEMBER_NAME}">
                      <input type="hidden" name="memberNo" value="${inquiryDto.MEMBER_NO}">
-                     <input class="rightBtn" type="submit" value="등록">
+                     <input style="background-color: red; color: white; border: none;" 
+                     	class="rightBtn" type="submit" value="등록">
                   
                   </div>
                </div>

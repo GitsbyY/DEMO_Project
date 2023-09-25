@@ -91,7 +91,8 @@ table{
    color: white;
    width: 80px;
    height: 30px;
-   font-size: 16px;   
+   font-size: 16px;
+   font-weight: bold;   
 }
 </style>
 <meta charset="UTF-8">

@@ -6,22 +6,23 @@
 <html>
 <head>
 <style type="text/css">
-#input{   
+#search{   
    margin-top: 10px;
-   height: 25px;
+   height: 35px;
    width: 220px;
    border-radius: 5px;
    padding-left: 20px;
    vertical-align: middle;
-   margin-bottom: 10px; 
+   margin-bottom: 10px;
+   font-size: 16px; 
 }
 #select{
    margin-right: 10px;
    margin-top: 18px;
-   height: 20px;
+   height: 35px;
    width: 70px;
    border-radius: 5px;
-   font-size: 12px;
+   font-size: 16px;
    font-weight: bold;
 }
 .optionTag{
@@ -139,18 +140,21 @@ a{
    <jsp:include page="/WEB-INF/views/asideShop.jsp"/>
    
    <div id='divContainer'>
+   <form action="./review.do" method="post">
       <div id="titleDiv">         
          <div id="firstDiv">후기남겨요</div>
          <div id="secondDiv"></div>                           
       </div>      
-      <div id="midDiv">
-         <select id="select">
+      <div id="midDiv" style="position: relative;">
+         <select id="select" name="select">
             <option class="optionTag" value="PRODUCT_NAME">상품</option>
             <option class="optionTag" value="PET_BREED">견종</option>
             <option class="optionTag" value="REVIEW_TITLE">제목</option>
          </select>         
-         <input id="input" type="text" name="search" placeholder="검색어 입력창">
-                       
+         <input id="search" type="text" name="search" placeholder="검색어 입력창">
+         <img src="/DEMO_Project/resources/img/Search.png"
+		        	alt="제출" id="searchButton"/ style="position: absolute; 
+		        	right: 10px; top: 55%; transform: translateY(-50%); cursor: pointer;">              
       </div>
       <div id="tableDiv">
          <table>
@@ -182,6 +186,7 @@ a{
             </c:forEach>
          </table>
       </div>
+      </form>
       <div id="writeBtnDiv">
           <c:choose>            
             <c:when test="${sessionScope.member.memberNo ne '1'}">
@@ -199,7 +204,6 @@ a{
       <jsp:include page="/WEB-INF/views/common/BoardPaging.jsp">
       <jsp:param value="${pagingMap}" name="pagingMap"/>
       </jsp:include>
-   
       <form action="./review.do" id='pagingForm' method="post">
       <input type="hidden" id='curPage' name='curPage' 
          value="${pagingMap.boardPaging.curPage}">

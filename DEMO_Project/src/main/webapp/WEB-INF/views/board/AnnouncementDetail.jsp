@@ -35,13 +35,13 @@ th{
    border-left:thick;
    border-right:thick;
    border-bottom:thick;
-   height: 30px;   
+   height: 40px;   
 }
 tr, td{
    border: 1px solid black;
    border-left:thick;
    border-right:thick;
-   height: 30px;   
+   height: 40px;   
 }
 table{
    width: 100%;
@@ -51,19 +51,19 @@ table{
 }
 #listColumn1{
    width: 7%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn2{
    width: 63%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn3{
    width: 13%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn4{
    width: 17%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 .tdClass{
    text-align: center;
@@ -85,6 +85,9 @@ table{
    margin-left: 10px;
    height: 30px;
    width: 50px;
+   background-color: red;
+   border:none;
+   color: white;
 }
 </style>
 <meta charset="UTF-8">

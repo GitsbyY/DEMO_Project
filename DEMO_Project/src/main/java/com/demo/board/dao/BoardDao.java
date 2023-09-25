@@ -21,7 +21,7 @@ public interface BoardDao {
 
    public int inquirySelectTotalCount();
    
-   Map<String, Object> reviewSelectList(int start, int end);
+	/* Map<String, Object> reviewSelectList(int start, int end); */
 
    public HashMap<String, Object> noticeSelectOne(int no);
 
@@ -62,6 +62,12 @@ public interface BoardDao {
    public HashMap<String, Object> replySelectOne(int no);
 
    public int inquiryUpdateReply(ReplyDto replyDto);
+   
+   Map<String, Object> reviewSelectList(int start, int end, String search
+		   , String select);
+   
+
+
    
 
 

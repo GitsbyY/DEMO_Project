@@ -43,8 +43,6 @@ public interface BoardService {
    
    public int reviewSelectTotalCount();
    
-   Map<String, Object> reviewSelectList(int start, int end);
-   
    public Map<String, Object> reviewSelectOne(int no);
    
    public int inquiryDeleteOne(int no);
@@ -66,6 +64,14 @@ public interface BoardService {
 
    public void replyInsertOne(ReplyDto replyDto
 		   , MultipartHttpServletRequest mulRequest) throws Exception;
+
+public Map<String, Object> reviewSelectList(int start, int end, String search, String select);
+
+
+
+
+
+
 
 
    
