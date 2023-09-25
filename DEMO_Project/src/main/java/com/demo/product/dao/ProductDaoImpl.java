@@ -30,8 +30,6 @@ public class ProductDaoImpl implements ProductDao{
 		map.put("category", category);
 		map.put("sort", sort);
 		
-		System.out.println(sort);
-		
 		return sqlSession.selectList(nameSpace + "productSelectList", map);
 	}
 

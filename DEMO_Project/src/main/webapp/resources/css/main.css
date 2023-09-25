@@ -160,3 +160,16 @@ footer {
 	width: 1020px;
 	height: 780px;	
 }
+
+.adminBtnClass{
+	background-color: red;
+	border: none;
+	color: white;
+}
+
+.memberBtnClass{
+	background-color: #FFC4A3;
+	border: none;
+	color: white;
+	font-weight: bold;
+}

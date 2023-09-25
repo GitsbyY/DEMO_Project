@@ -150,9 +150,9 @@ public class ProductController {
     public String productUpdate(String pdImgName,
     		ProductDto productDto, ProductDetailDto productDetailDto) {
 		log.debug("shop/update.do file");
-		System.out.println(productDetailDto.getProductDetailNo());
-		System.out.println(productDto.getProductDetailNo());
-		productDetailDto.setProductDetailNo(productDto.getProductDetailNo());
+//		System.out.println(productDetailDto.getProductDetailNo());
+//		System.out.println(productDto.getProductDetailNo());
+//		productDetailDto.setProductDetailNo(productDto.getProductDetailNo());
 		productService.updateProductDetail(productDetailDto);
 		productService.updateProduct(productDto);
 		

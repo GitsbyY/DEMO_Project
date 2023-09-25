@@ -107,12 +107,11 @@ select{
 #totalPriceTd{
 	color: red;
 }
-#adminBtn{
-	margin-top: 100px;
+#controlDiv{
 	clear: right;
 	float: right;
 }
-.adminBtn{
+#adminBtn{
 	width: 50px;
 	height: 30px;
 	background-color: red;
@@ -147,7 +146,10 @@ select{
 #reviewSpan{
 	color: blue;
 }
-
+#sumContainer{
+	width: 500px;
+	height: 100px;
+}
 </style>
 <script type="text/javascript" src="/DEMO_Project/resources/js/jquery-3.7.1.js">
 </script>
@@ -266,9 +268,15 @@ select{
 						</tr>				
 					</table>
 					<input id="imgName" name="pImgName" type="hidden" value="사진이름들어갈곳">
-					<div id="adminBtn">
-						<input class="adminBtn" type="button" value="뒤로가기">
-						<input class="adminBtn" type="button" value="등록"
+					<div id="sumContainer">
+						<div class="memberDiv">
+						</div>
+					</div>
+					<div id="controlDiv">
+						<input id="adminBtn" type="button" value="뒤로가기">
+						<input id="adminBtn" type="button" value="뒤로가기">
+						<input id="adminBtn" type="button" value="취소">
+						<input id="adminBtn" type="button" value="등록"
 							onclick="submitForm();">
 					</div>
 				</div>
