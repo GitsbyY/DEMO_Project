@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,7 +38,10 @@ public class OrderController {
 
 	// 마이페이지 화면
 	@RequestMapping(value = "/mypage/mypage.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myPage(@RequestParam(defaultValue = "1") int curPage, HttpSession session, Model model) {
+	public String myPage(@RequestParam(defaultValue = "1") int curPage, 
+						@RequestParam(defaultValue = "productName") String category, 
+						@RequestParam(defaultValue = "") String search,
+						HttpSession session, Model model) {
 
 		log.info("Welcome OrderController login!");
 
@@ -48,11 +52,19 @@ public class OrderController {
 		int start = myPagePaging.getPageBegin();
 		int end = myPagePaging.getPageEnd();
 
-		List<Map<String, Object>> orderList = orderService.orderSelectList(start, end);
-
+		List<Map<String, Object>> orderList = orderService.orderSelectList(start, end, category, search); 
+		
+//		if(!category.isEmpty() && !search.isEmpty()) {
+//			orderList = orderService.orderSelectList(start, end, category, search);
+//		}else {
+//			orderList = orderService.orderSelectList(start, end);
+//		}
+		
 		HashMap<String, Object> myPagingmap = new HashMap<>();
 		myPagingmap.put("totalCount", totalCount);
 		myPagingmap.put("myPagePaging", myPagePaging);
+		myPagingmap.put("category", category); 
+	    myPagingmap.put("search", search);
 
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("orderList", orderList);
@@ -114,7 +126,10 @@ public class OrderController {
 
 	// 취소내역 화면
 	@RequestMapping(value = "/mypage/cancelPage.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myPageCancel(@RequestParam(defaultValue = "1") int curPage, HttpSession session, Model model) {
+	public String myPageCancel(@RequestParam(defaultValue = "1") int curPage,
+							@RequestParam(defaultValue = "productName") String category, 
+							@RequestParam(defaultValue = "") String search, 
+							HttpSession session, Model model) {
 
 		log.info("Welcome OrderController login!");
 
@@ -131,12 +146,14 @@ public class OrderController {
 			end = myPagePaging.getPageEnd();
 		}
 				
-		List<Map<String, Object>> orderList = orderService.cancelSelectList(start, end);
+		List<Map<String, Object>> orderList = orderService.cancelSelectList(start, end, category, search);
 
 		HashMap<String, Object> myPagingmap = new HashMap<>();
 		myPagingmap.put("totalCount", totalCount);
 		myPagingmap.put("myPagePaging", myPagePaging);
-
+		myPagingmap.put("category", category); 
+	    myPagingmap.put("search", search);
+	    
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("orderList", orderList);
 		model.addAttribute("myPagingmap", myPagingmap);

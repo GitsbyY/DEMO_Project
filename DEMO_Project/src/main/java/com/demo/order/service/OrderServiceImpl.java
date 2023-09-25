@@ -21,9 +21,9 @@ public class OrderServiceImpl implements OrderService{
 	@Autowired
 	public OrderDao orderDao;
 	@Override
-	public List<Map<String, Object>> orderSelectList(int start, int end) {
+	public List<Map<String, Object>> orderSelectList(int start, int end, String category, String search) {
 		// TODO Auto-generated method stub
-		return orderDao.orderSelectList(start, end);
+		return orderDao.orderSelectList(start, end, category, search);
 	}
 	
 	//주문목록 상세
@@ -59,9 +59,9 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public List<Map<String, Object>> cancelSelectList(int start, int end) {
+	public List<Map<String, Object>> cancelSelectList(int start, int end, String category, String search) {
 		// TODO Auto-generated method stub
-		return orderDao.cancelSelectList(start, end);
+		return orderDao.cancelSelectList(start, end, category, search);
 	}
 
 	@Override

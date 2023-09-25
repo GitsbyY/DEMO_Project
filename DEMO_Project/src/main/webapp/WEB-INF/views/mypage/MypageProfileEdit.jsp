@@ -178,14 +178,7 @@ button {
 						<div class="memberInfoName">아이디</div>
 						<div class="memberInfoValue">${memberDto.MEMBER_ID}</div>
 					</div>
-					
-					<div class="memberInfo">
-						<div class="memberInfoName">비밀번호</div>
-						<div class="memberInfoValue">
-							<input class="memberInfoValueInput" type="text" placeholder="수정하시겠습니까?"/>
-						</div> 
-					</div>
-					
+			
 					<div class="memberInfo">
 						<div class="memberInfoName">이름</div>
 						<div class="memberInfoValue">${memberDto.MEMBER_NAME}</div>

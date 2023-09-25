@@ -7,7 +7,7 @@ import com.demo.order.dto.OrderDto;
 
 public interface OrderDao {
 
-	List<Map<String, Object>> orderSelectList(int start, int end);
+	List<Map<String, Object>> orderSelectList(int start, int end, String category, String search);
 
 	Map<String, Object> orderDetailSelectOne(int orderNo);
 
@@ -19,7 +19,7 @@ public interface OrderDao {
 
 	int cancelSelectListTotalCount();
 
-	List<Map<String, Object>> cancelSelectList(int start, int end);
+	List<Map<String, Object>> cancelSelectList(int start, int end, String category, String search);
 
 	Map<String, Object> orderCancelDetailSelectOne(int orderNo);
 

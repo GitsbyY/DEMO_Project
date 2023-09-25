@@ -21,11 +21,14 @@ public class OrderDaoImpl implements OrderDao{
 	String nameSpace = "com.demo.order.";
 
 	@Override
-	public List<Map<String, Object>> orderSelectList(int start, int end) {
+	public List<Map<String, Object>> orderSelectList(int start, int end, String category, String search) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("search", search);
 		map.put("start", start);
 		map.put("end", end);
+		map.put("category", category);
 		
 		return sqlSession.selectList(nameSpace + "orderSelectList", map);
 	}
@@ -61,11 +64,13 @@ public class OrderDaoImpl implements OrderDao{
 	}
 
 	@Override
-	public List<Map<String, Object>> cancelSelectList(int start, int end) {
+	public List<Map<String, Object>> cancelSelectList(int start, int end, String category, String search) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("search", search);
 		map.put("start", start);
 		map.put("end", end);
+		map.put("category", category);
 		
 		return sqlSession.selectList(nameSpace + "cancelSelectList", map);
 	}

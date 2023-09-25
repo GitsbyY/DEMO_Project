@@ -89,6 +89,20 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 #pageForm{
 	
 }
+#searchDiv{
+	margin-top: 20px;
+	text-align: right;
+	height: 40px;
+}
+#sortSelect{
+	width : 100px;
+	height: 24px;
+	font-size: 16px;
+}
+#search{
+	height: 20px;
+	font-size: 16px;
+}
 </style>
 <meta charset="UTF-8">
 <title>마이댕댕 메인</title>
@@ -142,12 +156,38 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 				</div>
 			</div>
 		</c:forEach>
+		
+		<div id='searchDiv'>
+			<form action="./cancelPage.do" method="post" id='myPageCancelSearchForm'>
+				
+				<select id="sortSelect" name="category">
+					<option value="memberNo">회원번호</option>
+					<option value="orderNo">주문번호</option>
+					<option value="memberId">아이디</option>
+					<option value="productName">상품명</option>
+				</select>
+				
+				<input id="search" type="text" name="search"
+					placeholder="검색"
+					value="${myPagingmap.search}"/>
+		        <img src="/DEMO_Project/resources/img/Search.png"
+		        	alt="제출" id="searchButton" onclick="submitForm()"/>
+			</form>
+		</div>
+		
 		<div id="pageStatus" style="margin-top: 50px;">
 			<jsp:include page="/WEB-INF/views/common/MyPagePaging.jsp">
 				<jsp:param value="${myPagingmap}" name="myPagingmap"/>
 			</jsp:include>
 		</div>
 	</div>
+		
+		<div id="pageStatus" style="margin-top: 50px;">
+			<jsp:include page="/WEB-INF/views/common/MyPagePaging.jsp">
+				<jsp:param value="${myPagingmap}" name="myPagingmap"/>
+			</jsp:include>
+		</div>
+
 
 
 	
@@ -167,6 +207,9 @@ function mypageCancelFnc(no) {
 	
     location.href= url;
 	
+}
+function submitForm() {
+    document.getElementById('myPageCancelSearchForm').submit();
 }
 </script>
 </html>
