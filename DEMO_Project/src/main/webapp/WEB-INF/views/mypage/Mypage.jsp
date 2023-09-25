@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="/DEMO_Project/resources/css/main.css">
 <style type="text/css">
@@ -162,22 +163,22 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 				
 				<select id="sortSelect" name="category">
 					<option value="productName"
-						<c:if test="${orderDto.category eq 'productName'}">
+						<c:if test="${myPagingmap.category eq 'productName'}">
 							selected
 						</c:if>
 						>상품명</option>
 						<option value="memberNo"
-						<c:if test="${orderDto.category eq 'memberNo'}">
+						<c:if test="${myPagingmap.category eq 'memberNo'}">
 							selected
 						</c:if>
 						>회원번호</option>
 						<option value="orderNo"
-						<c:if test="${orderDto.category eq 'orderNo'}">
+						<c:if test="${myPagingmap.category eq 'orderNo'}">
 							selected
 						</c:if>
 						>주문번호</option>
 						<option value="memberId"
-						<c:if test="${orderDto.category eq 'memberId'}">
+						<c:if test="${myPagingmap.category eq 'memberId'}">
 							selected
 						</c:if>
 						>아이디</option>
@@ -218,9 +219,9 @@ function mypageDetailFnc(no) {
     location.href= url;
 	
 }
+
 function submitForm() {
-	var curPageObj = $("#curPage");
-	curPageObj.val(1);
+	document.getElementById("curPage").value = 1;
     document.getElementById('myPageSearchForm').submit();
 }
 </script>

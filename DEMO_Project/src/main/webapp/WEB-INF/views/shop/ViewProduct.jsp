@@ -150,6 +150,10 @@ select{
 	width: 500px;
 	height: 100px;
 }
+
+.updateClass{
+	display:none;
+}
 </style>
 <script type="text/javascript" src="/DEMO_Project/resources/js/jquery-3.7.1.js">
 </script>
@@ -196,6 +200,8 @@ select{
 							<td id="typeTd">상품 유형</td>
 							<td>
 								<select id="productCategory" class="updateClass"
+									style="display:inline-block; opacity: 1;
+										color:black; background-color: white;"
 									name="productCategory" disabled>
 									<option value="0">상품 유형을 선택해주세요</option>
 									<option value="10"
@@ -237,7 +243,7 @@ select{
 							</td>
 							<td>
 								<input class="inputName updateClass" name="productName" id="productName"
-									type="text" placeholder="상품명을 입력해주세요" style="display:none;"
+									type="text" placeholder="상품명을 입력해주세요"
 									value="${productDto.PRODUCT_NAME}">
 							</td>			
 						</tr>
@@ -252,7 +258,7 @@ select{
 							</td>
 							<td>
 								<input class="inputName updateClass" name="productPrice" id="productPrice"
-									type="text" placeholder="가격을 입력해주세요" style="display:none;"
+									type="text" placeholder="가격을 입력해주세요"
 									value="${productDto.PRODUCT_PRICE}">
 							</td>				
 						</tr>
@@ -262,10 +268,20 @@ select{
 							</td>
 							<td>
 								<input class="inputName updateClass" name="productStock" id="productStock"
-									type="text" placeholder="수량을 입력해주세요" style="display:none;"
+									type="text" placeholder="수량을 입력해주세요"
 									value="${productDto.PRODUCT_STOCK}">
 							</td>				
-						</tr>				
+						</tr>
+						<tr class="inputTable">
+							<td>
+								${productDto.PRODUCT_NAME}
+							</td>
+							<td>
+								<div id="inputName">
+								
+								</div>
+							</td>			
+						</tr>
 					</table>
 					<input id="imgName" name="pImgName" type="hidden" value="사진이름들어갈곳">
 					<div id="sumContainer">
@@ -273,23 +289,26 @@ select{
 						</div>
 					</div>
 					<div id="controlDiv">
-						<input id="adminBtn" class="adminClass viewClass" type="button" value="뒤로가기">
-						<input id="adminBtn" class="adminClass viewClass" type="button" value="수정"
+						<input id="adminBtn" class="adminClass viewClass"
+							type="button" value="뒤로가기">
+						<input id="adminBtn" class="adminClass viewClass"
+							type="button" value="수정"
 							onclick="updateProductFnc();">
 						<input id="adminBtn" class="adminClass updateClass" 
-							style="display:none;" type="button" value="취소">
+							type="button" value="취소"
+							onclick="viewProductFnc();">
 						<input id="adminBtn" class="adminClass updateClass"
-							style="display:none;" type="button" value="등록"	onclick="submitForm();">
+							type="button" value="등록"	onclick="submitForm();">
 					</div>
 				</div>
 			</div>
-			<div id="goReview">
+			<div id="goReview" class="viewClass">
 				<span>해당상품 후기 </span>
 				<span id="reviewSpan">보러가기</span>
 			</div>
 			<div id="productDetailText">상품 상세 설명</div>
-			<div id="productDetailDivCtr" class="adminClass updateClass">
-				<button id="registBtn" type="button"
+			<div id="productDetailDivCtr" class="adminClass">
+				<button id="registBtn" type="button" class="updateClass"
 					onclick="registDetailFnc();">수정</button>
 			</div>
 			<input type="hidden" name="productDetailContent" id="productDetailInput">
@@ -306,11 +325,37 @@ select{
 <script>
 	function updateProductFnc(){
 		var updateClassArray = Array.from(document.querySelectorAll(".updateClass"));
+		var viewClassArray = Array.from(document.querySelectorAll(".viewClass"));
 
 		for (var element of updateClassArray) {
 		    element.style.display = "inline-block";
+			element.removeAttribute("readonly");
 		}
-		document.getElementById("mySelect").removeAttribute("disabled");
+		
+		for (var element of viewClassArray) {
+		    element.style.display = "none";
+		}
+		
+		document.getElementById("productCategory").removeAttribute("disabled");
+		
+	}
+	
+	function viewProductFnc(){
+		var updateClassArray = Array.from(document.querySelectorAll(".updateClass"));
+		var viewClassArray = Array.from(document.querySelectorAll(".viewClass"));
+
+		for (var element of viewClassArray) {
+		    element.style.display = "inline-block";
+			element.setAttribute("readonly", "readonly");
+		}
+		
+		for (var element of updateClassArray) {
+		    element.style.display = "none";
+		}
+		
+		document.getElementById("productCategory").disabled = true;
+		document.getElementById("productCategory").style.display="inline-block";
+		
 	}
 	
 	var namePattern = /^.{1,30}$/;

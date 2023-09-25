@@ -25,16 +25,19 @@ public class OrderDaoImpl implements OrderDao{
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		try {
-			Integer.parseInt(search);
-		} catch (Exception e) {
-			// TODO: handle exception
-			search = "";
+		if(category.equals("memberNo")||category.equals("orderNo")) {
+			try {
+				map.put("search", Integer.parseInt(search));
+			} catch (Exception e) {
+				// TODO: handle exception
+				map.put("search", "");
+			}
+		}else {
+			map.put("search", search);
 		}
-		map.put("search", search);
+		map.put("category", category);
 		map.put("start", start);
 		map.put("end", end);
-		map.put("category", category);
 		
 		return sqlSession.selectList(nameSpace + "orderSelectList", map);
 	}
@@ -50,13 +53,16 @@ public class OrderDaoImpl implements OrderDao{
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		try {
-			Integer.parseInt(search);
-		} catch (Exception e) {
-			// TODO: handle exception
-			search = "";
+		if(category.equals("memberNo")||category.equals("orderNo")) {
+			try {
+				map.put("search", Integer.parseInt(search));
+			} catch (Exception e) {
+				// TODO: handle exception
+				map.put("search", "");
+			}
+		}else {
+			map.put("search", search);
 		}
-		map.put("search", search);
 		map.put("category", category);
 		
 		return (int)sqlSession.selectOne(nameSpace + "orderSelectListTotalCount", map);

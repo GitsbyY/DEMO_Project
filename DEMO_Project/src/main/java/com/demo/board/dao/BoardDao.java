@@ -23,11 +23,11 @@ public interface BoardDao {
    
 	/* Map<String, Object> reviewSelectList(int start, int end); */
 
-   public HashMap<String, Object> noticeSelectOne(int no);
+   public Map<String, Object> noticeSelectOne(int no);
 
    List<Map<String, Object>> fileSelectList(int no);
 
-   public HashMap<String, Object> inquirySelectOne(int no);
+   public Map<String, Object> inquirySelectOne(int no);
 
    public int inquiryInsertOne(InquiryDto inquiryDto);
 
@@ -43,13 +43,13 @@ public interface BoardDao {
    
    public int reviewSelectTotalCount();
    
-   public HashMap<String, Object> reviewSelectOne(int no);
+   public Map<String, Object> reviewSelectOne(int no);
    
    public int inquiryDeleteOne(int no);
    
    public int inquiryUpdateOne(InquiryDto inquiryDto);
    
-   public HashMap<String, Object> memberInfo(int memberNo);
+   public Map<String, Object> memberInfo(int memberNo);
    
    public int reviewInsertOne(ReviewDto reviewDto);
    
@@ -59,7 +59,7 @@ public interface BoardDao {
    
    public int replyInsertOne(ReplyDto replyDto);
    
-   public HashMap<String, Object> replySelectOne(int no);
+   public Map<String, Object> replySelectOne(int no);
 
    public int inquiryUpdateReply(ReplyDto replyDto);
    

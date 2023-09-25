@@ -59,7 +59,7 @@ public class BoardServiceImpl implements BoardService{
       // TODO Auto-generated method stub
       Map<String, Object> resultMap = new HashMap<String, Object>();
       
-      HashMap<String, Object> noticeDto = boardDao.noticeSelectOne(no);
+      Map<String, Object> noticeDto = boardDao.noticeSelectOne(no);
       resultMap.put("noticeDto", noticeDto);
       
       List<Map<String, Object>> fileList = boardDao.fileSelectList(no);
@@ -72,10 +72,10 @@ public class BoardServiceImpl implements BoardService{
       // TODO Auto-generated method stub
       Map<String, Object> resultMap = new HashMap<String, Object>();
       
-      HashMap<String, Object> inquiryDto = boardDao.inquirySelectOne(no);
+      Map<String, Object> inquiryDto = boardDao.inquirySelectOne(no);
       resultMap.put("inquiryDto", inquiryDto);
       
-      HashMap<String, Object> replyDto = boardDao.replySelectOne(no);
+      Map<String, Object> replyDto = boardDao.replySelectOne(no);
       resultMap.put("replyDto", replyDto);            
       
       List<Map<String, Object>> fileList = boardDao.fileSelectList(no);
@@ -88,7 +88,7 @@ public class BoardServiceImpl implements BoardService{
       // TODO Auto-generated method stub
       Map<String, Object> resultMap = new HashMap<String, Object>();
          
-      HashMap<String, Object> reviewDto = boardDao.reviewSelectOne(no);
+      Map<String, Object> reviewDto = boardDao.reviewSelectOne(no);
       resultMap.put("reviewDto", reviewDto);
          
       List<Map<String, Object>> fileList = boardDao.fileSelectList(no);
@@ -206,7 +206,7 @@ public class BoardServiceImpl implements BoardService{
          return resultNum;
    }
    @Override
-   public HashMap<String, Object> memberInfo(int memberNo) {
+   public Map<String, Object> memberInfo(int memberNo) {
       // TODO Auto-generated method stub
       return boardDao.memberInfo(memberNo);
    }

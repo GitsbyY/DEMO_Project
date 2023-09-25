@@ -44,7 +44,6 @@ public class OrderController {
 						HttpSession session, Model model) {
 
 		log.info("Welcome OrderController login!");
-
 		int totalCount = orderService.orderSelectListTotalCount(category, search);
 
 		MyPagePaging myPagePaging = new MyPagePaging(totalCount, curPage);

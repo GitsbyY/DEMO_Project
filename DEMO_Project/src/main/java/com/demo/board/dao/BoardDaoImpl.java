@@ -84,13 +84,10 @@ public class BoardDaoImpl implements BoardDao{
    }
 
    @Override
-   public HashMap<String, Object> noticeSelectOne(int no) {
+   public Map<String, Object> noticeSelectOne(int no) {
       // TODO Auto-generated method stub
-      HashMap<String, Object> resultMap = new HashMap<>();
-      HashMap<String, Object> map = new HashMap<String, Object>();
-      map.put("no", no);
-      resultMap = sqlSession.selectOne(nameSpace + "noticeSelectOne", map);
-      return resultMap;
+      
+      return sqlSession.selectOne(nameSpace + "noticeSelectOne", no);
    }
 
    @Override
@@ -100,23 +97,16 @@ public class BoardDaoImpl implements BoardDao{
    }
 
    @Override
-   public HashMap<String, Object> inquirySelectOne(int no) {
+   public Map<String, Object> inquirySelectOne(int no) {
       // TODO Auto-generated method stub
-      HashMap<String, Object> resultMap = new HashMap<>();
-      HashMap<String, Object> map = new HashMap<String, Object>();
-      map.put("no", no);
-      resultMap = sqlSession.selectOne(nameSpace + "inquirySelectOne", map);
-      return resultMap;
+      
+      return sqlSession.selectOne(nameSpace + "inquirySelectOne", no);
    }
    
    @Override
-   public HashMap<String, Object> reviewSelectOne(int no) {
+   public Map<String, Object> reviewSelectOne(int no) {
       // TODO Auto-generated method stub
-      HashMap<String, Object> resultMap = new HashMap<>();
-      HashMap<String, Object> map = new HashMap<String, Object>();
-      map.put("no", no);
-      resultMap = sqlSession.selectOne(nameSpace + "reviewSelectOne", map);
-      return resultMap;
+      return sqlSession.selectOne(nameSpace + "reviewSelectOne", no);
    }
 
    @Override
@@ -177,11 +167,8 @@ public class BoardDaoImpl implements BoardDao{
    @Override
    public HashMap<String, Object> memberInfo(int memberNo) {
       // TODO Auto-generated method stub
-      HashMap<String, Object> resultMap = new HashMap<>();
-       HashMap<String, Object> map = new HashMap<String, Object>();
-       map.put("memberNo", memberNo);
-       resultMap = sqlSession.selectOne(nameSpace + "memberInfo", map);
-       return resultMap;
+      
+       return sqlSession.selectOne(nameSpace + "memberInfo", memberNo);
    }
 
    @Override

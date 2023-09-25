@@ -51,7 +51,7 @@ public interface BoardService {
          , MultipartHttpServletRequest mulRequest
          , int fileIdx) throws Exception;
    
-   public HashMap<String, Object> memberInfo(int memberNo);
+   public Map<String, Object> memberInfo(int memberNo);
    
    public void reviewInsertOne(ReviewDto reviewDto
          , MultipartHttpServletRequest mulRequest) throws Exception;
