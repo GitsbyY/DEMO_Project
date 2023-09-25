@@ -137,13 +137,13 @@
    
    <select id="myPageProfileDetailMemberSelectOne" resultType="map">
       SELECT MEMBER_ID, MEMBER_NAME, MEMBER_BIRTH_DATE
-      , MEMBER_PHONE, MEMBER_EMAIL, MEMBER_ADDRESS
+      , MEMBER_PHONE, MEMBER_EMAIL, MEMBER_ADDRESS, MEMBER_NO
       FROM MEMBER
       WHERE MEMBER_NO = #{memberNo}
    </select>
    
    <select id="myPageProfileDetailPetSelectOne" resultType="map">
-      SELECT PET_NAME, PET_BREED, PET_WEIGHT, PET_ADOPTION_DATE, PET_VACCINATION
+      SELECT PET_NAME, PET_BREED, PET_WEIGHT, PET_ADOPTION_DATE, PET_VACCINATION, MEMBER_NO
       FROM PET
       WHERE MEMBER_NO = #{memberNo}
    </select>

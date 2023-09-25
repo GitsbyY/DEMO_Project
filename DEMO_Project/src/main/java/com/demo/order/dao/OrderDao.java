@@ -11,7 +11,7 @@ public interface OrderDao {
 
 	Map<String, Object> orderDetailSelectOne(int orderNo);
 
-	int orderSelectListTotalCount();
+	int orderSelectListTotalCount(String category, String search);
 
 	int orderCancelUpdate(int orderNo);
 

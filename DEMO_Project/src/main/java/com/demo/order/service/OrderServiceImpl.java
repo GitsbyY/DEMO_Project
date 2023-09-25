@@ -34,9 +34,9 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public int orderSelectListTotalCount() {
+	public int orderSelectListTotalCount(String category, String search) {
 		// TODO Auto-generated method stub
-		return orderDao.orderSelectListTotalCount();
+		return orderDao.orderSelectListTotalCount(category, search);
 	}
 
 	@Override

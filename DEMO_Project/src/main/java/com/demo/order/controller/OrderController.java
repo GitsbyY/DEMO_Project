@@ -45,7 +45,7 @@ public class OrderController {
 
 		log.info("Welcome OrderController login!");
 
-		int totalCount = orderService.orderSelectListTotalCount();
+		int totalCount = orderService.orderSelectListTotalCount(category, search);
 
 		MyPagePaging myPagePaging = new MyPagePaging(totalCount, curPage);
 

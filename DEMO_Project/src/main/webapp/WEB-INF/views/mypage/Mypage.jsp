@@ -156,15 +156,35 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 				</div>
 			</div>
 		</c:forEach>
-		
+		<form action="./mypage.do" method="post" id='myPageSearchForm'>
 		<div id='searchDiv'>
-			<form action="./mypage.do" method="post" id='myPageSearchForm'>
+			
 				
 				<select id="sortSelect" name="category">
-					<option value="memberNo">회원번호</option>
-					<option value="orderNo">주문번호</option>
-					<option value="memberId">아이디</option>
-					<option value="productName">상품명</option>
+					<option value="productName"
+						<c:if test="${orderDto.category eq 'productName'}">
+							selected
+						</c:if>
+						>상품명</option>
+						<option value="memberNo"
+						<c:if test="${orderDto.category eq 'memberNo'}">
+							selected
+						</c:if>
+						>회원번호</option>
+						<option value="orderNo"
+						<c:if test="${orderDto.category eq 'orderNo'}">
+							selected
+						</c:if>
+						>주문번호</option>
+						<option value="memberId"
+						<c:if test="${orderDto.category eq 'memberId'}">
+							selected
+						</c:if>
+						>아이디</option>
+<!-- 					<option value="productName">상품명</option> -->
+<!-- 					<option value="memberNo">회원번호</option> -->
+<!-- 					<option value="orderNo">주문번호</option> -->
+<!-- 					<option value="memberId">아이디</option> -->
 				</select>
 				
 				<input id="search" type="text" name="search"
@@ -172,7 +192,10 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 					value="${myPagingmap.search}"/>
 		        <img src="/DEMO_Project/resources/img/Search.png"
 		        	alt="제출" id="searchButton" onclick="submitForm()"/>
-			</form>
+		        	
+		        	 
+		         
+			
 		</div>
 		
 		<div id="pageStatus" style="margin-top: 50px;">
@@ -180,6 +203,9 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 				<jsp:param value="${myPagingmap}" name="myPagingmap"/>
 			</jsp:include>
 		</div>
+		<input type="hidden" id="curPage" name="curPage"
+		         value="${myPagingmap.myPagePaging.curPage}">
+		</form>
 	</div>
 
 
@@ -187,8 +213,7 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 <!-- 	정보를 넘기기 위해서 폼을 만들었다 -->
 
 			<form action="./mypage.do" id="pagingForm" method="post">
-		      <input type="hidden" id="curPage" name="curPage"
-		         value="${myPagingmap.myPagePaging.curPage}">
+		     
 		    </form>
 
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />

@@ -221,16 +221,29 @@ public class MemberController {
       log.info("Welcome MemberController login!");
 
       Map<String, Object> memberDto = memberService.myPageProfileDetailMemberSelectOne(memberNo);
-      Map<String, Object> petDto = memberService.myPageProfileDetailPetSelectOne(memberNo);
 
       model.addAttribute("memberDto", memberDto);
-      model.addAttribute("petDto", petDto);
 
       session.setAttribute("myPageAside", "memberInfo");
 
       return "mypage/MypageProfileEdit";
    }
+   
+   // 회원정보 상세 화면
+   @RequestMapping(value = "/mypage/MypageProfileEditPet.do", method = { RequestMethod.GET, RequestMethod.POST })
+   public String myPageProfileDetailPet(int memberNo, HttpSession session, Model model) {
 
+      log.info("Welcome MemberController login!");
+
+      Map<String, Object> petDto = memberService.myPageProfileDetailPetSelectOne(memberNo);
+
+      model.addAttribute("petDto", petDto);
+
+      session.setAttribute("myPageAside", "memberInfo");
+
+      return "mypage/MypageProfileEditPet";
+   }
+   
    // 마이페이지결제 화면
    @RequestMapping(value = "/mypage/mypageProfilePayment.do", method = { RequestMethod.GET, RequestMethod.POST })
    public String myPageProfilPayment(@RequestParam(defaultValue = "1") int curPage, HttpSession session, Model model) {

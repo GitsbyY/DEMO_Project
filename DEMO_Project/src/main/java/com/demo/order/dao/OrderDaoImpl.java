@@ -24,7 +24,13 @@ public class OrderDaoImpl implements OrderDao{
 	public List<Map<String, Object>> orderSelectList(int start, int end, String category, String search) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
+		try {
+			Integer.parseInt(search);
+		} catch (Exception e) {
+			// TODO: handle exception
+			search = "";
+		}
 		map.put("search", search);
 		map.put("start", start);
 		map.put("end", end);
@@ -40,9 +46,20 @@ public class OrderDaoImpl implements OrderDao{
 	}
 
 	@Override
-	public int orderSelectListTotalCount() {
+	public int orderSelectListTotalCount(String category, String search) {
 		// TODO Auto-generated method stub
-		return (int)sqlSession.selectOne(nameSpace + "orderSelectListTotalCount");
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		try {
+			Integer.parseInt(search);
+		} catch (Exception e) {
+			// TODO: handle exception
+			search = "";
+		}
+		map.put("search", search);
+		map.put("category", category);
+		
+		return (int)sqlSession.selectOne(nameSpace + "orderSelectListTotalCount", map);
 	}
 
 	@Override

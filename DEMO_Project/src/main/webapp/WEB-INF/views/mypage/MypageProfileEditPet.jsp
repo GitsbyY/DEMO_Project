@@ -97,7 +97,33 @@ button {
 	color: white;
 	font-size: 24px;
 }
-
+.petInfo{
+	width: 400px;
+	height: 50px;
+	border: 1px solid black;
+	border-collapse: collapse;
+	font-size: 24px;
+	display: flex;
+	justify-content: space-between;
+}
+.petInfoName{
+	width: 180px;
+	text-align: left;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+.petInfoValue{
+	width: 220px;
+	text-align: right;
+	margin-right: 10px;
+	margin-top: 10px;
+}
+.petInfoValueInput{
+	width: 150px;
+	text-align: right;
+	font-size: 24px;
+	height: 25px;
+}
 #buttonContainer{
 	display: flex;
 	margin-top: 20px;
@@ -134,7 +160,7 @@ button {
 	<jsp:include page="/WEB-INF/views/asideMyPage.jsp" />
 
 	<fmt:formatDate value="${memberDto.MEMBER_BIRTH_DATE}" pattern="yyyy/MM/dd" var="formattedBirthDate" />
-
+	<fmt:formatDate value="${petDto.PET_ADOPTION_DATE}" pattern="yyyy/MM/dd" var="formattedAdoptionDate" />
 
 		<div id="infoWrap">
 			<div class="titleContainer">
@@ -143,45 +169,35 @@ button {
 			
 			<div id="infoContainer">
 				<div id="memberOrPetContainer">
-					<button class="memberOrPet" style="border-right: 1px solid white;">회원</button>
-					<button class="memberOrPet" onclick="showPetInfo('${memberDto.MEMBER_NO}')">반려견</button>
+					<button class="memberOrPet" style="border-right: 1px solid white;" onclick="showMemberInfo(${memberDto.MEMBER_NO})">회원</button>
+					<button class="memberOrPet" onclick="showPetInfo(${memberDto.MEMBER_NO})">반려견</button>
 				</div>
-				<div id="memberInfoContainer">
 				
-					<div class="memberInfo">
-						<div class="memberInfoName">아이디</div>
-						<div class="memberInfoValue">${memberDto.MEMBER_ID}</div>
-					</div>
-			
-					<div class="memberInfo">
-						<div class="memberInfoName">이름</div>
-						<div class="memberInfoValue">${memberDto.MEMBER_NAME}</div>
-					</div>
-					
-					<div class="memberInfo">
-						<div class="memberInfoName">생년월일</div>
-						<div class="memberInfoValue">${formattedBirthDate}</div>
-					</div>
-					
-					<div class="memberInfo">
-						<div class="memberInfoName">휴대폰 번호</div>
-						<div class="memberInfoValue">${memberDto.MEMBER_PHONE}</div>
-					</div>
-					
-					<div class="memberInfo">
-						<div class="memberInfoName">이메일</div>
-						<div class="memberInfoValue">
-							<input class="memberInfoValueInput" type="text" value="${memberDto.MEMBER_EMAIL}"/>
+				<div id="petInfoContainer">
+					<div class="petInfo">
+						<div class="petInfoName">이름</div>
+						<div class="petInfoValue">
+							<input class="petInfoValueInput" type="text" value="${petDto.PET_NAME}"/>
 						</div>
 					</div>
-					
-					<div class="memberInfo">
-						<div class="memberInfoName">주소</div>
-						<div class="memberInfoValue">
-							<input class="memberInfoValueInput" type="text" value="${memberDto.MEMBER_ADDRESS}"/>
+					<div class="petInfo">
+						<div class="petInfoName">반려견 종</div>
+						<div class="petInfoValue">${petDto.PET_BREED}</div>
+					</div>
+					<div class="petInfo">
+						<div class="petInfoName">무게</div>
+						<div class="petInfoValue">
+							<input class="petInfoValueInput" type="text" value="${petDto.PET_WEIGHT}&nbsp;Kg"/>
 						</div>
 					</div>
-					
+					<div class="petInfo">
+						<div class="petInfoName">입양일</div>
+						<div class="petInfoValue">${formattedAdoptionDate}</div>
+					</div>
+					<div class="petInfo">
+						<div class="petInfoName">예방접종차시</div>
+						<div class="petInfoValue">${petDto.PET_VACCINATION}</div>
+					</div>
 				</div>
 				
 				<div id="buttonContainer">
@@ -199,14 +215,13 @@ button {
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
 </body>
 <script type="text/javascript">
-function showPetInfo(memberNo) {
+
+function showMemberInfo(memberNo) {
 	
-	var url = 'MypageProfileEditPet.do?memberNo=' + memberNo;
+	var url = 'MypageProfileEdit.do?memberNo=' + memberNo;
 	
     location.href= url;
 	
 }
-
-
 </script>
 </html>

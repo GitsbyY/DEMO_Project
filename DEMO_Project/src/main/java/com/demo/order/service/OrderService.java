@@ -14,7 +14,7 @@ public interface OrderService {
 
 	Map<String, Object> orderDetailSelectOne(int orderNo);
 
-	int orderSelectListTotalCount();
+	int orderSelectListTotalCount(String category, String search);
 
 	boolean orderCancelUpdate(int orderNo);
 
