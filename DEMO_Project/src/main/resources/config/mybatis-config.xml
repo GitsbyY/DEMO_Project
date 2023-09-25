@@ -10,6 +10,8 @@
 		<typeAlias type="com.demo.board.dto.InquiryDto" alias="inquiryDto"/>
 		<typeAlias type="com.demo.board.dto.ReplyDto" alias="replyDto"/>
 		<typeAlias type="com.demo.board.dto.NoticeDto" alias="noticeDto"/>
+		<typeAlias type="com.demo.board.dto.NoticeReplyDto" alias="noticeReplyDto"/>
+		<typeAlias type="com.demo.board.dto.ReviewReplyDto" alias="reviewReplyDto"/>
 		
 		<typeAlias type="com.demo.member.dto.MemberDto" alias="memberDto"/>
 		<typeAlias type="com.demo.member.dto.PetDto" alias="petDto"/>

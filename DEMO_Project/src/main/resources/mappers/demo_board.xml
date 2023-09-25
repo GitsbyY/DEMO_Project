@@ -44,7 +44,25 @@
       <result column="NOTICE_CRE_DATE" property="noticeCreDate"
          javaType="java.util.Date" />
    </resultMap>
-      
+     
+   <resultMap type="noticeReplyDto" id="noticeReplyResultMap">
+      <id column="NOTICE_REPLY_NO" property="noticeReplyNo" />
+      <result column="MEMBER_NO" property="memberNo" />
+      <result column="NOTICE_NO" property="noticeNo" />
+      <result column="NOTICE_REPLY_CONTENT" property="noticeReplyContent" />
+      <result column="NOTICE_REPLY_CRE_DATE" property="noticeReplyCreDate"
+         javaType="java.util.Date" />
+   </resultMap>
+   
+   <resultMap type="reviewReplyDto" id="reviewReplyResultMap">
+      <id column="REVIEW_REPLY_NO" property="reviewReplyNo" />
+      <result column="MEMBER_NO" property="memberNo" />
+      <result column="REVIEW_NO" property="reviewNo" />
+      <result column="REVIEW_REPLY_CONTENT" property="reviewReplyContent" />
+      <result column="REVIEW_REPLY_CRE_DATE" property="reviewReplyCreDate"
+         javaType="java.util.Date" />
+   </resultMap>
+   
    <select id="noticeSelectList" parameterType="map" resultType="map">   
       SELECT 
        NOTICE.NOTICE_NO, 
