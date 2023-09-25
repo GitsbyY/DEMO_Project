@@ -169,8 +169,8 @@ button {
 			
 			<div id="infoContainer">
 				<div id="memberOrPetContainer">
-					<button class="memberOrPet" style="border-right: 1px solid white;" onclick="showMemberInfo(${memberDto.MEMBER_NO})">회원</button>
-					<button class="memberOrPet" onclick="showPetInfo(${memberDto.MEMBER_NO})">반려견</button>
+					<button class="memberOrPet" style="border-right: 1px solid white;" onclick="showMemberInfo('${petDto.MEMBER_NO}')">회원</button>
+					<button class="memberOrPet" onclick="showPetInfo('${petDto.MEMBER_NO}')">반려견</button>
 				</div>
 				
 				<div id="petInfoContainer">
