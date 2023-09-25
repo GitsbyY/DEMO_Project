@@ -97,18 +97,18 @@
    
    <select id="inquirySelectList" parameterType="map" resultType="map">   
      SELECT 
-	  SUBQUERY.INQUIRY_NO, 
-	  SUBQUERY.MEMBER_NO, 
-	  SUBQUERY.INQUIRY_TYPE, 
-	  SUBQUERY.MEMBER_NAME, 
-	  SUBQUERY.INQUIRY_CRE_DATE, 
-	  SUBQUERY.INQUIRY_TITLE, 
-	  SUBQUERY.INQUIRY_CONTENT, 
-	  SUBQUERY.INQUIRY_IS_REPLY, 
-	  SUBQUERY.REPLY_CONTENT,
-	  SUBQUERY.REPLY_CRE_DATE
-	FROM (
- 	 SELECT 
+     SUBQUERY.INQUIRY_NO, 
+     SUBQUERY.MEMBER_NO, 
+     SUBQUERY.INQUIRY_TYPE, 
+     SUBQUERY.MEMBER_NAME, 
+     SUBQUERY.INQUIRY_CRE_DATE, 
+     SUBQUERY.INQUIRY_TITLE, 
+     SUBQUERY.INQUIRY_CONTENT, 
+     SUBQUERY.INQUIRY_IS_REPLY, 
+     SUBQUERY.REPLY_CONTENT,
+     SUBQUERY.REPLY_CRE_DATE
+   FROM (
+     SELECT 
     I.INQUIRY_NO, 
     I.MEMBER_NO, 
     I.INQUIRY_TYPE, 
@@ -122,14 +122,14 @@
     R.REPLY_TITLE, 
     R.REPLY_CONTENT,
     ROW_NUMBER() OVER (ORDER BY I.INQUIRY_CRE_DATE DESC) AS RNUM
-  	FROM 
+     FROM 
     INQUIRY I
- 	 LEFT JOIN 
+     LEFT JOIN 
     REPLY R 
- 	 ON 
+     ON 
     I.INQUIRY_NO = R.INQUIRY_NO
-	) SUBQUERY
-	WHERE 
+   ) SUBQUERY
+   WHERE 
   SUBQUERY.RNUM BETWEEN #{start} AND #{end}
    </select>
    
@@ -159,11 +159,11 @@
    
    <select id="replySelectOne" parameterType="int"
        resultType="map">
-		SELECT I.INQUIRY_NO, R.MEMBER_NO, R.REPLY_CRE_DATE, R.REPLY_MEMBER_NAME
-		, R.REPLY_CONTENT, R.REPLY_TITLE
-		FROM REPLY R JOIN INQUIRY I
-		ON R.INQUIRY_NO = I.INQUIRY_NO
-		WHERE R.INQUIRY_NO = #{no}
+      SELECT I.INQUIRY_NO, R.MEMBER_NO, R.REPLY_CRE_DATE, R.REPLY_MEMBER_NAME
+      , R.REPLY_CONTENT, R.REPLY_TITLE
+      FROM REPLY R JOIN INQUIRY I
+      ON R.INQUIRY_NO = I.INQUIRY_NO
+      WHERE R.INQUIRY_NO = #{no}
    </select>
    
    <select id="memberInfo" parameterType="int"
@@ -239,9 +239,9 @@
    <insert id="replyInsertOne" parameterType="replyDto">
       
       INSERT INTO REPLY
-		(INQUIRY_NO, MEMBER_NO, REPLY_CRE_DATE, REPLY_MEMBER_NAME, REPLY_TITLE, REPLY_CONTENT)
-		VALUES(#{inquiryNo}, #{memberNo}, SYSDATE, #{memberName}
-		, #{replyTitle}, #{replyContent})
+      (INQUIRY_NO, MEMBER_NO, REPLY_CRE_DATE, REPLY_MEMBER_NAME, REPLY_TITLE, REPLY_CONTENT)
+      VALUES(#{inquiryNo}, #{memberNo}, SYSDATE, #{memberName}
+      , #{replyTitle}, #{replyContent})
             
    </insert>
    
@@ -326,4 +326,3 @@
       WHERE REVIEW_NO = #{value}
    </delete>
 </mapper>
-

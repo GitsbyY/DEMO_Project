@@ -7,97 +7,97 @@
 <head>
 <style type="text/css">
 #titleDiv{
-	margin-top: 30px;
-	border: 1px solid gray;
-	border-collapse: collapse;
-	border-top: thick;
-	border-left:thick;
-	border-right:thick;  
-	table-layout: fixed;
-	font-size: 30px;
-	margin-bottom: 10px;
-	width: 100%;   
+   margin-top: 30px;
+   border: 1px solid gray;
+   border-collapse: collapse;
+   border-top: thick;
+   border-left:thick;
+   border-right:thick;  
+   table-layout: fixed;
+   font-size: 30px;
+   margin-bottom: 10px;
+   width: 100%;   
 }
 #firstDiv{
-	border-bottom: 2px solid black;
-	width: 180px;
-	display: block;     
+   border-bottom: 2px solid black;
+   width: 180px;
+   display: block;     
 }
 #secondTh{      
 }
 
 #tableDiv{
-	margin-top: 60px;
-	clear: right;
-	width: 100%;   
-	height: 500px;
+   margin-top: 60px;
+   clear: right;
+   width: 100%;   
+   height: 500px;
 }
 th{      
-	height: 30px;   
+   height: 30px;   
 }
 tr, td{
-	border: 1px solid black;   
-	height: 40px;   
+   border: 1px solid black;   
+   height: 40px;   
 }
 table{
-	width: 100%;   
-	border-left: none;   
-	border-collapse: collapse;
-	font-size: 16px;
+   width: 100%;   
+   border-left: none;   
+   border-collapse: collapse;
+   font-size: 16px;
 }
 .firstTd{
-	width: 12%;   
-	text-align: center;
-	font-weight: bold;
-	border-right: 1px solid black;
-	background-color: #D3D3D3;
+   width: 12%;   
+   text-align: center;
+   font-weight: bold;
+   border-right: 1px solid black;
+   background-color: #FFC4A3;
 }
 #fourthTr{
-	height: 400px;
+   height: 400px;
 }
 td input{
     padding-left: 10px; /* 원하는 만큼의 여백 크기를 지정합니다. */    
 }
 #titleInputTd{
-	padding-left: 10px;   
+   padding-left: 10px;   
 }
 #titleInput{
-	height: 30px;
-	width: 500px;
+   height: 30px;
+   width: 90%;
 }
 #typeSelect{
-	height: 30px;
-	width: 80px;
-	font-size: 16px;
-	font-weight: bold;
-	text-align: center;
+   height: 30px;
+   width: 80px;
+   font-size: 16px;
+   font-weight: bold;
+   text-align: center;
 }
 #nameTd{
-	padding-left: 15px;
-	font-weight: bold;
+   padding-left: 15px;
+   font-weight: bold;
 }
 #contentInput{   
-	width: 90%;
-	height: 350px;
-	padding-left: 10px;
-	padding-top: 10px;
+   width: 90%;
+   height: 350px;
+   padding-left: 10px;
+   padding-top: 10px;
 }
 #contentInputTd{
-	padding-left: 10px;
-	padding-top: 10px;
-	padding-bottom: 10px;   
+   padding-left: 10px;
+   padding-top: 10px;
+   padding-bottom: 10px;   
 }
 #btnDiv{   
-	margin-top: 30px;
-	float: right;
+   margin-top: 30px;
+   float: right;
 }
 #registrationBtn, #cancellationBtn{
-	background-color: #FFC4A3;
-	border: none;
-	color: white;
-	width: 60px;
-	height: 30px;
-	font-size: 16px;   
+   background-color: #FFC4A3;
+   border: none;
+   color: white;
+   width: 60px;
+   height: 30px;
+   font-size: 16px;   
 }
 </style>
 <meta charset="UTF-8">
@@ -124,8 +124,8 @@ td input{
                   <td id="titleInputTd">
                      <!-- <input id="titleInput" type="text" name="inquiryType"> -->
                      <select id="typeSelect" name="inquiryType">
-                     	<option>회원
-                     	<option>상품
+                        <option>회원
+                        <option>상품
                      </select>
                   </td>      
                </tr>
@@ -142,8 +142,8 @@ td input{
                <tr id=fourthTr">
                   <td id="fourthTd" class="firstTd">내용</td>   
                   <td id="contentInputTd">
-                     <textarea id="contentInput" type="text" name="inquiryContent"></textarea>
-                     <input type="hidden" name="inquiryContent" value="${inquiryDto.INQUIRY_CONTENT}">                  
+                     <textarea id="contentInput" name="inquiryContent"></textarea>
+                     <%-- <input type="hidden" name="inquiryContent" value="${inquiryDto.INQUIRY_CONTENT}"> --%>                  
                   </td>
                </tr>            
             </table>

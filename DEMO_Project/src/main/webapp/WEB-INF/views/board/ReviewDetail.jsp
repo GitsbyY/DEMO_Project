@@ -142,10 +142,24 @@ table{
       <div id="btnDiv">
          <input id="listBtn" type="button" value="뒤로가기" 
          onclick="goBack();">
-         <input type="hidden" name="no" value="${reviewDto.REVIEW_NO}">
-         <input class="rightBtn" type="submit" value="수정">
-         <input class="rightBtn" type="button" value="삭제" 
-            onclick='pageMoveDeleteFnc(${reviewDto.REVIEW_NO});'>
+         <c:choose>            
+            <c:when test="${sessionScope.member.memberNo eq reviewDto.MEMBER_NO}">
+               <input type="hidden" name="no" value="${reviewDto.REVIEW_NO}">
+               <input class="rightBtn" type="submit" value="수정">
+               <input class="rightBtn" type="button" value="삭제" 
+                  onclick='pageMoveDeleteFnc(${reviewDto.REVIEW_NO});'>
+            </c:when>
+            <c:when test="${sessionScope.member.memberNo eq '1'}">
+               <input type="hidden" name="no" value="${reviewDto.REVIEW_NO}">               
+               <input class="rightBtn" type="button" value="삭제" 
+                  onclick='pageMoveDeleteFnc(${reviewDto.REVIEW_NO});'>
+            </c:when>
+            <c:otherwise>
+               
+            </c:otherwise>
+         </c:choose>
+         
+         
       </div>
       </form>                           
    </div>

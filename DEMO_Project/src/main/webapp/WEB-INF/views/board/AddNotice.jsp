@@ -50,7 +50,7 @@ table{
    text-align: center;
    font-weight: bold;
    border-right: 1px solid black;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #thirdTr{
    height: 400px;
@@ -63,7 +63,7 @@ td input{
 }
 #titleInput{
    height: 30px;
-   width: 500px;
+   width: 90%;
 }
 #nameTd{
    padding-left: 15px;
@@ -122,8 +122,8 @@ td input{
                <tr id="thirdTr">
                   <td id="thirdTd" class="firstTd">내용</td>   
                   <td id="contentInputTd">
-                     <textarea id="contentInput" type="text" name="noticeContent"></textarea>
-                     <input type="hidden" name="noticeContent" value="${noticeDto.NOTICE_CONTENT}">                  
+                     <textarea id="contentInput" name="noticeContent"></textarea>
+                     <%-- <input type="hidden" name="noticeContent" value="${noticeDto.NOTICE_CONTENT}"> --%>                  
                   </td>
                </tr>            
             </table>

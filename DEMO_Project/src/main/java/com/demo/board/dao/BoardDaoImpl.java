@@ -203,27 +203,27 @@ public class BoardDaoImpl implements BoardDao{
       return sqlSession.update(nameSpace + "reviewUpdateOne", reviewDto);
    }
 
-	@Override
-	public int replyInsertOne(ReplyDto replyDto) {
-		// TODO Auto-generated method stub
-		return sqlSession.insert(nameSpace + "replyInsertOne", replyDto);
-	}
+   @Override
+   public int replyInsertOne(ReplyDto replyDto) {
+      // TODO Auto-generated method stub
+      return sqlSession.insert(nameSpace + "replyInsertOne", replyDto);
+   }
 
-	@Override
-	public HashMap<String, Object> replySelectOne(int no) {
-		// TODO Auto-generated method stub
-		HashMap<String, Object> resultMap = new HashMap<>();
-	    HashMap<String, Object> map = new HashMap<String, Object>();
-	    map.put("no", no);
-	    resultMap = sqlSession.selectOne(nameSpace + "replySelectOne", map);
-	    return resultMap;
-	}
+   @Override
+   public HashMap<String, Object> replySelectOne(int no) {
+      // TODO Auto-generated method stub
+      HashMap<String, Object> resultMap = new HashMap<>();
+       HashMap<String, Object> map = new HashMap<String, Object>();
+       map.put("no", no);
+       resultMap = sqlSession.selectOne(nameSpace + "replySelectOne", map);
+       return resultMap;
+   }
 
-	@Override
-	public int inquiryUpdateReply(ReplyDto replyDto) {
-		// TODO Auto-generated method stub
-		return sqlSession.update(nameSpace + "inquiryUpdateReply", replyDto);
-	}
+   @Override
+   public int inquiryUpdateReply(ReplyDto replyDto) {
+      // TODO Auto-generated method stub
+      return sqlSession.update(nameSpace + "inquiryUpdateReply", replyDto);
+   }
 
 
 

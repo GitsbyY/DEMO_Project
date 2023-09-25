@@ -130,9 +130,18 @@ table{
          <input id="listBtn" type="button" value="뒤로가기" 
          onclick="goBack();">
          <input type="hidden" name="no" value="${noticeDto.NOTICE_NO}">
-         <input class="rightBtn" type="submit" value="수정">
-         <input class="rightBtn" type="button" value="삭제" 
-         	onclick='pageMoveDeleteFnc(${noticeDto.NOTICE_NO});'>
+         <c:choose>
+          <c:when test="${sessionScope.member.memberNo eq '1'}">
+          <input class="rightBtn" type="submit" value="수정">
+            <input class="rightBtn" type="button" value="삭제" 
+               onclick='pageMoveDeleteFnc(${noticeDto.NOTICE_NO});'>
+          </c:when>
+          
+          <c:otherwise>
+              
+          </c:otherwise>
+      </c:choose>
+         
       </div>
       </form>                           
    </div>
@@ -140,15 +149,15 @@ table{
    <jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
 <script type="text/javascript">
-	function goBack() {
-		window.history.back();
-	}
+   function goBack() {
+      window.history.back();
+   }
    
-	function pageMoveDeleteFnc(no) {
-		
-		var url = './delete.do?no=' + no;
-			
-		location.href = url;
-	}
+   function pageMoveDeleteFnc(no) {
+      
+      var url = './delete.do?no=' + no;
+         
+      location.href = url;
+   }
 </script>
 </html>

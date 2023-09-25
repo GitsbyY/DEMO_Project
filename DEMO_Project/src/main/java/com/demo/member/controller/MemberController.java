@@ -24,266 +24,257 @@ import com.demo.util.MyPagePaging;
 @Controller
 public class MemberController {
 
-	private static final Logger log = LoggerFactory.getLogger(MemberController.class);
+   private static final Logger log = LoggerFactory.getLogger(MemberController.class);
 
-	@Autowired
-	private MemberService memberService;
+   @Autowired
+   private MemberService memberService;
 
-	// 로그인 화면으로 이동
-	@RequestMapping(value = "/auth/login.do", method = RequestMethod.GET)
-	public String login(HttpSession session, Model model) {
+   // 로그인 화면으로 이동
+   @RequestMapping(value = "/auth/login.do", method = RequestMethod.GET)
+   public String login(HttpSession session, Model model) {
 
-		log.info("Welcome MemberController login!");
+      log.info("Welcome MemberController login!");
 
-		session.invalidate();
+      session.invalidate();
 
-		return "auth/LoginPage";
-	}
+      return "auth/LoginPage";
+   }
 
-	// 로그인 버튼 클릭시
-	@RequestMapping(value = "/auth/loginCtr.do", method = RequestMethod.POST)
-	public String loginCtr(String memberId, String memberPassword, HttpSession session, Model model) {
+   // 로그인 버튼 클릭시
+   @RequestMapping(value = "/auth/loginCtr.do", method = RequestMethod.POST)
+   public String loginCtr(String memberId, String memberPassword, HttpSession session, Model model) {
+
+      log.info("Welcome MemberController loginCtr!" + memberId + ", " + memberPassword);
+
+      MemberDto memberDto = memberService.memberExist(memberId, memberPassword);
+
+      String viewUrl = "";
+      String loginFail = "loginFail";
+      if (memberDto != null) {
+         // 회원이 존재하면 세션에 담는다
+         session.setAttribute("member", memberDto);
+
+         viewUrl = "redirect:/index.jsp";
+      } else {
+         viewUrl = "auth/LoginPage";
+         session.setAttribute("loginFail", loginFail);
+      }
+      return viewUrl;
+   }
+
+   // 로그아웃
+   @RequestMapping(value = "/auth/logout.do", method = RequestMethod.GET)
+   public String logout(HttpSession session, Model model) {
+      log.info("Welcome MemberController logout!");
+
+      session.invalidate();
+
+      return "redirect:/auth/login.do";
+   }
+
+   // id찾기 화면으로 이동
+   @RequestMapping(value = "/auth/findId.do", method = RequestMethod.GET)
+   public String findId(HttpSession session, Model model) {
+
+      log.info("Welcome MemberController findId!");
+
+      return "auth/FindId";
+   }
+
+   // id찾기
+   @RequestMapping(value = "/auth/findIdCtr.do", method = RequestMethod.POST)
+   public String findIdCtr(String memberEmail, String memberPhone, HttpSession session, Model model) {
+
+      log.info("Welcome MemberController findIdCtr!" + memberEmail + ", " + memberPhone);
+
+      MemberDto memberDto = memberService.memberFindId(memberEmail, memberPhone);
+
+      String viewUrl = "";
+      String findFail = "findFail";
+      if (memberDto != null) {
+//            회원이 존재하면 세션에 담는다
+         session.setAttribute("member", memberDto);
+
+         viewUrl = "auth/FindIdResult";
+      } else {
+         viewUrl = "auth/FindId";
+         session.setAttribute("findFail", findFail);
+      }
+      return viewUrl;
+   }
+
+   // 비밀번호찾기 화면으로 이동
+   @RequestMapping(value = "/auth/findPassword.do", method = RequestMethod.GET)
+   public String findPasword(HttpSession session, Model model) {
+
+      log.info("Welcome MemberController findPassword!");
+
+      return "auth/FindPassword";
+   }
+
+   // 비밀번호 찾기
+   @RequestMapping(value = "/auth/findPasswordCtr.do", method = RequestMethod.POST)
+   public String findPasswordCtr(String memberId, String memberEmail, HttpSession session, Model model) {
+
+      log.info("Welcome MemberController findIdCtr!" + memberId + ", " + memberEmail);
+
+      MemberDto memberDto = memberService.memberFindPassword(memberId, memberEmail);
+
+      String viewUrl = "";
+      String findFail = "findFail";
+      if (memberDto != null) {
+//                  회원이 존재하면 세션에 담는다
+         session.setAttribute("member", memberDto);
+
+         viewUrl = "auth/FindPasswordResult";
+      } else {
+         viewUrl = "auth/FindPassword";
+         session.setAttribute("findFail", findFail);
+      }
+      return viewUrl;
+   }
+   
+   // 비밀번호 변경
+      @RequestMapping(value = "/auth/changePassword.do", method = RequestMethod.POST)
+      public String memberPwdChange(MemberDto memberDto, Model model, HttpSession session) {
+         log.debug("Welcome BoardController memberPwdChange!");                  
+         
+         int resultNum = 0;
+         
+         try {
+            resultNum = memberService.memberPwdChange(memberDto);
+         } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+         }
+         
+         return "common/PwdChangeSuccessPage";                  
+      }
 
-		log.info("Welcome MemberController loginCtr!" + memberId + ", " + memberPassword);
+   // 일반.do는 단순 페이지 이동
+   @RequestMapping(value = "/auth/addm.do", method = RequestMethod.GET)
+   public String memberViewFormAdd(Model model) {
 
-		MemberDto memberDto = memberService.memberExist(memberId, memberPassword);
+      log.debug("Welcome MemberController member Add!");
 
-		String viewUrl = "";
-		String loginFail = "loginFail";
-		if (memberDto != null) {
-			// 회원이 존재하면 세션에 담는다
-			session.setAttribute("member", memberDto);
+      return "auth/JoinForm";
+   }
 
-			viewUrl = "redirect:/index.jsp";
-		} else {
-			viewUrl = "auth/LoginPage";
-			session.setAttribute("loginFail", loginFail);
-		}
-		return viewUrl;
-	}
+   @RequestMapping(value = "/auth/checkId.do", method = RequestMethod.POST)
+   @ResponseBody
+   public boolean checkIdAvailability(@RequestParam("memberId") String memberId) {
+      // MemberService의 isIdAvailable 메서드를 호출하여 중복 여부를 확인
+      boolean isAvailable = memberService.isIdAvailable(memberId);
+      return isAvailable;
+   }
 
-	// 로그아웃
-	@RequestMapping(value = "/auth/logout.do", method = RequestMethod.GET)
-	public String logout(HttpSession session, Model model) {
-		log.info("Welcome MemberController logout!");
+   @RequestMapping(value = "/auth/addp.do", method = RequestMethod.GET)
+   public String memberPetFormAdd(MemberDto memberDto, Model model) {
+      log.debug("Welcome MemberController pet Add! " + memberDto);
+      model.addAttribute("memberDto", memberDto);
+      return "auth/JoinFormDog";
+   }
 
-		session.invalidate();
+   @RequestMapping(value = "/auth/addp.do", method = RequestMethod.POST)
+   public String memberPAddCtr(MemberDto memberDto, PetDto petDto, Model model) {
 
-		return "redirect:/auth/login.do";
-	}
+      log.debug("Welcome MemberController pet Add2!" + "memberDto :" + memberDto + "petDto:" + petDto + "medel: "
+            + model);
+      int mno = memberService.memberInsertOne(memberDto);
+      petDto.setMemberNo(mno);
+      memberService.petInsertOne(petDto);
+      return "auth/LoginPage";
+   }
 
-	// id찾기 화면으로 이동
-	@RequestMapping(value = "/auth/findId.do", method = RequestMethod.GET)
-	public String findId(HttpSession session, Model model) {
+   // 회원정보관리
+   @RequestMapping(value = "/mypage/mypageProfile.do", method = { RequestMethod.GET, RequestMethod.POST })
+   public String myPageProfile(@RequestParam(defaultValue = "1") int curPage, HttpSession session, Model model) {
 
-		log.info("Welcome MemberController findId!");
+      log.info("Welcome MemberController login!");
 
-		return "auth/FindId";
-	}
+      int totalCount = memberService.memberSelectListTotalCount();
 
-	// id찾기
-	@RequestMapping(value = "/auth/findIdCtr.do", method = RequestMethod.POST)
-	public String findIdCtr(String memberEmail, String memberPhone, HttpSession session, Model model) {
+      MyPagePaging myPagePaging = new MyPagePaging(totalCount, curPage);
 
-		log.info("Welcome MemberController findIdCtr!" + memberEmail + ", " + memberPhone);
+      int start = myPagePaging.getPageBegin();
+      int end = myPagePaging.getPageEnd();
 
-		MemberDto memberDto = memberService.memberFindId(memberEmail, memberPhone);
+      List<Map<String, Object>> memberList = memberService.memberInfoSelectList(start, end);
 
-		String viewUrl = "";
-		String findFail = "findFail";
-		if (memberDto != null) {
-//				회원이 존재하면 세션에 담는다
-			session.setAttribute("member", memberDto);
+      HashMap<String, Object> myPagingmap = new HashMap<>();
+      myPagingmap.put("totalCount", totalCount);
+      myPagingmap.put("myPagePaging", myPagePaging);
 
-			viewUrl = "auth/FindIdResult";
-		} else {
-			viewUrl = "auth/FindId";
-			session.setAttribute("findFail", findFail);
-		}
-		return viewUrl;
-	}
+      model.addAttribute("totalCount", totalCount);
+      model.addAttribute("memberList", memberList);
+      model.addAttribute("myPagingmap", myPagingmap);
 
-	// 비밀번호찾기 화면으로 이동
-	@RequestMapping(value = "/auth/findPassword.do", method = RequestMethod.GET)
-	public String findPasword(HttpSession session, Model model) {
+      session.setAttribute("myPageAside", "memberInfo");
 
-		log.info("Welcome MemberController findPassword!");
+      return "mypage/MypageProfile";
+   }
 
-		return "auth/FindPassword";
-	}
+   // 회원정보 상세 화면
+   @RequestMapping(value = "/mypage/MypageProfileEdit.do", method = { RequestMethod.GET, RequestMethod.POST })
+   public String myPageProfileDetail(int memberNo, HttpSession session, Model model) {
 
-	// 비밀번호 찾기
-	@RequestMapping(value = "/auth/findPasswordCtr.do", method = RequestMethod.POST)
-	public String findPasswordCtr(String memberId, String memberEmail, HttpSession session, Model model) {
+      log.info("Welcome MemberController login!");
 
-		log.info("Welcome MemberController findIdCtr!" + memberId + ", " + memberEmail);
+      Map<String, Object> memberDto = memberService.myPageProfileDetailMemberSelectOne(memberNo);
+      Map<String, Object> petDto = memberService.myPageProfileDetailPetSelectOne(memberNo);
 
-		MemberDto memberDto = memberService.memberFindPassword(memberId, memberEmail);
+      model.addAttribute("memberDto", memberDto);
+      model.addAttribute("petDto", petDto);
 
-		String viewUrl = "";
-		String findFail = "findFail";
-		if (memberDto != null) {
-//						회원이 존재하면 세션에 담는다
-			session.setAttribute("member", memberDto);
+      session.setAttribute("myPageAside", "memberInfo");
 
-			viewUrl = "auth/FindPasswordResult";
-		} else {
-			viewUrl = "auth/FindPassword";
-			session.setAttribute("findFail", findFail);
-		}
-		return viewUrl;
-	}
+      return "mypage/MypageProfileEdit";
+   }
 
-	// 일반.do는 단순 페이지 이동
-	@RequestMapping(value = "/auth/addm.do", method = RequestMethod.GET)
-	public String memberViewFormAdd(Model model) {
+   // 마이페이지결제 화면
+   @RequestMapping(value = "/mypage/mypageProfilePayment.do", method = { RequestMethod.GET, RequestMethod.POST })
+   public String myPageProfilPayment(@RequestParam(defaultValue = "1") int curPage, HttpSession session, Model model) {
 
-		log.debug("Welcome MemberController member Add!");
+      log.info("Welcome MemberController login!");
 
-		return "auth/JoinForm";
-	}
+      int totalCount = memberService.memberSelectListTotalCount();
 
-	@RequestMapping(value = "/auth/checkId.do", method = RequestMethod.POST)
-	@ResponseBody
-	public boolean checkIdAvailability(@RequestParam("memberId") String memberId) {
-		// MemberService의 isIdAvailable 메서드를 호출하여 중복 여부를 확인
-		boolean isAvailable = memberService.isIdAvailable(memberId);
-		return isAvailable;
-	}
+      MyPagePaging myPagePaging = new MyPagePaging(totalCount, curPage);
 
-	@RequestMapping(value = "/auth/addp.do", method = RequestMethod.GET)
-	public String memberPetFormAdd(MemberDto memberDto, Model model) {
-		log.debug("Welcome MemberController pet Add! " + memberDto);
-		model.addAttribute("memberDto", memberDto);
-		return "auth/JoinFormDog";
-	}
+      int start = myPagePaging.getPageBegin();
+      int end = myPagePaging.getPageEnd();
 
-	@RequestMapping(value = "/auth/addp.do", method = RequestMethod.POST)
-	public String memberPAddCtr(MemberDto memberDto, PetDto petDto, Model model) {
+      List<Map<String, Object>> memberList = memberService.memberPaymentSelectList(start, end);
 
-		log.debug("Welcome MemberController pet Add2!" + "memberDto :" + memberDto + "petDto:" + petDto + "medel: "
-				+ model);
-		int mno = memberService.memberInsertOne(memberDto);
-		petDto.setMemberNo(mno);
-		memberService.petInsertOne(petDto);
-		return "auth/LoginPage";
-	}
+      HashMap<String, Object> myPagingmap = new HashMap<>();
+      myPagingmap.put("totalCount", totalCount);
+      myPagingmap.put("myPagePaging", myPagePaging);
 
-	// 회원정보관리
-	@RequestMapping(value = "/mypage/mypageProfile.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myPageProfile(@RequestParam(defaultValue = "1") int curPage, HttpSession session, Model model) {
+      model.addAttribute("totalCount", totalCount);
+      model.addAttribute("memberList", memberList);
+      model.addAttribute("myPagingmap", myPagingmap);
 
-		log.info("Welcome MemberController login!");
+      session.setAttribute("myPageAside", "memberPay");
 
-		int totalCount = memberService.memberSelectListTotalCount();
+      return "mypage/MypageProfilePayment";
+   }
 
-		MyPagePaging myPagePaging = new MyPagePaging(totalCount, curPage);
+   // 마이페이지결제 상세 화면
+   @RequestMapping(value = "/mypage/MypageProfilePaymentMemberDetail.do", method = { RequestMethod.GET,
+         RequestMethod.POST })
+   public String myPageProfilPaymentDetail(int memberNo, HttpSession session, Model model) {
 
-		int start = myPagePaging.getPageBegin();
-		int end = myPagePaging.getPageEnd();
+      log.info("Welcome MemberController login!");
 
-		List<Map<String, Object>> memberList = memberService.memberInfoSelectList(start, end);
+      Map<String, Object> memberDto = memberService.memberPaymentDeatilSelectOne(memberNo);
+      List<Map<String, Object>> memberChargeDto = memberService.memberPaymentDeatilChargeSelectList(memberNo);
 
-		HashMap<String, Object> myPagingmap = new HashMap<>();
-		myPagingmap.put("totalCount", totalCount);
-		myPagingmap.put("myPagePaging", myPagePaging);
+      model.addAttribute("memberDto", memberDto);
+      model.addAttribute("memberChargeDto", memberChargeDto);
 
-		model.addAttribute("totalCount", totalCount);
-		model.addAttribute("memberList", memberList);
-		model.addAttribute("myPagingmap", myPagingmap);
+      session.setAttribute("myPageAside", "memberPay");
 
-		session.setAttribute("myPageAside", "memberInfo");
-
-		return "mypage/MypageProfile";
-	}
-
-	// 회원정보 상세 화면
-	@RequestMapping(value = "/mypage/MypageProfileEdit.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myPageProfileDetail(int memberNo, HttpSession session, Model model) {
-
-		log.info("Welcome MemberController login!");
-
-		Map<String, Object> memberDto = memberService.myPageProfileDetailMemberSelectOne(memberNo);
-		Map<String, Object> petDto = memberService.myPageProfileDetailPetSelectOne(memberNo);
-
-		model.addAttribute("memberDto", memberDto);
-		model.addAttribute("petDto", petDto);
-
-		session.setAttribute("myPageAside", "memberInfo");
-
-		return "mypage/MypageProfileEdit";
-	}
-
-	// 마이페이지결제 화면
-	@RequestMapping(value = "/mypage/mypageProfilePayment.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myPageProfilPayment(@RequestParam(defaultValue = "1") int curPage, HttpSession session, Model model) {
-
-		log.info("Welcome MemberController login!");
-
-		int totalCount = memberService.memberSelectListTotalCount();
-
-		MyPagePaging myPagePaging = new MyPagePaging(totalCount, curPage);
-
-		int start = myPagePaging.getPageBegin();
-		int end = myPagePaging.getPageEnd();
-
-		List<Map<String, Object>> memberList = memberService.memberPaymentSelectList(start, end);
-
-		HashMap<String, Object> myPagingmap = new HashMap<>();
-		myPagingmap.put("totalCount", totalCount);
-		myPagingmap.put("myPagePaging", myPagePaging);
-
-		model.addAttribute("totalCount", totalCount);
-		model.addAttribute("memberList", memberList);
-		model.addAttribute("myPagingmap", myPagingmap);
-
-		session.setAttribute("myPageAside", "memberPay");
-
-		return "mypage/MypageProfilePayment";
-	}
-
-	// 마이페이지결제 상세 화면
-	@RequestMapping(value = "/mypage/MypageProfilePaymentMemberDetail.do", method = { RequestMethod.GET,
-			RequestMethod.POST })
-	public String myPageProfilPaymentDetail(int memberNo, HttpSession session, Model model) {
-
-		log.info("Welcome MemberController login!");
-
-		Map<String, Object> memberDto = memberService.memberPaymentDeatilSelectOne(memberNo);
-		List<Map<String, Object>> memberChargeDto = memberService.memberPaymentDeatilChargeSelectList(memberNo);
-
-		model.addAttribute("memberDto", memberDto);
-		model.addAttribute("memberChargeDto", memberChargeDto);
-
-		session.setAttribute("myPageAside", "memberPay");
-
-		return "mypage/MypageProfilePaymentMemberDetail";
-	}
-
-	 //포인트 변경
-	@RequestMapping(value = "//mypage/MypageProfilePaymentMemberDetailPointCtr", method = RequestMethod.POST)
-	public String orderCancel(@RequestParam(defaultValue = "-1") int memberNo, int pointStatus, HttpSession session, Model model) {
-		
-		 	System.out.println(memberNo);
-			System.out.println(pointStatus);
-			// 포인트 변화를 추가한다. update/select
-			boolean pointUpdate = memberService.memberPointUpdate(memberNo, pointStatus);
-			System.out.println(memberNo);
-			System.out.println(pointStatus);
-			if (pointUpdate) {
-				model.addAttribute("result", "success"); // 성공 시 'success' 값을 모델에 추가
-			} else {
-				model.addAttribute("result", "fail"); // 실패 시 'fail' 값을 모델에 추가
-			}
-
-			Map<String, Object> memberDto = memberService.memberPaymentDeatilSelectOne(memberNo);
-
-			model.addAttribute("memberDto", memberDto);
-			session.setAttribute("myPageAside", "memberPay");
-
-//	        		return "redirect:/mypage/MypageDetail.do"; // 리다이렉트할 경로로 이동
-			return "mypage/MypageProfilePaymentMemberDetail";
-
-		} 
+      return "mypage/MypageProfilePaymentMemberDetail";
+   }
 
 }

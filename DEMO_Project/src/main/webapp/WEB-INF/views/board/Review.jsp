@@ -46,13 +46,13 @@ th{
    border-left:thick;
    border-right:thick;
    border-bottom:thick;
-   height: 30px;   
+   height: 40px;   
 }
 tr, td{
-   border: 1px solid black;
+   border: 1px solid gray;
    border-left:thick;
    border-right:thick;
-   height: 30px;   
+   height: 40px;   
 }
 table{
    width: 100%;
@@ -83,27 +83,27 @@ table{
 }
 #listColumn1{
    width: 7%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn2{
    width: 15%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn3{
    width: 40%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn4{
    width: 13%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn5{
    width: 15%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn6{
    width: 10%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 .tdClass{
    text-align: center;
@@ -145,11 +145,12 @@ a{
       </div>      
       <div id="midDiv">
          <select id="select">
-            <option class="optionTag" value="product">상품</option>
-            <option class="optionTag" value="kind">견종</option>
-            <option class="optionTag" value="title">제목</option>
+            <option class="optionTag" value="PRODUCT_NAME">상품</option>
+            <option class="optionTag" value="PET_BREED">견종</option>
+            <option class="optionTag" value="REVIEW_TITLE">제목</option>
          </select>         
-         <input id="input" type="text" name="serch" placeholder="검색어 입력창">      
+         <input id="input" type="text" name="search" placeholder="검색어 입력창">
+                       
       </div>
       <div id="tableDiv">
          <table>
@@ -182,9 +183,17 @@ a{
          </table>
       </div>
       <div id="writeBtnDiv">
-         <input id="writeBtn" type="button" value="글쓰기" 
-            onclick="location.href = '/DEMO_Project/board/reviewadd.do'">
-         <input type="hidden" name="reviewDto" value="${reviewDtoList}">   
+          <c:choose>            
+            <c:when test="${sessionScope.member.memberNo ne '1'}">
+               <input id="writeBtn" type="button" value="글쓰기" 
+                  onclick="location.href = '/DEMO_Project/board/reviewadd.do'">
+               <input type="hidden" name="reviewDto" value="${reviewDtoList}"> 
+            </c:when>
+            <c:otherwise>
+               
+            </c:otherwise>
+         </c:choose>
+           
       </div>         
       <div id="pageDiv">
       <jsp:include page="/WEB-INF/views/common/BoardPaging.jsp">
@@ -201,4 +210,8 @@ a{
    
    <jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
+<script type="text/javascript">
+
+
+</script>
 </html>

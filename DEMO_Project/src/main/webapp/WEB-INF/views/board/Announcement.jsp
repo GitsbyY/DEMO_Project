@@ -46,7 +46,7 @@
 }
 #secondTh{      
 }
-#tableDiv{	
+#tableDiv{   
    clear: right;
    width: 100%;
    margin-top: 60px;
@@ -56,13 +56,13 @@ th{
    border-left:thick;
    border-right:thick;
    border-bottom:thick;
-   height: 30px;   
+   height: 40px;   
 }
 tr, td{
-   border: 1px solid black;
+   border: 1px solid gray;
    border-left:thick;
    border-right:thick;
-   height: 30px;   
+   height: 40px;   
 }
 table{
    width: 100%;
@@ -72,19 +72,19 @@ table{
 }
 #listColumn1{
    width: 10%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn2{
    width: 60%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn3{
    width: 13%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn4{
    width: 17%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 .tdClass{
    text-align: center;
@@ -146,10 +146,20 @@ table{
             </c:forEach>
          </table>
       </div>
-      <div id="writeBtnDiv">
-         <input id="writeBtn" type="button" value="글쓰기" 
-            onclick="location.href = '/DEMO_Project/board/noticeadd.do'">
-      </div>
+      <c:choose>
+          <c:when test="${sessionScope.member.memberNo eq '1'}">
+          <div id="writeBtnDiv">
+            <input id="writeBtn" type="button" value="글쓰기" 
+               onclick="location.href = '/DEMO_Project/board/noticeadd.do'">
+            </div>
+          </c:when>
+          
+          <c:otherwise>
+              
+          </c:otherwise>
+      </c:choose>
+      
+      
       <div id="pageDiv">
       <jsp:include page="/WEB-INF/views/common/BoardPaging.jsp">
       <jsp:param value="${pagingMap}" name="pagingMap"/>

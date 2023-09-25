@@ -1,186 +1,194 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.member">
-	<resultMap type="memberDto" id="memberResultMap">
-		<id column="MEMBER_NO" property="memberNo" />
-		<result column="MEMBER_ID" property="memberId" />
-		<result column="MEMBER_PASSWORD" property="memberPassword" />
-		<result column="MEMBER_NAME" property="memberName" />
-		<result column="MEMBER_NICKNAME" property="memberNickName" />
-		<result column="MEMBER_BIRTH_DATE" property="memberBirthDate"
-			javaType="java.util.Date" />
-		<result column="MEMBER_PHONE" property="memberPhone" />
-		<result column="MEMBER_EMAIL" property="memberEmail" />
-		<result column="MEMBER_ADDRESS" property="memberAddress" />
-		<result column="MEMBER_JOIN_DATE" property="memberJoinDate"
-			javaType="java.util.Date" />
-		<result column="MEMBER_EMONEY" property="memberEmoney" />
-		<result column="MEMBER_POINT" property="memberPoint" />
-		<result column="MEMBER_MOD_DATE" property="memberModDate"
-			javaType="java.util.Date" />
-	</resultMap>
+   <resultMap type="memberDto" id="memberResultMap">
+      <id column="MEMBER_NO" property="memberNo" />
+      <result column="MEMBER_ID" property="memberId" />
+      <result column="MEMBER_PASSWORD" property="memberPassword" />
+      <result column="MEMBER_NAME" property="memberName" />
+      <result column="MEMBER_NICKNAME" property="memberNickName" />
+      <result column="MEMBER_BIRTH_DATE" property="memberBirthDate"
+         javaType="java.util.Date" />
+      <result column="MEMBER_PHONE" property="memberPhone" />
+      <result column="MEMBER_EMAIL" property="memberEmail" />
+      <result column="MEMBER_ADDRESS" property="memberAddress" />
+      <result column="MEMBER_JOIN_DATE" property="memberJoinDate"
+         javaType="java.util.Date" />
+      <result column="MEMBER_EMONEY" property="memberEmoney" />
+      <result column="MEMBER_POINT" property="memberPoint" />
+      <result column="MEMBER_MOD_DATE" property="memberModDate"
+         javaType="java.util.Date" />
+   </resultMap>
 
-	<resultMap type="petDto" id="petResultMap">
-		<id column="PET_NO" property="petNo" />
-		<result column="MEMBER_NO" property="memberNo" />
-		<result column="PET_NAME" property="petName" />
-		<result column="PET_BREED" property="petBreed" />
-		<result column="PET_GENDER" property="petGender" />
-		<result column="PET_WEIGHT" property="petWeight" />
-		<result column="PET_ADOPTION_DATE" property="petAdoptDate"
-			javaType="java.util.Date" />
-		<result column="PET_VACCINATION" property="petVac" />
-		<result column="PET_VACCINATION_DATE" property="petVacDate"
-			javaType="java.util.Date" />
-	</resultMap>
+   <resultMap type="petDto" id="petResultMap">
+      <id column="PET_NO" property="petNo" />
+      <result column="MEMBER_NO" property="memberNo" />
+      <result column="PET_NAME" property="petName" />
+      <result column="PET_BREED" property="petBreed" />
+      <result column="PET_GENDER" property="petGender" />
+      <result column="PET_WEIGHT" property="petWeight" />
+      <result column="PET_ADOPTION_DATE" property="petAdoptDate"
+         javaType="java.util.Date" />
+      <result column="PET_VACCINATION" property="petVac" />
+      <result column="PET_VACCINATION_DATE" property="petVacDate"
+         javaType="java.util.Date" />
+   </resultMap>
 
-	<resultMap type="chargeDto" id="chargeResultMap">
-		<id column="MEMBER_CHARGE_NO" property="chargeNo" />
-		<result column="MEMBER_NO" property="memberNo" />
-		<result column="MEMBER_CHARGE_AMOUNT" property="chagrgeAmount" />
-		<result column="MEMBER_CHARGE_DATE" property="chargeDate"
-			javaType="java.util.Date" />
-	</resultMap>
+   <resultMap type="chargeDto" id="chargeResultMap">
+      <id column="MEMBER_CHARGE_NO" property="chargeNo" />
+      <result column="MEMBER_NO" property="memberNo" />
+      <result column="MEMBER_CHARGE_AMOUNT" property="chagrgeAmount" />
+      <result column="MEMBER_CHARGE_DATE" property="chargeDate"
+         javaType="java.util.Date" />
+   </resultMap>
 
-	<insert id="memberInsertOne" parameterType="memberDto"
-		useGeneratedKeys="true" keyProperty="memberNo">
-		<selectKey keyProperty="memberNo" resultType="int"
-			order="BEFORE">
-			SELECT MEMBER_NO_SEQ.NEXTVAL
-			FROM DUAL
-		</selectKey>
+   <insert id="memberInsertOne" parameterType="memberDto"
+      useGeneratedKeys="true" keyProperty="memberNo">
+      <selectKey keyProperty="memberNo" resultType="int"
+         order="BEFORE">
+         SELECT MEMBER_NO_SEQ.NEXTVAL
+         FROM DUAL
+      </selectKey>
 
-		INSERT INTO MEMBER
-		(MEMBER_NO, MEMBER_ID, MEMBER_PASSWORD, MEMBER_NAME,
-		MEMBER_NICKNAME,
-		MEMBER_BIRTH_DATE, MEMBER_PHONE, MEMBER_EMAIL,
-		MEMBER_ADDRESS,
-		MEMBER_JOIN_DATE, MEMBER_EMONEY, MEMBER_POINT,
-		MEMBER_MOD_DATE)
-		VALUES(#{memberNo},
-		#{memberId}, #{memberPassword},
-		#{memberName}, #{memberNickName},
-		#{memberBirthDate}, #{memberPhone},
-		#{memberEmail}, #{memberAddress},
-		SYSDATE, 0, 0, SYSDATE)
+      INSERT INTO MEMBER
+      (MEMBER_NO, MEMBER_ID, MEMBER_PASSWORD, MEMBER_NAME,
+      MEMBER_NICKNAME,
+      MEMBER_BIRTH_DATE, MEMBER_PHONE, MEMBER_EMAIL,
+      MEMBER_ADDRESS,
+      MEMBER_JOIN_DATE, MEMBER_EMONEY, MEMBER_POINT,
+      MEMBER_MOD_DATE)
+      VALUES(#{memberNo},
+      #{memberId}, #{memberPassword},
+      #{memberName}, #{memberNickName},
+      #{memberBirthDate}, #{memberPhone},
+      #{memberEmail}, #{memberAddress},
+      SYSDATE, 0, 0, SYSDATE)
 
-	</insert>
+   </insert>
 
-	<insert id="petInsertOne" parameterType="petDto"
-		useGeneratedKeys="true" keyProperty="petNo"> <!-- 키 값을 생성하는데 사용한다. -->
-		<selectKey keyProperty="petNo" resultType="int"
-			order="BEFORE">
-			SELECT PET_NO_SEQ.NEXTVAL
-			FROM DUAL
-		</selectKey>
+   <insert id="petInsertOne" parameterType="petDto"
+      useGeneratedKeys="true" keyProperty="petNo"> <!-- 키 값을 생성하는데 사용한다. -->
+      <selectKey keyProperty="petNo" resultType="int"
+         order="BEFORE">
+         SELECT PET_NO_SEQ.NEXTVAL
+         FROM DUAL
+      </selectKey>
 
-		INSERT INTO PET
-		(PET_NO, MEMBER_NO, PET_NAME, PET_BREED, PET_GENDER,
-		PET_WEIGHT
-		, PET_ADOPTION_DATE, PET_VACCINATION, PET_VACCINATION_DATE)
-		VALUES(#{petNo}, #{memberNo}, #{petName}, #{petBreed}, #{petGender},
-		#{petWeight},
-		#{petAdoptDate}, #{petVac}, #{petVacDate})
+      INSERT INTO PET
+      (PET_NO, MEMBER_NO, PET_NAME, PET_BREED, PET_GENDER,
+      PET_WEIGHT
+      , PET_ADOPTION_DATE, PET_VACCINATION, PET_VACCINATION_DATE)
+      VALUES(#{petNo}, #{memberNo}, #{petName}, #{petBreed}, #{petGender},
+      #{petWeight},
+      #{petAdoptDate}, #{petVac}, #{petVacDate})
 
-	</insert>
+   </insert>
 
-	<select id="isIdAvailable" resultMap="memberResultMap">
-		SELECT MEMBER_ID
-		FROM MEMBER
-		WHERE MEMBER_ID = #{memberId}
-	</select>
+   <select id="isIdAvailable" resultMap="memberResultMap">
+      SELECT MEMBER_ID
+      FROM MEMBER
+      WHERE MEMBER_ID = #{memberId}
+   </select>
 
-	<select id="memberExist" parameterType="map"
-		resultMap="memberResultMap">
-		SELECT MEMBER_ID, MEMBER_NAME, MEMBER_NO, MEMBER_PHONE,
-		MEMBER_EMAIL
-		FROM MEMBER
-		WHERE MEMBER_ID = #{memberId} AND
-		MEMBER_PASSWORD = #{memberPassword}
-	</select>
+   <select id="memberExist" parameterType="map"
+      resultMap="memberResultMap">
+      SELECT MEMBER_ID, MEMBER_NAME, MEMBER_NO, MEMBER_PHONE,
+      MEMBER_EMAIL
+      FROM MEMBER
+      WHERE MEMBER_ID = #{memberId} AND
+      MEMBER_PASSWORD = #{memberPassword}
+   </select>
 
-	<select id="memberFindId" parameterType="map"
-		resultMap="memberResultMap">
-		SELECT MEMBER_EMAIL, MEMBER_PHONE, MEMBER_ID
-		FROM MEMBER
-		WHERE MEMBER_EMAIL = #{memberEmail} AND MEMBER_PHONE = #{memberPhone}
-	</select>
+   <select id="memberFindId" parameterType="map"
+      resultMap="memberResultMap">
+      SELECT MEMBER_EMAIL, MEMBER_PHONE, MEMBER_ID
+      FROM MEMBER
+      WHERE MEMBER_EMAIL = #{memberEmail} AND MEMBER_PHONE = #{memberPhone}
+   </select>
 
-	<select id="memberFindPassword" parameterType="map"
-		resultMap="memberResultMap">
-		SELECT MEMBER_EMAIL, MEMBER_PHONE, MEMBER_ID,
-		MEMBER_PASSWORD
-		FROM MEMBER
-		WHERE MEMBER_ID = #{memberId} AND
-		MEMBER_EMAIL = #{memberEmail}
-	</select>
+   <select id="memberFindPassword" parameterType="map"
+      resultMap="memberResultMap">
+      SELECT MEMBER_EMAIL, MEMBER_PHONE, MEMBER_ID, MEMBER_NO, 
+      MEMBER_PASSWORD
+      FROM MEMBER
+      WHERE MEMBER_ID = #{memberId} AND
+      MEMBER_EMAIL = #{memberEmail}
+   </select>
 
-	<select id="memberSelectListTotalCount"
-		resultType="java.lang.Integer">
-		SELECT COUNT(*)
-		FROM MEMBER
-	</select>
+   <select id="memberSelectListTotalCount"
+      resultType="java.lang.Integer">
+      SELECT COUNT(*)
+      FROM MEMBER
+   </select>
 
-	<select id="memberInfoSelectList" parameterType="map"
-		resultType="map">
-		SELECT ROWNUM, MEMBER_NO, MEMBER_ID, MEMBER_NAME,
-		MEMBER_EMAIL, MEMBER_JOIN_DATE
-		FROM (
-		SELECT ROWNUM AS RN, MEMBER_NO, MEMBER_ID, MEMBER_NAME, MEMBER_EMAIL,
-		MEMBER_JOIN_DATE
-		FROM MEMBER
-		)
-		WHERE RN BETWEEN #{start} AND #{end}
-		ORDER BY RN
-	</select>
-	
-	<select id="myPageProfileDetailMemberSelectOne" resultType="map">
-		SELECT MEMBER_ID, MEMBER_NAME, MEMBER_BIRTH_DATE
-		, MEMBER_PHONE, MEMBER_EMAIL, MEMBER_ADDRESS
-		FROM MEMBER
-		WHERE MEMBER_NO = #{memberNo}
-	</select>
-	
-	<select id="myPageProfileDetailPetSelectOne" resultType="map">
-		SELECT PET_NAME, PET_BREED, PET_WEIGHT, PET_ADOPTION_DATE, PET_VACCINATION
-		FROM PET
-		WHERE MEMBER_NO = #{memberNo}
-	</select>
-	
+   <select id="memberInfoSelectList" parameterType="map"
+      resultType="map">
+      SELECT ROWNUM, MEMBER_NO, MEMBER_ID, MEMBER_NAME,
+      MEMBER_EMAIL, MEMBER_JOIN_DATE
+      FROM (
+      SELECT ROWNUM AS RN, MEMBER_NO, MEMBER_ID, MEMBER_NAME, MEMBER_EMAIL,
+      MEMBER_JOIN_DATE
+      FROM MEMBER
+      )
+      WHERE RN BETWEEN #{start} AND #{end}
+      ORDER BY RN
+   </select>
+   
+   <select id="myPageProfileDetailMemberSelectOne" resultType="map">
+      SELECT MEMBER_ID, MEMBER_NAME, MEMBER_BIRTH_DATE
+      , MEMBER_PHONE, MEMBER_EMAIL, MEMBER_ADDRESS
+      FROM MEMBER
+      WHERE MEMBER_NO = #{memberNo}
+   </select>
+   
+   <select id="myPageProfileDetailPetSelectOne" resultType="map">
+      SELECT PET_NAME, PET_BREED, PET_WEIGHT, PET_ADOPTION_DATE, PET_VACCINATION
+      FROM PET
+      WHERE MEMBER_NO = #{memberNo}
+   </select>
+   
 
-	<select id="memberPaymentSelectList" parameterType="map"
-		resultType="map">
-		SELECT ROWNUM, M.MEMBER_NO, M.MEMBER_ID, M.MEMBER_NAME,
-		M.MEMBER_EMAIL, M.MEMBER_JOIN_DATE, M.MEMBER_EMONEY, M.MEMBER_POINT
-		,COUNT(OL.ORDER_NO) AS TOTAL_ORDERS
-		FROM MEMBER M
-		JOIN ORDER_LIST OL ON M.MEMBER_NO = OL.MEMBER_NO
-		JOIN PRODUCT P ON OL.PRODUCT_NO = P.PRODUCT_NO
-		WHERE ROWNUM BETWEEN #{start} AND #{end}
-		GROUP BY ROWNUM, M.MEMBER_NO, M.MEMBER_ID, M.MEMBER_NAME
-		,M.MEMBER_EMAIL, M.MEMBER_JOIN_DATE, M.MEMBER_EMONEY, M.MEMBER_POINT
-		ORDER BY ROWNUM
-	</select>
-	
-	<select id="memberPaymentDeatilSelectOne" resultType="map">
-		SELECT M.MEMBER_NO, M.MEMBER_ID, M.MEMBER_NAME, M.MEMBER_JOIN_DATE, M.MEMBER_POINT, M.MEMBER_EMONEY, O.TOTALORDERS
-		FROM MEMBER M
-		LEFT JOIN (
-		    SELECT MEMBER_NO, COUNT(ORDER_NO) AS TOTALORDERS
-		    FROM ORDER_LIST
-		    GROUP BY MEMBER_NO
-		) O ON M.MEMBER_NO = O.MEMBER_NO
-		WHERE M.MEMBER_NO =  #{memberNo}
-	</select>
-	
-	<select id="memberPaymentDeatilChargeSelectList" resultType="map">
-		SELECT MEMBER_CHARGE_AMOUNT, MEMBER_CHARGE_DATE 
-		FROM MEMBER_CHARGE
-		WHERE MEMBER_NO = #{memberNo}
-	</select>
-
+   <select id="memberPaymentSelectList" parameterType="map"
+      resultType="map">
+      SELECT ROWNUM, M.MEMBER_NO, M.MEMBER_ID, M.MEMBER_NAME,
+      M.MEMBER_EMAIL, M.MEMBER_JOIN_DATE, M.MEMBER_EMONEY, M.MEMBER_POINT
+      ,COUNT(OL.ORDER_NO) AS TOTAL_ORDERS
+      FROM MEMBER M
+      JOIN ORDER_LIST OL ON M.MEMBER_NO = OL.MEMBER_NO
+      JOIN PRODUCT P ON OL.PRODUCT_NO = P.PRODUCT_NO
+      WHERE ROWNUM BETWEEN #{start} AND #{end}
+      GROUP BY ROWNUM, M.MEMBER_NO, M.MEMBER_ID, M.MEMBER_NAME
+      ,M.MEMBER_EMAIL, M.MEMBER_JOIN_DATE, M.MEMBER_EMONEY, M.MEMBER_POINT
+      ORDER BY ROWNUM
+   </select>
+   
+   <select id="memberPaymentDeatilSelectOne" resultType="map">
+      SELECT M.MEMBER_NO, M.MEMBER_ID, M.MEMBER_NAME, M.MEMBER_JOIN_DATE, M.MEMBER_POINT, M.MEMBER_EMONEY, O.TOTALORDERS
+      FROM MEMBER M
+      LEFT JOIN (
+          SELECT MEMBER_NO, COUNT(ORDER_NO) AS TOTALORDERS
+          FROM ORDER_LIST
+          GROUP BY MEMBER_NO
+      ) O ON M.MEMBER_NO = O.MEMBER_NO
+      WHERE M.MEMBER_NO =  #{memberNo}
+   </select>
+   
+   <select id="memberPaymentDeatilChargeSelectList" resultType="map">
+      SELECT MEMBER_CHARGE_AMOUNT, MEMBER_CHARGE_DATE 
+      FROM MEMBER_CHARGE
+      WHERE MEMBER_NO = #{memberNo}
+   </select>
+   
+   
+   <update id="memberPwdChange" parameterType="memberDto">
+      UPDATE MEMBER
+      <set>         
+         MEMBER_PASSWORD = #{memberPassword}
+      </set>
+      WHERE MEMBER_NO = #{memberNo}
+   </update>
+   
 </mapper>
-
 
 

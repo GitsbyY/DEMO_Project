@@ -36,13 +36,13 @@ th{
    border-left:thick;
    border-right:thick;
    border-bottom:thick;
-   height: 30px;   
+   height: 40px;   
 }
 tr, td{
-   border: 1px solid black;
+   border: 1px solid gray;
    border-left:thick;
    border-right:thick;
-   height: 30px;   
+   height: 40px;   
 }
 table{
    width: 100%;
@@ -52,27 +52,27 @@ table{
 }
 #listColumn1{
    width: 7%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn2{
    width: 10%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn3{
    width: 35%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn4{
    width: 10%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn5{
    width: 20%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #listColumn6{
    width: 15%;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 .tdClass{
    text-align: center;
@@ -102,71 +102,129 @@ table{
    <jsp:include page="/WEB-INF/views/Header.jsp"/>
    
    <jsp:include page="/WEB-INF/views/asideCustomerService.jsp"/>
-   
+      
    <div id='divContainer'>
-      <div id="titleDiv">         
-         <div id="firstDiv">1:1 상담문의</div>
-         <div id="secondDiv"></div>                           
-      </div>      
-      <div id="tableDiv">
-         <table>
-            <tr>
-               <th id="listColumn1" class="listColumn">번호</th>
-               <th id="listColumn2" class="listColumn">질문유형</th>
-               <th id="listColumn3" class="listColumn">제목</th>
-               <th id="listColumn4" class="listColumn">작성자</th>
-               <th id="listColumn5" class="listColumn">날짜</th>
-               <th id="listColumn6" class="listColumn">상태</th>            
-            </tr>
-            
-            <c:forEach var="inquiryDto" items="${inquiryDtoList}">
-            <tr>
-               <td class="tdClass">${inquiryDto.INQUIRY_NO}</td>
-               <td class="tdClass">${inquiryDto.INQUIRY_TYPE}</td>
-               <td>
-                  <a href='./listOne2.do?no=${inquiryDto.INQUIRY_NO}'>
+   <div id="titleDiv">         
+      <div id="firstDiv">1:1 상담문의</div>
+      <div id="secondDiv"></div>                           
+   </div>      
+
+   <c:choose>
+      <c:when test="${sessionScope.member.memberNo eq '1'}">
+         <div id="tableDiv">
+            <table>
+               <tr>
+                  <th id="listColumn1" class="listColumn">번호</th>
+                  <th id="listColumn2" class="listColumn">질문유형</th>
+                  <th id="listColumn3" class="listColumn">제목</th>
+                  <th id="listColumn4" class="listColumn">작성자</th>
+                  <th id="listColumn5" class="listColumn">날짜</th>
+                  <th id="listColumn6" class="listColumn">상태</th>            
+               </tr>
+               
+               <c:forEach var="inquiryDto" items="${inquiryDtoList}">
+                  <tr>
+                     <td class="tdClass">${inquiryDto.INQUIRY_NO}</td>
+                     <td class="tdClass">${inquiryDto.INQUIRY_TYPE}</td>
+                     <td>
+                        <a href='./listOne2.do?no=${inquiryDto.INQUIRY_NO}'>
                            ${inquiryDto.INQUIRY_TITLE}
                         </a>
                      </td>   
-               <td class="tdClass">${inquiryDto.MEMBER_NAME}</td>
-               <td class="tdClass">
-                  <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" 
-                     value="${inquiryDto.INQUIRY_CRE_DATE}"/>
-               </td>
-               <td class="tdClass">
-               <c:choose>
-				    <c:when test="${inquiryDto.INQUIRY_IS_REPLY eq 'N'}">
-				        답변 대기중
-				    </c:when>
-				    <c:when test="${inquiryDto.INQUIRY_IS_REPLY eq 'Y'}">
-				        답변 완료
-				    </c:when>
-				    <c:otherwise>
-				        
-				    </c:otherwise>
-				</c:choose>
-               </td>            
-            </tr>            
-            </c:forEach>
+                     <td class="tdClass">${inquiryDto.MEMBER_NAME}</td>               
+                     <td class="tdClass">
+                        <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" 
+                           value="${inquiryDto.INQUIRY_CRE_DATE}"/>
+                     </td>
+                     <td class="tdClass">
+                        <c:choose>
+                           <c:when test="${inquiryDto.INQUIRY_IS_REPLY eq 'N'}">
+                              답변 대기중
+                           </c:when>
+                           <c:when test="${inquiryDto.INQUIRY_IS_REPLY eq 'Y'}">
+                              답변 완료
+                           </c:when>
+                           <c:otherwise>
+                              
+                           </c:otherwise>
+                        </c:choose>
+                     </td>            
+                  </tr>            
+               </c:forEach>
+            </table>
+         </div>
+      </c:when>         
+      <c:otherwise>
+         <div id="tableDiv">
+                  <table>
+                     <tr>
+                        <th id="listColumn1" class="listColumn">번호</th>
+                        <th id="listColumn2" class="listColumn">질문유형</th>
+                        <th id="listColumn3" class="listColumn">제목</th>
+                        <th id="listColumn4" class="listColumn">작성자</th>
+                        <th id="listColumn5" class="listColumn">날짜</th>
+                        <th id="listColumn6" class="listColumn">상태</th>            
+                     </tr>
+         <c:forEach var="inquiryDto" items="${inquiryDtoList}">
+            <c:if test="${sessionScope.member.memberNo eq inquiryDto.MEMBER_NO}">               
+                     <tr>
+                        <td class="tdClass">${inquiryDto.INQUIRY_NO}</td>
+                        <td class="tdClass">${inquiryDto.INQUIRY_TYPE}</td>
+                        <td>
+                           <a href='./listOne2.do?no=${inquiryDto.INQUIRY_NO}'>
+                              ${inquiryDto.INQUIRY_TITLE}
+                           </a>
+                        </td>   
+                        <td class="tdClass">${inquiryDto.MEMBER_NAME}</td>               
+                        <td class="tdClass">
+                           <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" 
+                              value="${inquiryDto.INQUIRY_CRE_DATE}"/>
+                        </td>
+                        <td class="tdClass">
+                           <c:choose>
+                              <c:when test="${inquiryDto.INQUIRY_IS_REPLY eq 'N'}">
+                                 답변 대기중
+                              </c:when>
+                              <c:when test="${inquiryDto.INQUIRY_IS_REPLY eq 'Y'}">
+                                 답변 완료
+                              </c:when>
+                              <c:otherwise>
+                                 
+                              </c:otherwise>
+                           </c:choose>
+                        </td>            
+                     </tr>            
+                  
+               </div>
+            </c:if>
+         </c:forEach>
          </table>
-      </div>
-      <div id="writeBtnDiv">
-         <input id="writeBtn" type="button" value="문의하기" 
-            onclick="location.href = '/DEMO_Project/board/inquiryadd.do'">
-      </div>
-      <div id="pageDiv">
-         <jsp:include page="/WEB-INF/views/common/BoardPaging.jsp">
-         <jsp:param value="${pagingMap}" name="pagingMap"/>
-         </jsp:include>
+      </c:otherwise>
+   </c:choose>
+
+   <c:choose>
+      <c:when test="${sessionScope.member.memberNo ne '1'}">
+         <div id="writeBtnDiv">
+            <input id="writeBtn" type="button" value="문의하기" 
+               onclick="location.href = '/DEMO_Project/board/inquiryadd.do'">
+         </div>
+      </c:when>
+      <c:otherwise>
+         
+      </c:otherwise>
+   </c:choose>
    
-         <form action="./customerService.do" id='pagingForm' method="post">
+   <div id="pageDiv">
+      <jsp:include page="/WEB-INF/views/common/BoardPaging.jsp">
+         <jsp:param value="${pagingMap}" name="pagingMap"/>
+      </jsp:include>
+
+      <form action="./customerService.do" id='pagingForm' method="post">
          <input type="hidden" id='curPage' name='curPage' 
             value="${pagingMap.boardPaging.curPage}">
-         </form>
-         </div>   
-                  
-   </div>
-   
+      </form>
+   </div>   
+</div>
             
       
   

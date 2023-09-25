@@ -50,7 +50,7 @@ table{
    text-align: center;
    font-weight: bold;
    border-right: 1px solid black;
-   background-color: #D3D3D3;
+   background-color: #FFC4A3;
 }
 #fourthTr{
    height: 400px;
@@ -144,9 +144,9 @@ td input{
                <tr id=fourthTr">
                   <td id="fourthTd" class="firstTd">내용</td>   
                   <td id="contentInputTd" colspan="3">
-                     <textarea id="contentInput" type="text" name="reviewContent"></textarea>
-                     <input type="hidden" name="reviewContent" value="${memberInfo.REVIEW_CONTENT}">
-                     <input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}">                                      
+                     <textarea id="contentInput" name="reviewContent"></textarea>
+                     <%-- <input type="hidden" name="reviewContent" value="${memberInfo.REVIEW_CONTENT}"> --%>
+                     <input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}">                                     
                   </td>
                </tr>            
             </table>
