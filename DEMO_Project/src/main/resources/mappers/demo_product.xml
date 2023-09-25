@@ -61,9 +61,11 @@
 		WHERE P.RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
-	<select id="productSelectTotalCount" resultType="int">
+	<select id="productSelectTotalCount" parameterType="map" resultType="int">
 		SELECT COUNT(*)
 		FROM PRODUCT
+		WHERE PRODUCT_NAME LIKE '%'||#{search}||'%'
+		AND PRODUCT_CATEGORY LIKE #{category}||'%'
 	</select>
 	
 	<select id="createNewImgNo" parameterType="int" resultType="int">

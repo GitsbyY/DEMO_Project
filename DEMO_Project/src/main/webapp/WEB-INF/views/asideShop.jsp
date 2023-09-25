@@ -17,7 +17,7 @@
         </c:set>
         <c:set var="cssClass" value="${category eq 0 ? 'curPageATag' : ''}" />
         <c:set var="cssClass" value="${category eq pagingMap.category ? 'curPageATag' : ''}" />
-        <a class="asideATag ${cssClass}" href="/DEMO_Project/shop.do?category=${category eq 0 ? '' : category}">
+        <a class="asideATag ${cssClass}" href="/DEMO_Project/shop.do?category=${category eq 0 ? '' : category}&curPage=1">
             ${categoryName}
         </a><br>
     </c:forEach>

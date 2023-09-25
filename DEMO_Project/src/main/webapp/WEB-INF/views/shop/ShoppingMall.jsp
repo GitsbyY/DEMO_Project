@@ -92,8 +92,8 @@
 	<jsp:include page="/WEB-INF/views/asideShop.jsp"/>
 	
 	<div id='divContainer'>
-		<div id='sortDiv'>
-			<form action="./shop.do" method="post" id='sortForm'>
+		<form action="./shop.do" method="post" id='sortForm'>
+			<div id='sortDiv'>
 				<input id="search" type="text" name="search"
 					placeholder="상품명 검색"
 					value="${pagingMap.search}"/>
@@ -115,46 +115,44 @@
 						</c:if>
 						>높은가격순</option>
 				</select>
-			</form>
-		</div>
-		<div id='resultContainer'>
-			<c:forEach var="productDto" items="${productList}">
-				<div id='productDiv' onclick="viewProduct(${productDto.PRODUCT_NO})">
-					<input type="hidden" name="productNo" value="${productDto.PRODUCT_NO}">
-					<img alt="image not found" id="productImg" 
-							src="<c:url value='/image/Product/${productDto.STORED_FILE_NAME}'/>"><br/>
-					<div>
-						${productDto.PRODUCT_NAME}
-					</div>
-					<div>
-					<fmt:formatNumber value="${productDto.PRODUCT_PRICE}"
-						type="number" />원
-					</div>
-					<div>
-						남은수량:${productDto.PRODUCT_STOCK}개
-					</div>
-				</div>
-			</c:forEach>
-			<div id="btnDiv">
-				<input class="btnClass" type="button" value="전체">
-				<input class="btnClass" type="button" value="추가"
-					onclick="location.href='./shop/add.do'">
-				<input class="btnClass" type="button" value="삭제">
-			</div>
-		</div>
-		<div>
-			<jsp:include page="/WEB-INF/views/common/ShopPaging.jsp">
-			<jsp:param value="${pagingMap}" name="pagingMap"/>
-			</jsp:include>
 			
-			<!-- 	정보를 넘기기 위해서 폼을 만들었다 -->
-			<form action="./shop.do" id="pagingForm" method="post">
-			<input type="hidden" id="curPage" name="curPage"
-		         value="${pagingMap.shopPaging.curPage}">
-			</form>
-		   
-		</div>
-		
+			</div>
+			<div id='resultContainer'>
+				<c:forEach var="productDto" items="${productList}">
+					<div id='productDiv' onclick="viewProduct(${productDto.PRODUCT_NO})">
+						<input type="hidden" name="productNo" value="${productDto.PRODUCT_NO}">
+						<img alt="image not found" id="productImg" 
+								src="<c:url value='/image/Product/${productDto.STORED_FILE_NAME}'/>"><br/>
+						<div>
+							${productDto.PRODUCT_NAME}
+						</div>
+						<div>
+						<fmt:formatNumber value="${productDto.PRODUCT_PRICE}"
+							type="number" />원
+						</div>
+						<div>
+							남은수량:${productDto.PRODUCT_STOCK}개
+						</div>
+					</div>
+				</c:forEach>
+				<div id="btnDiv">
+					<input class="btnClass" type="button" value="전체">
+					<input class="btnClass" type="button" value="추가"
+						onclick="location.href='./shop/add.do'">
+					<input class="btnClass" type="button" value="삭제">
+				</div>
+			</div>
+			<div>
+				<jsp:include page="/WEB-INF/views/common/ShopPaging.jsp">
+				<jsp:param value="${pagingMap}" name="pagingMap"/>
+				</jsp:include>
+				
+				<!-- 	정보를 넘기기 위해서 폼을 만들었다 -->
+				<input type="hidden" id="curPage" name="curPage"
+			         value="${pagingMap.shopPaging.curPage}">
+			   
+			</div>
+		</form>
 	</div>
 	
 
@@ -166,12 +164,16 @@
 	var sortSelectObj = document.getElementById("sortSelect");
 	
 	sortSelectObj.addEventListener("change", function() {
+		var curPageObj = $("#curPage");
+		curPageObj.val(1);
 		document.getElementById("sortForm").submit();
 	});
 	
 	var searchButtonObj = document.getElementById("searchButton");
 	
 	searchButtonObj.addEventListener("click", function() {
+		var curPageObj = $("#curPage");
+		curPageObj.val(1);
 		document.getElementById("sortForm").submit();
 	});
 	

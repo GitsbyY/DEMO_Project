@@ -38,10 +38,10 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public int productSelectTotalCount() {
+	public int productSelectTotalCount(String search, String category) {
 		// TODO Auto-generated method stub
 		
-		return productDao.productSelectTotalCount();
+		return productDao.productSelectTotalCount(search, category);
 	}
 
 	@Transactional(rollbackFor = Exception.class)

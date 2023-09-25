@@ -208,14 +208,6 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 		</form>
 	</div>
 
-
-	
-<!-- 	정보를 넘기기 위해서 폼을 만들었다 -->
-
-			<form action="./mypage.do" id="pagingForm" method="post">
-		     
-		    </form>
-
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
 </body>
 <script type="text/javascript">
@@ -227,6 +219,8 @@ function mypageDetailFnc(no) {
 	
 }
 function submitForm() {
+	var curPageObj = $("#curPage");
+	curPageObj.val(1);
     document.getElementById('myPageSearchForm').submit();
 }
 </script>

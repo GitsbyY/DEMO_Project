@@ -10,7 +10,7 @@ public interface ProductDao {
 
 	List<Map<String, Object>> productSelectList(int start, int end, String search, String category, String sort);
 
-	int productSelectTotalCount();
+	int productSelectTotalCount(String search, String category);
 
 	int createNewImgNo();
 

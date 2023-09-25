@@ -13,7 +13,7 @@ public interface ProductService {
 
 	public List<Map<String, Object>> productSelectList(int start, int end, String search, String category, String sort);
 
-	public int productSelectTotalCount();
+	public int productSelectTotalCount(String search, String category);
 
 	public List<Map<String, Object>> productImgInsert(MultipartFile multfile, String pathName) throws Exception;
 

@@ -183,7 +183,7 @@ select{
 					<br/>
 					<input type="file" name="file" id="fileInput" style="display:none"
 						onchange="fileSelected()">
-					<label for="fileInput" style="background-color: white;
+					<label for="fileInput" class="updateClass" style="background-color: white;
 						border:2px solid black;">
 						이미지 첨부
 					</label>
@@ -195,8 +195,8 @@ select{
 						<tr class="inputTable">
 							<td id="typeTd">상품 유형</td>
 							<td>
-								<select id="productCategory"
-									name="productCategory">
+								<select id="productCategory" class="updateClass"
+									name="productCategory" disabled>
 									<option value="0">상품 유형을 선택해주세요</option>
 									<option value="10"
 										<c:if test="${productDto.PRODUCT_CATEGORY eq 10}">
@@ -236,8 +236,8 @@ select{
 								${productDto.PRODUCT_NAME}
 							</td>
 							<td>
-								<input class="inputName" name="productName" id="productName"
-									type="text" placeholder="상품명을 입력해주세요"
+								<input class="inputName updateClass" name="productName" id="productName"
+									type="text" placeholder="상품명을 입력해주세요" style="display:none;"
 									value="${productDto.PRODUCT_NAME}">
 							</td>			
 						</tr>
@@ -251,8 +251,8 @@ select{
 								</div>
 							</td>
 							<td>
-								<input class="inputName" name="productPrice" id="productPrice"
-									type="text" placeholder="가격을 입력해주세요"
+								<input class="inputName updateClass" name="productPrice" id="productPrice"
+									type="text" placeholder="가격을 입력해주세요" style="display:none;"
 									value="${productDto.PRODUCT_PRICE}">
 							</td>				
 						</tr>
@@ -261,8 +261,8 @@ select{
 								${productDto.PRODUCT_STOCK}
 							</td>
 							<td>
-								<input class="inputName" name="productStock" id="productStock"
-									type="text" placeholder="수량을 입력해주세요"
+								<input class="inputName updateClass" name="productStock" id="productStock"
+									type="text" placeholder="수량을 입력해주세요" style="display:none;"
 									value="${productDto.PRODUCT_STOCK}">
 							</td>				
 						</tr>				
@@ -273,11 +273,13 @@ select{
 						</div>
 					</div>
 					<div id="controlDiv">
-						<input id="adminBtn" type="button" value="뒤로가기">
-						<input id="adminBtn" type="button" value="뒤로가기">
-						<input id="adminBtn" type="button" value="취소">
-						<input id="adminBtn" type="button" value="등록"
-							onclick="submitForm();">
+						<input id="adminBtn" class="adminClass viewClass" type="button" value="뒤로가기">
+						<input id="adminBtn" class="adminClass viewClass" type="button" value="수정"
+							onclick="updateProductFnc();">
+						<input id="adminBtn" class="adminClass updateClass" 
+							style="display:none;" type="button" value="취소">
+						<input id="adminBtn" class="adminClass updateClass"
+							style="display:none;" type="button" value="등록"	onclick="submitForm();">
 					</div>
 				</div>
 			</div>
@@ -286,12 +288,12 @@ select{
 				<span id="reviewSpan">보러가기</span>
 			</div>
 			<div id="productDetailText">상품 상세 설명</div>
-			<div id="productDetailDivCtr">
+			<div id="productDetailDivCtr" class="adminClass updateClass">
 				<button id="registBtn" type="button"
-					onclick="registDetailFnc();">등록</button>
+					onclick="registDetailFnc();">수정</button>
 			</div>
 			<input type="hidden" name="productDetailContent" id="productDetailInput">
-			<div id="productDetailDiv" contenteditable="true">
+			<div id="productDetailDiv" contenteditable="false">
 				${productDto.PRODUCT_DETAIL_CONTENT}
 			</div>
 		</form>
@@ -302,6 +304,15 @@ select{
 </body>
 
 <script>
+	function updateProductFnc(){
+		var updateClassArray = Array.from(document.querySelectorAll(".updateClass"));
+
+		for (var element of updateClassArray) {
+		    element.style.display = "inline-block";
+		}
+		document.getElementById("mySelect").removeAttribute("disabled");
+	}
+	
 	var namePattern = /^.{1,30}$/;
 	var pricePattern = /^[0-9]{1,8}$/;
 	var stockPattern = /^[0-9]{1,5}$/;

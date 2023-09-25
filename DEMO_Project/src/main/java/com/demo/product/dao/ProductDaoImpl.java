@@ -34,9 +34,12 @@ public class ProductDaoImpl implements ProductDao{
 	}
 
 	@Override
-	public int productSelectTotalCount() {
+	public int productSelectTotalCount(String search, String category) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(nameSpace + "productSelectTotalCount");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("category", category);
+		return sqlSession.selectOne(nameSpace + "productSelectTotalCount", map);
 	}
 
 	@Override

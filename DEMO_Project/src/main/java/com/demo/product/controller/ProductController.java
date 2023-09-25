@@ -37,10 +37,9 @@ public class ProductController {
 			@RequestParam(defaultValue = "") String category,
 			@RequestParam(defaultValue = "PRODUCT_PRICE ASC") String sort,
 			HttpSession session, Model model) {
-
 		log.info("shop/ShoppingMall" + sort);
 
-		int totalCount = productService.productSelectTotalCount();
+		int totalCount = productService.productSelectTotalCount(search, category);
 
 		ShopPaging shopPaging = new ShopPaging(totalCount, curPage);
 

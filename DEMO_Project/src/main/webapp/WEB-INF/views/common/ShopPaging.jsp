@@ -57,7 +57,7 @@ nav > ul > li > a:hover {
 // 		alert(curPageObj.val());
 		
 		
-		var pagingFormObj = $('#pagingForm');
+		var pagingFormObj = $('#sortForm');
 		pagingFormObj.submit();
 		
 	}
