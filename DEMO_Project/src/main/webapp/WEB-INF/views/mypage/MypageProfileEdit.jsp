@@ -381,19 +381,31 @@ button {
 	}
 
 	// 버튼 엘리먼트를 가져옵니다.
-	const button = document.getElementById("updateButton");
+	const updateButton = document.getElementById("updateButton");
 
 	// 입력 필드에 변화가 있을 때 버튼 상태를 업데이트합니다.
 	function updateButtonState() {
 	    for (const fieldName in fields) {
 	        if (!handleBlurEvent(fields[fieldName].input, fields[fieldName].errMsg, fields[fieldName].check, fields[fieldName].errorMessage)) {
-	            button.disabled = true;
-	            button.style.backgroundColor = "gray";
+	        	updateButton.disabled = true;
+	        	updateButton.style.backgroundColor = "gray";
 	            return;
 	        }
 	    }
-	    button.disabled = false;
-	    button.style.backgroundColor = "#FFC4A3";
+	    updateButton.disabled = false;
+	    updateButton.style.backgroundColor = "#FFC4A3";
 	}
+	
+	// "수정" 버튼 클릭 시 폼을 서버로 제출하여 업데이트 수행
+	document.getElementById("updateButton").addEventListener("click", function (event) {
+	    // 폼을 서버로 제출하기 전에 유효성 검사를 한번 더 수행 (보안을 위해)
+	    if (validateForm()) {
+	        // 폼을 서버로 제출
+	        document.forms[0].submit(); // 첫 번째 폼을 제출합니다. 여러 개의 폼이 있는 경우 수정해야 할 수 있습니다.
+	    } else {
+	        // 유효성 검사를 통과하지 못한 경우 제출을 막습니다.
+	        event.preventDefault();
+	    }
+	});
 </script>
 </html>

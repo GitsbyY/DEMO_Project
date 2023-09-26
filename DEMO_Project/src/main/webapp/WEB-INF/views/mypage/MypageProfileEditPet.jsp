@@ -140,14 +140,7 @@ button {
 	border: none;
 	border-radius: 3px;
 }
-#deleteInfo > button{
-	background-color: #FFC4A3;
-	color: white;
-	font-size: 18px;
-	font-weight: bold;
-	border: none;
-	border-radius: 3px;
-}
+
 </style>
 <meta charset="UTF-8">
 <title>마이댕댕 메인</title>
@@ -203,9 +196,6 @@ button {
 				<div id="buttonContainer">
 					<div id="updateInfo">
 						<button type="button">수정</button>
-					</div>
-					<div id="deleteInfo">
-						<button type="button">탈퇴</button>
 					</div>
 				</div>
 			</div>
