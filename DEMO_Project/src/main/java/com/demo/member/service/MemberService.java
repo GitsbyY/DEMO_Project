@@ -42,6 +42,8 @@ public interface MemberService {
 
    void memberEmoneyUpdate(MemberDto memberDto);
 
+   List<Map<String, Object>> memberSelectCart(int memberNo);
+
 
 
    

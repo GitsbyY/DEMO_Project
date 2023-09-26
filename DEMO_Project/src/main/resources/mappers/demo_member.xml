@@ -207,6 +207,14 @@
 	SET MEMBER_EMONEY = #{memberEmoney}
 	WHERE MEMBER_NO = #{memberNo}
 	</update>
+	
+	<select id="memberSelectCart" parameterType="int" resultType="map">
+      SELECT *
+      FROM CART C
+      JOIN PRODUCT P ON P.PRODUCT_NO = C.PRODUCT_NO
+      JOIN IMG_FILE I ON I.IMG_NO = P.IMG_NO
+      WHERE C.MEMBER_NO =  #{memberNo}
+   </select>
 </mapper>
 
 

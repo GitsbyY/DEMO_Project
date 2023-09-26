@@ -341,6 +341,14 @@ select{
 	}
 	
 	function viewProductFnc(){
+		var registBtnObj = document.getElementById("registBtn");
+		var productDetailDivObj = document.getElementById("productDetailDiv");
+		
+		if(productDetailDivObj.contentEditable == "true"){
+			productDetailDivObj.contentEditable = "false";
+			registBtnObj.innerHTML = "수정"
+		}
+		
 		var updateClassArray = Array.from(document.querySelectorAll(".updateClass"));
 		var viewClassArray = Array.from(document.querySelectorAll(".viewClass"));
 

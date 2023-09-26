@@ -18,9 +18,51 @@
 	font-size: 25px;
 	font-weight: bold;
 }
+
 #countingDiv{
-	border: 1px 0px solid black;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
 	text-align: center;
+	padding: 20px;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+table tr td{
+	padding:20px;
+	border-bottom: 1px solid black;
+	border-collapse: collapse;
+}
+
+#columnTr{
+	border-bottom: 1px solid black;
+	height:50px;
+}
+#productListDiv{
+	display:flex;
+}
+#checkBoxDiv{
+	width: 100px;
+	flex-direction: row;
+}
+#imgDiv{
+	width: 300px;;
+	flex-direction: row;
+}
+#productDiv{
+	width: 350px;;
+	flex-direction: row;
+}
+#productSumPriceDiv{
+	width: 200px;
+	flex-direction: row;
+}
+#productQuantityDiv{
+	width: 170px;
+	flex-direction: row;
 }
 </style>
 <meta charset="UTF-8">
@@ -37,14 +79,41 @@
 		<div id="countingDiv">
 			구매(<span id="countingSpan">0</span>)
 		</div>
-		<div id="columnDiv">
+		<div id="productListDiv">
+			<table id="productTable">
+				<tr id="columnTr">
+					<td>
+						<div id="checkBoxDiv">
+							전체 선택
+						</div>
+					</td>
+					<td>
+						<div id="imgDiv">
+						</div>
+					</td>
+					<td>
+						<div id="productDiv">
+							상품 정보
+						</div>
+					</td>
+					<td>
+						<div id="productSumPriceDiv">
+							총 상품금액
+						</div>
+					</td>
+					<td>
+						<div id="productQuantityDiv">
+							상품 수량
+						</div>
+					</td>
+				</tr>
+				
+			</table>
 		</div>
 		
-		<div id="productListDiv">
-		</div>
 		<div id="deleteDiv">
 		</div>
-		<div id="sumPriceDiv">
+		<div id="orderSumPriceDiv">
 		</div>
 	</div>
 

@@ -148,6 +148,12 @@ public class MemberDaoImpl implements MemberDao{
 		sqlSession.update(nameSpace + "memberEmoneyUpdate", memberDto);
 	}
 
+	@Override
+	public List<Map<String, Object>> memberSelectCart(int memberNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(nameSpace + "memberSelectCart", memberNo);
+	}
+
    
 
 }
