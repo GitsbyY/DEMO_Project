@@ -54,6 +54,32 @@
 		WHERE (TL.RNUM BETWEEN #{start} AND #{end})
 		ORDER BY TL.RNUM ASC
 	</select>
+	
+	<select id="memberOrderSelectList" parameterType="map"
+		resultType="map">
+		SELECT TL.RNUM, TL.ORDER_DATE, TL.ORDER_NO, TL.MEMBER_NO,
+			TL.MEMBER_ID, TL.PRODUCT_NAME
+		FROM(
+			SELECT ROWNUM AS RNUM, OL.ORDER_DATE,
+				OL.ORDER_NO, OL.MEMBER_NO, OL.PRODUCT_NO,
+				OL.MEMBER_ID, OL.PRODUCT_NAME
+			FROM ( SELECT L.ORDER_DATE, L.ORDER_NO,
+						M.MEMBER_NO, P.PRODUCT_NO, M.MEMBER_ID, P.PRODUCT_NAME
+					FROM ORDER_LIST L
+					JOIN MEMBER M ON L.MEMBER_NO = M.MEMBER_NO
+					JOIN PRODUCT P ON L.PRODUCT_NO = P.PRODUCT_NO
+					WHERE M.MEMBER_NO = #{sessionMemberNo}
+					ORDER BY ORDER_DATE DESC) OL
+			<if test="category == 'orderNo'">
+				WHERE OL.ORDER_NO = #{search}
+			</if>
+			<if test="category == 'productName'">
+				WHERE OL.PRODUCT_NAME LIKE '%'||#{search}||'%'
+			</if>
+			) TL
+		WHERE (TL.RNUM BETWEEN #{start} AND #{end})
+		ORDER BY TL.RNUM ASC
+	</select>
 
 	<select id="orderSelectListTotalCount"
 		resultType="java.lang.Integer">
@@ -72,6 +98,21 @@
 		</if>
 		<if test="category == 'productName'">
 			WHERE P.PRODUCT_NAME LIKE '%'||#{search}||'%'
+		</if>
+	</select>
+	
+	<select id="memberOrderSelectListTotalCount"
+		resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM ORDER_LIST OL
+		JOIN MEMBER M ON OL.MEMBER_NO = M.MEMBER_NO
+		JOIN PRODUCT P ON OL.PRODUCT_NO = P.PRODUCT_NO
+		WHERE M.MEMBER_NO = #{sessionMemberNo}
+		<if test="category == 'orderNo'">
+			AND OL.ORDER_NO = #{search}
+		</if>
+		<if test="category == 'productName'">
+			AND P.PRODUCT_NAME LIKE '%'||#{search}||'%'
 		</if>
 	</select>
 	
@@ -133,6 +174,33 @@
 		ORDER BY ORDER_CANCEL_DATE
 	</select>
 
+	<select id="cancelSelectListMember" parameterType="map"
+		resultType="map">
+		SELECT ROWNUM AS RNUM, ORDER_NO, MEMBER_NO,
+		MEMBER_ID, PRODUCT_NAME, ORDER_CANCEL_DATE, ORDER_STATUS
+		FROM (
+			SELECT OL.ORDER_NO,
+			OL.MEMBER_NO, M.MEMBER_ID, P.PRODUCT_NAME
+			,OC.ORDER_CANCEL_DATE, OL.ORDER_STATUS
+			FROM
+			ORDER_LIST OL
+			JOIN MEMBER M ON OL.MEMBER_NO = M.MEMBER_NO
+			JOIN PRODUCT P ON OL.PRODUCT_NO = P.PRODUCT_NO
+			JOIN ORDER_CANCEL OC ON OL.ORDER_NO = OC.ORDER_NO
+			ORDER BY OC.ORDER_CANCEL_DATE
+		)
+		WHERE MEMBER_NO = #{sessionMemberNo} 
+		AND (ORDER_STATUS = '취소') AND (ROWNUM BETWEEN #{start} AND #{end})
+		AND
+		<if test="category == 'orderNo'">
+		 ORDER_NO = TO_NUMBER(#{search})
+		</if>
+		<if test="category == 'productName'">
+		 PRODUCT_NAME LIKE '%'||#{search}||'%'
+		</if>
+		ORDER BY ORDER_CANCEL_DATE
+	</select>
+
 	<select id="cancelSelectListTotalCount"
 		resultType="java.lang.Integer">
 		SELECT COUNT(*)
@@ -142,6 +210,18 @@
 		JOIN PRODUCT P ON OL.PRODUCT_NO = P.PRODUCT_NO
 		JOIN ORDER_CANCEL OC ON OL.ORDER_NO = OC.ORDER_NO
 	</select>
+	
+	<select id="cancelSelectListTotalCountMember"
+		resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM ORDER_LIST OL
+		JOIN MEMBER M ON
+		OL.MEMBER_NO = M.MEMBER_NO
+		JOIN PRODUCT P ON OL.PRODUCT_NO = P.PRODUCT_NO
+		JOIN ORDER_CANCEL OC ON OL.ORDER_NO = OC.ORDER_NO
+		WHERE M.MEMBER_NO = #{sessionMemberNo}
+	</select>
+	
 
 	<select id="orderCancelDetailSelectOne" resultType="map">
 		SELECT

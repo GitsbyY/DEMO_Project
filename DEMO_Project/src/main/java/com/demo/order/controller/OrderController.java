@@ -36,12 +36,24 @@ public class OrderController {
 	@Autowired
 	private MemberService memberService;
 
-	// 마이페이지 화면
+	// 마이페이지 처음
 	@RequestMapping(value = "/mypage/mypage.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myPage(@RequestParam(defaultValue = "1") int curPage, 
-						@RequestParam(defaultValue = "productName") String category, 
-						@RequestParam(defaultValue = "") String search,
-						HttpSession session, Model model) {
+	public String myPage(HttpSession session) {
+		MemberDto memberDto = (MemberDto) session.getAttribute("member");
+
+		if (memberDto.getMemberNo() == 1) {
+			return "redirect:/mypage/mypageAdmin.do";
+		} else {
+			return "redirect:/mypage/mypageMember.do";
+		}
+
+	}
+
+	// 마이페이지 화면 -> 관리자
+	@RequestMapping(value = "/mypage/mypageAdmin.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String myPageAdmin(@RequestParam(defaultValue = "1") int curPage,
+			@RequestParam(defaultValue = "productName") String category, @RequestParam(defaultValue = "") String search,
+			HttpSession session, Model model) {
 
 		log.info("Welcome OrderController login!");
 		int totalCount = orderService.orderSelectListTotalCount(category, search);
@@ -51,27 +63,55 @@ public class OrderController {
 		int start = myPagePaging.getPageBegin();
 		int end = myPagePaging.getPageEnd();
 
-		List<Map<String, Object>> orderList = orderService.orderSelectList(start, end, category, search); 
-		
-//		if(!category.isEmpty() && !search.isEmpty()) {
-//			orderList = orderService.orderSelectList(start, end, category, search);
-//		}else {
-//			orderList = orderService.orderSelectList(start, end);
-//		}
-		
+		List<Map<String, Object>> orderList = orderService.orderSelectList(start, end, category, search);
+
 		HashMap<String, Object> myPagingmap = new HashMap<>();
 		myPagingmap.put("totalCount", totalCount);
 		myPagingmap.put("myPagePaging", myPagePaging);
-		myPagingmap.put("category", category); 
-	    myPagingmap.put("search", search);
+		myPagingmap.put("category", category);
+		myPagingmap.put("search", search);
 
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("orderList", orderList);
 		model.addAttribute("myPagingmap", myPagingmap);
-		
+
 		session.setAttribute("myPageAside", "order");
-		
+
 		return "mypage/Mypage";
+	}
+
+	// 마이페이지 화면 -> 회원
+	@RequestMapping(value = "/mypage/mypageMember.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String myPageMember(@RequestParam(defaultValue = "1") int curPage,
+			@RequestParam(defaultValue = "productName") String category, @RequestParam(defaultValue = "") String search,
+			HttpSession session, Model model) {
+
+		MemberDto memberDto = (MemberDto) session.getAttribute("member");
+		int sessionMemberNo = memberDto.getMemberNo();
+		log.info("Welcome OrderController login!");
+		int totalCount = orderService.orderSelectListTotalCount(category, search, sessionMemberNo);
+
+		MyPagePaging myPagePaging = new MyPagePaging(totalCount, curPage);
+
+		int start = myPagePaging.getPageBegin();
+		int end = myPagePaging.getPageEnd();
+
+		List<Map<String, Object>> orderList = orderService.orderSelectList(start, end, category, search,
+				sessionMemberNo);
+
+		HashMap<String, Object> myPagingmap = new HashMap<>();
+		myPagingmap.put("totalCount", totalCount);
+		myPagingmap.put("myPagePaging", myPagePaging);
+		myPagingmap.put("category", category);
+		myPagingmap.put("search", search);
+
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("orderList", orderList);
+		model.addAttribute("myPagingmap", myPagingmap);
+
+		session.setAttribute("myPageAside", "order");
+
+		return "mypage/MypageMember";
 	}
 
 	// 마이페이지 주문목록 상세 페이지
@@ -82,15 +122,109 @@ public class OrderController {
 		Map<String, Object> orderDto = orderService.orderDetailSelectOne(orderNo);
 
 		model.addAttribute("orderDto", orderDto);
-		
+
 		session.setAttribute("myPageAside", "order");
-		
+
 		return "mypage/MypageDetail";
+	}
+
+	// 취소 처음
+	@RequestMapping(value = "/mypage/cancelPage.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String myPageCancel(HttpSession session) {
+		MemberDto memberDto = (MemberDto) session.getAttribute("member");
+
+		if (memberDto.getMemberNo() == 1) {
+			return "redirect:/mypage/cancelPageAdmin.do";
+		} else {
+			return "redirect:/mypage/cancelPageMember.do";
+		}
+
+	}
+
+	// 취소내역 화면 -> 관리자
+	@RequestMapping(value = "/mypage/cancelPageAdmin.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String myPageCancelAdmin(@RequestParam(defaultValue = "1") int curPage,
+			@RequestParam(defaultValue = "productName") String category, @RequestParam(defaultValue = "") String search,
+			HttpSession session, Model model) {
+
+		log.info("Welcome OrderController login!");
+
+		int totalCount = orderService.cancelSelectListTotalCount();
+
+		MyPagePaging myPagePaging = new MyPagePaging(totalCount, curPage);
+
+		int start = myPagePaging.getPageBegin();
+		int end = myPagePaging.getPageEnd();
+
+		List<Map<String, Object>> orderList = orderService.cancelSelectList(start, end, category, search);
+
+		HashMap<String, Object> myPagingmap = new HashMap<>();
+		myPagingmap.put("totalCount", totalCount);
+		myPagingmap.put("myPagePaging", myPagePaging);
+		myPagingmap.put("category", category);
+		myPagingmap.put("search", search);
+
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("orderList", orderList);
+		model.addAttribute("myPagingmap", myPagingmap);
+
+		session.setAttribute("myPageAside", "cancel");
+
+		return "mypage/MypageCancellationAdmin";
+	}
+	
+	// 취소내역 화면 -> 회원
+		@RequestMapping(value = "/mypage/cancelPageMember.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public String myPageCancelMember(@RequestParam(defaultValue = "1") int curPage,
+				@RequestParam(defaultValue = "productName") String category, @RequestParam(defaultValue = "") String search,
+				HttpSession session, Model model) {
+
+			log.info("Welcome OrderController login!");
+			
+			MemberDto memberDto = (MemberDto) session.getAttribute("member");
+			int sessionMemberNo = memberDto.getMemberNo();
+			
+			int totalCount = orderService.cancelSelectListTotalCountMember(sessionMemberNo);
+
+			MyPagePaging myPagePaging = new MyPagePaging(totalCount, curPage);
+
+			int start = myPagePaging.getPageBegin();
+			int end = myPagePaging.getPageEnd();
+
+			List<Map<String, Object>> orderList = orderService.cancelSelectListMember(start, end, category, search, sessionMemberNo);
+
+			HashMap<String, Object> myPagingmap = new HashMap<>();
+			myPagingmap.put("totalCount", totalCount);
+			myPagingmap.put("myPagePaging", myPagePaging);
+			myPagingmap.put("category", category);
+			myPagingmap.put("search", search);
+
+			model.addAttribute("totalCount", totalCount);
+			model.addAttribute("orderList", orderList);
+			model.addAttribute("myPagingmap", myPagingmap);
+
+			session.setAttribute("myPageAside", "cancel");
+
+			return "mypage/MypageCancellationMember";
+		}
+
+	// 마이페이지 주문취소 상세 페이지
+	@RequestMapping(value = "/mypage/MypageCancellationDetail.do", method = RequestMethod.GET)
+	public String myPageCancelDetail(int orderNo, HttpSession session, Model model) {
+		log.debug("Welcome MemberController myPageDetail! ");
+
+		Map<String, Object> orderDto = orderService.orderCancelDetailSelectOne(orderNo);
+
+		model.addAttribute("orderDto", orderDto);
+
+		session.setAttribute("myPageAside", "cancel");
+
+		return "mypage/MypageCancellationDetail";
 	}
 
 	// 주문취소
 	@RequestMapping(value = "/order/orderCancelCtr.do", method = RequestMethod.POST)
-	public String orderCancel(@RequestParam(defaultValue = "-1") int orderNo,HttpSession session, Model model) {
+	public String orderCancel(@RequestParam(defaultValue = "-1") int orderNo, HttpSession session, Model model) {
 		System.out.println(orderNo);
 		try {
 
@@ -114,7 +248,7 @@ public class OrderController {
 			model.addAttribute("orderDto", orderDto);
 			session.setAttribute("myPageAside", "order");
 
-//        		return "redirect:/mypage/MypageDetail.do"; // 리다이렉트할 경로로 이동
+//	        		return "redirect:/mypage/MypageDetail.do"; // 리다이렉트할 경로로 이동
 			return "mypage/MypageDetail";
 
 		} catch (Exception e) {
@@ -122,58 +256,4 @@ public class OrderController {
 			return "fail"; // 예외 발생 시 'fail' 응답
 		}
 	}
-
-	// 취소내역 화면
-	@RequestMapping(value = "/mypage/cancelPage.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myPageCancel(@RequestParam(defaultValue = "1") int curPage,
-							@RequestParam(defaultValue = "productName") String category, 
-							@RequestParam(defaultValue = "") String search, 
-							HttpSession session, Model model) {
-
-		log.info("Welcome OrderController login!");
-
-		int totalCount = orderService.cancelSelectListTotalCount();
-
-		MyPagePaging myPagePaging = new MyPagePaging(totalCount, curPage);
-
-		int start = myPagePaging.getPageBegin();
-		int end = 0;
-		
-		if(myPagePaging.getPageEnd()>totalCount) {
-			end = totalCount;
-		}else {
-			end = myPagePaging.getPageEnd();
-		}
-				
-		List<Map<String, Object>> orderList = orderService.cancelSelectList(start, end, category, search);
-
-		HashMap<String, Object> myPagingmap = new HashMap<>();
-		myPagingmap.put("totalCount", totalCount);
-		myPagingmap.put("myPagePaging", myPagePaging);
-		myPagingmap.put("category", category); 
-	    myPagingmap.put("search", search);
-	    
-		model.addAttribute("totalCount", totalCount);
-		model.addAttribute("orderList", orderList);
-		model.addAttribute("myPagingmap", myPagingmap);
-		
-		session.setAttribute("myPageAside", "cancel");
-		
-		return "mypage/MypageCancellation";
-	}
-
-	// 마이페이지 주문취소 상세 페이지
-	@RequestMapping(value = "/mypage/MypageCancellationDetail.do", method = RequestMethod.GET)
-	public String myPageCancelDetail(int orderNo, HttpSession session, Model model) {
-		log.debug("Welcome MemberController myPageDetail! ");
-
-		Map<String, Object> orderDto = orderService.orderCancelDetailSelectOne(orderNo);
-
-		model.addAttribute("orderDto", orderDto);
-		
-		session.setAttribute("myPageAside", "cancel");
-		
-		return "mypage/MypageCancellationDetail";
-	}
-
 }

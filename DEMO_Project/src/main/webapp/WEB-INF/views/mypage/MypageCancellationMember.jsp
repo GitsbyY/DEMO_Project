@@ -158,12 +158,10 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 		</c:forEach>
 		
 		<div id='searchDiv'>
-			<form action="./cancelPageAdmin.do" method="post" id='myPageCancelSearchForm'>
+			<form action="./cancelPageMember.do" method="post" id='myPageCancelSearchForm'>
 				
 				<select id="sortSelect" name="category">
-					<option value="memberNo">회원번호</option>
 					<option value="orderNo">주문번호</option>
-					<option value="memberId">아이디</option>
 					<option value="productName">상품명</option>
 				</select>
 				
@@ -193,7 +191,7 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 	
 <!-- 	정보를 넘기기 위해서 폼을 만들었다 -->
 
-			<form action="./cancelPageAdmin.do" id="pagingForm" method="post">
+			<form action="./cancelPageMember.do" id="pagingForm" method="post">
 		      <input type="hidden" id="curPage" name="curPage"
 		         value="${myPagingmap.myPagePaging.curPage}">
 		    </form>

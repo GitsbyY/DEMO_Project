@@ -157,7 +157,7 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 						</div>
 					</div>
 				</c:forEach>
-				<form action="./mypageAdmin.do" method="post" id='myPageSearchForm'>
+				<form action="./mypageMember.do" method="post" id='myPageSearchForm'>
 				<div id='searchDiv'>
 					
 						
@@ -167,25 +167,11 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 									selected
 								</c:if>
 								>상품명</option>
-								<option value="memberNo"
-								<c:if test="${myPagingmap.category eq 'memberNo'}">
-									selected
-								</c:if>
-								>회원번호</option>
 								<option value="orderNo"
 								<c:if test="${myPagingmap.category eq 'orderNo'}">
 									selected
 								</c:if>
 								>주문번호</option>
-								<option value="memberId"
-								<c:if test="${myPagingmap.category eq 'memberId'}">
-									selected
-								</c:if>
-								>아이디</option>
-		<!-- 					<option value="productName">상품명</option> -->
-		<!-- 					<option value="memberNo">회원번호</option> -->
-		<!-- 					<option value="orderNo">주문번호</option> -->
-		<!-- 					<option value="memberId">아이디</option> -->
 						</select>
 						
 						<input id="search" type="text" name="search"

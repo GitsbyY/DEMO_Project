@@ -16,13 +16,24 @@ public interface OrderService {
 
 	int orderSelectListTotalCount(String category, String search);
 
+	int orderSelectListTotalCount(String category, String search, int sessionMemberNo);
+	
 	boolean orderCancelUpdate(int orderNo);
 
 	int cancelSelectListTotalCount();
 
+	int cancelSelectListTotalCountMember(int sessionMemberNo);
+
 	List<Map<String, Object>> cancelSelectList(int start, int end, String category, String search);
 
 	Map<String, Object> orderCancelDetailSelectOne(int orderNo);
+
+	List<Map<String, Object>> orderSelectList(int start, int end, String category, String search, int sessionMemberNo);
+
+	List<Map<String, Object>> cancelSelectListMember(int start, int end, String category, String search,
+			int sessionMemberNo);
+
+
 
 
 }
