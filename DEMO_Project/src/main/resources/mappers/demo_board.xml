@@ -402,4 +402,9 @@
       DELETE FROM REVIEW
       WHERE REVIEW_NO = #{value}
    </delete>
+   
+   <delete id="reviewReplyDelete" parameterType="int">
+      DELETE FROM REVIEW_REPLY
+      WHERE REVIEW_REPLY_NO = #{value}
+   </delete>
 </mapper>

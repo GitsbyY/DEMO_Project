@@ -113,10 +113,11 @@ table{
 	border-radius: 5px;
 	height: 80px;		
 	flex-direction: column;
-	margin-bottom: 10px;	
+	margin-bottom: 10px;
+	position: relative;	
 }
 .replyText{
-	width: 80%;
+	width: 70%;
 	height: 40px;
 	margin: auto;
 	display: block;
@@ -144,6 +145,7 @@ table{
 	margin-top: 5px;
 	margin-bottom: 10px;
 	font-weight: bold;
+	width: 200px;
 }
 .submit{
 	float: right;
@@ -154,11 +156,30 @@ table{
 	height: 25px;
 	width: 40px;
 }
-
+#dateDiv{
+	position: absolute;
+	margin-left: 870px;	
+    top: 0;
+        
+    
+}
+#reviewListDiv{
+	
+}
+textarea {
+	overflow: hidden;
+}
+#reviewReplyTitle{
+	clear: both;
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
 </style>
 <meta charset="UTF-8">
 <title>후기남겨요 상세페이지</title>
 <link rel="stylesheet" type="text/css" href="/DEMO_Project/resources/css/main.css">
+<script type="text/javascript" src="/SpringHome/resources/js/jquery-3.7.1.js"></script>
 </head>
 <body>
    <jsp:include page="/WEB-INF/views/Header.jsp"/>
@@ -219,39 +240,53 @@ table{
             <c:otherwise>
                
             </c:otherwise>
-         </c:choose>
-         
-         
+         </c:choose>         
       </div>
       </form>
-      
+
+		<div id="reviewReplyTitle">댓글</div>
+		<form action="./reviewReplyUpdate.do" method="post">
       <c:forEach items="${reply}" var="reply">
 	      <div class="reviewReplyDiv">
 	      	<div class="reviewReplyName">
 	      		${reply.MEMBER_NAME}
 	      	</div>
 	      		
-	      	
-	      	<div>
-	      		<textarea class="replyText" rows="" cols="" name="reviewReplyContent">${reply.REVIEW_REPLY_CONTENT}</textarea>
+	      	<div id="dateDiv">
+		      		<fmt:formatDate pattern="yyyy-MM-dd HH:mm" 
+	                     value="${reply.REVIEW_REPLY_CRE_DATE}"/>
+                </div>  
+	      	<div id="reviewListDiv">
+	      		<textarea disabled="disabled" class="replyText" rows="" cols="" name="reviewReplyContent">${reply.REVIEW_REPLY_CONTENT}</textarea>
 	      		<input type="hidden" name="reviewReplyContent" value="${reply.REVIEW_REPLY_CONTENT}">
-	      		<%-- <p class="replyContent">
-	      			${reply.REVIEW_REPLY_CONTENT}
-	      		</p> --%>
-	      		<input class="submit" type="button" value="삭제">
+	      		                        		      			
+	      		<c:choose>
+					<c:when test="${sessionScope.member.memberNo eq reply.MEMBER_NO}">
+						<input class="submit" type="button" value="삭제" 
+	      					onclick="reviewReplyDeleteFnc(${reply.REVIEW_REPLY_NO});">
+	      				<input class="submit" type="submit" value="수정">							
+					</c:when>
+					<c:when test="${sessionScope.member.memberNo eq '1'}">
+						<input class="submit" type="button" value="삭제" 
+	      					onclick="reviewReplyDeleteFnc(${reply.REVIEW_REPLY_NO});">	      										
+					</c:when>
+					<c:otherwise>		
+					</c:otherwise>
+				</c:choose>	      			      		
 	      	</div>
 	      
 	      </div>
-      </c:forEach> 
+      </c:forEach>
+      </form> 
        
 		<form action="./write.do" method="post">
 		<div id="replyText" class="reviewReplyDiv">
       	<div class="reviewReplyName">
       		${sessionScope.member.memberName}
       	</div>
-      	<input type="hidden" name="reviewNo" value="${reviewDto.REVIEW_NO}">
+      	<input type="hidden" name="reviewNo" value="${reviewDto.REVIEW_NO}" id="reviewNo">
         <input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}"> 
-      	<textarea class="replyText" rows="" cols="" name="reviewReplyContent"></textarea>
+      	<textarea class="replyText" rows="2" cols="20" name="reviewReplyContent"></textarea>
       	<div>
       		<!-- <input class="submit" type="button" value="등록"> -->
       		<button class="submit" type="submit">등록</button>
@@ -264,15 +299,24 @@ table{
    <jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
 <script type="text/javascript">
-   function goBack() {
-      window.history.back();
-   }
+
+	function goBack() {
+		window.history.back();
+	}
    
-   function pageMoveDeleteFnc(no) {
+	function pageMoveDeleteFnc(no) {
       
-      var url = './reviewdelete.do?no=' + no;
+		var url = './reviewdelete.do?no=' + no;
          
-      location.href = url;
-   }
+		location.href = url;
+	}
+   
+	function reviewReplyDeleteFnc(no) {
+		var reviewNo = document.getElementById('reviewNo').value;
+		
+		var url = './reviewReplydelete.do?no=' + no +'&reviewNo=' + reviewNo;
+        
+		location.href = url;
+	}
 </script>
 </html>

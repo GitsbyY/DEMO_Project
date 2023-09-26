@@ -71,6 +71,8 @@ public interface BoardDao {
 
    public void reviewReplyWrite(ReviewReplyDto reviewReplyDto);
    
+   public int reviewReplyDelete(int no);
+   
 
 
    

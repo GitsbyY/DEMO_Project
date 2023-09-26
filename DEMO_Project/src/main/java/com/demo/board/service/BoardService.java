@@ -72,6 +72,8 @@ public List<ReviewReplyDto> list(int no);
 
 public void reviewReplyWrite(ReviewReplyDto reviewReplyDto);
 
+public int reviewReplyDelete(int no);
+
 
 
 

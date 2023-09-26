@@ -284,6 +284,11 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 		boardDao.reviewReplyWrite(reviewReplyDto);
 	}
+	@Override
+	public int reviewReplyDelete(int no) {
+		// TODO Auto-generated method stub
+		return boardDao.reviewReplyDelete(no);
+	}
 	
 	
    

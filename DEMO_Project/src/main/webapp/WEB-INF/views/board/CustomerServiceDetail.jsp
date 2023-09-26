@@ -133,7 +133,7 @@ table {
 #replyTableDiv {
    margin-top: 60px;
    width: 1020px;
-   height: 500px;
+   height: 620px;
    float: right;
 }
 
@@ -348,7 +348,7 @@ td input {
 
        // divContainer 내용 변경
        divContainer.innerHTML = `
-          <div id="divContainer">
+          
             <div id="titleDiv">
                <div id="firstDiv">1:1 상담문의</div>
                <div id="secondDiv"></div>
@@ -424,7 +424,7 @@ td input {
                </div>
             </form>   
 
-      </div>
+      
        `;
    }
 </script>

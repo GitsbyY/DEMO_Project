@@ -468,7 +468,18 @@ public class BoardController {
        
        
        return "redirect:/board/review.do";
-    } 
+    }
+    // 후기남겨요 댓글 삭제
+    @RequestMapping(value = "/board/reviewReplydelete.do", method = RequestMethod.GET)
+    public String reviewReplyDelete(int reviewNo, int no, Model model) {
+       log.info("Welcome BoardController reviewReplyDelete! " + no);
+
+       boardService.reviewReplyDelete(no);
+       
+       System.out.println("reviewReplyDto.ReviewNo 번호는" + reviewNo);
+              
+       return "redirect:/board/listOne3.do?no=" + reviewNo;      
+    }
       
    
    // 단순 페이지 이동

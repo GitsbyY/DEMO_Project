@@ -243,6 +243,12 @@ public void reviewReplyWrite(ReviewReplyDto reviewReplyDto) {
 	// TODO Auto-generated method stub
 	sqlSession.insert(nameSpace + "reviewReplyWrite", reviewReplyDto);
 }
+
+@Override
+public int reviewReplyDelete(int no) {
+	// TODO Auto-generated method stub
+	return sqlSession.delete(nameSpace + "reviewReplyDelete", no);
+}
   
 
    
