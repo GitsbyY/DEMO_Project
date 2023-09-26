@@ -21,6 +21,7 @@ import com.demo.board.dto.InquiryDto;
 import com.demo.board.dto.NoticeDto;
 import com.demo.board.dto.ReplyDto;
 import com.demo.board.dto.ReviewDto;
+import com.demo.board.dto.ReviewReplyDto;
 import com.demo.board.service.BoardService;
 import com.demo.member.dto.MemberDto;
 import com.demo.member.service.MemberService;
@@ -133,7 +134,7 @@ public class BoardController {
    }
    // 공지사항 상세보기
    @RequestMapping(value = "/board/listOne.do", method = RequestMethod.GET)
-   public String noticeSelectOne(int no, Model model) {
+   public String noticeSelectOne(@RequestParam("no") int no, Model model) {
       log.debug("Welcome BoardController noticelistOne! - {}" + no);
       
       Map<String, Object> resultMap = boardService.noticeSelectOne(no);
@@ -146,7 +147,11 @@ public class BoardController {
       
       model.addAttribute("noticeDto", noticeDto);
       model.addAttribute("fileList", fileList);
-            
+      
+//      List<ReviewReplyDto> reply = null;
+//      reply = boardService.list(no);
+//      model.addAttribute("reply", reply);
+                      
       return "board/AnnouncementDetail";
    }
    // 1:1 상담하기 상세보기
@@ -174,7 +179,7 @@ public class BoardController {
    
    // 후기남겨요 상세보기
    @RequestMapping(value = "/board/listOne3.do", method = RequestMethod.GET)
-   public String reviewSelectOne(int no, Model model, HttpSession session) {
+   public String reviewSelectOne(@RequestParam("no") int no, Model model, HttpSession session) {
       log.debug("Welcome BoardController reviewlistOne! - {}" + no);
       
       Map<String, Object> resultMap = boardService.reviewSelectOne(no);
@@ -186,7 +191,11 @@ public class BoardController {
          = (List<Map<String, Object>>) resultMap.get("fileList");
       
       model.addAttribute("reviewDto", reviewDto);
-      model.addAttribute("fileList", fileList);           
+      model.addAttribute("fileList", fileList);
+      
+      List<ReviewReplyDto> reply = null;
+      reply = boardService.list(no);
+      model.addAttribute("reply", reply);
             
       return "board/ReviewDetail";
    }
@@ -219,6 +228,15 @@ public class BoardController {
       
       return "board/AddInquiry";
    }
+   
+	// 댓글 작성
+	@RequestMapping(value = "/board/write", method = RequestMethod.POST)
+	public String reviewReplyWrite(ReviewReplyDto reviewReplyDto) throws Exception {
+		
+		boardService.reviewReplyWrite(reviewReplyDto);
+		
+		return "redirect:/board/listOne3.do?no=" + reviewReplyDto.getReviewNo();
+	}
    
    // 1:1문의 답변 등록하기
    @RequestMapping(value = "/board/inquiryReplyddCtr.do", method = RequestMethod.POST)

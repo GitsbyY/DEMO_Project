@@ -11,6 +11,7 @@ import com.demo.board.dto.InquiryDto;
 import com.demo.board.dto.NoticeDto;
 import com.demo.board.dto.ReplyDto;
 import com.demo.board.dto.ReviewDto;
+import com.demo.board.dto.ReviewReplyDto;
 import com.demo.member.dto.MemberDto;
 import com.demo.order.dto.OrderDto;
 
@@ -66,6 +67,12 @@ public interface BoardService {
 		   , MultipartHttpServletRequest mulRequest) throws Exception;
 
 public Map<String, Object> reviewSelectList(int start, int end, String search, String select);
+
+public List<ReviewReplyDto> list(int no);
+
+public void reviewReplyWrite(ReviewReplyDto reviewReplyDto);
+
+
 
 
 

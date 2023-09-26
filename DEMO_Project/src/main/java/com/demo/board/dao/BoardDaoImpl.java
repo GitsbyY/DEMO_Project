@@ -13,6 +13,7 @@ import com.demo.board.dto.NoticeDto;
 import com.demo.board.dto.ReplyDto;
 import com.demo.order.dto.OrderDto;
 import com.demo.board.dto.ReviewDto;
+import com.demo.board.dto.ReviewReplyDto;
 import com.demo.member.dto.MemberDto;
 
 
@@ -229,6 +230,18 @@ public Map<String, Object> reviewSelectList(int start, int end, String search
 
       return resultMap;
 	
+}
+
+@Override
+public List<ReviewReplyDto> list(int no) {
+	// TODO Auto-generated method stub
+	return sqlSession.selectList(nameSpace + "list", no);
+}
+
+@Override
+public void reviewReplyWrite(ReviewReplyDto reviewReplyDto) {
+	// TODO Auto-generated method stub
+	sqlSession.insert(nameSpace + "reviewReplyWrite", reviewReplyDto);
 }
   
 

@@ -189,6 +189,14 @@
   SUBQUERY.RNUM BETWEEN #{start} AND #{end}
    </select>
    
+	<select id="list" parameterType="map" resultType="map">
+	
+	SELECT REVIEW_REPLY_NO, REVIEW_REPLY.MEMBER_NO, REVIEW_NO, REVIEW_REPLY_CONTENT, REVIEW_REPLY_CRE_DATE, MEMBER.MEMBER_NAME
+	FROM REVIEW_REPLY JOIN MEMBER
+	ON REVIEW_REPLY.MEMBER_NO = MEMBER.MEMBER_NO
+	WHERE REVIEW_NO = #{reviewNo}		
+	</select>
+   
    <select id="noticeSelectTotalCount" resultType="java.lang.Integer">
       SELECT COUNT(*)
       FROM NOTICE
@@ -291,6 +299,19 @@
       (NOTICE_NO, MEMBER_NO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_CRE_DATE)
       VALUES(#{noticeNo}, #{memberNo}, #{noticeTitle}, #{noticeContent}, SYSDATE)
    </insert>
+   
+    <insert id="reviewReplyWrite" parameterType="reviewReplyDto" 
+      useGeneratedKeys="true" keyProperty= "reviewReplyNo">
+      <selectKey keyProperty="reviewReplyNo" resultType="int" order="BEFORE">
+         SELECT REVIEW_REPLY_NO_SEQ.NEXTVAL
+         FROM DUAL
+      </selectKey>
+      
+		INSERT INTO REVIEW_REPLY
+		(REVIEW_REPLY_NO, MEMBER_NO, REVIEW_NO, REVIEW_REPLY_CONTENT, REVIEW_REPLY_CRE_DATE)
+		VALUES(#{reviewReplyNo}, #{memberNo}, #{reviewNo}, #{reviewReplyContent}, SYSDATE)
+   </insert>
+   
    
    <insert id="replyInsertOne" parameterType="replyDto">
       

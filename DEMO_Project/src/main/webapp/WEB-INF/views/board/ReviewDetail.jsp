@@ -106,17 +106,18 @@ table{
 	width: 65px;
 	margin-bottom: 30px;
 }
-#reviewReplyDiv{
+.reviewReplyDiv{
 	clear: both;
 	width: 100%;
-	border: 2px solid gray;
+	border: 2px solid #FFC4A3;
 	border-radius: 5px;
-	height: 130px;		
-	flex-direction: column;	
+	height: 80px;		
+	flex-direction: column;
+	margin-bottom: 10px;	
 }
-#replyText{
-	width: 95%;
-	height: 50px;
+.replyText{
+	width: 80%;
+	height: 40px;
 	margin: auto;
 	display: block;
 	margin-bottom: 5px;
@@ -124,15 +125,27 @@ table{
 	background-color: transparent;
 	outline: none;
 	resize: none;
+	float: left;	
+	margin-left: 25px;
+	font-size: 16px;
 }
-#reviewReplyName{
+#replyText{
+	clear: both;
+	width: 100%;
+	border: 1px solid gray;
+	border-radius: 5px;
+	height: 80px;		
+	flex-direction: column;
+	margin-bottom: 10px;
+}
+.reviewReplyName{
 	text-align: left;
 	margin-left: 25px;
 	margin-top: 5px;
 	margin-bottom: 10px;
 	font-weight: bold;
 }
-#submit{
+.submit{
 	float: right;
 	margin-right: 25px;
 	background-color: #FFC4A3;
@@ -141,6 +154,7 @@ table{
 	height: 25px;
 	width: 40px;
 }
+
 </style>
 <meta charset="UTF-8">
 <title>후기남겨요 상세페이지</title>
@@ -197,7 +211,8 @@ table{
                   onclick='pageMoveDeleteFnc(${reviewDto.REVIEW_NO});'>
             </c:when>
             <c:when test="${sessionScope.member.memberNo eq '1'}">
-               <input type="hidden" name="no" value="${reviewDto.REVIEW_NO}">               
+               <input type="hidden" name="no" value="${reviewDto.REVIEW_NO}">
+               <input type="hidden" name="memberNo" value="${reviewDto.MEMBER_NO}">               
                <input class="rightBtn" type="button" value="삭제" 
                   onclick='pageMoveDeleteFnc(${reviewDto.REVIEW_NO});'>
             </c:when>
@@ -208,18 +223,42 @@ table{
          
          
       </div>
-      </form> 
-      <div id="reviewReplyDiv">
-      	<div id="reviewReplyName">
+      </form>
+      
+      <c:forEach items="${reply}" var="reply">
+	      <div class="reviewReplyDiv">
+	      	<div class="reviewReplyName">
+	      		${reply.MEMBER_NAME}
+	      	</div>
+	      		
+	      	
+	      	<div>
+	      		<textarea class="replyText" rows="" cols="" name="reviewReplyContent">${reply.REVIEW_REPLY_CONTENT}</textarea>
+	      		<input type="hidden" name="reviewReplyContent" value="${reply.REVIEW_REPLY_CONTENT}">
+	      		<%-- <p class="replyContent">
+	      			${reply.REVIEW_REPLY_CONTENT}
+	      		</p> --%>
+	      		<input class="submit" type="button" value="삭제">
+	      	</div>
+	      
+	      </div>
+      </c:forEach> 
+       
+		<form action="./write.do" method="post">
+		<div id="replyText" class="reviewReplyDiv">
+      	<div class="reviewReplyName">
       		${sessionScope.member.memberName}
       	</div>
-      	
-      	<textarea id="replyText" rows="" cols=""></textarea>
+      	<input type="hidden" name="reviewNo" value="${reviewDto.REVIEW_NO}">
+        <input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}"> 
+      	<textarea class="replyText" rows="" cols="" name="reviewReplyContent"></textarea>
       	<div>
-      		<input id="submit" type="button" value="등록">
+      		<!-- <input class="submit" type="button" value="등록"> -->
+      		<button class="submit" type="submit">등록</button>
       	</div>
       
-      </div>                          
+		</div>
+		</form>                          
    </div>
   
    <jsp:include page="/WEB-INF/views/Footer.jsp"/>

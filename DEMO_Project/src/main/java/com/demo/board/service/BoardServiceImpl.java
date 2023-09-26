@@ -18,6 +18,7 @@ import com.demo.board.dto.InquiryDto;
 import com.demo.board.dto.NoticeDto;
 import com.demo.board.dto.ReplyDto;
 import com.demo.board.dto.ReviewDto;
+import com.demo.board.dto.ReviewReplyDto;
 import com.demo.member.dto.MemberDto;
 import com.demo.util.FileUtils;
 
@@ -272,6 +273,16 @@ public class BoardServiceImpl implements BoardService{
 	public Map<String, Object> reviewSelectList(int start, int end, String search, String select) {
 		// TODO Auto-generated method stub
 		return boardDao.reviewSelectList(start, end, search, select);
+	}
+	@Override
+	public List<ReviewReplyDto> list(int no) {
+		// TODO Auto-generated method stub
+		return boardDao.list(no);
+	}
+	@Override
+	public void reviewReplyWrite(ReviewReplyDto reviewReplyDto) {
+		// TODO Auto-generated method stub
+		boardDao.reviewReplyWrite(reviewReplyDto);
 	}
 	
 	
