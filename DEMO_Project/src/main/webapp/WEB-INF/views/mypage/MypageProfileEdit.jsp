@@ -218,7 +218,7 @@ button {
 						<div class="memberInfoName">휴대폰 번호</div>
 						<div class="memberInfoValueWrap">
 							<input class="memberInfoValueInput" id="memberPhoneNum"
-								type="text" value="${memberDto.MEMBER_PHONE}" name="memberPhoneNum"/>
+								type="text" value="${memberDto.MEMBER_PHONE}" name="memberPhone"/>
 							<div class="txtErrorArea" style="">
 								<p class="errTxtRed" id="userUpdateMessagePhone"
 									aria-live="assertive"></p>

@@ -228,6 +228,12 @@
 		WHERE MEMBER_NO = #{memberNo}
    </update>
    
+   <update id="petInfoUpdate">
+	UPDATE PET
+	SET PET_NAME = #{petName}, PET_WEIGHT = #{petWeight}
+	WHERE PET_NO = #{petNo}
+   </update>
+   
 </mapper>
 
 

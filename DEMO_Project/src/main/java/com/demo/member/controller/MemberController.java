@@ -250,32 +250,49 @@ public class MemberController {
 		return "mypage/MypageProfileEdit";
 	}
 
-	// 회원정보 변경 -> 아직 진행중./MypageProfileEditUpdateCtr
+	// 회원정보 변경 
 	@RequestMapping(value = "/mypage/MypageProfileEditUpdateCtr.do", method = RequestMethod.POST)
 	public String memberInfoChange(MemberDto memberDto, HttpSession session, Model model) {
 
-		System.out.println(memberDto);
+		System.out.println(memberDto + "MypageProfileEditUpdateCtr.do Start");
 
-		// update/select
-		try {
-			memberService.memberInfoUpdate(memberDto);//업데이트는 가는데 커밋이 안되는 것 같다>
-			model.addAttribute("result", "success"); // 성공 시 'success' 값을 모델에 추가
-		} catch (Exception e) {
-			// TODO: handle exception
-			model.addAttribute("result", "fail"); // 실패 시 'fail' 값을 모델에 추가
-		}
-		System.out.println(memberDto);
+		memberService.memberInfoUpdate(memberDto);
+		
+		
+		System.out.println(memberDto + "MypageProfileEditUpdateCtr.do Update");
 
-		Map<String, Object> memberDto1 = memberService.myPageProfileDetailMemberSelectOne(memberDto.getMemberNo());
+		Map<String, Object> memberDtoUpdated = memberService.myPageProfileDetailMemberSelectOne(memberDto.getMemberNo());
 
-		model.addAttribute("memberDto", memberDto1);
+		model.addAttribute("memberDto", memberDtoUpdated);
 
 		session.setAttribute("myPageAside", "memberInfo");
 
 //		  		        		return "redirect:/mypage/MypageDetail.do"; // 리다이렉트할 경로로 이동
-		return "redirect:/mypage/MypageProfileEdit.do";
+		return "redirect:/mypage/MypageProfileEdit.do?memberNo=" + memberDto.getMemberNo();
 
 	}
+	
+	// 회원정보 Pet 변경 
+		@RequestMapping(value = "/mypage/MypageProfileEditPetUpdateCtr.do", method = RequestMethod.POST)
+		public String petInfoChange(PetDto petDto, HttpSession session, Model model) {
+
+			System.out.println(petDto + "MypageProfileEditUpdateCtr.do Start");
+
+			memberService.petInfoUpdate(petDto);
+			
+			
+			System.out.println(petDto + "MypageProfileEditUpdateCtr.do Update");
+
+			//Map<String, Object> petDtoUpdated = memberService.myPageProfileDetailMemberSelectOne(petDto.getMemberNo());
+
+			//model.addAttribute("memberDto", petDtoUpdated);
+
+			session.setAttribute("myPageAside", "memberInfo");
+
+//			  		        		return "redirect:/mypage/MypageDetail.do"; // 리다이렉트할 경로로 이동
+			return "redirect:/mypage/MypageProfileEdit.do?memberNo=" + petDto.getMemberNo();
+
+		}
 
 	// 회원탈퇴
 	@RequestMapping(value = "/mypage/MypageProfileUpdateEditDeleteCtr.do", method = RequestMethod.POST)

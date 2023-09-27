@@ -118,6 +118,11 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		memberDao.memberInfoUpdate(memberDto);
 	}
+	@Override
+	public void petInfoUpdate(PetDto petDto) {
+		// TODO Auto-generated method stub
+		memberDao.petInfoUpdate(petDto);
+	}
 
    
    

@@ -17,16 +17,14 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 	padding: 0;
 }
 
-tr, td{
+tr, td {
 	border: 1px solid black;
 }
 
-
 /* 버튼 스타일 */
 button {
-    cursor: pointer;
+	cursor: pointer;
 }
-
 
 #firstTitle {
 	width: 400px;
@@ -38,20 +36,21 @@ button {
 	margin-bottom: 25px;
 	display: flex;
 }
-.titleContainer{
+
+.titleContainer {
 	height: 70px;
 }
 
 #infoContainer {
-    display: flex;    
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 800px;
-    height: 500px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 800px;
+	height: 500px;
 }
 
-.memberInfo{
+.memberInfo {
 	width: 400px;
 	height: 50px;
 	border: 1px solid black;
@@ -60,35 +59,35 @@ button {
 	display: flex;
 	justify-content: space-between;
 }
-.memberInfoName{
+
+.memberInfoName {
 	width: 150px;
 	text-align: left;
 	margin-left: 10px;
 	margin-top: 10px;
-
 }
-.memberInfoValue{
+
+.memberInfoValue {
 	width: 250px;
 	text-align: right;
 	margin-right: 10px;
 	margin-top: 10px;
-
 }
 
-.memberInfoValueInput{
+.memberInfoValueInput {
 	width: 200px;
 	text-align: right;
 	font-size: 24px;
 	height: 25px;
 }
 
-#memberOrPetContainer{
-	margin-bottom: 5px; 
-	width: 400px; 
+#memberOrPetContainer {
+	margin-bottom: 5px;
+	width: 400px;
 	height: 50px;
 }
 
-.memberOrPet{
+.memberOrPet {
 	background-color: #FFC4A3;
 	width: 200px;
 	height: 50px;
@@ -97,7 +96,8 @@ button {
 	color: white;
 	font-size: 24px;
 }
-.petInfo{
+
+.petInfo {
 	width: 400px;
 	height: 50px;
 	border: 1px solid black;
@@ -106,33 +106,39 @@ button {
 	display: flex;
 	justify-content: space-between;
 }
-.petInfoName{
+
+.petInfoName {
 	width: 180px;
 	text-align: left;
 	margin-left: 10px;
 	margin-top: 10px;
 }
-.petInfoValue{
+
+.petInfoValue {
 	width: 220px;
 	text-align: right;
 	margin-right: 10px;
 	margin-top: 10px;
 }
-.petInfoValueInput{
+
+.petInfoValueInput {
 	width: 150px;
 	text-align: right;
 	font-size: 24px;
 	height: 25px;
 }
-#buttonContainer{
+
+#buttonContainer {
 	display: flex;
 	margin-top: 20px;
 	margin-left: 610px;
 }
-#updateInfo{
+
+#updateInfo {
 	margin-right: 20px;
 }
-#updateInfo > button{
+
+#updateInfo>button {
 	background-color: #FFC4A3;
 	color: white;
 	font-size: 18px;
@@ -141,6 +147,18 @@ button {
 	border-radius: 3px;
 }
 
+.errorOutline {
+	border: 1px solid red;
+}
+
+.focusOutline {
+	outline: 2px solid #0080ff;
+}
+
+.errTxtRed {
+	font-size: 11px;
+	margin-top: 1px;
+}
 </style>
 <meta charset="UTF-8">
 <title>마이댕댕 메인</title>
@@ -152,25 +170,38 @@ button {
 
 	<jsp:include page="/WEB-INF/views/asideMyPage.jsp" />
 
-	<fmt:formatDate value="${memberDto.MEMBER_BIRTH_DATE}" pattern="yyyy/MM/dd" var="formattedBirthDate" />
-	<fmt:formatDate value="${petDto.PET_ADOPTION_DATE}" pattern="yyyy/MM/dd" var="formattedAdoptionDate" />
+	<fmt:formatDate value="${memberDto.MEMBER_BIRTH_DATE}"
+		pattern="yyyy/MM/dd" var="formattedBirthDate" />
+	<fmt:formatDate value="${petDto.PET_ADOPTION_DATE}"
+		pattern="yyyy/MM/dd" var="formattedAdoptionDate" />
 
-		<div id="infoWrap">
-			<div class="titleContainer">
-				<div id="firstTitle" style="color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG FAMILY</div>
+	<div id="infoWrap">
+		<div class="titleContainer">
+			<div id="firstTitle"
+				style="color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG
+				FAMILY</div>
+		</div>
+
+		<div id="infoContainer">
+			<div id="memberOrPetContainer">
+				<button class="memberOrPet" style="border-right: 1px solid white;"
+					onclick="showMemberInfo('${petDto.MEMBER_NO}')">회원</button>
+				<button class="memberOrPet"
+					onclick="showPetInfo('${petDto.MEMBER_NO}')">반려견</button>
 			</div>
-			
-			<div id="infoContainer">
-				<div id="memberOrPetContainer">
-					<button class="memberOrPet" style="border-right: 1px solid white;" onclick="showMemberInfo('${petDto.MEMBER_NO}')">회원</button>
-					<button class="memberOrPet" onclick="showPetInfo('${petDto.MEMBER_NO}')">반려견</button>
-				</div>
-				
+			<form action="./MypageProfileEditPetUpdateCtr.do" method="POST"
+				id="petUpdateForm">
+				<input type="hidden" value="${petDto.PET_NO}" name="petNo"/>
 				<div id="petInfoContainer">
 					<div class="petInfo">
 						<div class="petInfoName">이름</div>
 						<div class="petInfoValue">
-							<input class="petInfoValueInput" type="text" value="${petDto.PET_NAME}"/>
+							<input class="petInfoValueInput" type="text"
+								value="${petDto.PET_NAME}" name="petName" id="petNameInput"/>
+							<div class="txtErrorArea" style="">
+								<p class="errTxtRed" id="petNameErrMsg"
+									aria-live="assertive"></p>
+							</div>	
 						</div>
 					</div>
 					<div class="petInfo">
@@ -180,7 +211,13 @@ button {
 					<div class="petInfo">
 						<div class="petInfoName">무게</div>
 						<div class="petInfoValue">
-							<input class="petInfoValueInput" type="text" value="${petDto.PET_WEIGHT}&nbsp;Kg"/>
+							<input class="petInfoValueInput" type="text"
+								value="${petDto.PET_WEIGHT}" name="petWeight" id="petWeightInput"/>
+							<input class="petInfoValueInput" type="text" value="&nsbp;Kg" >
+							<div class="txtErrorArea" style="">
+								<p class="errTxtRed" id="petWeightErrMsg"
+									aria-live="assertive"></p>
+							</div>	
 						</div>
 					</div>
 					<div class="petInfo">
@@ -192,14 +229,14 @@ button {
 						<div class="petInfoValue">${petDto.PET_VACCINATION}</div>
 					</div>
 				</div>
-				
-				<div id="buttonContainer">
-					<div id="updateInfo">
-						<button type="button">수정</button>
-					</div>
+			</form>
+			<div id="buttonContainer">
+				<div id="updateInfo">
+					<button type="submit" id="updateButton">수정</button>
 				</div>
 			</div>
 		</div>
+	</div>
 
 
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
@@ -213,5 +250,119 @@ function showMemberInfo(memberNo) {
     location.href= url;
 	
 }
+
+
+//반려견 이름 정규식
+var petNameCheck = !/^[가-힣]{1,10}$/;
+//반려견 몸무게 정규식
+var petWeightCheck = !/^\d+(\.\d{0,1})?$/;
+//공백이 존재하면 안 된다.
+var blankCheck = /^\S*$/;
+//5글자 이상이어야한다
+var textCheck = /^.{5,}$/;
+
+// 공통 유효성 검사 함수
+function handleBlurEvent(inputElement, errMsgElement, checkFunction, errorMessage) {
+    inputElement.classList.remove("focusOutline");
+
+    if (inputElement.value.length === 0) {
+        inputElement.classList.add("errorOutline");
+        errMsgElement.style.color = "red";
+        errMsgElement.textContent = errorMessage.empty;
+        return false;
+    }
+
+    if (!blankCheck.test(inputElement.value)) {
+        inputElement.classList.add("errorOutline");
+        errMsgElement.style.color = "red";
+        errMsgElement.textContent = errorMessage.noSpace;
+        return false;
+    }
+
+    if (!checkFunction(inputElement.value)) {
+        inputElement.classList.add("errorOutline");
+        errMsgElement.style.color = "red";
+        errMsgElement.textContent = errorMessage.invalid;
+        return false;
+    }
+
+    inputElement.classList.remove("errorOutline");
+    errMsgElement.style.color = "";
+    errMsgElement.textContent = "";
+    return true;
+}
+
+// 공통 포커스 이벤트 핸들러
+function handleFocusEvent(inputElement) {
+    inputElement.classList.add("focusOutline");
+    inputElement.classList.remove("errorOutline");
+}
+
+// 입력 필드와 오류 메시지 엘리먼트를 정의합니다.
+const fields = {
+	petName: {
+        input: document.getElementById("petNameInput"),
+        errMsg: document.getElementById("petNameErrMsg"),
+        check: function (value) {
+            const petNameCheck = !/^[가-힣]{1,10}$/;
+            return petNameCheck.test(value);
+        },
+        errorMessage: {
+            empty: "닉네임을 입력 해 주세요.",
+            noSpace: "공백은 사용할 수 없습니다.",
+            invalid: "1자 이상 10자 이하의 한글만 입력 가능합니다.",
+        },
+    },
+    petWeight: {
+        input: document.getElementById("petWeightInput"),
+        errMsg: document.getElementById("petWeightErrMsg"),
+        check: function (value) {
+            const petWeightCheck = !/^\d+(\.\d{0,1})?$/;
+            return petWeightCheck.test(value);
+        },
+        errorMessage: {
+            empty: "무게를를 입력해주세요.",
+            noSpace: "공백은 사용할 수 없습니다.",
+            invalid: "무게는 두 자리 수, 소수점 한 자리 수",
+        },
+    },
+};
+
+// 모든 입력 필드에 대한 이벤트 리스너를 추가합니다.
+for (const fieldName in fields) {
+    const field = fields[fieldName];
+    field.input.addEventListener("blur", () => handleBlurEvent(field.input, field.errMsg, field.check, field.errorMessage));
+    field.input.addEventListener("focus", () => handleFocusEvent(field.input));
+    field.input.addEventListener("input", () => updateButtonState());
+}
+
+// 버튼 엘리먼트를 가져옵니다.
+const updateButton = document.getElementById("updateButton");
+
+// 입력 필드에 변화가 있을 때 버튼 상태를 업데이트합니다.
+function updateButtonState() {
+    for (const fieldName in fields) {
+        if (!handleBlurEvent(fields[fieldName].input, fields[fieldName].errMsg, fields[fieldName].check, fields[fieldName].errorMessage)) {
+        	updateButton.disabled = true;
+        	updateButton.style.backgroundColor = "gray";
+            return;
+        }
+    }
+    updateButton.disabled = false;
+    updateButton.style.backgroundColor = "#FFC4A3";
+}
+
+// "수정" 버튼 클릭 시 폼을 서버로 제출하여 업데이트 수행
+document.getElementById("updateButton").addEventListener("click", function (event) {
+    // 폼을 서버로 제출하기 전에 유효성 검사를 한번 더 수행 (보안을 위해)
+    if (updateButton.disabled == false) {
+        // 폼을 서버로 제출
+    	document.getElementById("petUpdateForm").submit();
+    } else {
+        // 유효성 검사를 통과하지 못한 경우 제출을 막습니다.
+        event.preventDefault();
+        alert("실패");
+    }
+});
 </script>
 </html>

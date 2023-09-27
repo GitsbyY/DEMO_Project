@@ -46,4 +46,6 @@ public interface MemberDao {
 
 	void memberInfoUpdate(MemberDto memberDto);
 
+	void petInfoUpdate(PetDto petDto);
+
 }

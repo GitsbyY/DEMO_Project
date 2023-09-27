@@ -48,4 +48,6 @@ public interface MemberService {
 
 	void memberInfoUpdate(MemberDto memberDto);
 
+	void petInfoUpdate(PetDto petDto);
+
 }
