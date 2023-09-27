@@ -216,8 +216,9 @@ textarea {
             <tr>
                <td id="contentTd" colspan="6" valign="top" name="reviewContent">
                   <pre>${reviewDto.REVIEW_CONTENT}</pre>
-               </td>
                <input type="hidden" name="reviewContent" value="${reviewDto.REVIEW_CONTENT}">
+               </td>
+               
             </tr>                        
          </table>
       </div>
@@ -244,10 +245,10 @@ textarea {
       </div>
       </form>
 
-		<div id="reviewReplyTitle">댓글</div>
-		<form action="./reviewReplyUpdate.do" method="post">
-      <c:forEach items="${reply}" var="reply">
-	      <div class="reviewReplyDiv">
+	<div id="reviewReplyTitle">댓글</div>
+		
+      <c:forEach items="${reply}" var="reply" varStatus="loop">
+	      <div class="reviewReplyDiv" id="reviewReplyDiv${loop.index}">
 	      	<div class="reviewReplyName">
 	      		${reply.MEMBER_NAME}
 	      	</div>
@@ -255,16 +256,22 @@ textarea {
 	      	<div id="dateDiv">
 		      		<fmt:formatDate pattern="yyyy-MM-dd HH:mm" 
 	                     value="${reply.REVIEW_REPLY_CRE_DATE}"/>
-                </div>  
+            </div>  
 	      	<div id="reviewListDiv">
 	      		<textarea disabled="disabled" class="replyText" rows="" cols="" name="reviewReplyContent">${reply.REVIEW_REPLY_CONTENT}</textarea>
 	      		<input type="hidden" name="reviewReplyContent" value="${reply.REVIEW_REPLY_CONTENT}">
 	      		                        		      			
 	      		<c:choose>
 					<c:when test="${sessionScope.member.memberNo eq reply.MEMBER_NO}">
-						<input class="submit" type="button" value="삭제" 
-	      					onclick="reviewReplyDeleteFnc(${reply.REVIEW_REPLY_NO});">
-	      				<input class="submit" type="submit" value="수정">							
+						<input id="firstBtn" class="submit" type="button" value="삭제" 
+	      					onclick="reviewReplyDeleteFnc(${reply.REVIEW_REPLY_NO});" 
+	      					style="display: block;">
+	      				<button id="secondBtn" class="submit" type="button" 
+	      					style="display: block;" onclick="changeBtnFnc('reviewReplyDiv${loop.index}'); changeDivBorder('reviewReplyDiv${loop.index}'); activateTextarea('reviewReplyDiv${loop.index}');">수정</button>
+	      				<button id="thirdBtn" class="submit" type="button" 
+	      					style="display: none;" onclick="cancelEdit('reviewReplyDiv${loop.index}'); revertDivBorder('reviewReplyDiv${loop.index}');">취소</button>
+	      				<button id="fourthBtn" class="submit" type="button" 
+	      					style="display: none;">등록</button>							
 					</c:when>
 					<c:when test="${sessionScope.member.memberNo eq '1'}">
 						<input class="submit" type="button" value="삭제" 
@@ -277,7 +284,7 @@ textarea {
 	      
 	      </div>
       </c:forEach>
-      </form> 
+       
        
 		<form action="./write.do" method="post">
 		<div id="replyText" class="reviewReplyDiv">
@@ -299,6 +306,66 @@ textarea {
    <jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
 <script type="text/javascript">
+	var originalTextareaValue; // 전역 변수로 원래의 textarea 값 저장
+
+	function revertDivBorder(divId) {
+	    var targetDiv = document.getElementById(divId);
+	    targetDiv.style.border = "2px solid #FFC4A3";
+	}
+	
+	function changeDivBorder(divId) {
+	    var targetDiv = document.getElementById(divId);
+	    targetDiv.style.border = "2px solid #99CCFF";
+	}
+	
+	function activateTextarea() {
+	    var reviewListDiv = document.getElementById('reviewListDiv');
+	    var textarea = reviewListDiv.querySelector('textarea');
+
+	 	// 원래의 textarea 값을 저장
+	    originalTextareaValue = textarea.value;
+	    
+	    // textarea를 활성화합니다.
+	    textarea.disabled = false;
+	}
+	
+	function cancelEdit(div) {
+	    var reviewListDiv = document.getElementById('reviewListDiv');
+	    var textarea = reviewListDiv.querySelector('textarea');
+
+	    // 원래의 textarea 값을 복원
+	    textarea.value = originalTextareaValue;
+
+	    // textarea를 비활성화합니다.
+	    textarea.disabled = true;
+	    
+		var findDiv = document.getElementById(div);
+		
+		var firstBtn = findDiv.querySelector('#firstBtn');
+		var secondBtn = findDiv.querySelector('#secondBtn');
+		var thirdBtn = findDiv.querySelector('#thirdBtn');
+		var fourthBtn = findDiv.querySelector('#fourthBtn');
+		
+		firstBtn.style.display = 'block';
+		secondBtn.style.display = 'block';
+		thirdBtn.style.display = 'none';
+		fourthBtn.style.display = 'none';
+	}
+	
+	function changeBtnFnc(div) {
+		var findDiv = document.getElementById(div);
+		
+		var firstBtn = findDiv.querySelector('#firstBtn');
+		var secondBtn = findDiv.querySelector('#secondBtn');
+		var thirdBtn = findDiv.querySelector('#thirdBtn');
+		var fourthBtn = findDiv.querySelector('#fourthBtn');
+		
+		firstBtn.style.display = 'none';
+		secondBtn.style.display = 'none';
+		thirdBtn.style.display = 'block';
+		fourthBtn.style.display = 'block';
+		
+	}
 
 	function goBack() {
 		window.history.back();
