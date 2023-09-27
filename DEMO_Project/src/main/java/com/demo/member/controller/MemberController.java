@@ -198,6 +198,7 @@ public class MemberController {
 		}
 
 	}
+
 	// 회원정보관리 -> 관리자
 	@RequestMapping(value = "/mypage/mypageProfileAdmin.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myPageProfileAdmin(@RequestParam(defaultValue = "1") int curPage, HttpSession session, Model model) {
@@ -225,6 +226,7 @@ public class MemberController {
 
 		return "mypage/MypageProfile";
 	}
+
 	// 회원정보관리 -> 회원 비밀번호를 입력 해 주세요
 	@RequestMapping(value = "/mypage/mypageProfileMember.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myPageProfileMember(HttpSession session, Model model) {
@@ -246,6 +248,55 @@ public class MemberController {
 		session.setAttribute("myPageAside", "memberInfo");
 
 		return "mypage/MypageProfileEdit";
+	}
+
+	// 회원정보 변경 -> 아직 진행중./MypageProfileEditUpdateCtr
+	@RequestMapping(value = "/mypage/MypageProfileEditUpdateCtr.do", method = RequestMethod.POST)
+	public String memberInfoChange(MemberDto memberDto, HttpSession session, Model model) {
+
+		System.out.println(memberDto);
+
+		// update/select
+		try {
+			memberService.memberInfoUpdate(memberDto);//업데이트는 가는데 커밋이 안되는 것 같다>
+			model.addAttribute("result", "success"); // 성공 시 'success' 값을 모델에 추가
+		} catch (Exception e) {
+			// TODO: handle exception
+			model.addAttribute("result", "fail"); // 실패 시 'fail' 값을 모델에 추가
+		}
+		System.out.println(memberDto);
+
+		Map<String, Object> memberDto1 = memberService.myPageProfileDetailMemberSelectOne(memberDto.getMemberNo());
+
+		model.addAttribute("memberDto", memberDto1);
+
+		session.setAttribute("myPageAside", "memberInfo");
+
+//		  		        		return "redirect:/mypage/MypageDetail.do"; // 리다이렉트할 경로로 이동
+		return "redirect:/mypage/MypageProfileEdit.do";
+
+	}
+
+	// 회원탈퇴
+	@RequestMapping(value = "/mypage/MypageProfileUpdateEditDeleteCtr.do", method = RequestMethod.POST)
+	public String memberDelete(MemberDto memberDto, HttpSession session, Model model) {
+
+		System.out.println(memberDto);
+
+		try {
+			memberService.memberInfoDelete(memberDto);
+			model.addAttribute("result", "success"); // 성공 시 'success' 값을 모델에 추가
+		} catch (Exception e) {
+			// TODO: handle exception
+			model.addAttribute("result", "fail"); // 실패 시 'fail' 값을 모델에 추가
+		}
+		System.out.println(memberDto);
+
+		session.setAttribute("myPageAside", "memberInfo");
+
+		// 회원이 탈퇴되었다는 페이지 추가해야함
+		return "redirect:/mypage/MypageProfileEdit.do";
+
 	}
 
 	// 회원정보 상세 화면(pet)
@@ -278,7 +329,8 @@ public class MemberController {
 
 	// 마이페이지결제 화면
 	@RequestMapping(value = "/mypage/mypageProfilePaymentAdmin.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String myPageProfilePaymentAdmin(@RequestParam(defaultValue = "1") int curPage, HttpSession session, Model model) {
+	public String myPageProfilePaymentAdmin(@RequestParam(defaultValue = "1") int curPage, HttpSession session,
+			Model model) {
 
 		log.info("Welcome MemberController login!");
 
@@ -303,7 +355,6 @@ public class MemberController {
 
 		return "mypage/MypageProfilePayment";
 	}
-	
 
 	// 마이페이지결제 상세 화면
 	@RequestMapping(value = "/mypage/MypageProfilePaymentMemberDetail.do", method = { RequestMethod.GET,
@@ -311,7 +362,7 @@ public class MemberController {
 	public String myPageProfilePaymentDetail(int memberNo, HttpSession session, Model model) {
 
 		log.info("Welcome MemberController login!");
-		
+
 		Map<String, Object> memberDto = memberService.memberPaymentDeatilSelectOne(memberNo);
 		List<Map<String, Object>> memberChargeDto = memberService.memberPaymentDeatilChargeSelectList(memberNo);
 
@@ -324,7 +375,7 @@ public class MemberController {
 	}
 
 	// 포인트 변경
-	@RequestMapping(value = "/mypage/MypageProfilePaymentMemberDetailPointCtr", method = RequestMethod.POST)
+	@RequestMapping(value = "/mypage/MypageProfilePaymentMemberDetailPointCtr.do", method = RequestMethod.POST)
 	public String memberPointChange(MemberDto memberDto, HttpSession session, Model model) {
 
 		System.out.println(memberDto);
@@ -347,7 +398,7 @@ public class MemberController {
 	}
 
 	// Emoney 변경
-	@RequestMapping(value = "/mypage/MypageProfilePaymentMemberDetailEmoneyCtr", method = RequestMethod.POST)
+	@RequestMapping(value = "/mypage/MypageProfilePaymentMemberDetailEmoneyCtr.do", method = RequestMethod.POST)
 	public String memberEmoneyChange(MemberDto memberDto, HttpSession session, Model model) {
 
 		System.out.println(memberDto);
@@ -369,26 +420,4 @@ public class MemberController {
 
 	}
 
-	// 회원정보 변경 -> 아직 진행중
-	@RequestMapping(value = "/mypage/MypageProfileUpdateEditCtr", method = RequestMethod.POST)
-	public String memberInfoChange(MemberDto memberDto, HttpSession session, Model model) {
-
-		System.out.println(memberDto);
-
-		// 포인트 변화를 추가한다. update/select
-		try {
-			// memberService.memberInfoUpdate(memberDto);
-			model.addAttribute("result", "success"); // 성공 시 'success' 값을 모델에 추가
-		} catch (Exception e) {
-			// TODO: handle exception
-			model.addAttribute("result", "fail"); // 실패 시 'fail' 값을 모델에 추가
-		}
-		System.out.println(memberDto);
-
-		session.setAttribute("myPageAside", "memberInfo");
-
-//	  		        		return "redirect:/mypage/MypageDetail.do"; // 리다이렉트할 경로로 이동
-		return "redirect:/mypage/MypageProfileEdit.do";
-
-	}
 }

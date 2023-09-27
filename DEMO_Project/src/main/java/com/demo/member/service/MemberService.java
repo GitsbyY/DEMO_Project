@@ -10,45 +10,42 @@ import com.demo.member.dto.PetDto;
 
 public interface MemberService {
 
-   int memberInsertOne(MemberDto memberDto);
+	int memberInsertOne(MemberDto memberDto);
 
-   void petInsertOne(PetDto petDto);
+	void petInsertOne(PetDto petDto);
 
-   boolean isIdAvailable(String memberId);
+	boolean isIdAvailable(String memberId);
 
-   MemberDto memberExist(String memeberId, String memberPassword);
+	MemberDto memberExist(String memeberId, String memberPassword);
 
-   MemberDto memberFindId(String memberEmail, String memberPhone);
+	MemberDto memberFindId(String memberEmail, String memberPhone);
 
-   MemberDto memberFindPassword(String memberId, String memberEmail);
+	MemberDto memberFindPassword(String memberId, String memberEmail);
 
-   int memberSelectListTotalCount();
+	int memberSelectListTotalCount();
 
-   List<Map<String, Object>> memberInfoSelectList(int start, int end);
+	List<Map<String, Object>> memberInfoSelectList(int start, int end);
 
-   List<Map<String, Object>> memberPaymentSelectList(int start, int end);
+	List<Map<String, Object>> memberPaymentSelectList(int start, int end);
 
-   Map<String, Object> memberPaymentDeatilSelectOne(int memberNo);
+	Map<String, Object> memberPaymentDeatilSelectOne(int memberNo);
 
-   List<Map<String, Object>> memberPaymentDeatilChargeSelectList(int memberNo);
+	List<Map<String, Object>> memberPaymentDeatilChargeSelectList(int memberNo);
 
-   Map<String, Object> myPageProfileDetailMemberSelectOne(int memberNo);
+	Map<String, Object> myPageProfileDetailMemberSelectOne(int memberNo);
 
-   Map<String, Object> myPageProfileDetailPetSelectOne(int memberNo);         
+	Map<String, Object> myPageProfileDetailPetSelectOne(int memberNo);
 
-   int memberPwdChange(MemberDto memberDto);
+	int memberPwdChange(MemberDto memberDto);
 
-   void memberPointUpdate(MemberDto memberDto);
+	void memberPointUpdate(MemberDto memberDto);
 
-   void memberEmoneyUpdate(MemberDto memberDto);
+	void memberEmoneyUpdate(MemberDto memberDto);
 
-   List<Map<String, Object>> memberSelectCart(int memberNo);
+	List<Map<String, Object>> memberSelectCart(int memberNo);
 
+	void memberInfoDelete(MemberDto memberDto);
 
+	void memberInfoUpdate(MemberDto memberDto);
 
-   
-
-   
-   
-   
 }

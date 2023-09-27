@@ -130,7 +130,7 @@ tr, td {
 								<input type="text" id="pointChangeInput"
 									class="infoTabalTdDataInput" name="memberPoint" style="text-align: right;"
 									value="${memberDto.MEMBER_POINT}" />
-								<c:if test="${sessionScope.member.memberNo} == 1">
+								<c:if test="${sessionScope.member.memberNo == 1}">
 								<input type="submit" value="수정">
 								</c:if>
 							</form>
@@ -145,7 +145,7 @@ tr, td {
 								<input type="hidden" name="memberNo" value="${memberDto.MEMBER_NO}" />
 								<input type="text" class="infoTabalTdDataInput" id="pointEmoneyInput" 
 								name="memberEmoney" value="${memberDto.MEMBER_EMONEY}" style="text-align: right;" />
-								<c:if test="${sessionScope.member.memberNo} == 1">
+								<c:if test="${sessionScope.member.memberNo == 1}">
 								<input type="submit" value="수정">
 								</c:if>
 							</form>

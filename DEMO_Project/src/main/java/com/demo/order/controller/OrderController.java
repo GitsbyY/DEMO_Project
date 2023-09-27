@@ -170,7 +170,7 @@ public class OrderController {
 
 		session.setAttribute("myPageAside", "cancel");
 
-		return "mypage/MypageCancellationAdmin";
+		return "mypage/MypageCancellation";
 	}
 	
 	// 취소내역 화면 -> 회원

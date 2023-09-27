@@ -108,6 +108,16 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return memberDao.memberSelectCart(memberNo);
 	}
+	@Override
+	public void memberInfoDelete(MemberDto memberDto) {
+		// TODO Auto-generated method stub
+		memberDao.memberInfoDelete(memberDto);
+	}
+	@Override
+	public void memberInfoUpdate(MemberDto memberDto) {
+		// TODO Auto-generated method stub
+		memberDao.memberInfoUpdate(memberDto);
+	}
 
    
    

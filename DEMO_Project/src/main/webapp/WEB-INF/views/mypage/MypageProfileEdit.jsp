@@ -17,16 +17,14 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 	padding: 0;
 }
 
-tr, td{
+tr, td {
 	border: 1px solid black;
 }
 
-
 /* 버튼 스타일 */
 button {
-    cursor: pointer;
+	cursor: pointer;
 }
-
 
 #firstTitle {
 	width: 400px;
@@ -38,20 +36,21 @@ button {
 	margin-bottom: 25px;
 	display: flex;
 }
-.titleContainer{
+
+.titleContainer {
 	height: 70px;
 }
 
 #infoContainer {
-    display: flex;    
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 800px;
-    height: 500px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 800px;
+	height: 500px;
 }
 
-.memberInfo{
+.memberInfo {
 	width: 400px;
 	height: 50px;
 	border: 1px solid black;
@@ -60,41 +59,41 @@ button {
 	display: flex;
 	justify-content: space-between;
 }
-.memberInfoName{
+
+.memberInfoName {
 	width: 150px;
 	text-align: left;
 	margin-left: 10px;
 	margin-top: 10px;
-
 }
-.memberInfoValue{
+
+.memberInfoValue {
 	width: 250px;
 	text-align: right;
 	margin-right: 10px;
 	margin-top: 10px;
-
 }
 
-.memberInfoValueWrap{
+.memberInfoValueWrap {
 	width: 250px;
 	text-align: right;
 	margin-right: 10px;
 }
 
-.memberInfoValueInput{
+.memberInfoValueInput {
 	width: 200px;
 	text-align: right;
 	font-size: 24px;
 	height: 25px;
 }
 
-#memberOrPetContainer{
-	margin-bottom: 5px; 
-	width: 400px; 
+#memberOrPetContainer {
+	margin-bottom: 5px;
+	width: 400px;
 	height: 50px;
 }
 
-.memberOrPet{
+.memberOrPet {
 	background-color: #FFC4A3;
 	width: 200px;
 	height: 50px;
@@ -104,30 +103,46 @@ button {
 	font-size: 24px;
 }
 
-#buttonContainer{
+#buttonContainer {
 	display: flex;
 	margin-top: 20px;
 	margin-left: 610px;
 }
-#updateInfo{
-	margin-right: 20px;
+
+#updateInfo {
+	margin-right: 10px;
+	margin-left: 10px;
 }
-#updateInfo > input{
+
+#updateInfo>input {
+	background-color: grey;
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+#deleteInfo>input {
 	background-color: #FFC4A3;
 	color: white;
 	font-size: 18px;
 	font-weight: bold;
 	border: none;
 	border-radius: 3px;
+	cursor: pointer;
 }
-#deleteInfo > input{
+#backToInfo>input{
 	background-color: #FFC4A3;
 	color: white;
 	font-size: 18px;
 	font-weight: bold;
 	border: none;
 	border-radius: 3px;
+	cursor: pointer;
 }
+
 .errorOutline {
 	border: 1px solid red;
 }
@@ -135,7 +150,8 @@ button {
 .focusOutline {
 	outline: 2px solid #0080ff;
 }
-.errTxtRed{
+
+.errTxtRed {
 	font-size: 11px;
 	margin-top: 1px;
 }
@@ -150,102 +166,115 @@ button {
 
 	<jsp:include page="/WEB-INF/views/asideMyPage.jsp" />
 
-	<fmt:formatDate value="${memberDto.MEMBER_BIRTH_DATE}" pattern="yyyy/MM/dd" var="formattedBirthDate" />
+	<fmt:formatDate value="${memberDto.MEMBER_BIRTH_DATE}"
+		pattern="yyyy/MM/dd" var="formattedBirthDate" />
 
 
-		<div id="infoWrap">
-			<div class="titleContainer">
-				<div id="firstTitle" style="color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG FAMILY</div>
-			</div>
-			
-			<div id="infoContainer">
-				<div id="memberOrPetContainer">
-					<button class="memberOrPet" style="border-right: 1px solid white;">회원</button>
-					<button class="memberOrPet" onclick="showPetInfo('${memberDto.MEMBER_NO}')">반려견</button>
-				</div>
-				
-					<div id="memberInfoContainer">
-					
-						<div class="memberInfo">
-							<div class="memberInfoName">아이디</div>
-							<div class="memberInfoValue">${memberDto.MEMBER_ID}</div>
-						</div>
-				
-						<div class="memberInfo">
-							<div class="memberInfoName">이름</div>
-							<div class="memberInfoValue">${memberDto.MEMBER_NAME}</div>
-						</div>
-						
-						<div class="memberInfo">
-							<div class="memberInfoName">생년월일</div>
-							<div class="memberInfoValue">${formattedBirthDate}</div>
-						</div>
-						
-						<div class="memberInfo">
-							<div class="memberInfoName">닉네임</div>
-							<div class="memberInfoValueWrap">
-								<input class="memberInfoValueInput" id="memberNickName" type="text" value="${memberDto.MEMBER_NICKNAME}"/>
-								<div class="txtErrorArea" style="">
-									<p class="errTxtRed" id="userUpdateMessageNickName" aria-live="assertive"></p>
-								</div>
-							</div>
-							
-						</div>
-						
-						<div class="memberInfo">
-							<div class="memberInfoName">휴대폰 번호</div>
-							<div class="memberInfoValueWrap">
-								<input class="memberInfoValueInput" id="memberPhoneNum" type="text" value="${memberDto.MEMBER_PHONE}"/>
-								<div class="txtErrorArea" style="">
-									<p class="errTxtRed" id="userUpdateMessagePhone" aria-live="assertive"></p>
-								</div>
-							</div>
-							
-						</div>
-						
-						<div class="memberInfo">
-							<div class="memberInfoName">이메일</div>
-							<div class="memberInfoValueWrap">
-								<input class="memberInfoValueInput" id="memberEmail" type="text" value="${memberDto.MEMBER_EMAIL}"/>
-								<div class="txtErrorArea" style="">
-									<p class="errTxtRed" id="userUpdateMessageEmail" aria-live="assertive"></p>
-								</div>
-							</div>
-						</div>
-						
-						<div class="memberInfo">
-							<div class="memberInfoName">주소</div>
-							<div class="memberInfoValueWrap">
-								<input class="memberInfoValueInput"  id="memberAddress" type="text" value="${memberDto.MEMBER_ADDRESS}"/>
-								<div class="txtErrorArea" style="">
-									<p class="errTxtRed" id="userUpdateMessageAddress" aria-live="assertive"></p>
-								</div>
-							</div>
-						</div>
-						
-					</div>
-					
-					
-					<div id="buttonContainer">
-						<div id="updateInfo">
-							<input type="button" id="backButton" 
-								value="목록" onclick="backToListFnc()"/>
-						</div>
-						<form action="./MypageProfileEditUpdateCtr" method="POST">
-							<div id="updateInfo">
-								<input type="submit" name="updateMemberInfo" id="updateButton" 
-									value="수정"/>
-							</div>
-						</form>
-						<form action="" method="POST">
-						<div id="deleteInfo">
-							<input type="submit" name="deleteMemberInfo" value="탈퇴"/>
-						</div>
-						</form>
-					</div>
-			
-			</div>
+	<div id="infoWrap">
+		<div class="titleContainer">
+			<div id="firstTitle"
+				style="color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG
+				FAMILY</div>
 		</div>
+
+		<div id="infoContainer">
+			<div id="memberOrPetContainer">
+				<button class="memberOrPet" style="border-right: 1px solid white;">회원</button>
+				<button class="memberOrPet"
+					onclick="showPetInfo('${memberDto.MEMBER_NO}')">반려견</button>
+			</div>
+			<form action="./MypageProfileEditUpdateCtr.do" method="POST" id="memberUpdateForm">
+				<div id="memberInfoContainer">
+					<input type="hidden" value="${memberDto.MEMBER_NO}" name="memberNo"/>
+					<div class="memberInfo">
+						<div class="memberInfoName">아이디</div>
+						<div class="memberInfoValue">${memberDto.MEMBER_ID}</div>
+					</div>
+
+					<div class="memberInfo">
+						<div class="memberInfoName">이름</div>
+						<div class="memberInfoValue">${memberDto.MEMBER_NAME}</div>
+					</div>
+
+					<div class="memberInfo">
+						<div class="memberInfoName">생년월일</div>
+						<div class="memberInfoValue">${formattedBirthDate}</div>
+					</div>
+
+					<div class="memberInfo">
+						<div class="memberInfoName">닉네임</div>
+						<div class="memberInfoValueWrap">
+							<input class="memberInfoValueInput" id="memberNickName"
+								type="text" value="${memberDto.MEMBER_NICKNAME}" name="memberNickName"/>
+							<div class="txtErrorArea" style="">
+								<p class="errTxtRed" id="userUpdateMessageNickName"
+									aria-live="assertive"></p>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="memberInfo">
+						<div class="memberInfoName">휴대폰 번호</div>
+						<div class="memberInfoValueWrap">
+							<input class="memberInfoValueInput" id="memberPhoneNum"
+								type="text" value="${memberDto.MEMBER_PHONE}" name="memberPhoneNum"/>
+							<div class="txtErrorArea" style="">
+								<p class="errTxtRed" id="userUpdateMessagePhone"
+									aria-live="assertive"></p>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="memberInfo">
+						<div class="memberInfoName">이메일</div>
+						<div class="memberInfoValueWrap">
+							<input class="memberInfoValueInput" id="memberEmail" type="text"
+								value="${memberDto.MEMBER_EMAIL}" name="memberEmail"/>
+							<div class="txtErrorArea" style="">
+								<p class="errTxtRed" id="userUpdateMessageEmail"
+									aria-live="assertive"></p>
+							</div>
+						</div>
+					</div>
+
+					<div class="memberInfo">
+						<div class="memberInfoName">주소</div>
+						<div class="memberInfoValueWrap">
+							<input class="memberInfoValueInput" id="memberAddress"
+								type="text" value="${memberDto.MEMBER_ADDRESS}" name="memberAddress"/>
+							<div class="txtErrorArea" style="">
+								<p class="errTxtRed" id="userUpdateMessageAddress"
+									aria-live="assertive"></p>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</form>
+
+			<div id="buttonContainer">
+				<c:if test="${sessionScope.member.memberNo == 1}">
+					<div id="backToInfo">
+							<input type="button" id="backButton" value="목록"
+								onclick="backToListFnc()" />
+					</div>
+				</c:if>
+				<div id="updateInfo">
+					<input type="submit" name="updateMemberInfo" id="updateButton"
+						disabled="disabled" value="수정" />
+				</div>
+
+				<form action="" method="POST" id="memberDeleteForm">
+					<div id="deleteInfo">
+						<input type="submit" name="deleteMemberInfo" value="탈퇴" />
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
 
 
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
@@ -399,12 +428,13 @@ button {
 	// "수정" 버튼 클릭 시 폼을 서버로 제출하여 업데이트 수행
 	document.getElementById("updateButton").addEventListener("click", function (event) {
 	    // 폼을 서버로 제출하기 전에 유효성 검사를 한번 더 수행 (보안을 위해)
-	    if (validateForm()) {
+	    if (updateButton.disabled == false) {
 	        // 폼을 서버로 제출
-	        document.forms[0].submit(); // 첫 번째 폼을 제출합니다. 여러 개의 폼이 있는 경우 수정해야 할 수 있습니다.
+	    	document.getElementById("memberUpdateForm").submit();
 	    } else {
 	        // 유효성 검사를 통과하지 못한 경우 제출을 막습니다.
 	        event.preventDefault();
+	        alert("실패");
 	    }
 	});
 </script>

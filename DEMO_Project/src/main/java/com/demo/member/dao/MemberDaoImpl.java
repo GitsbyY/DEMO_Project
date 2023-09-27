@@ -154,6 +154,18 @@ public class MemberDaoImpl implements MemberDao{
 		return sqlSession.selectList(nameSpace + "memberSelectCart", memberNo);
 	}
 
+	@Override
+	public void memberInfoDelete(MemberDto memberDto) {
+		// TODO Auto-generated method stub
+		sqlSession.delete(nameSpace + "memberInfoDelete", memberDto);
+	}
+
+	@Override
+	public void memberInfoUpdate(MemberDto memberDto) {
+		// TODO Auto-generated method stub
+		sqlSession.update(nameSpace + "memberInfoUpdate", memberDto);
+	}
+
    
 
 }
