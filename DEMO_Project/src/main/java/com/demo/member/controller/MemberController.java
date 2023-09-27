@@ -272,26 +272,31 @@ public class MemberController {
 
 	}
 	
-	// 회원정보 Pet 변경 
+	// 회원정보 Pet 변경  ./MypageProfileEditPetUpdateCtr.do
 		@RequestMapping(value = "/mypage/MypageProfileEditPetUpdateCtr.do", method = RequestMethod.POST)
-		public String petInfoChange(PetDto petDto, HttpSession session, Model model) {
+		public String petInfoChange(@RequestParam("memberNo") Integer memberNo
+									,@RequestParam("petNo") Integer petNo
+									, String petName, double petWeight
+									, HttpSession session, Model model) {
+			log.info("Welcome MemberController petInfoChange ??!");
+			
+			System.out.println(petName + petName + "MypageProfileEditUpdateCtr.do Start");
 
-			System.out.println(petDto + "MypageProfileEditUpdateCtr.do Start");
-
-			memberService.petInfoUpdate(petDto);
+			memberService.petInfoUpdate(petName, petWeight, petNo);
 			
 			
-			System.out.println(petDto + "MypageProfileEditUpdateCtr.do Update");
+			System.out.println(petName + petName + "MypageProfileEditUpdateCtr.do Update");
+			
+			Map<String, Object> petDtoUpdated = memberService.myPageProfileDetailPetSelectOne(memberNo);
 
-			//Map<String, Object> petDtoUpdated = memberService.myPageProfileDetailMemberSelectOne(petDto.getMemberNo());
+			model.addAttribute("petDto",petDtoUpdated);
 
-			//model.addAttribute("memberDto", petDtoUpdated);
 
 			session.setAttribute("myPageAside", "memberInfo");
 
-//			  		        		return "redirect:/mypage/MypageDetail.do"; // 리다이렉트할 경로로 이동
-			return "redirect:/mypage/MypageProfileEdit.do?memberNo=" + petDto.getMemberNo();
-
+				//return "redirect:/mypage/MypageDetail.do"; // 리다이렉트할 경로로 이동
+			return "redirect:/mypage/MypageProfileEdit.do?memberNo=" + memberNo;
+			
 		}
 
 	// 회원탈퇴

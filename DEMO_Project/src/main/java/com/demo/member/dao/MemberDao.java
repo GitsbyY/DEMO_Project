@@ -46,6 +46,6 @@ public interface MemberDao {
 
 	void memberInfoUpdate(MemberDto memberDto);
 
-	void petInfoUpdate(PetDto petDto);
+	void petInfoUpdate(String petName, double petWeight, int petNo);
 
 }

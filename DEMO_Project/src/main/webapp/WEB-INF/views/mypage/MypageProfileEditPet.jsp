@@ -189,9 +189,10 @@ button {
 				<button class="memberOrPet"
 					onclick="showPetInfo('${petDto.MEMBER_NO}')">반려견</button>
 			</div>
-			<form action="./MypageProfileEditPetUpdateCtr.do" method="POST"
+			<form action="./MypageProfileEditPetUpdateCtr.do" method="post"
 				id="petUpdateForm">
 				<input type="hidden" value="${petDto.PET_NO}" name="petNo"/>
+				<input type="hidden" value="${petDto.MEMBER_NO}" name="memberNo"/>
 				<div id="petInfoContainer">
 					<div class="petInfo">
 						<div class="petInfoName">이름</div>
@@ -211,9 +212,9 @@ button {
 					<div class="petInfo">
 						<div class="petInfoName">무게</div>
 						<div class="petInfoValue">
-							<input class="petInfoValueInput" type="text"
+							<input class="petInfoValueInput" type="text" 
 								value="${petDto.PET_WEIGHT}" name="petWeight" id="petWeightInput"/>
-							<input class="petInfoValueInput" type="text" value="&nsbp;Kg" >
+							<label class="petInfoValueInput">Kg</label>
 							<div class="txtErrorArea" style="">
 								<p class="errTxtRed" id="petWeightErrMsg"
 									aria-live="assertive"></p>
@@ -252,12 +253,8 @@ function showMemberInfo(memberNo) {
 }
 
 
-//반려견 이름 정규식
-var petNameCheck = !/^[가-힣]{1,10}$/;
-//반려견 몸무게 정규식
-var petWeightCheck = !/^\d+(\.\d{0,1})?$/;
-//공백이 존재하면 안 된다.
-var blankCheck = /^\S*$/;
+//공백이 존재하면 안 된다. /^.*\S.*$/
+var blankCheck = /^.*\S.*$/;
 //5글자 이상이어야한다
 var textCheck = /^.{5,}$/;
 
@@ -304,7 +301,7 @@ const fields = {
         input: document.getElementById("petNameInput"),
         errMsg: document.getElementById("petNameErrMsg"),
         check: function (value) {
-            const petNameCheck = !/^[가-힣]{1,10}$/;
+            const petNameCheck = /^[가-힣]{1,10}$/;
             return petNameCheck.test(value);
         },
         errorMessage: {
@@ -313,19 +310,19 @@ const fields = {
             invalid: "1자 이상 10자 이하의 한글만 입력 가능합니다.",
         },
     },
-    petWeight: {
-        input: document.getElementById("petWeightInput"),
-        errMsg: document.getElementById("petWeightErrMsg"),
-        check: function (value) {
-            const petWeightCheck = !/^\d+(\.\d{0,1})?$/;
-            return petWeightCheck.test(value);
-        },
-        errorMessage: {
-            empty: "무게를를 입력해주세요.",
-            noSpace: "공백은 사용할 수 없습니다.",
-            invalid: "무게는 두 자리 수, 소수점 한 자리 수",
-        },
-    },
+//     petWeight: {
+//         input: document.getElementById("petWeightInput"),
+//         errMsg: document.getElementById("petWeightErrMsg"),
+//         check: function (value) {
+//             const petWeightCheck = /^\d+(\.\d{0,1})?$/;
+//             return petWeightCheck.test(value);
+//         },
+//         errorMessage: {
+//             empty: "무게를를 입력해주세요.",
+//             noSpace: "공백은 사용할 수 없습니다.",
+//             invalid: "무게는 두 자리 수, 소수점 한 자리 수",
+//         },
+//     },
 };
 
 // 모든 입력 필드에 대한 이벤트 리스너를 추가합니다.
