@@ -104,9 +104,9 @@ public class MemberServiceImpl implements MemberService{
 		memberDao.memberEmoneyUpdate(memberDto);
 	}
 	@Override
-	public List<Map<String, Object>> memberSelectCart(int memberNo) {
+	public List<Map<String, Object>> memberSelectCartList(int memberNo) {
 		// TODO Auto-generated method stub
-		return memberDao.memberSelectCart(memberNo);
+		return memberDao.memberSelectCartList(memberNo);
 	}
 	@Override
 	public void memberInfoDelete(MemberDto memberDto) {
@@ -125,6 +125,10 @@ public class MemberServiceImpl implements MemberService{
 		memberDao.petInfoUpdate(petName, petWeight, petNo);
 	}
 
-   
+	@Override
+	public void updateCartQuantity(int memberNo, int productNo, int quantity) {
+		// TODO Auto-generated method stub
+		memberDao.updateCartQuantity(memberNo, productNo, quantity);
+	}
    
 }

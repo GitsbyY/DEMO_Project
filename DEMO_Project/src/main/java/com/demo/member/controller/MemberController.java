@@ -442,4 +442,29 @@ public class MemberController {
 
 	}
 
+	@RequestMapping(value = "/cart.do", method = { RequestMethod.GET,
+			RequestMethod.POST })
+	public String cart(HttpSession session, Model model) {
+		log.info("cart.do");
+		
+		MemberDto memberDto = (MemberDto) session.getAttribute("member");
+		List<Map<String, Object>> cartList = memberService.memberSelectCartList(memberDto.getMemberNo());
+		
+		model.addAttribute("cartList", cartList);
+		
+		return "shop/Cart";
+
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/cart/updateCartQuantity.do", method = RequestMethod.POST)
+	public void updateProductQuantity(
+			@RequestParam("memberNo") int memberNo,
+			@RequestParam("productNo") int productNo,
+			@RequestParam("quantity") int quantity) {
+		
+		log.info("updateCartQuantity.do");
+		
+		memberService.updateCartQuantity(memberNo, productNo, quantity);
+	}
 }

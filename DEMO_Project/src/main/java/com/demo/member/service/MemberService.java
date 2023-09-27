@@ -42,7 +42,7 @@ public interface MemberService {
 
 	void memberEmoneyUpdate(MemberDto memberDto);
 
-	List<Map<String, Object>> memberSelectCart(int memberNo);
+	List<Map<String, Object>> memberSelectCartList(int memberNo);
 
 	void memberInfoDelete(MemberDto memberDto);
 
@@ -50,4 +50,5 @@ public interface MemberService {
 
 	void petInfoUpdate(String petName, double petWeight, int petNo);
 
+	void updateCartQuantity(int memberNo, int productNo, int quantity);
 }

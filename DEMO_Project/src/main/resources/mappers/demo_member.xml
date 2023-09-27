@@ -208,7 +208,7 @@
 	WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
-	<select id="memberSelectCart" parameterType="int" resultType="map">
+	<select id="memberSelectCartList" parameterType="int" resultType="map">
       SELECT *
       FROM CART C
       JOIN PRODUCT P ON P.PRODUCT_NO = C.PRODUCT_NO
@@ -232,6 +232,13 @@
 	UPDATE PET
 	SET PET_NAME = #{petName}, PET_WEIGHT = #{petWeight}
 	WHERE PET_NO = #{petNo}
+   </update>
+
+   <update id="updateCartQuantity">
+		UPDATE CART
+		SET PRODUCT_QUANTITY = #{quantity}
+		WHERE MEMBER_NO = #{memberNo}
+		AND PRODUCT_NO = #{productNo}
    </update>
    
 </mapper>

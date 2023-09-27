@@ -149,9 +149,9 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public List<Map<String, Object>> memberSelectCart(int memberNo) {
+	public List<Map<String, Object>> memberSelectCartList(int memberNo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(nameSpace + "memberSelectCart", memberNo);
+		return sqlSession.selectList(nameSpace + "memberSelectCartList", memberNo);
 	}
 
 	@Override
@@ -177,6 +177,15 @@ public class MemberDaoImpl implements MemberDao{
 	     sqlSession.update(nameSpace + "petInfoUpdate", map);
 	}
 
-   
+	@Override
+	public void updateCartQuantity(int memberNo, int productNo, int quantity) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("productNo", productNo);
+		map.put("quantity", quantity);
+
+		sqlSession.selectOne(nameSpace + "updateCartQuantity", map);
+	}
 
 }

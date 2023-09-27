@@ -33,7 +33,7 @@
 						</button>
 					</div>
 					<div id="mallBasket" class="buttonSide" 
-						onclick="">					
+						onclick="location.href = '/DEMO_Project/cart.do';">					
 						<button id="cartBtn">
 							<img alt="장바구니"
 								src="/DEMO_Project/resources/img/imgHeader/basket.jpg">
