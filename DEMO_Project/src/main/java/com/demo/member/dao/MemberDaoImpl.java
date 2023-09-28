@@ -166,16 +166,16 @@ public class MemberDaoImpl implements MemberDao{
 		sqlSession.update(nameSpace + "memberInfoUpdate", memberDto);
 	}
 
-	@Override
-	public void petInfoUpdate(String petName, double petWeight, int petNo) {
-		// TODO Auto-generated method stub
-		 Map<String, Object> map = new HashMap<String, Object>();
-	     map.put("petName", petName);
-	     map.put("petWeight", petWeight);
-	     map.put("petNo", petNo);
-	     
-	     sqlSession.update(nameSpace + "petInfoUpdate", map);
-	}
+//	@Override
+//	public void petInfoUpdate(String petName, double petWeight, int petNo) {
+//		// TODO Auto-generated method stub
+//		 Map<String, Object> map = new HashMap<String, Object>();
+//	     map.put("petName", petName);
+//	     map.put("petWeight", petWeight);
+//	     map.put("petNo", petNo);
+//	     
+//	     sqlSession.update(nameSpace + "petInfoUpdate", map);
+//	}
 
 	@Override
 	public void updateCartQuantity(int memberNo, int productNo, int quantity) {
@@ -186,6 +186,12 @@ public class MemberDaoImpl implements MemberDao{
 		map.put("quantity", quantity);
 
 		sqlSession.selectOne(nameSpace + "updateCartQuantity", map);
+	}
+
+	@Override
+	public void petInfoUpdate(PetDto petDto) {
+		// TODO Auto-generated method stub
+		sqlSession.update(nameSpace + "petInfoUpdate", petDto);
 	}
 
 }

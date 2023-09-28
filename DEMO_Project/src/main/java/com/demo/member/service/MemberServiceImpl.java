@@ -119,16 +119,21 @@ public class MemberServiceImpl implements MemberService{
 		memberDao.memberInfoUpdate(memberDto);
 	}
 
-	@Override
-	public void petInfoUpdate(String petName, double petWeight, int petNo) {
-		// TODO Auto-generated method stub
-		memberDao.petInfoUpdate(petName, petWeight, petNo);
-	}
+//	@Override
+//	public void petInfoUpdate(String petName, double petWeight, int petNo) {
+//		// TODO Auto-generated method stub
+//		memberDao.petInfoUpdate(petName, petWeight, petNo);
+//	}
 
 	@Override
 	public void updateCartQuantity(int memberNo, int productNo, int quantity) {
 		// TODO Auto-generated method stub
 		memberDao.updateCartQuantity(memberNo, productNo, quantity);
+	}
+	@Override
+	public void petInfoUpdate(PetDto petDto) {
+		// TODO Auto-generated method stub
+		memberDao.petInfoUpdate(petDto);
 	}
    
 }

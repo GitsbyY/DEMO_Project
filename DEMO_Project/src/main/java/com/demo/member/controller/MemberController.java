@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -274,33 +275,34 @@ public class MemberController {
 	
 	// 회원정보 Pet 변경  ./MypageProfileEditPetUpdateCtr.do
 		@RequestMapping(value = "/mypage/MypageProfileEditPetUpdateCtr.do", method = RequestMethod.POST)
-		public String petInfoChange(@RequestParam("memberNo") Integer memberNo
-									,@RequestParam("petNo") Integer petNo
-									, String petName, double petWeight
-									, HttpSession session, Model model) {
-			log.info("Welcome MemberController petInfoChange ??!");
+		public String petInfoChange(@ModelAttribute("petDto")PetDto petDto, HttpSession session, Model model) {
+			log.info("Welcome MemberController petInfoChange !");
 			
-			System.out.println(petName + petName + "MypageProfileEditUpdateCtr.do Start");
+			
+				System.out.println(petDto + "MypageProfileEditUpdateCtr.do Start");
+				
+				memberService.petInfoUpdate(petDto);
+				
+				
+				System.out.println(petDto + "MypageProfileEditUpdateCtr.do Start");
+		
 
-			memberService.petInfoUpdate(petName, petWeight, petNo);
+		
 			
-			
-			System.out.println(petName + petName + "MypageProfileEditUpdateCtr.do Update");
-			
-			Map<String, Object> petDtoUpdated = memberService.myPageProfileDetailPetSelectOne(memberNo);
+			Map<String, Object> petDtoUpdated = memberService.myPageProfileDetailPetSelectOne(petDto.getMemberNo());
 
 			model.addAttribute("petDto",petDtoUpdated);
 
 
 			session.setAttribute("myPageAside", "memberInfo");
 
-				//return "redirect:/mypage/MypageDetail.do"; // 리다이렉트할 경로로 이동
-			return "redirect:/mypage/MypageProfileEdit.do?memberNo=" + memberNo;
+				//return "./MypageProfileEditPet.do?memberNo=' + memberNo;// 리다이렉트할 경로로 이동
+			return "redirect:/mypage/MypageProfileEditPet.do?memberNo=" + petDto.getMemberNo();
 			
 		}
 
-	// 회원탈퇴
-	@RequestMapping(value = "/mypage/MypageProfileUpdateEditDeleteCtr.do", method = RequestMethod.POST)
+	// 회원탈퇴   ./MypageProfileEditDeleteCtr.do  ./MypageProfileEditDeleteCtr.do
+	@RequestMapping(value = "/mypage/MypageProfileEditDeleteCtr.do", method = RequestMethod.POST)
 	public String memberDelete(MemberDto memberDto, HttpSession session, Model model) {
 
 		System.out.println(memberDto);
@@ -316,8 +318,8 @@ public class MemberController {
 
 		session.setAttribute("myPageAside", "memberInfo");
 
-		// 회원이 탈퇴되었다는 페이지 추가해야함
-		return "redirect:/mypage/MypageProfileEdit.do";
+		// 로그인페이지로 이동 ->http://localhost:9080/DEMO_Project/auth/login.do
+		return "redirect:/auth/login.do";
 
 	}
 

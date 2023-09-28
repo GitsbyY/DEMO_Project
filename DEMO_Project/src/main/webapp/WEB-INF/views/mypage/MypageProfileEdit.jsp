@@ -266,9 +266,10 @@ button {
 						disabled="disabled" value="수정" />
 				</div>
 
-				<form action="" method="POST" id="memberDeleteForm">
+				<form action="./MypageProfileEditDeleteCtr.do" method="POST" id="memberDeleteForm">
 					<div id="deleteInfo">
-						<input type="submit" name="deleteMemberInfo" value="탈퇴" />
+					<input type="hidden" value="${sessionScope.member.memberNo}" name="memberNo" id="deleteMemberNo"/>
+						<input type="submit" name="deleteMemberInfo" value="탈퇴" onclick="return confirmDelete();" />
 					</div>
 				</form>
 			</div>
@@ -280,14 +281,14 @@ button {
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
 </body>
 <script type="text/javascript">
-
+	//목록으로 돌아간다
 	function backToListFnc() {
 		
 		var url = './mypageProfile.do';
 		
 	    location.href= url;
 	}
-
+	//반려견 정보를 띄우는 페이지
 	function showPetInfo(memberNo) {
 		
 		var url = './MypageProfileEditPet.do?memberNo=' + memberNo;
@@ -295,7 +296,28 @@ button {
 	    location.href= url;
 		
 	}
-	
+	//삭제 전에 한 번 더 확인
+	function confirmDelete() {
+	   
+	    const memberNo = document.getElementById("deleteMemberNo").value;
+
+	    
+	    if (memberNo === "1") {
+	    	 var resultAdmin = confirm("정말로 탈퇴시키겠습니까?");
+	    	 if (resultAdmin) {
+	 	        document.getElementById("memberDeleteForm").submit();
+	 	    }
+	    	 return false;
+	    }else {
+	    	 var result = confirm("정말로 탈퇴하시겠습니까?");
+	    	 if (result) {
+	 	        document.getElementById("memberDeleteForm").submit();
+	 	    }
+	    	 return false;
+	    }
+
+	    
+	}
 	
 	//email 정규식
 	var emailCheck = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

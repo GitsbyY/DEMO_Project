@@ -48,7 +48,9 @@ public interface MemberService {
 
 	void memberInfoUpdate(MemberDto memberDto);
 
-	void petInfoUpdate(String petName, double petWeight, int petNo);
+	//void petInfoUpdate(String petName, double petWeight, int petNo);
 
 	void updateCartQuantity(int memberNo, int productNo, int quantity);
+
+	void petInfoUpdate(PetDto petDto);
 }

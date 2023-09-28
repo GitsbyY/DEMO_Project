@@ -170,16 +170,15 @@ button {
 
 	<jsp:include page="/WEB-INF/views/asideMyPage.jsp" />
 
-	<fmt:formatDate value="${memberDto.MEMBER_BIRTH_DATE}"
-		pattern="yyyy/MM/dd" var="formattedBirthDate" />
 	<fmt:formatDate value="${petDto.PET_ADOPTION_DATE}"
 		pattern="yyyy/MM/dd" var="formattedAdoptionDate" />
 
 	<div id="infoWrap">
 		<div class="titleContainer">
 			<div id="firstTitle"
-				style="color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG
-				FAMILY</div>
+				style="color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">
+				DAENGDAENG FAMILY
+			</div>
 		</div>
 
 		<div id="infoContainer">
@@ -257,6 +256,8 @@ function showMemberInfo(memberNo) {
 var blankCheck = /^.*\S.*$/;
 //5글자 이상이어야한다
 var textCheck = /^.{5,}$/;
+// 0부터 99까지 소수점 첫자리만 가능
+var weightCheck = /^(0(\.[5-9])?|([1-9][0-9]?(\.[0-9])?))$/;
 
 // 공통 유효성 검사 함수
 function handleBlurEvent(inputElement, errMsgElement, checkFunction, errorMessage) {
@@ -310,19 +311,19 @@ const fields = {
             invalid: "1자 이상 10자 이하의 한글만 입력 가능합니다.",
         },
     },
-//     petWeight: {
-//         input: document.getElementById("petWeightInput"),
-//         errMsg: document.getElementById("petWeightErrMsg"),
-//         check: function (value) {
-//             const petWeightCheck = /^\d+(\.\d{0,1})?$/;
-//             return petWeightCheck.test(value);
-//         },
-//         errorMessage: {
-//             empty: "무게를를 입력해주세요.",
-//             noSpace: "공백은 사용할 수 없습니다.",
-//             invalid: "무게는 두 자리 수, 소수점 한 자리 수",
-//         },
-//     },
+    petWeight: {
+        input: document.getElementById("petWeightInput"),
+        errMsg: document.getElementById("petWeightErrMsg"),
+        check: function (value) {
+            const petWeightCheck = /^(0(\.[5-9])?|([1-9][0-9]?(\.[0-9])?))$/;
+            return petWeightCheck.test(value);
+        },
+        errorMessage: {
+            empty: "무게를를 입력해주세요.",
+            noSpace: "공백은 사용할 수 없습니다.",
+            invalid: "무게는 두 자리 수, 소수점 한 자리 수",
+        },
+    },
 };
 
 // 모든 입력 필드에 대한 이벤트 리스너를 추가합니다.
@@ -334,14 +335,14 @@ for (const fieldName in fields) {
 }
 
 // 버튼 엘리먼트를 가져옵니다.
-const updateButton = document.getElementById("updateButton");
+const updateBtn = document.getElementById("updateButton");
 
 // 입력 필드에 변화가 있을 때 버튼 상태를 업데이트합니다.
 function updateButtonState() {
     for (const fieldName in fields) {
         if (!handleBlurEvent(fields[fieldName].input, fields[fieldName].errMsg, fields[fieldName].check, fields[fieldName].errorMessage)) {
-        	updateButton.disabled = true;
-        	updateButton.style.backgroundColor = "gray";
+        	updateBtn.disabled = true;
+        	updateBtn.style.backgroundColor = "gray";
             return;
         }
     }
@@ -352,9 +353,10 @@ function updateButtonState() {
 // "수정" 버튼 클릭 시 폼을 서버로 제출하여 업데이트 수행
 document.getElementById("updateButton").addEventListener("click", function (event) {
     // 폼을 서버로 제출하기 전에 유효성 검사를 한번 더 수행 (보안을 위해)
-    if (updateButton.disabled == false) {
+    if (updateBtn.disabled == false) {
         // 폼을 서버로 제출
     	document.getElementById("petUpdateForm").submit();
+        alert("수정이 완료되었습니다");
     } else {
         // 유효성 검사를 통과하지 못한 경우 제출을 막습니다.
         event.preventDefault();
