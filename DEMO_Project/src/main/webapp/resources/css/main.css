@@ -82,6 +82,7 @@ button{
 	font-size: 14px;
 	text-align: right;
 	margin-left: 10px;
+	width: 300px;
 }
 
 .bottomRowButton {

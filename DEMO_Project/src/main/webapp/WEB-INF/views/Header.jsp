@@ -24,7 +24,7 @@
 		<div>
 			<div id="iconSet">
 				<div class="buttonContainer">
-					<div id="mallIcon" class="buttonSide" 
+					<div id="mallIcon" class="buttonSide"
 						onclick="location.href = '/DEMO_Project/shop.do';">
 						<button id="shopBtn">
 							<img alt="쇼핑몰"
@@ -32,15 +32,15 @@
 							<p>쇼핑몰</p>
 						</button>
 					</div>
-					<div id="mallBasket" class="buttonSide" 
-						onclick="location.href = '/DEMO_Project/cart.do';">					
+					<div id="mallBasket" class="buttonSide"
+						onclick="location.href = '/DEMO_Project/cart.do';">
 						<button id="cartBtn">
 							<img alt="장바구니"
 								src="/DEMO_Project/resources/img/imgHeader/basket.jpg">
 							<p>장바구니</p>
 						</button>
 					</div>
-					<div id="myDaeng" class="buttonSide" 
+					<div id="myDaeng" class="buttonSide"
 						onclick="location.href = '/DEMO_Project/mypage/mypage.do';">
 						<button id="myDaengBtn">
 							<img alt="마이댕댕"
@@ -48,7 +48,7 @@
 							<p>마이댕댕</p>
 						</button>
 					</div>
-					<div id="customerCenter" class="buttonSide" 
+					<div id="customerCenter" class="buttonSide"
 						onclick="location.href = '/DEMO_Project/board/announcement.do';">
 						<button id="customerCenterBtn">
 							<img alt="고객센터"
@@ -57,24 +57,55 @@
 						</button>
 					</div>
 				</div>
-				<div id="bottomRow">
-					<a href="#" id="curEMony" class="bottomRowButton">
-						${sessionScope.member.memberPoint}포인트</a> 
-					<a href="#" id="loginName" class="bottomRowButton">
-						${sessionScope.member.memberName}님</a> 
-					<a href="<%=request.getContextPath()%>/auth/logout.do"
-						 id="logoutButton" class="bottomRowButton">로그아웃</a>
-				</div>
+
+				<c:choose>
+					<c:when test="${empty sessionScope.member}">
+						<div id="bottomRow">
+							<div id="timerElement" class="bottomRowButton"></div>
+						</div>
+					</c:when>
+					<c:otherwise>
+
+						<div id="bottomRow">
+							<a href="#" id="curEMony" class="bottomRowButton">
+								${sessionScope.member.memberPoint}포인트</a> <a href="#" id="loginName"
+								class="bottomRowButton"> ${sessionScope.member.memberName}님</a>
+							<a href="<%=request.getContextPath()%>/auth/logout.do"
+								id="logoutButton" class="bottomRowButton">로그아웃</a>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</div>
 	<hr>
 </div>
 <script type="text/javascript">
-function goHomeFnc() {
+	function goHomeFnc() {
+
+		var url = '/DEMO_Project/auth/login.do';
+
+		location.href = url;
+	}
 	
-	var url = '/DEMO_Project/board/announcement.do';
 	
-    location.href= url;
-}  
+	var countdown = 5; // 타이머 시간 (초)
+	var timerElement = document.getElementById("timerElement");
+
+	function updateTimer() {
+		timerElement.innerHTML = "로그인이 되어있지 않습니다." + countdown + "초 후에 회원가입 페이지로 이동합니다.";
+		
+		countdown--;
+
+		if (countdown < 0) {
+			// 회원가입 페이지로 이동
+			var registrationUrl = '<c:url value="/auth/login.do"/>'; // 이동할 페이지의 URL을 입력하세요
+			window.location.href = registrationUrl;
+		} else {
+			setTimeout(updateTimer, 1000); // 1초마다 업데이트
+		}
+	}
+
+	// 타이머 시작
+	updateTimer();
 </script>
