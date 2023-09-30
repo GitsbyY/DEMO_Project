@@ -56,7 +56,7 @@
 
 	<filter-mapping>
 		<filter-name>sessionFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
 
 	<error-page>
