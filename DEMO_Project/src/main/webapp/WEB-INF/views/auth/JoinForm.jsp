@@ -180,9 +180,6 @@
 						<div class="changeBtn">
 							<button type="submit" disabled="disabled">댕댕</button>
 						</div>
-						<!-- 					<div class="submitBtn"> -->
-						<!-- 						<button type="submit" disabled="disabled">회원가입</button> -->
-						<!-- 					</div> -->
 					</div>
 				</div>
 			</form>
@@ -351,7 +348,7 @@
 	//이름 정규식
 	var nameCheck = /^[가-힣]{2,5}$/;
 	//핸드폰정규식
-	var mobileCheck = /^010|011|017\d{3,4}\d{4}$/;
+	var mobileCheck = /^010\d{8}$/;
 	//공백이 존재하면 안 된다.
 	var blankCheck = /^\S*$/;
 
@@ -577,13 +574,14 @@
 			mobile.classList.add("errorOutline");
 			errMsgMobile.style.color = "red";
 			errMsgMobile.textContent = "공백은 사용할 수 없습니다.";
+			mobile.value.trim;
 			return;
 		}
-
+		
 		if (!mobileCheck.test(mobile.value)) {
 			mobile.classList.add("errorOutline");
 			errMsgMobile.style.color = "red";
-			errMsgMobile.textContent = "번호 형식을 지켜주세요. 010/011/017만 지원합니다.";
+			errMsgMobile.textContent = "01012341234의 형식으로 입력 해 주세요";
 			return;
 		}
 

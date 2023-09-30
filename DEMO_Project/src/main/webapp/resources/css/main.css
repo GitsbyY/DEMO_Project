@@ -74,6 +74,17 @@ button{
 	margin-left: 10px; /* 오른쪽 요소들 사이의 간격 설정 */
 }
 
+#bottomRowElse {
+	clear: both; /* 띄워진 요소들 아래로 내리기 */
+	float: right; /* 오른쪽으로 띄우기 */
+	margin-top: 40px; /*위에 마진 추가*/
+	margin-right : 15px;
+	font-size: 10px;
+	text-align: right;
+	margin-left: 10px;
+	width: 350px;
+}
+
 #bottomRow {
 	clear: both; /* 띄워진 요소들 아래로 내리기 */
 	float: right; /* 오른쪽으로 띄우기 */
@@ -82,17 +93,35 @@ button{
 	font-size: 14px;
 	text-align: right;
 	margin-left: 10px;
-	width: 300px;
+	width: 350px;
 }
-
-.bottomRowButton {
+#timerElement{
 	float: left; /* 왼쪽으로 띄우기 */
 	margin-left: 15px; /* 왼쪽 요소들 사이의 간격 설정 */
 	margin-top : 2px;
 	height: 20px;
-	width: 60px;
+	width: 350px;
 	text-decoration: none; /* 밑줄 제거 */
     color: black; /* 텍스트 색상을 검은색으로 설정 */
+}
+
+.bottomRowButton {
+	float: left; /* 왼쪽으로 띄우기 */
+	margin-top : 2px;
+	height: 20px;
+	text-decoration: none; /* 밑줄 제거 */
+    color: black; /* 텍스트 색상을 검은색으로 설정 */
+}
+#curEMony{
+	width: 160px;
+	margin-left : 10px;
+	margin-right: -20px;
+}
+#loginName{
+	width: 100px;
+}
+#logoutButton{
+	width: 90px;
 }
 a.bottomRowButton:hover {
     color: #FFAB7C;

@@ -60,18 +60,23 @@
 
 				<c:choose>
 					<c:when test="${empty sessionScope.member}">
-						<div id="bottomRow">
-							<div id="timerElement" class="bottomRowButton"></div>
+						<div id="bottomRowElse">
+							<div id="timerElement"></div>
 						</div>
 					</c:when>
 					<c:otherwise>
 
 						<div id="bottomRow">
 							<a href="#" id="curEMony" class="bottomRowButton">
-								${sessionScope.member.memberPoint}포인트</a> <a href="#" id="loginName"
-								class="bottomRowButton"> ${sessionScope.member.memberName}님</a>
-							<a href="<%=request.getContextPath()%>/auth/logout.do"
-								id="logoutButton" class="bottomRowButton">로그아웃</a>
+								${sessionScope.member.memberPoint}포인트
+							</a>
+							<a href="#" id="loginName" class="bottomRowButton"> 
+								${sessionScope.member.memberName}님
+							</a>
+							<a href="<%=request.getContextPath()%>/auth/logout.do" 
+							id="logoutButton" class="bottomRowButton">
+								로그아웃
+							</a>
 						</div>
 					</c:otherwise>
 				</c:choose>
@@ -88,24 +93,25 @@
 		location.href = url;
 	}
 	
-	
-	var countdown = 5; // 타이머 시간 (초)
-	var timerElement = document.getElementById("timerElement");
+	 <c:if test="${empty sessionScope.member}">
+     var countdown = 5; // 타이머 시간 (초)
+     var timerElement = document.getElementById("timerElement");
 
-	function updateTimer() {
-		timerElement.innerHTML = "로그인이 되어있지 않습니다." + countdown + "초 후에 회원가입 페이지로 이동합니다.";
-		
-		countdown--;
+     function updateTimer() {
+         timerElement.innerHTML = "로그인이 되어있지 않습니다." + countdown + "초 후에 회원가입 페이지로 이동합니다.";
+         
+         countdown--;
 
-		if (countdown < 0) {
-			// 회원가입 페이지로 이동
-			var registrationUrl = '<c:url value="/auth/login.do"/>'; // 이동할 페이지의 URL을 입력하세요
-			window.location.href = registrationUrl;
-		} else {
-			setTimeout(updateTimer, 1000); // 1초마다 업데이트
-		}
-	}
+         if (countdown < 0) {
+             // 회원가입 페이지로 이동
+             var registrationUrl = '<c:url value="/auth/login.do"/>'; // 이동할 페이지의 URL을 입력하세요
+             window.location.href = registrationUrl;
+         } else {
+             setTimeout(updateTimer, 1000); // 1초마다 업데이트
+         }
+     }
 
-	// 타이머 시작
-	updateTimer();
+     // 타이머 시작
+     updateTimer();
+	</c:if>
 </script>

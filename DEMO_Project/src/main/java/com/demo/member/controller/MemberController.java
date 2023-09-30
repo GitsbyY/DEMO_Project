@@ -37,7 +37,7 @@ public class MemberController {
 		log.info("Welcome MemberController login!");
 
 		session.invalidate();
-
+		
 		return "auth/LoginPage";
 	}
 
@@ -184,7 +184,7 @@ public class MemberController {
 		int mno = memberService.memberInsertOne(memberDto);
 		petDto.setMemberNo(mno);
 		memberService.petInsertOne(petDto);
-		return "auth/LoginPage";
+		return "auth/LoginSuccess";
 	}
 
 	// 회원관리 처음
