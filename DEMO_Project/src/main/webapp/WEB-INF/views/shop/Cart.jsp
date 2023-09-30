@@ -9,6 +9,12 @@
 <link rel="stylesheet" type="text/css"
 	href="/DEMO_Project/resources/css/main.css">
 <style type="text/css">
+.checkBoxDiv input{
+	width:20px;
+	height:20px;
+}
+
+
 #mainImg {
 	height: 30px;
 	width: 30px;
@@ -21,7 +27,7 @@
 }
 
 #maintitle {
-	font-size: 25px;
+	font-size: 24px;
 	font-weight: bold;
 }
 
@@ -77,6 +83,7 @@ table tr td div {
 }
 .checkBoxDiv{
 	width: 100px;
+	text-align:left;
 }
 
 .imgDiv {
@@ -99,6 +106,23 @@ table tr td div {
 	width: 70px;
 	text-align:left;
 }
+
+#deleteDiv{
+	height:200px;
+	padding:20px;
+}
+#deleteBtn{
+	float:right;
+}
+
+#orderSumPriceDiv{
+	font-size: 24px;
+	font-weight: bold;
+	height:200px;
+	border: 1px solid black;
+	padding: 20px;
+	padding-left: 900px;
+}
 </style>
 <meta charset="UTF-8">
 <title>장바구니</title>
@@ -107,89 +131,120 @@ table tr td div {
 	<jsp:include page="/WEB-INF/views/Header.jsp" />
 
 	<div id="mainContainer">
-		<div id="basket" style="width: 100%;">
-			<img id="mainImg" alt="장바구니"
-				src="./resources/img/imgHeader/basket.jpg">
-			<span id="maintitle">장바구니</span>
-		</div>
-		<div id="countingDiv">
-			구매(<span id="countingSpan">0</span>)
-		</div>
-		<div id="productListDiv">
-			<table id="productTable">
-				<tr id="columnTr">
-					<td>
-						<div class="columnDiv checkBoxDiv">전체 선택</div>
-					</td>
-					<td>
-						<div class="columnDiv imgDiv"></div>
-					</td>
-					<td>
-						<div class="columnDiv productDiv">상품 정보</div>
-					</td>
-					<td>
-						<div class="columnDiv productSumpriceDiv">총 상품금액</div>
-					</td>
-					<td>
-						<div class="columnDiv productQuantityDiv">상품 수량</div>
-					</td>
-					<td>
-						<div class="columnDiv productQuantityCtrDiv"></div>
-					</td>
-				</tr>
-				<c:forEach var="cart" items="${cartList}" varStatus="loop">
-					<tr>
+		<form action="#" method="post" id="cartForm">
+			<div id="basket" style="width: 100%;">
+				<img id="mainImg" alt="장바구니"
+					src="./resources/img/imgHeader/basket.jpg">
+				<span id="maintitle">장바구니</span>
+			</div>
+			<div id="countingDiv">
+				구매(<span id="countingSpan">0</span>)
+			</div>
+			<div id="productListDiv">
+				<table id="productTable">
+					<tr id="columnTr">
 						<td>
-							<input type="hidden" id="memberNoId${loop.index}" value="${cart.MEMBER_NO}">
-							<input type="hidden" id="productNoId${loop.index}" value="${cart.PRODUCT_NO}">
-							<div class="cartListDiv checkBoxDiv">
-								체크박스
+							<div class="columnDiv checkBoxDiv">
+								<input type="checkbox" name="product">
+								전체 선택
 							</div>
 						</td>
 						<td>
-							<div class="cartListDiv imgDiv">
-								<img alt="image not found" id="productImg" 
-									src="<c:url value='/image/Product/${cart.STORED_FILE_NAME}'/>">
-							</div>
+							<div class="columnDiv imgDiv"></div>
 						</td>
 						<td>
-							<div class="cartListDiv productDiv" >
-								${cart.PRODUCT_NAME}, 상세페이지 참조<br/>
-								<fmt:formatNumber value="${cart.PRODUCT_PRICE}" type="number" />원
-							</div>
+							<div class="columnDiv productDiv">상품 정보</div>
 						</td>
 						<td>
-							<input type="hidden" value="${cart.PRODUCT_PRICE}" id="priceId${loop.index}">
-							<div class="cartListDiv productSumpriceDiv" id="sumPriceId${loop.index}">
-								<fmt:formatNumber value="${cart.PRODUCT_PRICE * cart.PRODUCT_QUANTITY}" type="number" />
-							</div>
+							<div class="columnDiv productSumpriceDiv">총 상품금액</div>
 						</td>
 						<td>
-							<div class="cartListDiv productQuantityDiv" id="quantityId${loop.index}">
-								${cart.PRODUCT_QUANTITY}
-							</div>
+							<div class="columnDiv productQuantityDiv">상품 수량</div>
 						</td>
 						<td>
-							<div class="cartListDiv productQuantityCtrDiv">
-								<button type="button" onclick="plusQuantityFnc(${loop.index});">+</button>
-								<button type="button" onclick="minusQuantityFnc(${loop.index});">-</button>
-							</div>
+							<div class="columnDiv productQuantityCtrDiv"></div>
 						</td>
 					</tr>
-					
-				</c:forEach>
-							
-			</table>
-		</div>
-
-		<div id="deleteDiv"></div>
-		<div id="orderSumPriceDiv"></div>
+					<c:forEach var="cart" items="${cartList}" varStatus="loop">
+						<tr>
+							<td>
+								<input type="hidden" id="memberNoId${loop.index}" value="${cart.MEMBER_NO}">
+								<input type="hidden" id="productNoId${loop.index}" value="${cart.PRODUCT_NO}">
+								<div class="cartListDiv checkBoxDiv">
+						            <input type="checkbox" name="product">
+								</div>
+							</td>
+							<td>
+								<div class="cartListDiv imgDiv">
+									<img alt="image not found" id="productImg" 
+										src="<c:url value='/image/Product/${cart.STORED_FILE_NAME}'/>">
+								</div>
+							</td>
+							<td>
+								<div class="cartListDiv productDiv" >
+									${cart.PRODUCT_NAME}, 상세페이지 참조<br/>
+									<fmt:formatNumber value="${cart.PRODUCT_PRICE}" type="number" />원
+								</div>
+							</td>
+							<td>
+								<input type="hidden" value="${cart.PRODUCT_PRICE}" id="priceId${loop.index}">
+								<div class="cartListDiv productSumpriceDiv" id="sumPriceId${loop.index}">
+									<fmt:formatNumber value="${cart.PRODUCT_PRICE * cart.PRODUCT_QUANTITY}" type="number" />
+								</div>
+							</td>
+							<td>
+								<div class="cartListDiv productQuantityDiv" id="quantityId${loop.index}">
+									${cart.PRODUCT_QUANTITY}
+								</div>
+							</td>
+							<td>
+								<div class="cartListDiv productQuantityCtrDiv">
+									<button type="button" onclick="plusQuantityFnc(${loop.index});">+</button>
+									<button type="button" onclick="minusQuantityFnc(${loop.index});">-</button>
+								</div>
+							</td>
+						</tr>
+						
+					</c:forEach>
+								
+				</table>
+			</div>
+	
+			<div id="deleteDiv">
+				<button id="deleteBtn" type="button">
+					선택 삭제
+				</button>
+			</div>
+			<div id="orderSumPriceDiv">
+				총 주문금액
+				<span id="checkedSumPriceSpan"></span>
+			</div>
+		</form>
 	</div>
 
 
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
 </body>
 <script type="text/javascript">
+	
+	const checkboxForm = document.getElementById('cartForm');
+
+	checkboxForm.addEventListener('change', updateSumPrice);
+	
+	function updateSumPrice() {
+        // checkboxForm 내의 모든 체크박스 요소를 가져옴
+        let sumPrice = 0;
+            $('input[name="product"]:checked').each(function () {
+                const index = $(this).closest('tr').index() - 1; // 헤더 행을 제외하기 위해 -1
+                const productPrice = parseFloat($('#priceId' + index).val());
+                const productQuantity = parseInt($('#quantityId' + index).text());
+                sumPrice += productPrice * productQuantity;
+            });
+
+            // 계산된 총 주문금액을 span에 넣기
+            $('#checkedSumPriceSpan').text(sumPrice); // 소수점 2자리까지 표시
+    }
+	
 	function plusQuantityFnc(num) {
 		
 		var priceDiv = document.getElementById('priceId' + num);
