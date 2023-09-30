@@ -124,7 +124,12 @@ td input{
                <tr id="firstTr">
                   <td id="firstTd" class="firstTd">상품명</td>   
                   <td id="titleInputTd">
-                     ${memberInfo.PRODUCT_NAME}
+                  	<select>
+                  		<option>상품을 선택해주세요
+                  		<option>상품
+                  	
+                  	</select>
+                     <%-- ${memberInfo.PRODUCT_NAME} --%>
                   </td>
                   <td class="firstTd">견종</td>
                   <td id="petBreed">

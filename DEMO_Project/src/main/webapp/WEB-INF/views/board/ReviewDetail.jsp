@@ -179,7 +179,7 @@ textarea {
 <meta charset="UTF-8">
 <title>후기남겨요 상세페이지</title>
 <link rel="stylesheet" type="text/css" href="/DEMO_Project/resources/css/main.css">
-<script type="text/javascript" src="/SpringHome/resources/js/jquery-3.7.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
    <jsp:include page="/WEB-INF/views/Header.jsp"/>
@@ -203,7 +203,7 @@ textarea {
                <th id="listColumn6" class="listColumn">작성일</th>            
             </tr>            
             <tr>
-               <td class="tdClass">${reviewDto.REVIEW_NO}</td>
+               <td id="Rno" class="tdClass">${reviewDto.REVIEW_NO}</td>
                <td class="tdClass">${reviewDto.PRODUCT_NAME}</td>
                <td>${reviewDto.REVIEW_TITLE}</td>
                <td class="tdClass">${reviewDto.MEMBER_NAME}</td>
@@ -258,8 +258,9 @@ textarea {
 	                     value="${reply.REVIEW_REPLY_CRE_DATE}"/>
             </div>  
 	      	<div id="reviewListDiv">
-	      		<textarea disabled="disabled" class="replyText" rows="" cols="" name="reviewReplyContent">${reply.REVIEW_REPLY_CONTENT}</textarea>
+	      		<textarea id="textContent" disabled="disabled" class="replyText" rows="" cols="" name="reviewReplyContent">${reply.REVIEW_REPLY_CONTENT}</textarea>
 	      		<input type="hidden" name="reviewReplyContent" value="${reply.REVIEW_REPLY_CONTENT}">
+	      		<input id="reviewReplyNo1" type="hidden" name="reviewReplyNo" value="${reply.REVIEW_REPLY_NO}">
 	      		                        		      			
 	      		<c:choose>
 					<c:when test="${sessionScope.member.memberNo eq reply.MEMBER_NO}">
@@ -269,9 +270,9 @@ textarea {
 	      				<button id="secondBtn" class="submit" type="button" 
 	      					style="display: block;" onclick="changeBtnFnc('reviewReplyDiv${loop.index}'); changeDivBorder('reviewReplyDiv${loop.index}'); activateTextarea('reviewReplyDiv${loop.index}');">수정</button>
 	      				<button id="thirdBtn" class="submit" type="button" 
-	      					style="display: none;" onclick="cancelEdit('reviewReplyDiv${loop.index}'); revertDivBorder('reviewReplyDiv${loop.index}');">취소</button>
+	      					style="background-color: red; display: none;" onclick="cancelEdit('reviewReplyDiv${loop.index}'); revertDivBorder('reviewReplyDiv${loop.index}');">취소</button>
 	      				<button id="fourthBtn" class="submit" type="button" 
-	      					style="display: none;">등록</button>							
+	      					style="background-color: red; display: none;" onclick="editFnc('reviewReplyDiv${loop.index}');">등록</button>							
 					</c:when>
 					<c:when test="${sessionScope.member.memberNo eq '1'}">
 						<input class="submit" type="button" value="삭제" 
@@ -286,14 +287,14 @@ textarea {
       </c:forEach>
        
        
-		<form action="./write.do" method="post">
+		<form action="./write.do" method="post" onsubmit="return submitReplyForm();">
 		<div id="replyText" class="reviewReplyDiv">
       	<div class="reviewReplyName">
       		${sessionScope.member.memberName}
       	</div>
       	<input type="hidden" name="reviewNo" value="${reviewDto.REVIEW_NO}" id="reviewNo">
         <input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}"> 
-      	<textarea class="replyText" rows="2" cols="20" name="reviewReplyContent"></textarea>
+      	<textarea id="writeReviewReplyContent" class="replyText" rows="2" cols="20" name="reviewReplyContent"></textarea>
       	<div>
       		<!-- <input class="submit" type="button" value="등록"> -->
       		<button class="submit" type="submit">등록</button>
@@ -306,6 +307,18 @@ textarea {
    <jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
 <script type="text/javascript">
+	function submitReplyForm() {
+	    var reviewReplyContent = document.getElementById('writeReviewReplyContent').value;
+	
+	    // 댓글 내용이 공백인지 확인
+	    if (reviewReplyContent.trim() === "") {
+	        alert("댓글을 입력하지 않았습니다.");
+	        return false; // 폼 제출을 막습니다.
+	    }
+	
+	    return true; // 폼 제출을 허용합니다.
+	}
+
 	var originalTextareaValue; // 전역 변수로 원래의 textarea 값 저장
 
 	function revertDivBorder(divId) {
@@ -315,11 +328,11 @@ textarea {
 	
 	function changeDivBorder(divId) {
 	    var targetDiv = document.getElementById(divId);
-	    targetDiv.style.border = "2px solid #99CCFF";
+	    targetDiv.style.border = "2px solid blue";
 	}
 	
-	function activateTextarea() {
-	    var reviewListDiv = document.getElementById('reviewListDiv');
+	function activateTextarea(divId) {
+	    var reviewListDiv = document.getElementById(divId);
 	    var textarea = reviewListDiv.querySelector('textarea');
 
 	 	// 원래의 textarea 값을 저장
@@ -330,7 +343,7 @@ textarea {
 	}
 	
 	function cancelEdit(div) {
-	    var reviewListDiv = document.getElementById('reviewListDiv');
+	    var reviewListDiv = document.getElementById(div);
 	    var textarea = reviewListDiv.querySelector('textarea');
 
 	    // 원래의 textarea 값을 복원
@@ -384,6 +397,64 @@ textarea {
 		var url = './reviewReplydelete.do?no=' + no +'&reviewNo=' + reviewNo;
         
 		location.href = url;
+	}
+	
+	function editFnc(div) {
+		var findDiv = document.getElementById(div);
+		textContent
+		var reviewReplyContent = findDiv.querySelector('#textContent').value;
+		var reviewReplyNo = findDiv.querySelector('#reviewReplyNo1').value;
+		var Rno = ${reviewDto.REVIEW_NO};
+		
+		if (reviewReplyContent.trim() == "") {
+			alert("댓글을 입력하지 않았습니다");
+			event.preventDefault();
+						
+		}else {
+			$.ajax({
+				url : "/DEMO_Project/board/editReviewReply.do",
+				method : "POST",
+				data : {reviewReplyContent : reviewReplyContent, 
+					reviewReplyNo : reviewReplyNo}, 
+				
+				
+				
+				success: function() {
+					// 요청이 성공하면 결과를 화면에 표시
+					
+					
+					var reviewListDiv = document.getElementById(div);
+				    var textarea = reviewListDiv.querySelector('textarea');
+			
+				    // 원래의 textarea 값을 복원
+				    textarea.value = reviewReplyContent;
+			
+				    // textarea를 비활성화합니다.
+				    textarea.disabled = true;
+				    
+					var findDiv = document.getElementById(div);
+					
+					var firstBtn = findDiv.querySelector('#firstBtn');
+					var secondBtn = findDiv.querySelector('#secondBtn');
+					var thirdBtn = findDiv.querySelector('#thirdBtn');
+					var fourthBtn = findDiv.querySelector('#fourthBtn');
+					
+					firstBtn.style.display = 'block';
+					secondBtn.style.display = 'block';
+					thirdBtn.style.display = 'none';
+					fourthBtn.style.display = 'none';
+					
+					var targetDiv = document.getElementById(div);
+				    targetDiv.style.border = "2px solid #FFC4A3";
+					
+					console.log(Rno);
+					
+				},
+				error: function() {
+					alert('실패');
+	             }
+			});
+		}				
 	}
 </script>
 </html>

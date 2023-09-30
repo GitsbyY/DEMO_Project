@@ -1,5 +1,6 @@
 package com.demo.board.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.demo.board.dto.InquiryDto;
 import com.demo.board.dto.NoticeDto;
+import com.demo.board.dto.NoticeReplyDto;
 import com.demo.board.dto.ReplyDto;
 import com.demo.board.dto.ReviewDto;
 import com.demo.board.dto.ReviewReplyDto;
@@ -66,13 +68,26 @@ public interface BoardService {
    public void replyInsertOne(ReplyDto replyDto
 		   , MultipartHttpServletRequest mulRequest) throws Exception;
 
-public Map<String, Object> reviewSelectList(int start, int end, String search, String select);
+	public Map<String, Object> reviewSelectList(int start, int end, String search, String select);
+	
+	public List<ReviewReplyDto> list(int no);
+	
+	public void reviewReplyWrite(ReviewReplyDto reviewReplyDto);
+	
+	public int reviewReplyDelete(int no);
 
-public List<ReviewReplyDto> list(int no);
+	public void reviewReplyEdit(ReviewReplyDto reviewReplyDto);
 
-public void reviewReplyWrite(ReviewReplyDto reviewReplyDto);
+	public List<NoticeReplyDto> noticeReplylist(int no);
 
-public int reviewReplyDelete(int no);
+	public void noticeReplyWrite(NoticeReplyDto noticeReplyDto);
+
+	public int noticeReplyDelete(int no);
+
+	public void noticeReplyEdit(NoticeReplyDto noticeReplyDto);
+
+	
+	
 
 
 

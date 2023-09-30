@@ -82,36 +82,7 @@
       ) NOTICE 
       JOIN MEMBER ON NOTICE.MEMBER_NO = MEMBER.MEMBER_NO
       WHERE NOTICE.RNUM BETWEEN #{start} AND #{end}
-   </select>
-   
-   <!-- <select id="reviewSelectList" parameterType="map" resultType="map">   
-      SELECT 
-       REVIEW.REVIEW_NO, 
-       REVIEW.MEMBER_NO, 
-       REVIEW.PRODUCT_NO, 
-       REVIEW.REVIEW_TITLE, 
-       REVIEW.REVIEW_CONTENT, 
-       REVIEW.REVIEW_CRE_DATE, 
-       REVIEW.REVIEW_MOD_DATE, 
-       PRODUCT.PRODUCT_NAME, 
-       MEMBER.MEMBER_NAME, 
-       PET.PET_BREED
-      FROM (
-       SELECT ROWNUM AS RNUM, R.REVIEW_NO, R.MEMBER_NO, R.PRODUCT_NO
-       , R.REVIEW_TITLE, R.REVIEW_CONTENT, R.REVIEW_CRE_DATE, R.REVIEW_MOD_DATE
-       FROM (
-        SELECT REVIEW_NO, MEMBER_NO, PRODUCT_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_CRE_DATE, REVIEW_MOD_DATE
-        FROM REVIEW
-        ORDER BY REVIEW_CRE_DATE DESC
-       ) R
-      ) REVIEW 
-      JOIN PRODUCT 
-      ON REVIEW.PRODUCT_NO = PRODUCT.PRODUCT_NO
-      JOIN MEMBER ON REVIEW.MEMBER_NO = MEMBER.MEMBER_NO
-      JOIN PET ON MEMBER.MEMBER_NO = PET.MEMBER_NO
-      WHERE REVIEW.RNUM BETWEEN #{start} AND #{end}
-
-   </select> -->
+   </select>  
    
    <select id="reviewSelectList" parameterType="map" resultType="map">   
       SELECT 
@@ -193,9 +164,20 @@
 	
 	SELECT REVIEW_REPLY_NO, REVIEW_REPLY.MEMBER_NO, REVIEW_NO, REVIEW_REPLY_CONTENT, REVIEW_REPLY_CRE_DATE, MEMBER.MEMBER_NAME
 	FROM REVIEW_REPLY JOIN MEMBER
-	ON REVIEW_REPLY.MEMBER_NO = MEMBER.MEMBER_NO
-	WHERE REVIEW_NO = #{reviewNo}		
+	ON REVIEW_REPLY.MEMBER_NO = MEMBER.MEMBER_NO	
+	WHERE REVIEW_NO = #{reviewNo}
+	ORDER BY REVIEW_REPLY_NO
 	</select>
+	
+	<select id="noticeReplylist" parameterType="map" resultType="map">
+	
+	SELECT NOTICE_REPLY_NO, NOTICE_REPLY.MEMBER_NO, NOTICE_NO, NOTICE_REPLY_CONTENT, NOTICE_REPLY_CRE_DATE, MEMBER.MEMBER_NAME
+	FROM NOTICE_REPLY JOIN MEMBER
+	ON NOTICE_REPLY.MEMBER_NO = MEMBER.MEMBER_NO
+	WHERE NOTICE_NO = #{noticeNo}
+	ORDER BY NOTICE_REPLY_NO
+	</select>
+	
    
    <select id="noticeSelectTotalCount" resultType="java.lang.Integer">
       SELECT COUNT(*)
@@ -312,6 +294,18 @@
 		VALUES(#{reviewReplyNo}, #{memberNo}, #{reviewNo}, #{reviewReplyContent}, SYSDATE)
    </insert>
    
+   <insert id="noticeReplyWrite" parameterType="noticeReplyDto" 
+      useGeneratedKeys="true" keyProperty= "noticeReplyNo">
+      <selectKey keyProperty="noticeReplyNo" resultType="int" order="BEFORE">
+         SELECT NOTICE_REPLY_NO_SEQ.NEXTVAL
+         FROM DUAL
+      </selectKey>
+      
+		INSERT INTO NOTICE_REPLY
+		(NOTICE_REPLY_NO, MEMBER_NO, NOTICE_NO, NOTICE_REPLY_CONTENT, NOTICE_REPLY_CRE_DATE)
+		VALUES(#{noticeReplyNo}, #{memberNo}, #{noticeNo}, #{noticeReplyContent}, SYSDATE)
+   </insert>
+   
    
    <insert id="replyInsertOne" parameterType="replyDto">
       
@@ -367,6 +361,24 @@
       </set>
       WHERE INQUIRY_NO = #{inquiryNo}
    </update>
+   
+   <update id="reviewReplyEdit" parameterType="reviewReplyDto">
+      UPDATE REVIEW_REPLY
+      <set>        
+         REVIEW_REPLY_CONTENT = #{reviewReplyContent}, 
+         REVIEW_REPLY_CRE_DATE = SYSDATE
+      </set>
+      WHERE REVIEW_REPLY_NO = #{reviewReplyNo}
+   </update>
+   
+   <update id="noticeReplyEdit" parameterType="noticeReplyDto">
+      UPDATE NOTICE_REPLY
+      <set>        
+         NOTICE_REPLY_CONTENT = #{noticeReplyContent}, 
+         NOTICE_REPLY_CRE_DATE = SYSDATE
+      </set>
+      WHERE NOTICE_REPLY_NO = #{noticeReplyNo}
+   </update>
       
    <update id="inquiryUpdateOne" parameterType="inquiryDto">
       UPDATE INQUIRY
@@ -407,4 +419,10 @@
       DELETE FROM REVIEW_REPLY
       WHERE REVIEW_REPLY_NO = #{value}
    </delete>
+   
+   <delete id="noticeReplyDelete" parameterType="int">
+      DELETE FROM NOTICE_REPLY
+      WHERE NOTICE_REPLY_NO = #{value}
+   </delete>
+   
 </mapper>

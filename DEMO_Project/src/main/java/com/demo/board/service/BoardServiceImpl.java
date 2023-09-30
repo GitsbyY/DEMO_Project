@@ -1,5 +1,6 @@
 package com.demo.board.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.demo.board.dao.BoardDao;
 import com.demo.board.dto.InquiryDto;
 import com.demo.board.dto.NoticeDto;
+import com.demo.board.dto.NoticeReplyDto;
 import com.demo.board.dto.ReplyDto;
 import com.demo.board.dto.ReviewDto;
 import com.demo.board.dto.ReviewReplyDto;
@@ -289,6 +291,34 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 		return boardDao.reviewReplyDelete(no);
 	}
+	@Override
+	public void reviewReplyEdit(ReviewReplyDto reviewReplyDto) {
+		// TODO Auto-generated method stub
+		boardDao.reviewReplyEdit(reviewReplyDto);
+	}
+	@Override
+	public List<NoticeReplyDto> noticeReplylist(int no) {
+		// TODO Auto-generated method stub
+		return boardDao.noticeReplylist(no);
+	}
+	@Override
+	public void noticeReplyWrite(NoticeReplyDto noticeReplyDto) {
+		// TODO Auto-generated method stub
+		boardDao.noticeReplyWrite(noticeReplyDto);
+	}
+	@Override
+	public int noticeReplyDelete(int no) {
+		// TODO Auto-generated method stub
+		return boardDao.noticeReplyDelete(no);
+	}
+	@Override
+	public void noticeReplyEdit(NoticeReplyDto noticeReplyDto) {
+		// TODO Auto-generated method stub
+		boardDao.noticeReplyEdit(noticeReplyDto);
+	}
+
+
+	
 	
 	
    
