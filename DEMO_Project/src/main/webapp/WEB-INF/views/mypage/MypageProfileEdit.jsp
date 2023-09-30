@@ -453,6 +453,7 @@ button {
 	    if (updateButton.disabled == false) {
 	        // 폼을 서버로 제출
 	    	document.getElementById("memberUpdateForm").submit();
+	    	alert("수정이 완료되었습니다.");
 	    } else {
 	        // 유효성 검사를 통과하지 못한 경우 제출을 막습니다.
 	        event.preventDefault();
