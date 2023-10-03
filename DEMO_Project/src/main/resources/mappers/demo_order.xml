@@ -5,6 +5,7 @@
 	<resultMap type="orderDto" id="orderResultMap">
 		<id column="ORDER_NO" property="orderNo" />
 		<result column="MEMBER_NO" property="memberNo" />
+		<result column="PRODUCT_NO" property="productNo" />
 		<result column="ORDER_DATE" property="orderDate"
 			javaType="java.util.Date" />
 		<result column="ORDER_REQUEST" property="orderRequest" />
@@ -22,6 +23,14 @@
 		<id column="ORDER_NO" property="orderNo" />
 		<result column="ORDER_CANCEL_DATE" property="orderCancelDate"
 			javaType="java.util.Date" />
+	</resultMap>
+	
+	<resultMap type="cartDto" id="cartResultMap2">
+		<id column="PRODUCT_NO" property="productNo" />
+		<result column="MEMBER_NO" property="memberNo" />
+		<result column="PRODUCT_NAME" property="productName" />
+		<result column="PRODUCT_PRICE" property="productPrice" />
+		<result column="PRODUCT_QUANTITY" property="productQuantity" />
 	</resultMap>
 
 	<select id="orderSelectList" parameterType="map"
@@ -237,6 +246,20 @@
 		WHERE OL.ORDER_NO = #{orderNo}
 	</select>
 
+	<insert id="insertOrder" parameterType="orderDto"
+		useGeneratedKeys="true" keyProperty="orderNo">
+		<selectKey keyProperty="orderNo" resultType="int"
+			order="BEFORE">
+			SELECT ORDER_NO_SEQ.NEXTVAL
+			FROM DUAL
+		</selectKey>
+		INSERT INTO ORDER_LIST
+		(ORDER_NO, MEMBER_NO, PRODUCT_NO,
+			ORDER_DATE, ORDER_REQUEST, ORDER_STATUS, PRODUCT_QUANTITY)
+		VALUES(#{orderNo}, #{memberNo}, #{productNo},
+			SYSDATE, #{orderRequest}, '미확정', #{productQuantity})
+	</insert>
+	
 </mapper>
 
 

@@ -134,7 +134,7 @@ select{
 
 #productDetailDiv{
 	width: 700px;
-	height: 700px;
+	min-height: 700px;
 	margin: 0px auto;
 	border: 1px solid black;
 }
@@ -151,9 +151,9 @@ select{
 	<div id="mainContainer">		
 		<form id="productForm" action="./addCtr.do" method="post">
 			<div id='routeDiv'>
-				<a id='routeA'>댕댕홈</a>
+				<a id='routeA' href="../">댕댕홈</a>
 				<a id='routeA'> > </a>
-				<a id='routeA'>쇼핑몰</a>
+				<a id='routeA' href="../shop.do">쇼핑몰</a>
 				<a id='routeA'> > </a>
 				<a id='routeA' style='color:blue;'>물품등록</a>
 			</div>
@@ -221,7 +221,6 @@ select{
 					</table>
 					<input id="imgName" name="pImgName" type="hidden" value="사진이름들어갈곳">
 					<div id="adminBtn">
-						<input class="adminBtn" type="button" value="뒤로가기">
 						<input class="adminBtn" type="button" value="등록"
 							onclick="submitForm();">
 					</div>
@@ -234,7 +233,6 @@ select{
 			</div>
 			<input type="hidden" name="productDetailContent" id="productDetailInput">
 			<div id="productDetailDiv" contenteditable="true">
-				입력하요
 			</div>
 		</form>
 	</div>
@@ -333,7 +331,7 @@ select{
 	    	return ;
 	    }
 	    if(!pricePattern.test(productPrice.value)){
-	    	alert('1억 미만의 숫자만 가능합니다.');
+	    	alert('가격은 1억 미만의 숫자만 가능합니다.');
 	    	return ;
 	    }
 	    if(productStockObj.value.length == 0){

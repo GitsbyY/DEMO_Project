@@ -31,6 +31,12 @@ public interface ProductService {
 
 	public void updateProduct(ProductDto productDto);
 
+	public boolean insertCart(Map<String, Object> productDto, int productQuantity, int memberNo);
+
+	public boolean deleteCartList(List<String> productNos, int memberNo);
+
+	public boolean deleteProductList(List<String> productNos);
+
 
 	
 	

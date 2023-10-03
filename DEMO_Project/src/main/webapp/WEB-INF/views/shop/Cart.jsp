@@ -118,10 +118,42 @@ table tr td div {
 #orderSumPriceDiv{
 	font-size: 24px;
 	font-weight: bold;
-	height:200px;
-	border: 1px solid black;
+	height:100px;
+	border: 3px solid black;
 	padding: 20px;
 	padding-left: 900px;
+}
+
+#checkedSumPriceSpan{
+	color:red;
+}
+#shopCtrContainer{
+	height:300px;
+	padding: 50px;
+	padding-left:350px;
+}
+.shopCtrDiv{
+	display:inline-block;
+	width: 200px;
+	height: 50px;
+	margin: 50px;
+	padding:20px;
+	border: 1px solid black;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 24px;
+	line-height: 5vh;
+}
+#emptyCartDiv{
+	width:100%;
+	height:160px;
+	text-align:center;
+	padding-top: 100px;
+}
+.empty{
+	width: 130px;
+	height: 100px;
+	display:inline-block;
 }
 </style>
 <meta charset="UTF-8">
@@ -131,7 +163,8 @@ table tr td div {
 	<jsp:include page="/WEB-INF/views/Header.jsp" />
 
 	<div id="mainContainer">
-		<form action="#" method="post" id="cartForm">
+		<form action="/DEMO_Project/paymentCart.do" method="post" id="cartForm">
+			<input type="hidden" id="formData" name="formData" value="">
 			<div id="basket" style="width: 100%;">
 				<img id="mainImg" alt="장바구니"
 					src="./resources/img/imgHeader/basket.jpg">
@@ -145,7 +178,8 @@ table tr td div {
 					<tr id="columnTr">
 						<td>
 							<div class="columnDiv checkBoxDiv">
-								<input type="checkbox" name="product">
+								<input id="allCheckbox" type="checkbox" name="product"
+									onclick="allCheckboxFnc();">
 								전체 선택
 							</div>
 						</td>
@@ -170,8 +204,8 @@ table tr td div {
 							<td>
 								<input type="hidden" id="memberNoId${loop.index}" value="${cart.MEMBER_NO}">
 								<input type="hidden" id="productNoId${loop.index}" value="${cart.PRODUCT_NO}">
-								<div class="cartListDiv checkBoxDiv">
-						            <input type="checkbox" name="product">
+								<div class="cartListDiv checkBoxDiv" >
+						            <input type="checkbox" name="product" value="${cart.PRODUCT_NO}">
 								</div>
 							</td>
 							<td>
@@ -206,21 +240,49 @@ table tr td div {
 						</tr>
 						
 					</c:forEach>
-								
+						<tr class="emptyCartClass">
+							<td colspan="6">
+								<div id="emptyCartDiv">
+									장바구니에 담긴 상품이 없습니다
+								</div>
+							</td>
+						</tr><tr class="emptyCartClass">
+							<td colspan="6">
+								<div id="emptyCartDiv">
+									각 상품을 선택하시고 구매하기 버튼을 눌러보세요<br>
+									선택한 상품을 모두 장바구니에 담을수 있습니다
+								</div>
+							</td>
+						</tr>
 				</table>
 			</div>
 	
-			<div id="deleteDiv">
-				<button id="deleteBtn" type="button">
+			<div id="deleteDiv" class="notEmptyCartClass">
+				<button id="deleteBtn" type="button" onclick="deleteFnc();">
 					선택 삭제
 				</button>
 			</div>
-			<div id="orderSumPriceDiv">
+			<div id="orderSumPriceDiv" class="notEmptyCartClass">
 				총 주문금액
-				<span id="checkedSumPriceSpan"></span>
+				<span id="checkedSumPriceSpan">0원</span>
+				<input type="hidden" id="sumPrice" name="sumPrice" value="">
+			</div>
+			<div id="shopCtrContainer">
+				<div class="emptyCartClass empty">
+				</div>
+				<div class="shopCtrDiv"
+					onclick="location.href='./shop.do'">
+					쇼핑계속하기
+				</div>
+				<div class="shopCtrDiv notEmptyCartClass"
+					onclick="paymentFnc();">
+					구매하기
+				</div>
 			</div>
 		</form>
 	</div>
+	
+	
 
 
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
@@ -231,18 +293,42 @@ table tr td div {
 
 	checkboxForm.addEventListener('change', updateSumPrice);
 	
+	function allCheckboxFnc() {
+	    const checkboxObj = document.getElementById('allCheckbox');
+	    
+	    // 모든 제품 체크박스에 대한 jQuery 객체
+	    const productCheckboxes = $('input[name="product"]');
+	    
+	    if (checkboxObj.checked) {
+	        // 전체 체크박스가 체크되었을 때, 모든 제품 체크박스를 선택
+	        productCheckboxes.prop('checked', true);
+	    } else {
+	        // 전체 체크박스가 해제되었을 때, 모든 제품 체크박스를 해제
+	        productCheckboxes.prop('checked', false);
+	    }
+	}
+	
 	function updateSumPrice() {
         // checkboxForm 내의 모든 체크박스 요소를 가져옴
         let sumPrice = 0;
+        let countingBox = 0;
             $('input[name="product"]:checked').each(function () {
                 const index = $(this).closest('tr').index() - 1; // 헤더 행을 제외하기 위해 -1
-                const productPrice = parseFloat($('#priceId' + index).val());
-                const productQuantity = parseInt($('#quantityId' + index).text());
-                sumPrice += productPrice * productQuantity;
+                if(index != -1){
+	                const productPrice = parseInt($('#priceId' + index).val());
+	                const productQuantity = parseInt($('#quantityId' + index).text());
+	                sumPrice += productPrice * productQuantity;
+	                countingBox += 1;
+                }
             });
 
             // 계산된 총 주문금액을 span에 넣기
-            $('#checkedSumPriceSpan').text(sumPrice); // 소수점 2자리까지 표시
+
+            $('#checkedSumPriceSpan').text(
+            		new Intl.NumberFormat().format(sumPrice) + "원");
+            
+            $('#countingSpan').text(countingBox);
+            
     }
 	
 	function plusQuantityFnc(num) {
@@ -262,6 +348,7 @@ table tr td div {
 		
 		sumPriceDiv.innerHTML = new Intl.NumberFormat().format(sumPriceNum) + "원";
 		quantityDiv.innerHTML = quantityNum;
+		updateSumPrice();
 	}
 	
 	function updateProductQuantity(num, quantityNum) {
@@ -306,8 +393,90 @@ table tr td div {
 			
 			sumPriceDiv.innerHTML = new Intl.NumberFormat().format(sumPriceNum) + "원";
 			quantityDiv.innerHTML = quantityNum;
+			updateSumPrice();
 		}
 	}
+	
+	function deleteFnc() {
+		var checkboxes = document.querySelectorAll('input[name="product"]:not(#allCheckbox)');
+
+        // 체크된 체크박스의 개수를 셉니다.
+        var checkedCount = 0;
+        checkboxes.forEach(function(checkbox) {
+            if (checkbox.checked) {
+                checkedCount++;
+            }
+        });
+
+		if(checkedCount == 0){
+			alert('선택한 상품이 없습니다.');
+			return ;
+		}
+		if(confirm("선택한 상품을 장바구니에서 제외하시겠습니까?")){
+			var checkedProductNos = $('input[name="product"]:checked:not(#allCheckbox)').map(function () {
+		        return this.value;
+		    }).get();
+			console.log(checkedProductNos);
+		    // 배열을 JSON 문자열로 변환
+		    var jsonString = JSON.stringify({ productNos: checkedProductNos });
+			
+		    location.href="/DEMO_Project/cart/delete.do?formData=" + jsonString;
+		}
+	}
+	
+	function paymentFnc() {
+	    var checkedProductNos = $('input[name="product"]:checked:not(#allCheckbox)').map(function () {
+	        return this.value;
+	    }).get();
+	    var checkboxes = document.querySelectorAll('input[name="product"]:not(#allCheckbox)');
+
+        // 체크된 체크박스의 개수를 셉니다.
+        var checkedCount = 0;
+        checkboxes.forEach(function(checkbox) {
+            if (checkbox.checked) {
+                checkedCount++;
+            }
+        });
+
+		if(checkedCount == 0){
+			alert('선택한 상품이 없습니다.');
+			return ;
+		}
+		
+		console.log(checkedProductNos);
+	    // 배열을 JSON 문자열로 변환
+	    var jsonString = JSON.stringify({ productNos: checkedProductNos });
+
+	    // 숨은 필드에 JSON 데이터 설정
+	    document.getElementById("formData").value = jsonString;
+	    console.log(document.getElementById("formData").value);
+	    
+	    var sumPrice =
+	    	document.getElementById("checkedSumPriceSpan").innerText.replace(/[^0-9]/g, '');
+	    document.getElementById("sumPrice").value = sumPrice;
+	    // 폼 제출
+	    document.getElementById('cartForm').submit();
+	}
+	
+	document.addEventListener('DOMContentLoaded', function () {
+	       var table = document.getElementById('productTable');
+	
+	       //장바구니에 담긴 것이 없을때
+	       if (table.rows.length === 3) {
+	           console.log('Table has only three row.');
+	   		var notEmptyCartClassArray = Array.from(document.querySelectorAll(".notEmptyCartClass"));
+	
+	   		for (var element of notEmptyCartClassArray) {
+	   		    element.style.display = "none";
+	   		}
+	       } else {
+	       	var emptyCartClassArray = Array.from(document.querySelectorAll(".emptyCartClass"));
+	
+	   		for (var element of emptyCartClassArray) {
+	   		    element.style.display = "none";
+	   		}
+	       }
+	   });
 	
 </script>
 </html>

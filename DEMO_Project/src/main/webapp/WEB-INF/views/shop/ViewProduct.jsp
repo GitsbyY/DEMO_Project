@@ -10,6 +10,7 @@
 
 table tr td{
 	margin: 0px 50px;
+	border-collapse: collapse;
 }
 
 #routeDiv{
@@ -49,10 +50,11 @@ table tr td{
 	display:inline-block;
 }
 
-#type{
+#infoTable{
 	float: right;
 	font-size: 20px;
 	font-weight: bold;
+	border-collapse: collapse;
 }
 #typeTd{
 	width: 250px;
@@ -83,15 +85,15 @@ select{
 .midTd{
 	width: 50px;
 }
-#price{
-	color: red;
+.redTextClass{
+	color:red;
 }
 #inventory{
 	font-weight: normal;
 	font-size: 15px;
 }
 .inputTable{
-	height: 50px;
+	height: 80px;
 }
 #totalPrice{
 	clear: right;
@@ -103,9 +105,6 @@ select{
 	text-align: right;
 	font-size: 25px;
 	font-weight: bold;
-}
-#totalPriceTd{
-	color: red;
 }
 #controlDiv{
 	clear: right;
@@ -119,6 +118,7 @@ select{
 	color: white;
 }
 #productDetailText{
+	margin-bottom: 50px;
 	text-align:center;
 	font-size: 32px;
 }
@@ -133,12 +133,13 @@ select{
 
 #productDetailDiv{
 	width: 700px;
-	height: 700px;
+	min-height: 700px;
 	margin: 0px auto;
 	border: 1px solid black;
 }
 
 #goReview{
+	margin: 50px auto;
 	clear: right;
 	text-align: center;
 	font-size: 25px;
@@ -153,6 +154,70 @@ select{
 
 .updateClass{
 	display:none;
+}
+.quantityTable{
+	width:100px;
+	height:60px;
+	border: 1px solid black;
+	border-collapse: collapse;
+	background-color: #FFFFFF;
+	text-align:center;
+	margin-left: 130px;
+}
+.quantityTable tr td{
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+.quantityTr{
+	background-color: #EEEEEE;
+	font-weight: normal;
+}
+.inputQuantity{
+	width:50px;
+	height:50px;
+}
+.inputQuantity input {
+	border-style: none;
+	width:50px;
+	height:50px;
+	font-size: 20px;
+}
+.controlQuantity{
+	width:20px;
+}
+.stockTr{
+	font-weight: normal;
+}
+
+.sumPriceTd{
+	font-size: 20px;
+	padding-left: 300px;
+}
+#cartDiv{
+	width:100px;
+	height:40px;
+	background-color: #666666;
+	color: #FFFFFF;
+	text-align:center;
+	padding-top:10px;
+	margin-right: 30px;
+	display:inline-block;
+	float:right;
+}
+#paymentDiv{
+	padding-top:10px;
+	text-align:center;
+	width:150px;
+	height:40px;
+	float:right;
+}
+
+.adminClass.updateClass{
+/* 	margin-top: 160px; */
+/* 	margin-righ: 5px; */
+}
+.updateBtn{
+
 }
 </style>
 <script type="text/javascript" src="/DEMO_Project/resources/js/jquery-3.7.1.js">
@@ -171,11 +236,34 @@ select{
 			<input type="hidden" name="productDetailNo"
 				value="${productDto.PRODUCT_DETAIL_NO}">
 			<div id='routeDiv'>
-				<a id='routeA'>댕댕홈</a>
+				<a id='routeA' href="../">댕댕홈</a>
 				<a id='routeA'> > </a>
-				<a id='routeA'>쇼핑몰</a>
+				<a id='routeA' href="../shop.do">쇼핑몰</a>
 				<a id='routeA'> > </a>
-				<a id='routeA' style='color:blue;'>물품등록</a>
+				<c:if test="${productDto.PRODUCT_CATEGORY eq 10}">
+					<a id='routeA' style='color:blue;'
+						href="../shop.do?category=10">사료</a>
+				</c:if>
+				<c:if test="${productDto.PRODUCT_CATEGORY eq 20}">
+					<a id='routeA' style='color:blue;'
+						href="../shop.do?category=20">간식</a>
+				</c:if>
+				<c:if test="${productDto.PRODUCT_CATEGORY eq 30}">
+					<a id='routeA' style='color:blue;'
+						href="../shop.do?category=30">영양제</a>
+				</c:if>
+				<c:if test="${productDto.PRODUCT_CATEGORY eq 40}">
+					<a id='routeA' style='color:blue;'
+						href="../shop.do?category=40">미용/목욕용품</a>
+				</c:if>
+				<c:if test="${productDto.PRODUCT_CATEGORY eq 50}">
+					<a id='routeA' style='color:blue;'
+						href="../shop.do?category=50">장난감</a>
+				</c:if>
+				<c:if test="${productDto.PRODUCT_CATEGORY eq 60}">
+					<a id='routeA' style='color:blue;'
+						href="../shop.do?category=60">기타</a>
+				</c:if>
 			</div>
 				
 			<div id='bodyContainer'>
@@ -195,7 +283,7 @@ select{
 				</div>
 				
 				<div id='inputContainer'>
-					<table id="type">
+					<table id="infoTable">
 						<tr class="inputTable">
 							<td id="typeTd">상품 유형</td>
 							<td>
@@ -249,11 +337,13 @@ select{
 						</tr>
 						<tr>
 							<td>
-								<div id="price">
-									${productDto.PRODUCT_PRICE}
+								<div class="redTextClass" id="price">
+									<fmt:formatNumber value="${productDto.PRODUCT_PRICE}" pattern="#,##0" />원
 								</div>
 								<div id="pointAccumulate">
-									1234
+									최대 
+									<fmt:formatNumber value="${productDto.PRODUCT_PRICE*0.05}" pattern="#,##0" />
+									P 적립
 								</div>
 							</td>
 							<td>
@@ -262,9 +352,13 @@ select{
 									value="${productDto.PRODUCT_PRICE}">
 							</td>				
 						</tr>
-						<tr class="inputTable">
+						<tr class="inputTable stockTr">
 							<td>
-								${productDto.PRODUCT_STOCK}
+								상품재고: 
+								<span id="inventory">
+									${productDto.PRODUCT_STOCK}
+								</span>
+								개
 							</td>
 							<td>
 								<input class="inputName updateClass" name="productStock" id="productStock"
@@ -272,34 +366,77 @@ select{
 									value="${productDto.PRODUCT_STOCK}">
 							</td>				
 						</tr>
-						<tr class="inputTable">
-							<td>
-								${productDto.PRODUCT_NAME}
-							</td>
-							<td>
-								<div id="inputName">
-								
-								</div>
-							</td>			
-						</tr>
+						<c:if test='${sessionScope.member.memberNo != 1}'>
+							<tr class="inputTable quantityTr viewClass viewTr">
+								<td>
+									<div>
+										${productDto.PRODUCT_NAME}
+									</div>
+								</td>
+								<td>
+									<div>
+										<table class="quantityTable">
+											<tr>
+												<td rowspan="2" class="inputQuantity">
+													<input type="text" id="productQuantity" value="1">
+												</td>
+												<td class="controlQuantity">
+													<div onclick="plusQuantityFnc();">
+														∧
+													</div>
+												</td>
+											</tr>
+											<tr>
+												<td class="controlQuantity">
+													<div onclick="minusQuantityFnc();">
+														∨
+													</div>
+												</td>
+											</tr>
+										</table>
+									</div>
+								</td>
+							</tr>
+							<tr class="inputTable viewClass viewTr">
+								<td colspan="2" class="sumPriceTd">
+									<span class="redTextClass">총 상품금액</span>
+									<span id="sumPriceSpan">
+										<fmt:formatNumber value="${productDto.PRODUCT_PRICE}" pattern="#,##0" />원
+									</span>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<div>
+										<div id='paymentDiv' class='memberBtnClass'
+											onclick="paymentFnc();">
+											바로 구매하기
+										</div>
+										<div id='cartDiv' onclick="addCartFnc();">
+											장바구니
+										</div>
+									</div>
+								</td>
+							</tr>
+						</c:if>
 					</table>
 					<input id="imgName" name="pImgName" type="hidden" value="사진이름들어갈곳">
 					<div id="sumContainer">
 						<div class="memberDiv">
 						</div>
 					</div>
-					<div id="controlDiv">
-						<input id="adminBtn" class="adminClass viewClass"
-							type="button" value="뒤로가기">
-						<input id="adminBtn" class="adminClass viewClass"
-							type="button" value="수정"
-							onclick="updateProductFnc();">
-						<input id="adminBtn" class="adminClass updateClass" 
-							type="button" value="취소"
-							onclick="viewProductFnc();">
-						<input id="adminBtn" class="adminClass updateClass"
-							type="button" value="등록"	onclick="submitForm();">
-					</div>
+					<c:if test='${sessionScope.member.memberNo == 1}'>
+						<div id="controlDiv">
+							<input id="adminBtn" class="adminClass viewClass updateBtn"
+								type="button" value="수정"
+								onclick="updateProductFnc();">
+							<input id="adminBtn" class="adminClass updateClass" 
+								type="button" value="취소"
+								onclick="viewProductFnc();">
+							<input id="adminBtn" class="adminClass updateClass"
+								type="button" value="등록"	onclick="submitForm();">
+						</div>
+					</c:if>
 				</div>
 			</div>
 			<div id="goReview" class="viewClass">
@@ -307,7 +444,7 @@ select{
 				<span id="reviewSpan">보러가기</span>
 			</div>
 			<div id="productDetailText">상품 상세 설명</div>
-			<div id="productDetailDivCtr" class="adminClass">
+			<div id="productDetailDivCtr" class="adminClass updateClass">
 				<button id="registBtn" type="button" class="updateClass"
 					onclick="registDetailFnc();">수정</button>
 			</div>
@@ -323,6 +460,54 @@ select{
 </body>
 
 <script>
+
+	var namePattern = /^.{1,30}$/;
+	var pricePattern = /^[0-9]{1,8}$/;
+	var stockPattern = /^[0-9]{1,5}$/;
+	var detailPattern = /^.{1,3000}$/;
+	
+	const productQuantityObj = document.getElementById('productQuantity');
+	
+	productQuantityObj.addEventListener('change', updateSumPrice);
+	
+	function plusQuantityFnc(){
+		var productQuantity = parseInt($('#productQuantity').val());
+		productQuantityObj.value = productQuantity + 1;
+		updateSumPrice();
+	}
+	function minusQuantityFnc(){
+		var productQuantity = parseInt($('#productQuantity').val());
+		if(productQuantity === 1){
+			return ;
+		}
+		productQuantityObj.value = productQuantity - 1;
+		updateSumPrice();
+	}
+	function updateSumPrice() {
+		var productQuantity = parseInt($('#productQuantity').val());
+		var productStock = parseInt($('#inventory').text().replace(/[^\d]/g, ''));
+		var productPrice = parseInt($('#price').text().replace(/[^\d]/g, ''));
+		console.log("Quantity: " + productQuantity);
+		console.log("Price: " + productPrice);
+		if(productQuantity === 0){
+			productQuantity = 1;
+	    	$('#productQuantity').val(1);
+		}
+		if(!stockPattern.test(productQuantity)){
+	    	alert('숫자를 입력해주세요.');
+	    	productQuantity = 1;
+	    	$('#productQuantity').val(1);
+	    }
+		if(productQuantity > productStock){
+			alert('보유한 재고 이하로 입력해주세요.');
+			productQuantity = productStock;
+			$('#productQuantity').val(productQuantity);
+		}
+        
+        $('#sumPriceSpan').text(
+        		new Intl.NumberFormat().format(productPrice * productQuantity) + "원");
+	}
+	
 	function updateProductFnc(){
 		var updateClassArray = Array.from(document.querySelectorAll(".updateClass"));
 		var viewClassArray = Array.from(document.querySelectorAll(".viewClass"));
@@ -335,9 +520,9 @@ select{
 		for (var element of viewClassArray) {
 		    element.style.display = "none";
 		}
-		
+		document.getElementById('productDetailDivCtr').style.display = "block";
 		document.getElementById("productCategory").removeAttribute("disabled");
-		
+		productDetailDivCtr
 	}
 	
 	function viewProductFnc(){
@@ -363,13 +548,14 @@ select{
 		
 		document.getElementById("productCategory").disabled = true;
 		document.getElementById("productCategory").style.display="inline-block";
+		document.getElementById("goReview").style.display="block";
 		
+		var elements = document.querySelectorAll(".viewTr");
+
+		elements.forEach(function(element) {
+		    element.style.display = "table-row";
+		});
 	}
-	
-	var namePattern = /^.{1,30}$/;
-	var pricePattern = /^[0-9]{1,8}$/;
-	var stockPattern = /^[0-9]{1,5}$/;
-	var detailPattern = /^.{1,3000}$/;
 	
 	function fileSelected() {
 		var imgSrc = document.getElementById('productImgName').getAttribute('src');
@@ -489,6 +675,24 @@ select{
 	    
 	    // 폼 제출
 	    document.getElementById("productForm").submit();
+	}
+	
+	function addCartFnc() {
+		var productNo = $('#productNo').val();
+		var productQuantity = $('#productQuantity').val();
+		
+		location.href="/DEMO_Project/shop/insertCart.do?productNo=" + productNo + "&productQuantity=" + productQuantity;
+	}
+	
+	function paymentFnc() {sumPriceSpan
+		var productNo = $('#productNo').val();
+		var productQuantity = $('#productQuantity').val();
+		var sumPrice = $('#sumPriceSpan').text().replace(/[^\d]/g, '');
+		
+		location.href = 
+			"/DEMO_Project/payment.do?productNo=" + productNo +
+			"&productQuantity=" + productQuantity +
+			"&sumPrice=" + sumPrice;
 	}
 </script>
 </html>

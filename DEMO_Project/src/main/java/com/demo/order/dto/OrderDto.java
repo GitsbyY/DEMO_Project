@@ -8,6 +8,7 @@ public class OrderDto {
 
 	private int orderNo;
 	private int memberNo;
+	private int productNo;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date orderDate;
 	private String orderRequest;
@@ -18,11 +19,12 @@ public class OrderDto {
 		super();
 	}
 
-	public OrderDto(int orderNo, int memberNo, Date orderDate, String orderRequest, String orderStatus,
+	public OrderDto(int orderNo, int memberNo, int productNo, Date orderDate, String orderRequest, String orderStatus,
 			int productQuantity) {
 		super();
 		this.orderNo = orderNo;
 		this.memberNo = memberNo;
+		this.productNo = productNo;
 		this.orderDate = orderDate;
 		this.orderRequest = orderRequest;
 		this.orderStatus = orderStatus;
@@ -43,6 +45,14 @@ public class OrderDto {
 
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
+	}
+
+	public int getProductNo() {
+		return productNo;
+	}
+
+	public void setProductNo(int productNo) {
+		this.productNo = productNo;
 	}
 
 	public Date getOrderDate() {
@@ -79,11 +89,12 @@ public class OrderDto {
 
 	@Override
 	public String toString() {
-		return "OrderDto [orderNo=" + orderNo + ", memberNo=" + memberNo + ", orderDate=" + orderDate
-				+ ", orderRequest=" + orderRequest + ", orderStatus=" + orderStatus + ", productQuantity="
+		return "OrderDto [orderNo=" + orderNo + ", memberNo=" + memberNo + ", productNo=" + productNo + ", orderDate="
+				+ orderDate + ", orderRequest=" + orderRequest + ", orderStatus=" + orderStatus + ", productQuantity="
 				+ productQuantity + "]";
 	}
 
+	
 	
 	
 	

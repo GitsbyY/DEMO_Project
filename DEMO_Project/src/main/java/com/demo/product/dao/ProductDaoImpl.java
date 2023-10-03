@@ -1,5 +1,6 @@
 package com.demo.product.dao;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,6 +105,39 @@ public class ProductDaoImpl implements ProductDao{
 	public void updateProduct(ProductDto productDto) {
 		// TODO Auto-generated method stub
 		sqlSession.update(nameSpace + "updateProduct", productDto);
+	}
+
+	@Override
+	public boolean insertCart(Map<String, Object> productDto, int productQuantity, int memberNo) {
+		// TODO Auto-generated method stub
+		productDto.put("productQuantity", productQuantity);
+		productDto.put("memberNo", memberNo);
+		productDto.put("PRODUCT_NO", ((BigDecimal)productDto.get("PRODUCT_NO")).intValue());
+		productDto.put("PRODUCT_PRICE", ((BigDecimal)productDto.get("PRODUCT_PRICE")).intValue());
+		try {
+			sqlSession.insert(nameSpace + "insertCart", productDto);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+	}
+
+	@Override
+	public void deleteCartOne(String productNoStr, int memberNo) {
+		// TODO Auto-generated method stub
+		int productNo = Integer.parseInt(productNoStr);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("productNo", productNo);
+		map.put("memberNo", memberNo);
+		sqlSession.update(nameSpace + "deleteCartOne", map);
+	}
+
+	@Override
+	public void deleteCartOne(String productNoStr) {
+		// TODO Auto-generated method stub
+		int productNo = Integer.parseInt(productNoStr);
+		sqlSession.update(nameSpace + "deleteProductOne", productNo);
 	}
 
 	

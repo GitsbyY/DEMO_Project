@@ -147,6 +147,32 @@
 			PRODUCT_MOD_DATE = SYSDATE
 		WHERE PRODUCT_NO = #{productNo}
 	</update>
+
+	<insert id="insertCart" parameterType="map">
+		insert into cart
+		(PRODUCT_NO, MEMBER_NO, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_QUANTITY)
+		VALUES(#{PRODUCT_NO}, #{memberNo}, #{PRODUCT_NAME},
+			#{PRODUCT_PRICE}, #{productQuantity})
+	</insert>
+	
+	<delete id="deleteCartOne" parameterType="map">
+		DELETE FROM CART
+		WHERE MEMBER_NO = #{memberNo}
+		AND PRODUCT_NO = #{productNo}
+	</delete>
+	
+	<delete id="deleteProductOne" parameterType="int">
+		DELETE FROM PRODUCT
+		WHERE PRODUCT_NO = #{productNo}
+	</delete>
+	
+	<select id="selectCartOne" parameterType="map"
+		resultType="map">
+		SELECT *
+		FROM CART
+		WHERE MEMBER_NO = #{memberNo}
+		AND PRODUCT_NO = #{productNo}
+	</select>
 </mapper>
 
 

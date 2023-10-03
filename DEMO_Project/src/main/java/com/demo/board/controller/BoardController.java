@@ -1,12 +1,8 @@
 package com.demo.board.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.demo.board.dto.InquiryDto;
@@ -30,8 +25,6 @@ import com.demo.board.dto.ReviewDto;
 import com.demo.board.dto.ReviewReplyDto;
 import com.demo.board.service.BoardService;
 import com.demo.member.dto.MemberDto;
-import com.demo.member.service.MemberService;
-import com.demo.order.dto.OrderDto;
 import com.demo.util.BoardPaging;
 
 @Controller
@@ -41,8 +34,6 @@ public class BoardController {
    
    @Autowired
    private BoardService boardService;
-   @Autowired
-   private MemberService memberService;
 
    // 공지사항 화면으로 이동
    @RequestMapping(value = "/board/announcement.do", 

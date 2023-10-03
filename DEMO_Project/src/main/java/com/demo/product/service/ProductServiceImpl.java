@@ -112,6 +112,41 @@ public class ProductServiceImpl implements ProductService{
 		// TODO Auto-generated method stub
 		productDao.updateProduct(productDto);
 	}
+
+	@Override
+	public boolean insertCart(Map<String, Object> productDto, int productQuantity, int memberNo) {
+		// TODO Auto-generated method stub
+		return productDao.insertCart(productDto, productQuantity, memberNo);
+	}
+
+	@Override
+	public boolean deleteCartList(List<String> productNos, int memberNo) {
+		// TODO Auto-generated method stub
+		
+		try {
+			for (int i = 0; i < productNos.size(); i++) {
+				productDao.deleteCartOne(productNos.get(i), memberNo);
+			}
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+	}
+
+	@Override
+	public boolean deleteProductList(List<String> productNos) {
+		// TODO Auto-generated method stub
+		try {
+			for (int i = 0; i < productNos.size(); i++) {
+				productDao.deleteCartOne(productNos.get(i));
+			}
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+	}
 	
 
 	

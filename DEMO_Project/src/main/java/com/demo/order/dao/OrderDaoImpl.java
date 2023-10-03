@@ -8,9 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
-
-
+import com.demo.order.dto.OrderDto;
 
 @Repository
 public class OrderDaoImpl implements OrderDao{
@@ -167,6 +165,21 @@ public class OrderDaoImpl implements OrderDao{
 		map.put("sessionMemberNo", sessionMemberNo);
 		
 		return sqlSession.selectList(nameSpace + "cancelSelectListMember", map);
+	}
+
+	@Override
+	public void insertOrder(OrderDto orderDto) {
+		// TODO Auto-generated method stub
+		sqlSession.insert(nameSpace + "insertOrder", orderDto);
+	}
+
+	@Override
+	public Map<String, Object> selectCartOne(int productNo, int memberNo) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("productNo", productNo);
+		map.put("memberNo", memberNo);
+		return sqlSession.selectOne("com.demo.product." + "selectCartOne", map);
 	}
 
 	

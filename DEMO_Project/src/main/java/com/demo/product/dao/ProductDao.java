@@ -32,6 +32,12 @@ public interface ProductDao {
 
 	void updateProduct(ProductDto productDto);
 
+	boolean insertCart(Map<String, Object> productDto, int productQuantity, int memberNo);
+
+	void deleteCartOne(String productNoStr, int memberNo);
+
+	void deleteCartOne(String productNoStr);
+
 
 
 	

@@ -1,5 +1,6 @@
 package com.demo.product.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,10 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.demo.member.dto.MemberDto;
 import com.demo.product.dto.ProductDetailDto;
 import com.demo.product.dto.ProductDto;
 import com.demo.product.service.ProductService;
 import com.demo.util.ShopPaging;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class ProductController {
@@ -157,4 +162,64 @@ public class ProductController {
 		
 		return "common/successShopAdd";
     }
+    @RequestMapping(value = "/shop/insertCart.do",
+			method = { RequestMethod.GET, RequestMethod.POST })
+    public String insertCart(int productNo, int productQuantity,
+    		HttpSession session, Model model) {
+		log.debug("shop/insertCart.do");
+		
+		Map<String,Object> productDto = productService.selectProductOne(productNo);
+		MemberDto memberDto
+			= (MemberDto) session.getAttribute("member");
+		
+		boolean result =
+				productService.insertCart(productDto, productQuantity, memberDto.getMemberNo());
+		if(result == true) {
+			return "common/successAddCart";
+		}else {
+			return "common/failAddCart";
+		}
+    }
+    
+    @RequestMapping(value = "/cart/delete.do",
+			method = { RequestMethod.GET, RequestMethod.POST })
+	public String payment(@RequestParam("formData") String formData,
+				HttpSession session, Model model)
+			throws JsonParseException, JsonMappingException, IOException{
+	    // JSON 문자열을 Map으로 변환
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    Map<String, Object> data = objectMapper.readValue(formData, Map.class);
+
+	    // Map에서 productNos를 꺼내서 사용
+	    List<String> productNos = (List<String>) data.get("productNos");
+	    
+	    MemberDto memberDto = (MemberDto) session.getAttribute("member");
+	    boolean result = productService.deleteCartList(productNos, memberDto.getMemberNo());
+	    
+	    if(result == true) {
+			return "common/successDeleteCart";
+		}else {
+			return "common/failDeleteCart";
+		}
+	}
+    
+    @RequestMapping(value = "/shop/delete.do",
+			method = { RequestMethod.GET, RequestMethod.POST })
+	public String deleteProduct(@RequestParam("formData") String formData)
+			throws JsonParseException, JsonMappingException, IOException{
+	    // JSON 문자열을 Map으로 변환
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    Map<String, Object> data = objectMapper.readValue(formData, Map.class);
+
+	    // Map에서 productNos를 꺼내서 사용
+	    List<String> productNos = (List<String>) data.get("productNos");
+	    
+	    boolean result = productService.deleteProductList(productNos);
+	    
+	    if(result == true) {
+			return "common/successDeleteProduct";
+		}else {
+			return "common/failDeleteProduct";
+		}
+	}
 }

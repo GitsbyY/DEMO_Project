@@ -1,6 +1,5 @@
 package com.demo.board.dao;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,8 +9,6 @@ import com.demo.board.dto.NoticeReplyDto;
 import com.demo.board.dto.ReplyDto;
 import com.demo.board.dto.ReviewDto;
 import com.demo.board.dto.ReviewReplyDto;
-import com.demo.member.dto.MemberDto;
-import com.demo.order.dto.OrderDto;
 
 public interface BoardDao {
 

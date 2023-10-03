@@ -33,6 +33,10 @@ public interface OrderService {
 	List<Map<String, Object>> cancelSelectListMember(int start, int end, String category, String search,
 			int sessionMemberNo);
 
+	boolean insertOrder(OrderDto orderDto);
+
+	boolean insertOrderList(List<String> productNos, OrderDto orderDto);
+
 
 
 

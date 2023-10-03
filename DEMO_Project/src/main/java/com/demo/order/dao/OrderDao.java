@@ -32,6 +32,10 @@ public interface OrderDao {
 	List<Map<String, Object>> cancelSelectListMember(int start, int end, String category, String search,
 			int sessionMemberNo);
 
+	void insertOrder(OrderDto orderDto);
+
+	Map<String, Object> selectCartOne(int productNo, int memberNo);
+
 
 
 

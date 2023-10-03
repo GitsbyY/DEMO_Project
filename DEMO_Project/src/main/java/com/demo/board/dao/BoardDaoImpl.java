@@ -12,10 +12,8 @@ import com.demo.board.dto.InquiryDto;
 import com.demo.board.dto.NoticeDto;
 import com.demo.board.dto.NoticeReplyDto;
 import com.demo.board.dto.ReplyDto;
-import com.demo.order.dto.OrderDto;
 import com.demo.board.dto.ReviewDto;
 import com.demo.board.dto.ReviewReplyDto;
-import com.demo.member.dto.MemberDto;
 
 
 
