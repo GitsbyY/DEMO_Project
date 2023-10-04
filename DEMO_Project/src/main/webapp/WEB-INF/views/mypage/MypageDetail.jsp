@@ -110,7 +110,7 @@ th, td {
 							<img src="" alt="상품 이미지">
 							<input type="text" value="텍스트박스 내용">
 						</th>
-						<th style="font-size: 24px; font-weight: bold;">1개</th>
+						<th style="font-size: 24px; font-weight: bold;">${orderDto.PRODUCT_QUANTITY} 개</th>
 						<th rowspan="2" style="font-size: 24px; font-weight: bold; border-left: 1px solid black;">${orderDto.ORDER_STATUS}</th>
 					</tr>
 					<tr>
