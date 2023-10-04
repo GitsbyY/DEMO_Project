@@ -120,6 +120,7 @@
       <if test="select == 'REVIEW_TITLE'">
       REVIEW.REVIEW_TITLE LIKE '%'||#{search}||'%'
       </if>
+      ORDER BY REVIEW.REVIEW_CRE_DATE DESC
    </select>   
    
    <select id="inquirySelectList" parameterType="map" resultType="map">   
@@ -213,6 +214,19 @@
    </select>
    
    <select id="memberInfo" parameterType="int"
+       resultType="map">
+         SELECT P.PRODUCT_NAME, T.PET_BREED, M.MEMBER_NO, P.PRODUCT_NO
+      FROM PET T JOIN MEMBER M
+      ON T.MEMBER_NO = M.MEMBER_NO
+      JOIN ORDER_LIST O
+      ON M.MEMBER_NO = O.MEMBER_NO
+      JOIN PRODUCT P
+      ON O.PRODUCT_NO = P.PRODUCT_NO
+      WHERE M.MEMBER_NO = #{memberNo}
+      
+   </select>
+   
+   <select id="memberInfoList" parameterType="int"
        resultType="map">
          SELECT P.PRODUCT_NAME, T.PET_BREED, M.MEMBER_NO, P.PRODUCT_NO
       FROM PET T JOIN MEMBER M
@@ -326,7 +340,7 @@
       INSERT INTO REVIEW
       (REVIEW_NO, MEMBER_NO, PRODUCT_NO, REVIEW_TITLE, REVIEW_CONTENT,
        REVIEW_CRE_DATE, REVIEW_MOD_DATE)
-      VALUES(#{reviewNo}, #{memberNo}, 1, #{reviewTitle}, #{reviewContent}
+      VALUES(#{reviewNo}, #{memberNo}, #{productNo}, #{reviewTitle}, #{reviewContent}
       , SYSDATE, SYSDATE)
    </insert>
    

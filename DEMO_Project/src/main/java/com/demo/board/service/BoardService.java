@@ -86,6 +86,8 @@ public interface BoardService {
 
 	public void noticeReplyEdit(NoticeReplyDto noticeReplyDto);
 
+	public List<MemberDto> memberInfoList(int memberNo);
+
 	
 	
 

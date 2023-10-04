@@ -50,7 +50,7 @@ table{
 	text-align: center;
 	font-weight: bold;
 	border-right: 1px solid black;
-	background-color: #D3D3D3;
+	background-color: #FFC4A3;
 }
 #fourthTr{
 	height: 400px;

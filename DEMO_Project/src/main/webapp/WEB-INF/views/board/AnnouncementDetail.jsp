@@ -135,7 +135,7 @@ table{
 	font-weight: bold;
 	width: 200px;
 }
-.submit{
+.submit, .edit{
 	float: right;
 	margin-right: 25px;
 	background-color: #FFC4A3;
@@ -242,8 +242,8 @@ textarea {
 	      		                        		      			
 	      		<c:choose>
 					<c:when test="${sessionScope.member.memberNo eq reply.MEMBER_NO}">
-						<input id="firstBtn" class="submit" type="button" value="삭제" onclick="noticeReplyDeleteFnc(${reply.NOTICE_REPLY_NO});" style="display: block;">
-	      				<button id="secondBtn" class="submit" type="button" 
+						<input id="firstBtn" class="edit" type="button" value="삭제" onclick="noticeReplyDeleteFnc(${reply.NOTICE_REPLY_NO});" style="display: block;">
+	      				<button id="secondBtn" class="edit" type="button" 
 	      					style="display: block;" onclick="changeBtnFnc('noticeReplyDiv${loop.index}'); changeDivBorder('noticeReplyDiv${loop.index}'); activateTextarea('noticeReplyDiv${loop.index}');">수정</button>
 	      				<button id="thirdBtn" class="submit" type="button" 
 	      					style="background-color: red; display: none;" onclick="cancelEdit('noticeReplyDiv${loop.index}'); revertDivBorder('noticeReplyDiv${loop.index}');">취소</button>
@@ -273,7 +273,7 @@ textarea {
       	<textarea id="writenoticeReplyContent" class="replyText" rows="2" cols="20" name="noticeReplyContent"></textarea>
       	<div>
       		<!-- <input class="submit" type="button" value="등록"> -->
-      		<button class="submit" type="submit">등록</button>
+      		<button class="edit" type="submit">등록</button>
       	</div>
       
 		</div>
@@ -339,6 +339,12 @@ textarea {
 		secondBtn.style.display = 'block';
 		thirdBtn.style.display = 'none';
 		fourthBtn.style.display = 'none';
+		
+		var editButtons = document.querySelectorAll('.edit'); // 클래스가 'edit 모든 요소를 선택합니다.
+
+	    editButtons.forEach(function(button) {
+	        button.disabled = false; 
+	    });
 	}
 	
 	function changeBtnFnc(div) {
@@ -354,6 +360,12 @@ textarea {
 		thirdBtn.style.display = 'block';
 		fourthBtn.style.display = 'block';
 		
+		var editButtons = document.querySelectorAll('.edit'); // 클래스가 'edit 모든 요소를 선택합니다.
+
+	    editButtons.forEach(function(button) {
+	        button.disabled = true; 
+	    });
+		
 	}
 	
 	function goBack() {
@@ -361,18 +373,24 @@ textarea {
 	}
 	
 	function pageMoveDeleteFnc(no) {
-	  
-		var url = './noticedelete.do?no=' + no;
-	     
-		location.href = url;
+		
+		var noticeNo = document.getElementById('noticeNo').value;
+		
+		if (confirm("정말로 삭제 하시겠습니까?")) {        
+			var url = './noticedelete.do?no=' + no;
+		     
+			location.href = url;
+	   } 	  		
 	}
 	
 	function noticeReplyDeleteFnc(no) {
 		var noticeNo = document.getElementById('noticeNo').value;
-		
-		var url = './noticeReplydelete.do?no=' + no +'&noticeNo=' + noticeNo;
 	    
-		location.href = url;
+		   if (confirm("정말로 삭제 하시겠습니까?")) {        
+				var url = './noticeReplydelete.do?no=' + no +'&noticeNo=' + noticeNo;
+			    
+				location.href = url;
+		   } 		
 	}
 			
 	function editFnc(div) {
@@ -423,6 +441,12 @@ textarea {
 				    targetDiv.style.border = "2px solid #FFC4A3";
 					
 					console.log(Rno);
+					
+					var editButtons = document.querySelectorAll('.edit'); // 클래스가 'edit 모든 요소를 선택합니다.
+
+				    editButtons.forEach(function(button) {
+				        button.disabled = false; 
+				    });
 					
 				},
 				error: function() {

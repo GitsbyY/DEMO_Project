@@ -103,6 +103,10 @@ td input{
 #petBreed{
    padding-left: 10px;
 }
+select{
+	height: 30px;
+	font-size: 16px;
+}
 </style>
 <meta charset="UTF-8">
 <title>공지사항 메인</title>
@@ -118,22 +122,23 @@ td input{
          <div id="firstDiv">후기남겨요</div>
          <div id="secondDiv"></div>                           
       </div>
-      <form action='./reviewaddCtr.do' method='post' enctype="multipart/form-data">
+      <form id="formId" action='./reviewaddCtr.do' method='post' enctype="multipart/form-data">
          <div id="tableDiv">
             <table>                       
                <tr id="firstTr">
                   <td id="firstTd" class="firstTd">상품명</td>   
                   <td id="titleInputTd">
-                  	<select>
+                  	<select id="productSelect" name="productNo">
                   		<option>상품을 선택해주세요
-                  		<option>상품
-                  	
+                  		<c:forEach items="${memberInfoList}" var="memberInfoList">
+                  			<option value="${memberInfoList.PRODUCT_NO}">${memberInfoList.PRODUCT_NAME}                  			                 			
+                  		</c:forEach>                  		                  	
                   	</select>
                      <%-- ${memberInfo.PRODUCT_NAME} --%>
                   </td>
                   <td class="firstTd">견종</td>
                   <td id="petBreed">
-                     ${memberInfo.PET_BREED}
+                     ${memberInfoList[0].PET_BREED}
                   </td>      
                </tr>
                <tr id="secondTr">
@@ -151,23 +156,36 @@ td input{
                   <td id="contentInputTd" colspan="3">
                      <textarea id="contentInput" name="reviewContent"></textarea>
                      <%-- <input type="hidden" name="reviewContent" value="${memberInfo.REVIEW_CONTENT}"> --%>
-                     <input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}">                                     
+                     <input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}">
+                     
                   </td>
                </tr>            
             </table>
          </div>
          <div id="btnDiv">
-            <input id="registrationBtn" type="submit" value="등록">
+            <input id="registrationBtn" type="button" value="등록" onclick="submitForm();">
             <input id="cancellationBtn" type="button" value="취소" 
                onclick="location.href = 'javascript:window.history.back();'">   
          </div>
       </form>         
                   
    </div>
-   
-            
-      
-  
+ 
    <jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
+<script type="text/javascript">
+
+	function submitForm() {
+	   var selectedProduct = document.getElementById("productSelect").value;
+	   var titleInput = document.getElementById("titleInput").value;
+	   var contentInput = document.getElementById("contentInput").value;
+	
+	   if(selectedProduct === "상품을 선택해주세요" || titleInput === "" || contentInput === "") {
+		      alert("상품, 제목, 내용을 모두 입력해주세요!");
+		   } else {
+		      document.getElementById("formId").submit();
+		   }    	   
+	}
+	
+</script>
 </html>

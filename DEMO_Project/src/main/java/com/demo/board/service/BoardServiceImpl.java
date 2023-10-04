@@ -316,6 +316,11 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 		boardDao.noticeReplyEdit(noticeReplyDto);
 	}
+	@Override
+	public List<MemberDto> memberInfoList(int memberNo) {
+		// TODO Auto-generated method stub
+		return boardDao.memberInfoList(memberNo);
+	}
 
 
 	

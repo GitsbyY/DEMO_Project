@@ -154,12 +154,12 @@ td input {
 }
 
 #titleInputTd {
-   padding-left: 10px;
+   padding-left: 10px;  
 }
 
 #titleInput {
    height: 30px;
-   width: 500px;
+   width: 90%;
 }
 
 #nameTd {
@@ -265,7 +265,7 @@ td input {
                   <td class="tdClass">${inquiryDto.INQUIRY_NO}</td>
                   <td class="tdClass">${inquiryDto.INQUIRY_TYPE}</td>
                   <td>[RE] : ${replyDto.REPLY_TITLE}</td>
-                  <td class="tdClass">${sessionScope.member.memberName}</td>
+                  <td class="tdClass">관리자</td>
                   <td class="tdClass"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
                         value="${replyDto.REPLY_CRE_DATE}" /></td>                  
                </tr>
@@ -282,6 +282,7 @@ td input {
          <div id="btnDiv">
              <input id="listBtn" type="button" value="목록으로" onclick="goBack();">
              <input type="hidden" name="no" value="${inquiryDto.INQUIRY_NO}">
+             <input type="hidden" id="inquiryNo" name="inquiryNo" value="${inquiryDto.INQUIRY_NO}">
              
              <c:choose>
                  <c:when test="${sessionScope.member.memberNo eq inquiryDto.MEMBER_NO}">
@@ -335,11 +336,16 @@ td input {
       window.history.back();
    }
    
-   function pageMoveDeleteFnc(no) {
+   function pageMoveDeleteFnc(no) {      
+	   var inquiryNo = document.getElementById('inquiryNo').value;
+	    
+	   if (confirm("정말로 삭제 하시겠습니까?")) {        
+		   var url = './inquirydelete.do?no=' + no;
+	         
+		   location.href = url;
+	   }  
+	   
       
-      var url = './inquirydelete.do?no=' + no;
-         
-      location.href = url;
    }
    
    function showReplyForm() {

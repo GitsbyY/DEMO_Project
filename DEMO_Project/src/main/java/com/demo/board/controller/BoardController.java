@@ -204,6 +204,7 @@ public class BoardController {
       
       return "board/AddNotice";
    }
+   
    // 후기남겨요 작성 페이지 이동
    @RequestMapping(value = "/board/reviewadd.do", method = RequestMethod.GET)
    public String reviewAdd(Model model, HttpSession session) {
@@ -213,9 +214,11 @@ public class BoardController {
       
       int memberNo = memberDto.getMemberNo();
            
-      Map<String, Object> memberInfo = boardService.memberInfo(memberNo);      
+//      Map<String, Object> memberInfo = boardService.memberInfo(memberNo);
+      
+      List<MemberDto> memberInfoList = boardService.memberInfoList(memberNo);
                   
-      model.addAttribute("memberInfo", memberInfo);
+      model.addAttribute("memberInfoList", memberInfoList);
 
       return "board/AddReview";
    }

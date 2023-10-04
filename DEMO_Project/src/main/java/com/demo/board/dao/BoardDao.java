@@ -9,6 +9,7 @@ import com.demo.board.dto.NoticeReplyDto;
 import com.demo.board.dto.ReplyDto;
 import com.demo.board.dto.ReviewDto;
 import com.demo.board.dto.ReviewReplyDto;
+import com.demo.member.dto.MemberDto;
 
 public interface BoardDao {
 
@@ -80,6 +81,8 @@ public interface BoardDao {
    public int noticeReplyDelete(int no);
    
    public void noticeReplyEdit(NoticeReplyDto noticeReplyDto);
+   
+   List<MemberDto> memberInfoList(int memberNo);
      
    
 

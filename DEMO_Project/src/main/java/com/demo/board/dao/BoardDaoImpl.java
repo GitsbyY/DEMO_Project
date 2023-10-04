@@ -14,6 +14,7 @@ import com.demo.board.dto.NoticeReplyDto;
 import com.demo.board.dto.ReplyDto;
 import com.demo.board.dto.ReviewDto;
 import com.demo.board.dto.ReviewReplyDto;
+import com.demo.member.dto.MemberDto;
 
 
 
@@ -277,6 +278,12 @@ public class BoardDaoImpl implements BoardDao{
 	public void noticeReplyEdit(NoticeReplyDto noticeReplyDto) {
 		// TODO Auto-generated method stub
 		sqlSession.update(nameSpace + "noticeReplyEdit", noticeReplyDto);
+	}
+
+	@Override
+	public List<MemberDto> memberInfoList(int memberNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(nameSpace + "memberInfoList", memberNo);
 	}
 
 

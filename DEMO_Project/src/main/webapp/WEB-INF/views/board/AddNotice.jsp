@@ -105,7 +105,7 @@ td input{
          <div id="firstDiv">공지사항</div>
          <div id="secondDiv"></div>                           
       </div>
-      <form action='./noticeaddCtr.do' method='post' enctype="multipart/form-data">      
+      <form id="formId" action='./noticeaddCtr.do' method='post' enctype="multipart/form-data">      
          <input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}">
          <div id="tableDiv">
             <table>
@@ -129,7 +129,7 @@ td input{
             </table>
          </div>
          <div id="btnDiv">
-            <input id="registrationBtn" type="submit" value="등록">
+            <input id="registrationBtn" type="button" value="등록" onclick="submitForm();">
             <input id="cancellationBtn" type="button" value="취소" 
                onclick="location.href = 'javascript:window.history.back();'">   
          </div>
@@ -141,4 +141,17 @@ td input{
   
    <jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
+<script type="text/javascript">
+	function submitForm() {	   
+	   var titleInput = document.getElementById("titleInput").value;
+	   var contentInput = document.getElementById("contentInput").value;
+	
+	   if(titleInput === "" || contentInput === "") {
+		      alert("제목, 내용을 모두 입력해주세요!");
+		   } else {
+		      document.getElementById("formId").submit();
+		   }    	   
+	}
+</script>
+
 </html>

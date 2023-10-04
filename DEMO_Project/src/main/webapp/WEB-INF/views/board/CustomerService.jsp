@@ -183,7 +183,7 @@ table {
 								test="${sessionScope.member.memberNo eq inquiryDto.MEMBER_NO}">
 								<c:set var="index" value="${index + 1}" scope="page" />
 								<tr>
-									<td class="tdClass">${index}</td>
+									<td class="tdClass">${inquiryDto.INQUIRY_NO}</td>
 									<td class="tdClass">${inquiryDto.INQUIRY_TYPE}</td>
 									<td><a href='./listOne2.do?no=${inquiryDto.INQUIRY_NO}'>
 											${inquiryDto.INQUIRY_TITLE} </a></td>
