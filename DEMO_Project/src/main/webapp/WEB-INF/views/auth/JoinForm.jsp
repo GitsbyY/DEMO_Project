@@ -148,34 +148,27 @@
 					<!-- 		주소div		 -->
 					<div class="joinAddress">
 						<div class="inputLabel">
-							<label for="userJoinAddress">주소</label>
+							<label for="daumAddress">주소</label>
 						</div>
 						<div class="inputWithButton">
-							<input class="inputUser" type="text" name="memberAddress"
+							<input class="inputUser" type="hidden" name="memberAddress"
 								id="userJoinAddress" placeholder="주소" />
+							<input class="inputUser" type="text" id="daumAddress" placeholder="주소"><br>
 							<button type="button" class="btnDel"></button>
+						</div>
+						<div class="joinAddressDetail">
+							<div class="inputWithButton">
+								<input type="button" onclick="DaumPostcode()" 
+									value="주소찾기" style="margin-bottom: 5px; float: right;">
+								<input class="inputUser" type="text" id="detailAddress" placeholder="상세주소">
+								<button type="button" class="btnDel" style="margin-top: 13px;"></button>
+							</div>
 						</div>
 					</div>
 					<div class="txt_error_area" style="">
-						<p class="err_txt" id="userJoinMessageAddress"
+						<p class="err_txt" id="userJoinMessageAddressDetail"
 							aria-live="assertive"></p>
 					</div>
-					<!-- 	상세주소div		 -->
-					<!-- 					<div class="joinDetailAddress"> -->
-					<!-- 						<div class="inputLabel"> -->
-					<!-- 							<label for="userJoinDetailAddress">상세주소</label> -->
-					<!-- 						</div> -->
-					<!-- 						<div class="inputWithButton"> -->
-					<!-- 							<input class="inputUser" type="text" name="detailAddress" -->
-					<!-- 								id="userJoinDetailAddress" placeholder="상세주소를 입력 해 주세요" /> -->
-					<!-- 							<button type="button" class="btnDel"></button> -->
-					<!-- 						</div> -->
-					<!-- 					</div> -->
-					<!-- 					<div class="txt_error_area" style=""> -->
-					<!-- 						<p class="err_txt" id="userJoinMessageDetailAddress" -->
-					<!-- 							aria-live="assertive"></p> -->
-					<!-- 					</div> -->
-					<!-- 				</div> -->
 
 					<div>
 						<div class="changeBtn">
@@ -190,25 +183,9 @@
 </body>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 
-// 	$(document).ready(function() {
-// 		$("#userJoinId").on("blur", function() {
-// 			var memberId = $(this).val();
-// 			$.ajax({
-// 				url : "/DEMO_Project/auth/checkId.do",
-// 				method : "POST",
-// 				data : {
-// 					memberId : memberId
-// 				},
-// 				success : function(response) {
-// 					if (!response) {
-// 						$("#userJoinMessageId").text("이미 사용 중인 아이디입니다.").css("color", "red");
-// 					}
-// 				}
-// 			});
-// 		});
-// 	});
 
 	//아이디 인풋과 딜리트 버튼
 	var userId = document.getElementById("userJoinId");
@@ -260,10 +237,16 @@
 	});
 
 	// 주소 인풋과 딜리트 버튼
-	var address = document.getElementById("userJoinAddress");
+	var address = document.getElementById("daumAddress");
 	var addressDeleteButton = document.querySelector(".joinAddress .btnDel");
 	addressDeleteButton.addEventListener("click", function() {
 		address.value = ""; // 주소 인풋 값을 비웁니다.
+	});
+	// 상세주소 인풋과 딜리트 버튼
+	var addressDetail = document.getElementById("detailAddress");
+	var addressDetailDeleteButton = document.querySelector(".joinAddressDetail .btnDel");
+	addressDetailDeleteButton.addEventListener("click", function() {
+		addressDetail.value = ""; // 주소 인풋 값을 비웁니다.
 	});
 
 	//아이디 div		
@@ -288,9 +271,11 @@
 	//별명 div	
 	var nickName = document.getElementById("userJoinNickname");
 	var errMsgNickName = document.getElementById("userJoinMessageNickname");
-	//주소 div	
-	var address = document.getElementById("userJoinAddress");
-	var errMsgAddress = document.getElementById("userJoinMessageAddress");
+	//상세 주소 div	
+	var addressDetail = document.getElementById("detailAddress");
+	var errMsgAddress = document.getElementById("userJoinMessageAddressDetail");
+	// 주소
+	var addressInput = document.getElementById("userJoinAddress");
 	// 	//상세주소 div	
 	// 	var detailAddress = document.getElementById("userJoinDetailAddress");
 	// 	var errMsgDetailAddress = document
@@ -324,13 +309,9 @@
 	nickName.addEventListener("blur", handleBlurEventForNickName);
 	nickName.addEventListener("focus", handleFocusEventForNickName);
 
-	// 주소 div
-	address.addEventListener("blur", handleBlurEventForAddress);
-	address.addEventListener("focus", handleFocusEventForAddress);
-
-	// 	// 상세주소 div
-	// 	detailAddress.addEventListener("blur", handleBlurEventForDetailAddress);
-	// 	detailAddress.addEventListener("focus", handleFocusEventForDetailAddress);
+	// 상세 주소 div
+	addressDetail.addEventListener("blur", handleBlurEventForAddress);
+	addressDetail.addEventListener("focus", handleFocusEventForAddress);
 
 	//지역변수 전역변수 확인.
 	//영어 정규식 첫글자
@@ -667,33 +648,38 @@
 
 	//주소
 	function handleBlurEventForAddress() {
+		var addressDetail = document.getElementById("detailAddress");
+// 		alert(addressDetail);
+		addressDetail.classList.remove("focusOutline");
 
-		nickName.classList.remove("focusOutline");
-
-		if (address.value.length == 0) {
-			address.classList.add("errorOutline");
+		if (addressDetail.value.length == 0) {
+			addressDetail.classList.add("errorOutline");
 			errMsgAddress.style.color = "red";
 			errMsgAddress.textContent = "주소를 입력 해 주세요";
 			return;
 		}
 
-		if (!textCheck.test(address.value)) {
-			address.classList.add("errorOutline");
+		if (!textCheck.test(addressDetail.value)) {
+			addressDetail.classList.add("errorOutline");
 			errMsgAddress.style.color = "red";
 			errMsgAddress.textContent = "주소를 확인 해 주세요";
 			return;
 		}
 
-		address.classList.remove("errorOutline");
+		addressDetail.classList.remove("errorOutline");
 		errMsgAddress.style.color = "";
 		errMsgAddress.textContent = "";
+		var address = document.getElementById("daumAddress").value;
+		addressInput = address + " " + addressDetail.value;
+		document.getElementById("userJoinAddress").value = addressInput;
+		alert(addressInput);
 		isValidAddress = true;
 
 	}
 
 	function handleFocusEventForAddress() {
-		address.classList.add("focusOutline");
-		address.classList.remove("errorOutline");
+		addressDetail.classList.add("focusOutline");
+		addressDetail.classList.remove("errorOutline");
 	}
 
 	// 버튼 엘리먼트를 가져옵니다.
@@ -739,7 +725,50 @@
 	nickName.addEventListener("input", updateButtonState);
 	nickName.addEventListener("blur", updateButtonState);
 
-	address.addEventListener("input", updateButtonState);
-	address.addEventListener("blur", updateButtonState);
+	addressDetail.addEventListener("input", updateButtonState);
+	addressDetail.addEventListener("blur", updateButtonState);
+	
+	 function DaumPostcode() {
+		 new daum.Postcode({
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var addr = ''; // 주소 변수
+	                var extraAddr = ''; // 참고항목 변수
+
+	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    addr = data.roadAddress;
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    addr = data.jibunAddress;
+	                }
+
+	                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	                if(data.userSelectedType === 'R'){
+	                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                        extraAddr += data.bname;
+	                    }
+	                    // 건물명이 있고, 공동주택일 경우 추가한다.
+	                    if(data.buildingName !== '' && data.apartment === 'Y'){
+	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    }
+	                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                    if(extraAddr !== ''){
+	                        extraAddr = ' (' + extraAddr + ')';
+	                    }
+	                }
+
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+// 	                document.getElementById('sample6_postcode').value = data.zonecode;
+	                document.getElementById("daumAddress").value = addr;
+	                // 커서를 상세주소 필드로 이동한다.
+	                document.getElementById("detailAddress").focus();
+	            }
+	        }).open();
+	    }
 </script>
 </html>

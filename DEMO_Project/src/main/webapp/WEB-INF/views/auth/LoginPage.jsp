@@ -89,6 +89,14 @@ div {
 	color: red;
 	text-align: left;
 }
+
+
+
+button.DaengBtn:hover {
+    color: #FFAB7C;
+    cursor: pointer;
+}
+
 </style>
 
 </head>

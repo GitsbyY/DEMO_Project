@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,11 +54,11 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 }
 
 #listColumn2 {
-	width: 230px;
+	width: 100px;
 }
 
 #listColumn3 {
-	width: 124px;
+	width: 179px;
 }
 
 #listColumn4 {
@@ -65,7 +66,7 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 }
 
 #listColumn5 {
-	width: 195px;
+	width: 270px;
 }
 
 #listColumn6 {
@@ -99,7 +100,6 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 	<jsp:include page="/WEB-INF/views/Header.jsp" />
 
 	<jsp:include page="/WEB-INF/views/asideMyPage.jsp" />
-
 	<div id='divContainer'>
 		<div class="title">
 			<div id="firstTitle">회원목록</div>
@@ -113,8 +113,9 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 			<div id="listColumn6" class="listColumn">가입일</div>
 		</div>
 <!-- 		루프로하면 안된다 -->
-
+		
 		<c:forEach var="memberDto" items="${memberList}" varStatus="loop">
+			<fmt:formatDate var="formattedDate" value="${memberDto.MEMBER_JOIN_DATE}" pattern="yyyy/MM/dd HH:mm" />
 			<div class="listColumnContainer" onclick="mypageProfileDetailFnc(${memberDto.MEMBER_NO})">
 				<div id="listColumn1" class="listColumn 
 					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
@@ -138,7 +139,7 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 				</div>
 				<div id="listColumn6" class="listColumn 
 					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
-						${memberDto.MEMBER_JOIN_DATE}
+						${formattedDate}
 				</div>
 			</div>
 		</c:forEach>
