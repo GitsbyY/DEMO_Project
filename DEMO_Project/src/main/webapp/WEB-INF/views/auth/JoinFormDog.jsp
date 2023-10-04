@@ -7,17 +7,17 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="/DEMO_Project/resources/css/JoinFormDog.css">
 </head>
 
 <body>
 <div>
-	<h1
-		style="text-align: left; color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG</h1>
+	<h1 style="text-align: left; color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;"
+		onclick="location.href='/DEMO_Project/auth/login.do'">DAENGDAENG</h1>
 	<div class="formContainerDog">
-		<form action="addp.do" method="post">
+		<form action="addpCtr.do" method="post">
 			<div class="joinWrapDog">
 
 				<!-- 		강아지 이름div		 -->
@@ -137,18 +137,18 @@
 					</div>
 					<div class="selectDogVaccin">
 						<select id="dogPillSelect" name="petVac">
+							<option value="미정" selected>미정</option>
 							<option value="1차">1차</option>
 							<option value="2차">2차</option>
 							<option value="3차">3차</option>
 							<option value="4차">4차</option>
 							<option value="5차">5차</option>
 							<option value="6차">6차</option>
-							<option value="없음">미정</option>
 						</select>
 					</div>
 				</div>
 				<!-- 		예방접종일div		 -->
-				<div class="joinDog">
+				<div class="joinDog" id="dogVacDateDiv">
 					<div class="inputLabelDog">
 						<label for="userJoinDogVacDate">반려견<br/>예방접종일</label>
 					</div>
@@ -300,10 +300,12 @@
 		var dogWeight = document.getElementById("userJoinDogWeight").value;
 		var adoptionDate = document.getElementById("userJoinDogDate").value;
 		var dogBreedSelect = document.getElementById("dogTypeSelect").value;
+		var dogPillSelect = document.getElementById("dogPillSelect").value;
+		var dogVacDate = document.getElementById("userJoinDogVacDate").value;
 	
 		// 필수 필드 중 하나라도 비어있으면 false를 반환
 		if (dogName === "" || dogWeight === "" || adoptionDate === ""
-				|| dogBreedSelect === "none") {
+				|| dogBreedSelect === "none"||(dogPillSelect != "미정" & dogVacDate == "")) {
 			return false;
 		}
 		return true;
@@ -335,8 +337,23 @@
 			updateSubmitButton);
 	document.getElementById("userJoinDogDate").addEventListener("input",
 			updateSubmitButton);
+	document.getElementById("dogPillSelect").addEventListener("change",
+			changeDogPillSelect);
+	document.getElementById("userJoinDogVacDate").addEventListener("input",
+			updateSubmitButton);
 
 	// 초기 버튼 스타일 설정
-	updateSubmitButton();
+// 	updateSubmitButton();
+	
+	function changeDogPillSelect() {
+		if(document.getElementById("dogPillSelect").value === "미정"){
+			$('#dogVacDateDiv').css('display', 'none');
+		}else{
+			$('#dogVacDateDiv').css('display', 'flex');
+		}
+		updateSubmitButton();
+	}
+	
+	changeDogPillSelect();
 </script>
 </html>

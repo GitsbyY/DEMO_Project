@@ -113,7 +113,8 @@ tr, td{
    
    <form action="changePassword.do" method="post" onsubmit="return checkPasswords()">
         <div>
-            <h1 style="text-align: center; color: #FFC4A3;">DAENGDAENG</h1>
+            <h1 style="text-align: center; color: #FFC4A3;"
+            	onclick="location.href='/DEMO_Project/auth/login.do'">DAENGDAENG</h1>
             <div id="findPwdText">비밀번호 변경</div>
             <div id="findPwdResult">
                 <table>

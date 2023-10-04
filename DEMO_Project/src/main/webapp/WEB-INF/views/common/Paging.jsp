@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<script type="text/javascript" src="/SpringHome/resources/js/jquery-3.7.1.js">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 </script>
 

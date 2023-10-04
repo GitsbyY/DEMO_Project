@@ -72,7 +72,8 @@ div {
 	
 	<form action="login.do" method="get">
 		<div>
-			<h1 style="text-align: center; color: #FFC4A3;">DAENGDAENG</h1>
+			<h1 style="text-align: center; color: #FFC4A3;"
+				onclick="location.href='/DEMO_Project/auth/login.do'">DAENGDAENG</h1>
 			<div id="findIdText">ID 찾기 결과</div>
 				<div id="findIdResult">
 					회원님의 ID는 ${member.getMemberId()} 입니다

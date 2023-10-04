@@ -5,8 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/DEMO_Project/resources/css/main.css">
 <style type="text/css">
+
+#sortSelect{
+	margin-top:15px;
+}
 
 #search{
 	float: right;	
@@ -20,10 +25,11 @@
 
 #searchButton{
 	position: absolute;
-	marign-top: 3px;
     margin-left: 310px;
-    width: 18px;
-    height: 30px;
+    width: 27px;
+    height: 45px;
+    top: -2px;
+    right: 5px;
 }
 
 #select{
@@ -60,8 +66,8 @@
 #sortDiv {
 	width: 100%;
 	height: 40px;
-	border: 1px solid black;
 	text-align: right;
+	position: relative;
 }
 
 .productDiv{

@@ -169,14 +169,14 @@ public class MemberController {
 		return isAvailable;
 	}
 
-	@RequestMapping(value = "/auth/addp.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/auth/addp.do", method = RequestMethod.POST)
 	public String memberPetFormAdd(MemberDto memberDto, Model model) {
 		log.debug("Welcome MemberController pet Add! " + memberDto);
 		model.addAttribute("memberDto", memberDto);
 		return "auth/JoinFormDog";
 	}
 
-	@RequestMapping(value = "/auth/addp.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/auth/addpCtr.do", method = RequestMethod.POST)
 	public String memberPAddCtr(MemberDto memberDto, PetDto petDto, Model model) {
 
 		log.debug("Welcome MemberController pet Add2!" + "memberDto :" + memberDto + "petDto:" + petDto + "medel: "

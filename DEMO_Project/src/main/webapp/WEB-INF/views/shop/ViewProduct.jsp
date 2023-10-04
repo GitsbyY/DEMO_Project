@@ -26,7 +26,6 @@ table tr td{
 
 #bodyContainer{
 	display: flex;
-	flex-flow: row;
 }
 
 #imgContainer{
@@ -47,7 +46,7 @@ table tr td{
 }
 
 #inputContainer{
-	display:inline-block;
+	margin-left: auto;
 }
 
 #infoTable{
@@ -326,8 +325,10 @@ select{
 							</td>
 						</tr>
 						<tr class="inputTable">
-							<td >
-								${productDto.PRODUCT_NAME}
+							<td>
+								<div id="productNameDiv">
+									${productDto.PRODUCT_NAME}
+								</div>
 							</td>
 							<td>
 								<input class="inputName updateClass" name="productName" id="productName"
@@ -439,7 +440,7 @@ select{
 					</c:if>
 				</div>
 			</div>
-			<div id="goReview" class="viewClass">
+			<div id="goReview" class="viewClass" onclick="goReviewFnc();">
 				<span>해당상품 후기 </span>
 				<span id="reviewSpan">보러가기</span>
 			</div>
@@ -461,14 +462,18 @@ select{
 
 <script>
 
+	var originalProductCategory;
+	var originalProductDetailText;
+	
 	var namePattern = /^.{1,30}$/;
 	var pricePattern = /^[0-9]{1,8}$/;
 	var stockPattern = /^[0-9]{1,5}$/;
 	var detailPattern = /^.{1,3000}$/;
 	
 	const productQuantityObj = document.getElementById('productQuantity');
-	
-	productQuantityObj.addEventListener('change', updateSumPrice);
+	if(productQuantityObj != null){
+		productQuantityObj.addEventListener('change', updateSumPrice);
+	}
 	
 	function plusQuantityFnc(){
 		var productQuantity = parseInt($('#productQuantity').val());
@@ -520,9 +525,15 @@ select{
 		for (var element of viewClassArray) {
 		    element.style.display = "none";
 		}
+		originalProductCategory = $('#productCategory :selected').val();
+		originalProductDetailText = $('#productDetailDiv').text();
+		console.log(originalProductCategory);
+		console.log(originalProductDetailText);
+		
 		document.getElementById('productDetailDivCtr').style.display = "block";
 		document.getElementById("productCategory").removeAttribute("disabled");
-		productDetailDivCtr
+		
+		
 	}
 	
 	function viewProductFnc(){
@@ -555,6 +566,9 @@ select{
 		elements.forEach(function(element) {
 		    element.style.display = "table-row";
 		});
+		
+		$('#productCategory').val(originalProductCategory);
+		$('#productDetailDiv').text(originalProductDetailText);
 	}
 	
 	function fileSelected() {
@@ -693,6 +707,12 @@ select{
 			"/DEMO_Project/payment.do?productNo=" + productNo +
 			"&productQuantity=" + productQuantity +
 			"&sumPrice=" + sumPrice;
+	}
+	
+	function goReviewFnc() {
+		var productName = $('#productNameDiv').text();
+		location.href="/DEMO_Project/board/review.do?search=" + productName;
+		
 	}
 </script>
 </html>

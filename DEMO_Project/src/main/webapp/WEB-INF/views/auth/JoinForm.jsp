@@ -17,9 +17,10 @@
 <body>
 
 	<div>
-		<h1 style="text-align: left; color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG</h1>
+		<h1 style="text-align: left; color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;"
+			onclick="location.href='/DEMO_Project/auth/login.do'">DAENGDAENG</h1>
 		<div class="formContainer">
-			<form action="./addp.do" method="get">
+			<form action="./addp.do" method="post">
 				<div class="joinWrap">
 
 					<!-- 		아이디div		 -->

@@ -97,7 +97,8 @@ div {
 	
 	<form action="loginCtr.do" method="post">
 		<div>
-			<h1 style="text-align: center; color: #FFC4A3;">DAENGDAENG</h1>
+			<h1 style="text-align: center; color: #FFC4A3;"
+				onclick="location.href='/DEMO_Project/auth/login.do'">DAENGDAENG</h1>
 			<div id="loginText">Login</div>
 			<div class="inputTagWrap">
 				<div id="inputIdDiv" class="inputTagWrap">

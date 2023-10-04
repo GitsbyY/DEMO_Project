@@ -81,7 +81,14 @@
       , PET_ADOPTION_DATE, PET_VACCINATION, PET_VACCINATION_DATE)
       VALUES(#{petNo}, #{memberNo}, #{petName}, #{petBreed}, #{petGender},
       #{petWeight},
-      #{petAdoptDate}, #{petVac}, #{petVacDate})
+      #{petAdoptDate}, #{petVac},
+      <if test="petVac == '미정'">
+      	''
+      </if>
+      <if test="petVac != '미정'">
+      	#{petVacDate}
+      </if>
+      )
 
    </insert>
 

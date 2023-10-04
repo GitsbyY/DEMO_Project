@@ -26,7 +26,6 @@ table tr td{
 
 #bodyContainer{
 	display: flex;
-	flex-flow: row;
 }
 
 #imgContainer{
@@ -47,7 +46,7 @@ table tr td{
 }
 
 #inputContainer{
-	display:inline-block;
+	margin-left: auto;
 }
 
 #type{

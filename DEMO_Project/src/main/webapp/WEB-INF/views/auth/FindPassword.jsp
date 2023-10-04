@@ -65,7 +65,8 @@ div {
    
    <form action="findPasswordCtr.do" method="post">
       <div>
-         <h1 style="text-align: center; color: #FFC4A3;">DAENGDAENG</h1>
+         <h1 style="text-align: center; color: #FFC4A3;"
+         	onclick="location.href='/DEMO_Project/auth/login.do'">DAENGDAENG</h1>
          <div id="findPasswordText">비밀번호 찾기</div>
          <div class="inputTagWrap">
             <div id="inputIdDiv" class="inputTagWrap">
