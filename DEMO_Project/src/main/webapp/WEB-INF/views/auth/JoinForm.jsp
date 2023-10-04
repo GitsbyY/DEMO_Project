@@ -250,36 +250,26 @@
 	});
 
 	//아이디 div		
-	var userId = document.getElementById("userJoinId");
 	var errMsgId = document.getElementById("userJoinMessageId");
 	//비밀번호 div	
-	var pwd = document.getElementById("userJoinPwd");
 	var errMsgPwd = document.getElementById("userJoinMessagePwd");
 	//비밀번호확인 div	
-	var conPwd = document.getElementById("userJoinPwdConfirm");
 	var errMsgConPwd = document.getElementById("userJoinMessagePwdConfirm");
 	//이름 div	
-	var uName = document.getElementById("userJoinName");
 	var errMsgUname = document.getElementById("userJoinMessageName");
 
 	//폰번호 div	
-	var mobile = document.getElementById("userJoinPhoneNum");
 	var errMsgMobile = document.getElementById("userJoinMessagePhoneNum");
 	//이메일 div	
-	var email = document.getElementById("userJoinEmail");
 	var errMsgEmail = document.getElementById("userJoinMessageEmail");
 	//별명 div	
 	var nickName = document.getElementById("userJoinNickname");
 	var errMsgNickName = document.getElementById("userJoinMessageNickname");
 	//상세 주소 div	
-	var addressDetail = document.getElementById("detailAddress");
 	var errMsgAddress = document.getElementById("userJoinMessageAddressDetail");
 	// 주소
 	var addressInput = document.getElementById("userJoinAddress");
-	// 	//상세주소 div	
-	// 	var detailAddress = document.getElementById("userJoinDetailAddress");
-	// 	var errMsgDetailAddress = document
-	// 			.getElementById("userJoinMessageDetailAddress");
+
 
 	// 아이디 div
 	userId.addEventListener("blur", handleBlurEventForId);
@@ -672,7 +662,7 @@
 		var address = document.getElementById("daumAddress").value;
 		addressInput = address + " " + addressDetail.value;
 		document.getElementById("userJoinAddress").value = addressInput;
-		alert(addressInput);
+		//alert(addressInput);
 		isValidAddress = true;
 
 	}
@@ -762,8 +752,6 @@
 	                    }
 	                }
 
-	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-// 	                document.getElementById('sample6_postcode').value = data.zonecode;
 	                document.getElementById("daumAddress").value = addr;
 	                // 커서를 상세주소 필드로 이동한다.
 	                document.getElementById("detailAddress").focus();
