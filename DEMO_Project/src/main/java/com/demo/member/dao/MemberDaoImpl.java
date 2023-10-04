@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.demo.member.dto.ChargeDto;
 import com.demo.member.dto.MemberDto;
 import com.demo.member.dto.PetDto;
 
@@ -192,6 +193,15 @@ public class MemberDaoImpl implements MemberDao{
 	public void petInfoUpdate(PetDto petDto) {
 		// TODO Auto-generated method stub
 		sqlSession.update(nameSpace + "petInfoUpdate", petDto);
+	}
+
+	@Override
+	public void insertChargeOne(int memberNo, int chargeAmount) {
+		// TODO Auto-generated method stub
+		ChargeDto chargeDto = new ChargeDto();
+		chargeDto.setMemberNo(memberNo);
+		chargeDto.setChagrgeAmount(chargeAmount);
+		sqlSession.insert(nameSpace + "insertChargeOne", chargeDto);
 	}
 
 }

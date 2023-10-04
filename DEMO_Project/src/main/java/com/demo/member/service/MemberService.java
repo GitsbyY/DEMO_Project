@@ -53,4 +53,6 @@ public interface MemberService {
 	void updateCartQuantity(int memberNo, int productNo, int quantity);
 
 	void petInfoUpdate(PetDto petDto);
+
+	void insertChargeOne(int memberNo, int chargeAmount);
 }

@@ -52,4 +52,6 @@ public interface MemberDao {
 
 	void petInfoUpdate(PetDto petDto);
 
+	void insertChargeOne(int memberNo, int chargeAmount);
+
 }

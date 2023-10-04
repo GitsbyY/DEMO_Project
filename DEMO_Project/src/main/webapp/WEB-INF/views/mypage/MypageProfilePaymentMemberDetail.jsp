@@ -137,9 +137,9 @@ tr, td {
 	padding-top: 10px;
 	text-align: center;
 }
-#chagrgeAmount{
-	border: none;
-	height: 30px;
+#chargeAmount{
+/* 	border: none; */
+/* 	height: 30px; */
 }
 </style>
 <meta charset="UTF-8">
@@ -212,13 +212,13 @@ tr, td {
 						<td class="infoTabalTdDefault">E-money</td>
 						<td class="infoTabalTdData">
 							<form action="../mypage/MypageProfilePaymentMemberDetailEmoneyCtr.do"
-								onsubmit="return checkEmoneyStatus()" id="emoneyForm"
+								id="emoneyForm"
 								method="post">
 								<input type="hidden" name="memberNo" value="${memberDto.MEMBER_NO}" />
 								<c:if test="${sessionScope.member.memberNo == 1}">
 									<input type="text" class="infoTabalTdDataInput" id="pointEmoneyInput" 
 										name="memberEmoney" value="${memberDto.MEMBER_EMONEY}" style="text-align: right;" />
-									<input type="submit" value="수정">
+									<input type="button" value="수정" onclick="checkEmoneyStatus();">
 								</c:if>
 								<c:if test="${sessionScope.member.memberNo != 1}">
 									<input type="text" class="infoTabalTdDataInput" id="pointEmoneyInput" 
@@ -227,7 +227,45 @@ tr, td {
 									<!-- 모달 버튼 -->
 									<button type="button" onclick="openModal()">충전</button>
 								</c:if>
+								<!-- 모달 -->
+								<div id="myModal" class="modal">
+								    <!-- 모달 내용 -->
+								    <div class="modal-content">
+								    	<table class='modal-table'>
+								    		<tr>
+								    			<td>
+								    				<div>충전 전 금액</div>
+								    			</td>
+								    			<td>
+								    				<div id='chargeBeforeEmoney'>
+								    					<fmt:formatNumber value="${memberDto.MEMBER_EMONEY}" pattern="#,##0" />원
+								    				</div>
+								    			</td>
+								    		</tr>
+								    		<tr>
+								    			<td>
+								    				<div>충전할 금액을 입력하세요</div>
+								    			</td>
+								    			<td>
+								    				<input type='text' name='chargeAmount' id='chargeAmount'>
+								    			</td>
+								    		</tr>
+								    		<tr>
+								    			<td>
+								    				<div>충전 후 금액</div>
+								    			</td>
+								    			<td>
+								    				<div id='chargeAfterEmoney'>
+								    					<fmt:formatNumber value="${memberDto.MEMBER_EMONEY}" pattern="#,##0" />원
+								    				</div>
+								    			</td>
+								    		</tr>
+								    	</table>
+								    	<div id='chargeBtnDiv' onclick="memberChargeFnc();">충전</div>
+								        <span class="close" onclick="closeModal()">&times;</span>
+								    </div>
 								
+								</div>
 							</form>
 						</td>
 					</tr>
@@ -247,61 +285,32 @@ tr, td {
 					</c:forEach>
 				</table>
 			</div>
-
 		</div>
-
 	</div>
-
-	<!-- 모달 -->
-	<div id="myModal" class="modal">
-	    <!-- 모달 내용 -->
-	    <div class="modal-content">
-	    	<table class='modal-table'>
-	    		<tr>
-	    			<td>
-	    				<div>충전 전 금액</div>
-	    			</td>
-	    			<td>
-	    				<div id='chargeBeforeEmoney'>
-	    					<fmt:formatNumber value="${memberDto.MEMBER_EMONEY}" pattern="#,##0" />원
-	    				</div>
-	    			</td>
-	    		</tr>
-	    		<tr>
-	    			<td>
-	    				<div>충전할 금액을 입력하세요</div>
-	    			</td>
-	    			<td>
-	    				<input type='text' name='chagrgeAmount' id='chargeAmount'>
-	    			</td>
-	    		</tr>
-	    		<tr>
-	    			<td>
-	    				<div>충전 후 금액</div>
-	    			</td>
-	    			<td>
-	    				<div id='chargeAfterEmoney'>
-	    					<fmt:formatNumber value="${memberDto.MEMBER_EMONEY}" pattern="#,##0" />원
-	    				</div>
-	    			</td>
-	    		</tr>
-	    	</table>
-	    	<div id='chargeBtnDiv'>충전</div>
-	        <span class="close" onclick="closeModal()">&times;</span>
-	    </div>
-	
-	</div>
-
 
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
 </body>
 <script type="text/javascript">
 	
+	var numberPattern = /^[0-9]+$/;
+	var rangePattern = /^[0-9]{1,5}$/;
+	
 	function checkPointStatus() {
 		var pointStatus = "${memberDto.MEMBER_POINT}";
 		var memberNo = "${memberDto.MEMBER_NO}";
 		var changePointStatus = document.getElementById("pointChangeInput").value;
-
+		
+		if(!numberPattern.test(changePointStatus)){
+	    	alert('숫자만 입력가능합니다.');
+	    	document.getElementById("pointChangeInput").value = pointStatus;
+	    	return ;
+	    }
+		if(!rangePattern.test(changePointStatus)){
+	    	alert('포인트는 100,000P 미만으로 수정 가능합니다.');
+	    	document.getElementById("pointChangeInput").value = pointStatus;
+	    	return ;
+	    }
+		
 		var confirmPointChange = confirm(pointStatus + " 포인트를 "
 				+ changePointStatus + " 로 바꾸시겠습니까?");
 		if (confirmPointChange) {
@@ -315,13 +324,52 @@ tr, td {
 		var emoneyStatus = "${memberDto.MEMBER_EMONEY}";
 		var memberNo = "${memberDto.MEMBER_NO}";
 		var changeEmoneyStatus = document.getElementById("pointEmoneyInput").value;
+		
+		if(!numberPattern.test(changeEmoneyStatus)){
+	    	alert('숫자만 입력가능합니다.');
+	    	document.getElementById("pointEmoneyInput").value = emoneyStatus;
+	    	return ;
+	    }
+		if(!rangePattern.test(changeEmoneyStatus)){
+	    	alert('이머니는 100,000원 미만으로 수정 가능합니다.');
+	    	document.getElementById("pointEmoneyInput").value = emoneyStatus;
+	    	return ;
+	    }
+		
 		var confirmEmoneyChange = confirm(emoneyStatus + "이머니를 "
 				+ changeEmoneyStatus + " 로 바꾸시겠습니까?");
 
 		if (confirmEmoneyChange) {
-			return true;
+			$('#emoneyForm').submit();
 		} else {
-			return false;
+			return ;
+		}
+	}
+	
+	function memberChargeFnc() {
+		
+		var chargeAmount = document.getElementById("chargeAmount").value;
+		if(chargeAmount == 0){
+			alert('충전 금액을 입력해주세요');
+			return ;
+		}
+		if(!numberPattern.test(chargeAmount)){
+	    	alert('숫자만 입력가능합니다.');
+	    	document.getElementById("chargeAmount").value = 0;
+	    	return ;
+	    }
+		if(!rangePattern.test(chargeAmount)){
+	    	alert('이머니는 100,000원 미만으로 충전 가능합니다.');
+	    	document.getElementById("chargeAmount").value = 0;
+	    	return ;
+	    }
+		var confirmEmoneyChange = confirm("이머니 "
+				+ chargeAmount + "를 충전하시겠습니까?");
+
+		if (confirmEmoneyChange) {
+			$('#emoneyForm').submit();
+		} else {
+			return ;
 		}
 	}
 	
@@ -334,7 +382,9 @@ tr, td {
     function closeModal() {
         document.getElementById('myModal').style.display = 'none';
         $('#chargeAmount').val(0);
-        inputChargeEmoneyFnc();
+    	var chargeBeforeEmoney = parseInt($('#chargeBeforeEmoney').text().replace(/[^\d]/g, ''));
+    	
+    	$('#chargeAfterEmoney').text(new Intl.NumberFormat().format(chargeBeforeEmoney) + "원");
     }
 
     // 모달 외부 클릭 시 닫기
@@ -348,6 +398,18 @@ tr, td {
     chargeEmoneyObj.addEventListener('change', inputChargeEmoneyFnc);
     
     function inputChargeEmoneyFnc() {
+    	var chargeAmount = document.getElementById("chargeAmount").value;
+		if(chargeAmount == 0){
+			alert('충전 금액을 입력해주세요');
+			return ;
+		}
+		if(!numberPattern.test(chargeAmount)){
+	    	alert('숫자만 입력가능합니다.');
+	    	document.getElementById("chargeAmount").value = 0;
+	    }else if(!rangePattern.test(chargeAmount)){
+	    	alert('이머니는 100,000원 미만으로 충전 가능합니다.');
+	    	document.getElementById("chargeAmount").value = 0;
+	    }
     	var chargeEmoney = parseInt($('#chargeAmount').val());
     	var chargeBeforeEmoney = parseInt($('#chargeBeforeEmoney').text().replace(/[^\d]/g, ''));
     	

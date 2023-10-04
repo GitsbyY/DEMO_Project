@@ -248,7 +248,14 @@
 		WHERE MEMBER_NO = #{memberNo}
 		AND PRODUCT_NO = #{productNo}
    </update>
-   
+
+	<insert id="insertChargeOne" parameterType="chargeDto">
+		INSERT INTO MEMBER_CHARGE
+		(MEMBER_CHARGE_NO, MEMBER_NO,
+			MEMBER_CHARGE_AMOUNT, MEMBER_CHARGE_DATE)
+		VALUES(MEMBER_CHARGE_NO_SEQ.NEXTVAL, #{memberNo},
+			#{chagrgeAmount}, SYSDATE)
+	</insert>
 </mapper>
 
 

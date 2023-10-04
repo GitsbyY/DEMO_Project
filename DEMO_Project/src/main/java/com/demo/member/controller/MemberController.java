@@ -423,12 +423,17 @@ public class MemberController {
 
 	// Emoney 변경
 	@RequestMapping(value = "/mypage/MypageProfilePaymentMemberDetailEmoneyCtr.do", method = RequestMethod.POST)
-	public String memberEmoneyChange(MemberDto memberDto, HttpSession session, Model model) {
+	public String memberEmoneyChange(MemberDto memberDto, HttpSession session, Model model,
+			@RequestParam(defaultValue = "0") int chargeAmount) {
 
 		System.out.println(memberDto);
-
 		// 포인트 변화를 추가한다. update/select
 		try {
+			if(chargeAmount != 0) {
+				System.out.println("멤버충전이요");
+				memberService.insertChargeOne(memberDto.getMemberNo(), chargeAmount);
+				memberDto.setMemberEmoney(memberDto.getMemberEmoney() + chargeAmount);
+			}
 			memberService.memberEmoneyUpdate(memberDto);
 			model.addAttribute("result", "success"); // 성공 시 'success' 값을 모델에 추가
 		} catch (Exception e) {
