@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript" src="/DEMO_Project/resources/js/jquery-3.7.1.js">
+</script>
 <link rel="stylesheet" type="text/css"
 	href="/DEMO_Project/resources/css/main.css">
 <style type="text/css">
@@ -74,6 +76,71 @@ tr, td {
 	font-size: 24px;
 	text-align: center;
 }
+
+/* 모달 css 시작 */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* 모달 내용 스타일 */
+.modal-content {
+	background-color: #fefefe;
+	margin: 15% auto;
+	padding: 50px 20px 20px 20px;
+	border: 1px solid #888;
+	width: 30%;
+	position: relative;
+}
+
+.modal-table{
+	border-collapse: collapse;
+}
+.modal-table tr td{
+	margin-left: 10px;
+    width: 300px;
+    height: 30px;
+    border-collapse: collapse;
+}
+.modal-table tr td:first-child {
+    background-color: #dddddd;
+}
+/* 모달 닫기 버튼 스타일 */
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	position: absolute;
+	top: -1px;
+    right: 10px;
+}
+
+.close:hover, .close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+#chargeBtnDiv{
+	font-weight: bold;
+	background-color: #dddddd;
+	width:100px;
+	height: 30px;
+	margin: 30px auto;
+	padding-top: 10px;
+	text-align: center;
+}
+#chagrgeAmount{
+	border: none;
+	height: 30px;
+}
 </style>
 <meta charset="UTF-8">
 <title>마이댕댕 메인</title>
@@ -127,11 +194,16 @@ tr, td {
 								onsubmit="return checkPointStatus()" id="pointForm"
 								method="post">
 								<input type="hidden" name="memberNo" value="${memberDto.MEMBER_NO}" />
-								<input type="text" id="pointChangeInput"
+								<c:if test="${sessionScope.member.memberNo == 1}">
+									<input type="text" id="pointChangeInput"
 									class="infoTabalTdDataInput" name="memberPoint" style="text-align: right;"
 									value="${memberDto.MEMBER_POINT}" />
-								<c:if test="${sessionScope.member.memberNo == 1}">
-								<input type="submit" value="수정">
+									<input type="submit" value="수정">
+								</c:if>
+								<c:if test="${sessionScope.member.memberNo != 1}">
+									<input type="text" id="pointChangeInput"
+										class="infoTabalTdDataInput" name="memberPoint" style="text-align: right; border:none;"
+										value="${memberDto.MEMBER_POINT}" readonly/>
 								</c:if>
 							</form>
 						</td>
@@ -143,15 +215,24 @@ tr, td {
 								onsubmit="return checkEmoneyStatus()" id="emoneyForm"
 								method="post">
 								<input type="hidden" name="memberNo" value="${memberDto.MEMBER_NO}" />
-								<input type="text" class="infoTabalTdDataInput" id="pointEmoneyInput" 
-								name="memberEmoney" value="${memberDto.MEMBER_EMONEY}" style="text-align: right;" />
 								<c:if test="${sessionScope.member.memberNo == 1}">
-								<input type="submit" value="수정">
+									<input type="text" class="infoTabalTdDataInput" id="pointEmoneyInput" 
+										name="memberEmoney" value="${memberDto.MEMBER_EMONEY}" style="text-align: right;" />
+									<input type="submit" value="수정">
 								</c:if>
+								<c:if test="${sessionScope.member.memberNo != 1}">
+									<input type="text" class="infoTabalTdDataInput" id="pointEmoneyInput" 
+										name="memberEmoney" value="${memberDto.MEMBER_EMONEY}" style="text-align: right; border:none;"
+											readonly/>
+									<!-- 모달 버튼 -->
+									<button type="button" onclick="openModal()">충전</button>
+								</c:if>
+								
 							</form>
 						</td>
 					</tr>
 				</table>
+				
 			</div>
 			<div id="emoneyChargeList">
 				<table>
@@ -171,37 +252,107 @@ tr, td {
 
 	</div>
 
+	<!-- 모달 -->
+	<div id="myModal" class="modal">
+	    <!-- 모달 내용 -->
+	    <div class="modal-content">
+	    	<table class='modal-table'>
+	    		<tr>
+	    			<td>
+	    				<div>충전 전 금액</div>
+	    			</td>
+	    			<td>
+	    				<div id='chargeBeforeEmoney'>
+	    					<fmt:formatNumber value="${memberDto.MEMBER_EMONEY}" pattern="#,##0" />원
+	    				</div>
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>
+	    				<div>충전할 금액을 입력하세요</div>
+	    			</td>
+	    			<td>
+	    				<input type='text' name='chagrgeAmount' id='chargeAmount'>
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td>
+	    				<div>충전 후 금액</div>
+	    			</td>
+	    			<td>
+	    				<div id='chargeAfterEmoney'>
+	    					<fmt:formatNumber value="${memberDto.MEMBER_EMONEY}" pattern="#,##0" />원
+	    				</div>
+	    			</td>
+	    		</tr>
+	    	</table>
+	    	<div id='chargeBtnDiv'>충전</div>
+	        <span class="close" onclick="closeModal()">&times;</span>
+	    </div>
+	
+	</div>
+
 
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
 </body>
 <script type="text/javascript">
+	
+	function checkPointStatus() {
+		var pointStatus = "${memberDto.MEMBER_POINT}";
+		var memberNo = "${memberDto.MEMBER_NO}";
+		var changePointStatus = document.getElementById("pointChangeInput").value;
 
-function checkPointStatus(){
-	var pointStatus = "${memberDto.MEMBER_POINT}";
-    var memberNo = "${memberDto.MEMBER_NO}";
-    var changePointStatus = document.getElementById("pointChangeInput").value;
-    
-    var confirmPointChange = confirm(pointStatus+ " 포인트를 " + changePointStatus + " 로 바꾸시겠습니까?" );
-        if (confirmPointChange) {
-        	return true;
-        } else {
-            return false; 
-        }
+		var confirmPointChange = confirm(pointStatus + " 포인트를 "
+				+ changePointStatus + " 로 바꾸시겠습니까?");
+		if (confirmPointChange) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	function checkEmoneyStatus() {
+		var emoneyStatus = "${memberDto.MEMBER_EMONEY}";
+		var memberNo = "${memberDto.MEMBER_NO}";
+		var changeEmoneyStatus = document.getElementById("pointEmoneyInput").value;
+		var confirmEmoneyChange = confirm(emoneyStatus + "이머니를 "
+				+ changeEmoneyStatus + " 로 바꾸시겠습니까?");
+
+		if (confirmEmoneyChange) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	 // 모달 열기
+    function openModal() {
+        document.getElementById('myModal').style.display = 'block';
     }
 
+    // 모달 닫기
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+        $('#chargeAmount').val(0);
+        inputChargeEmoneyFnc();
+    }
 
-function checkEmoneyStatus(){
-	 var emoneyStatus = "${memberDto.MEMBER_EMONEY}";
-	 var memberNo = "${memberDto.MEMBER_NO}";
-	 var changeEmoneyStatus = document.getElementById("pointEmoneyInput").value;
-	 var confirmEmoneyChange = confirm(emoneyStatus + "이머니를 " + changeEmoneyStatus + " 로 바꾸시겠습니까?" );
-  
-	 if (confirmEmoneyChange) {
-         return true; 
-     } else {
-         return false; 
-     }
- }
-	
+    // 모달 외부 클릭 시 닫기
+//     window.onclick = function(event) {
+//         var modal = document.getElementById('myModal');
+//         if (event.target == modal) {
+//             modal.style.display = 'none';
+//         }
+//     }
+    const chargeEmoneyObj = document.getElementById('chargeAmount');
+    chargeEmoneyObj.addEventListener('change', inputChargeEmoneyFnc);
+    
+    function inputChargeEmoneyFnc() {
+    	var chargeEmoney = parseInt($('#chargeAmount').val());
+    	var chargeBeforeEmoney = parseInt($('#chargeBeforeEmoney').text().replace(/[^\d]/g, ''));
+    	
+    	$('#chargeAfterEmoney').text(new Intl.NumberFormat().format(chargeEmoney + chargeBeforeEmoney) + "원");
+    }
+    
 </script>
 </html>
