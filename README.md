@@ -26,9 +26,9 @@
 <h3>## 🛠 기술스택</h3>
 
 Front<br/>
-Figma / JavaScript / CSS / html5
+Figma / JavaScript / CSS / html5<br/>
 Dev tools<br/>
-Java / Spring / json / 
+Java / Spring / json <br/>
 Dev Ops<br/>
 Eclipse 
 
