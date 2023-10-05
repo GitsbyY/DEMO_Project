@@ -37,7 +37,7 @@
 	<c:set var="cssCancel" value="${sessionScope.myPageAside eq 'cancel' ? 'asideATagSelected' : 'asideATag'}" />
 	<a class="${cssCancel}" href="/DEMO_Project/mypage/cancelPage.do">취소내역</a><br>
 
-<!-- 	<!-- 쇼핑몰 결제관리 메뉴 --> -->
+ 	<!-- 쇼핑몰 결제관리 메뉴 --> 
 <%-- 	<c:set var="cssMallPay" value="${sessionScope.myPageAside eq 'mallPay' ? 'asideATagSelected' : 'asideATag'}" /> --%>
 <%-- 	<a class="${cssMallPay}" href="${paymentUrl}">쇼핑몰 결제관리</a><br> --%>
 

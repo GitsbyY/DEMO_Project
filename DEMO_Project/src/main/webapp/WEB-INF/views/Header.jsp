@@ -60,7 +60,7 @@
 
 				<div id="bottomRow">
 					<a href="#" id="curEMony" class="bottomRowButton">
-						${sessionScope.member.memberPoint}eMoney
+						eMoney : ${sessionScope.member.memberPoint}
 					</a>
 					<a href="#" id="loginName" class="bottomRowButton"> 
 						${sessionScope.member.memberName}님

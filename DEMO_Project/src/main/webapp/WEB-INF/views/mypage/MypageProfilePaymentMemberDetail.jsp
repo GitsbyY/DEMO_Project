@@ -75,19 +75,19 @@ tr, td {
 }
 
 .emoneyListTitle {
-	width: 463px;
+	width: 481px;
 	height: 100px;
 	font-size: 24px;
 	text-align: center;
-	padding-top: 10px;
 	position: absolute;
-    top: 63px;
-    right: 107px;
+    right: 91px;
+
 }
 .emoneyListTableDiv{
 	width:100%;
 	height:370px;
 	overflow-y:auto;
+	margin-top: 65px;
 }
 
 .emoneyListTable{
@@ -101,7 +101,7 @@ tr, td {
 }
 
 .emoneyListTr td:first-child{
-	width: 130px;
+	width: 145px;
 	height: 51px;
 	border-collapse: collapse;
 	background-color: #DDDDDD;
@@ -197,7 +197,6 @@ tr, td {
 			style="color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG
 			FAMILY</div>
 		<div class='emoneyListTitle'>
-			<div style='height:47px'>이머니 충전 내역</div>
 			<table class="emoneyListTable">
 				<tr class='emoneyListTr'>
 					<td>충전 금액</td>
@@ -317,10 +316,6 @@ tr, td {
 			<div id="emoneyListDiv">
 				<div class="emoneyListTableDiv">
 					<table class="emoneyListTable">
-						<tr class='emoneyListTr'>
-							<td>충전 금액</td>
-							<td>충전 날짜</td>
-						</tr>
 						<c:forEach var="memberChargeDto" items="${memberChargeDto}"
 							varStatus="loop">
 							<tr class='emoneyListTr'>
