@@ -31,35 +31,90 @@
 	</resultMap>
 	
 	<select id="productSelectList" parameterType="map"
-		resultType="map">
-		SELECT P.PRODUCT_NO, P.IMG_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE,
-        P.PRODUCT_STOCK, P.PRODUCT_CATEGORY, P.PRODUCT_CRE_DATE,
-        P.PRODUCT_MOD_DATE, P.RNUM, I.STORED_FILE_NAME
-		FROM (  
-		        SELECT ROWNUM AS RNUM, PRODUCT_NO, IMG_NO,
-		        		PRODUCT_NAME, PRODUCT_PRICE,
-		                PRODUCT_STOCK, PRODUCT_CATEGORY,
-		                PRODUCT_CRE_DATE, PRODUCT_MOD_DATE
-		        FROM (  
-		                SELECT *
-		                FROM product
-		                WHERE PRODUCT_NAME LIKE '%'||#{search}||'%'
-		                AND PRODUCT_CATEGORY LIKE #{category}||'%'
-		                ORDER BY
-		                <choose>
-			                <when test="sort == 'PRODUCT_PRICE ASC'">
-			                    PRODUCT_PRICE ASC,
-			                </when>
-			                <when test="sort == 'PRODUCT_PRICE DESC'">
-			                    PRODUCT_PRICE DESC,
-			                </when>
-			            </choose>
-			            PRODUCT_CATEGORY
-		                )
-		     ) P
-		INNER JOIN IMG_FILE I ON P.IMG_NO = I.IMG_NO
-		WHERE P.RNUM BETWEEN #{start} AND #{end}
-	</select>
+	resultType="map">
+	<choose>
+		<when test="sort.contains('order')">
+			SELECT P.PRODUCT_NO, P.IMG_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE,
+			P.PRODUCT_STOCK, P.PRODUCT_CATEGORY, P.PRODUCT_CRE_DATE,
+			P.PRODUCT_MOD_DATE, P.RNUM, I.STORED_FILE_NAME
+			FROM (
+			SELECT ROWNUM AS RNUM, PRODUCT_NO, IMG_NO,
+			PRODUCT_NAME, PRODUCT_PRICE,
+			PRODUCT_STOCK, PRODUCT_CATEGORY,
+			PRODUCT_CRE_DATE, PRODUCT_MOD_DATE, counting
+			FROM (
+			SELECT PRODUCT_NO, IMG_NO,
+			PRODUCT_NAME, PRODUCT_PRICE,
+			PRODUCT_STOCK, PRODUCT_CATEGORY,
+			PRODUCT_CRE_DATE, PRODUCT_MOD_DATE, counting
+			FROM (
+			SELECT P.PRODUCT_NO, P.IMG_NO,
+			P.PRODUCT_NAME, P.PRODUCT_PRICE,
+			P.PRODUCT_STOCK, P.PRODUCT_CATEGORY,
+			P.PRODUCT_CRE_DATE, P.PRODUCT_MOD_DATE, COALESCE(C.counting, 0) as counting
+			FROM product P
+			FULL OUTER JOIN
+			(select product_no, count(*) as counting
+			from order_list
+			where order_status != '취소'
+			group by product_no) C
+			ON P.PRODUCT_NO = C.PRODUCT_NO
+			WHERE PRODUCT_NAME LIKE '%'||#{search}||'%'
+			AND PRODUCT_CATEGORY LIKE #{category}||'%'
+			)
+			ORDER BY
+			<choose>
+				<when test="sort == 'orderASC'">
+					COUNTING ASC,
+				</when>
+				<when test="sort == 'orderDESC'">
+					COUNTING DESC,
+				</when>
+			</choose>
+			PRODUCT_NAME
+			)
+			) P
+			INNER JOIN IMG_FILE I ON P.IMG_NO = I.IMG_NO
+			WHERE P.RNUM BETWEEN #{start} AND #{end}
+		</when>
+		<otherwise>
+			SELECT P.PRODUCT_NO, P.IMG_NO, P.PRODUCT_NAME, P.PRODUCT_PRICE,
+			P.PRODUCT_STOCK, P.PRODUCT_CATEGORY, P.PRODUCT_CRE_DATE,
+			P.PRODUCT_MOD_DATE, P.RNUM, I.STORED_FILE_NAME
+			FROM (
+			SELECT ROWNUM AS RNUM, PRODUCT_NO, IMG_NO,
+			PRODUCT_NAME, PRODUCT_PRICE,
+			PRODUCT_STOCK, PRODUCT_CATEGORY,
+			PRODUCT_CRE_DATE, PRODUCT_MOD_DATE
+			FROM (
+			SELECT *
+			FROM product
+			WHERE PRODUCT_NAME LIKE '%'||#{search}||'%'
+			AND PRODUCT_CATEGORY LIKE #{category}||'%'
+			ORDER BY
+			<choose>
+				<when test="sort == 'priceASC'">
+					PRODUCT_PRICE ASC,
+				</when>
+				<when test="sort == 'priceDESC'">
+					PRODUCT_PRICE DESC,
+				</when>
+				<when test="sort == 'lastest'">
+					PRODUCT_CRE_DATE DESC,
+				</when>
+				<when test="sort == 'oldest'">
+					PRODUCT_CRE_DATE ASC,
+				</when>
+			</choose>
+			PRODUCT_NAME
+			)
+			) P
+			INNER JOIN IMG_FILE I ON P.IMG_NO = I.IMG_NO
+			WHERE P.RNUM BETWEEN #{start} AND #{end}
+		</otherwise>
+	</choose>
+
+</select>
 	
 	<select id="productSelectTotalCount" parameterType="map" resultType="int">
 		SELECT COUNT(*)

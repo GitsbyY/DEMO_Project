@@ -40,10 +40,12 @@ public class ProductController {
 	public String viewProduct(@RequestParam(defaultValue = "1") int curPage,
 			@RequestParam(defaultValue = "") String search,
 			@RequestParam(defaultValue = "") String category,
-			@RequestParam(defaultValue = "PRODUCT_PRICE ASC") String sort,
+			@RequestParam(defaultValue = "priceASC") String sort,
 			HttpSession session, Model model) {
 		log.info("shop/ShoppingMall" + sort);
 
+		search = search.trim();
+		
 		int totalCount = productService.productSelectTotalCount(search, category);
 
 		ShopPaging shopPaging = new ShopPaging(totalCount, curPage);

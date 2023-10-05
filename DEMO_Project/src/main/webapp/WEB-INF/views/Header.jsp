@@ -8,7 +8,7 @@
 		<div>
 			<div id="daengLogo" class="logoSide"
 				style="height: 75px; width: 75px;">
-				<button id="daengLogoBtn" onclick="goHomeFnc()">
+				<button id="daengLogoBtn" onclick="location.href='/DEMO_Project/'">
 					<img alt="댕댕로고"
 						src="/DEMO_Project/resources/img/imgHeader/logo.png"
 						style="height: 80px; width: 90px; margin-top: 30px;">
@@ -16,7 +16,7 @@
 			</div>
 			<div id="daengText" class="logoSide"
 				style="height: 50px; width: 180px; margin-left: 10px; margin-top: 65px;">
-				<button id="daengTxtBtn" onclick="goHomeFnc()">
+				<button id="daengTxtBtn" onclick="location.href='/DEMO_Project/'">
 					<h1>DAENGDAENG</h1>
 				</button>
 			</div>

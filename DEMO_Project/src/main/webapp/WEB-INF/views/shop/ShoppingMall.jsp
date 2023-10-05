@@ -76,7 +76,7 @@
 	padding: 10px;
 	width: 170px;
 	height: 230px;
-	border: 1px solid purple;
+	border: 1px solid black;
 	text-align: center;
 	position: relative;
 }
@@ -123,17 +123,41 @@
 		        	value="${pagingMap.category}">
 				<select id="sortSelect" name="sort">
 					<option class="optionTag"
-						value="PRODUCT_PRICE ASC"
-						<c:if test="${pagingMap.sort eq 'PRODUCT_PRICE ASC'}">
+						value="priceASC"
+						<c:if test="${pagingMap.sort eq 'priceASC'}">
 							selected
 						</c:if>
 						>낮은가격순</option>
 					<option class="optionTag"
-						value="PRODUCT_PRICE DESC"
-						<c:if test="${pagingMap.sort eq 'PRODUCT_PRICE DESC'}">
+						value="priceDESC"
+						<c:if test="${pagingMap.sort eq 'priceDESC'}">
 							selected
 						</c:if>
 						>높은가격순</option>
+					<option class="optionTag"
+						value="lastest"
+						<c:if test="${pagingMap.sort eq 'lastest'}">
+							selected
+						</c:if>
+						>상품최신순</option>
+					<option class="optionTag"
+						value="oldest"
+						<c:if test="${pagingMap.sort eq 'oldest'}">
+							selected
+						</c:if>
+						>상품오래된순</option>
+					<option class="optionTag"
+						value="orderDESC"
+						<c:if test="${pagingMap.sort eq 'orderDESC'}">
+							selected
+						</c:if>
+						>주문높은순</option>
+					<option class="optionTag"
+						value="orderASC"
+						<c:if test="${pagingMap.sort eq 'orderASC'}">
+							selected
+						</c:if>
+						>주문낮은순</option>
 				</select>
 			
 			</div>
