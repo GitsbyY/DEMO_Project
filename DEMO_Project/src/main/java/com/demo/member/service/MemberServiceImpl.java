@@ -140,5 +140,15 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		memberDao.insertChargeOne(memberNo, chargeAmount);
 	}
+	@Override
+	public int memberCheckId(String memberId) {
+		// TODO Auto-generated method stub
+		return memberDao.memberCheckId(memberId);
+	}
+	@Override
+	public int memberCheckEmail(String memberEmail, String memberId) {
+		// TODO Auto-generated method stub
+		return memberDao.memberCheckEmail(memberEmail, memberId);
+	}
    
 }

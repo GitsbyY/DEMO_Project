@@ -204,4 +204,19 @@ public class MemberDaoImpl implements MemberDao{
 		sqlSession.insert(nameSpace + "insertChargeOne", chargeDto);
 	}
 
+	@Override
+	public int memberCheckId(String memberId) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + "memberCheckId", memberId);
+			    		
+	}
+
+	@Override
+	public int memberCheckEmail(String memberEmail, String memberId) {
+	    Map<String, String> params = new HashMap<>();
+	    params.put("memberEmail", memberEmail);
+	    params.put("memberId", memberId);
+	    return sqlSession.selectOne(nameSpace + "memberCheckEmail", params);
+	}
+
 }

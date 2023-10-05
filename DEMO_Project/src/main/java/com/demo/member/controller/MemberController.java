@@ -12,11 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.demo.mail.MailSendService;
 import com.demo.member.dto.MemberDto;
 import com.demo.member.dto.PetDto;
 import com.demo.member.service.MemberService;
@@ -29,6 +31,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private MailSendService mailSendService;
 
 	// 로그인 화면으로 이동
 	@RequestMapping(value = "/auth/login.do", method = RequestMethod.GET)
@@ -112,27 +117,54 @@ public class MemberController {
 
 		return "auth/FindPassword";
 	}
+	
+	//이메일 인증
+   @PostMapping("/auth/emailCheck.do")
+   @ResponseBody
+   public String mailCheck(String email) {
+      System.out.println("이메일 인증 요청이 들어옴!");
+      System.out.println("이메일 인증 이메일 : " + email);
+     
+      return mailSendService.joinEmail(email);      
+   }
+   //아이디 유효성검사
+   @PostMapping("/auth/memberCheck.do")
+   @ResponseBody
+   public boolean memberCheck(String memberId) {
+	   System.out.println("회원 인증 요청이 들어옴!");
+	   System.out.println("회원 ID : " + memberId );
+	   
+	   int memberIdCheck = memberService.memberCheckId(memberId);
+	   if(memberIdCheck == 0) {
+		   return false;
+	   }else {
+		   return true;
+	   }
+   }
+   
+ //이메일 유효성검사
+   @PostMapping("/auth/memberCheck2.do")
+   @ResponseBody
+   public boolean memberCheck2(String memberEmail, String memberId) {
+	   System.out.println("회원 인증 요청이 들어옴!");
+	   System.out.println("회원 EMAIL : " + memberEmail );
+	   
+	   int memberIdCheck = memberService.memberCheckEmail(memberEmail, memberId);
+	   if(memberIdCheck == 0) {
+		   return false;
+	   }else {
+		   return true;
+	   }
+   }
 
 	// 비밀번호 찾기
 	@RequestMapping(value = "/auth/findPasswordCtr.do", method = RequestMethod.POST)
 	public String findPasswordCtr(String memberId, String memberEmail, HttpSession session, Model model) {
 
 		log.info("Welcome MemberController findIdCtr!" + memberId + ", " + memberEmail);
-
-		MemberDto memberDto = memberService.memberFindPassword(memberId, memberEmail);
-
-		String viewUrl = "";
-		String findFail = "findFail";
-		if (memberDto != null) {
-//                  회원이 존재하면 세션에 담는다
-			session.setAttribute("member", memberDto);
-
-			viewUrl = "auth/FindPasswordResult";
-		} else {
-			viewUrl = "auth/FindPassword";
-			session.setAttribute("findFail", findFail);
-		}
-		return viewUrl;
+		MemberDto memberDto = new MemberDto();
+		session.setAttribute("member", memberDto);
+		return "auth/FindPasswordResult";
 	}
 
 	// 비밀번호 변경

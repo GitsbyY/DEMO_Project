@@ -54,4 +54,8 @@ public interface MemberDao {
 
 	void insertChargeOne(int memberNo, int chargeAmount);
 
+	int memberCheckId(String memberId);
+
+	int memberCheckEmail(String memberEmail, String memberId);
+
 }

@@ -20,7 +20,7 @@ public interface MemberService {
 
 	MemberDto memberFindId(String memberEmail, String memberPhone);
 
-	MemberDto memberFindPassword(String memberId, String memberEmail);
+	MemberDto memberFindPassword(String memberId, String memberEmail);	
 
 	int memberSelectListTotalCount();
 
@@ -55,4 +55,10 @@ public interface MemberService {
 	void petInfoUpdate(PetDto petDto);
 
 	void insertChargeOne(int memberNo, int chargeAmount);
+
+	int memberCheckId(String memberId);
+
+	int memberCheckEmail(String memberEmail, String memberId);
+
+
 }
