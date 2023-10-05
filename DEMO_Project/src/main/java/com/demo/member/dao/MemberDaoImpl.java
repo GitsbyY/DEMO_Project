@@ -219,4 +219,18 @@ public class MemberDaoImpl implements MemberDao{
 	    return sqlSession.selectOne(nameSpace + "memberCheckEmail", params);
 	}
 
+	@Override
+	public int memberCheckEmail2(String memberEmail) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(nameSpace + "memberCheckEmail2", memberEmail);
+	}
+
+	@Override
+	public int memberCheckPhone(String memberEmail, String memberPhone) {
+		Map<String, String> params = new HashMap<>();
+	    params.put("memberEmail", memberEmail);
+	    params.put("memberPhone", memberPhone);
+	    return sqlSession.selectOne(nameSpace + "memberCheckPhone", params);
+	}
+
 }

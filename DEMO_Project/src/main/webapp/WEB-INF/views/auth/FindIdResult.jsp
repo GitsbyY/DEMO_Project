@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>    
 <!DOCTYPE html>
 <html>
 
@@ -65,7 +66,8 @@ div {
 	font-size: 20px;
 }
 </style>
-
+<script type="text/javascript" src="/DEMO_Project/resources/js/jquery-3.7.1.js">
+</script>
 </head>
 
 <body>
@@ -76,7 +78,7 @@ div {
 				onclick="location.href='/DEMO_Project/auth/login.do'">DAENGDAENG</h1>
 			<div id="findIdText">ID 찾기 결과</div>
 				<div id="findIdResult">
-					회원님의 ID는 ${member.getMemberId()} 입니다
+					회원님의 ID는 <span id="visibleId">${member.getMemberId().substring(0, 3)}</span> 입니다
 				</div>
 							
 			<div id="findIdBtn">
@@ -89,6 +91,11 @@ div {
 	
 <script type="text/javascript">
 	
+	document.addEventListener('DOMContentLoaded', function() {
+	    var visibleId = document.getElementById('visibleId');
+	    var hiddenPart = '*'.repeat(${fn:length(member.memberId) - 3});
+	    visibleId.innerHTML += hiddenPart;
+	});
 	
 </script>
 

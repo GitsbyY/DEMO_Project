@@ -83,6 +83,9 @@ p{
 	font-size: 14px;
 	float: left;
 }
+#sendMailBtn, #btn {   
+    border: none;
+}
 
 
 </style>
@@ -141,8 +144,14 @@ p{
 	$(document).ready(function() {
 	    // 초기에는 버튼을 비활성화합니다.
 	    var findPasswordBtn = document.getElementById("findPasswordBtn");
+	    var sendMailBtn = document.getElementById("sendMailBtn");
+	    var btn = document.getElementById("btn");
 	    findPasswordBtn.disabled = true;
+	    sendMailBtn.disabled = true;
+	    btn.disabled = true;
 	    findPasswordBtn.style.backgroundColor = "#ccc";
+	    sendMailBtn.style.backgroundColor = "#ccc";
+	    btn.style.backgroundColor = "#ccc";
 	});
 
 	//이메일 입력란을 떠날 때마다 호출되는 함수
@@ -161,7 +170,12 @@ p{
 	                document.getElementById("emailCheck").style.display = "block";
 	            } else {
 	                document.getElementById("emailCheck").style.display = "none";
+	                var sendMailBtn = document.getElementById("sendMailBtn");
+		            sendMailBtn.disabled = false;
+		            sendMailBtn.style.backgroundColor = "#FFC4A3";
+		            
 	            }
+	            
 	        },
 	        error: function() {
 	            alert('에러 발생');
@@ -204,6 +218,9 @@ p{
 			success: function(authNumber) {
 				document.getElementById("authNumber").value = authNumber;
 			    alert("이메일이 발송되었습니다.");
+			    var btn = document.getElementById("btn");
+	            btn.disabled = false;
+	            btn.style.backgroundColor = "#FFC4A3";
 				
 			},
 			error: function() {

@@ -127,7 +127,7 @@ public class MemberController {
      
       return mailSendService.joinEmail(email);      
    }
-   //아이디 유효성검사
+   //비밀번호 찾기 아이디 유효성검사
    @PostMapping("/auth/memberCheck.do")
    @ResponseBody
    public boolean memberCheck(String memberId) {
@@ -142,17 +142,54 @@ public class MemberController {
 	   }
    }
    
- //이메일 유효성검사
+   //아이디찾기 이메일 유효성검사
+   @PostMapping("/auth/memberCheck3.do")
+   @ResponseBody
+   public boolean memberCheck3(String memberEmail) {
+	   System.out.println("회원 인증 요청이 들어옴!");
+	   System.out.println("회원 EMAIL : " + memberEmail );
+	   
+	   int memberIdCheck = memberService.memberCheckEmail2(memberEmail);
+	   if(memberIdCheck == 0) {
+		   return false;
+	   }else {
+		   return true;
+	   }
+   }
+   
+ //비밀번호 찾기 이메일 유효성검사
    @PostMapping("/auth/memberCheck2.do")
    @ResponseBody
-   public boolean memberCheck2(String memberEmail, String memberId) {
+   public boolean memberCheck2(String memberEmail, String memberId, HttpSession session) {
 	   System.out.println("회원 인증 요청이 들어옴!");
 	   System.out.println("회원 EMAIL : " + memberEmail );
 	   
 	   int memberIdCheck = memberService.memberCheckEmail(memberEmail, memberId);
+	   
+	   MemberDto memberDto = memberService.memberFindPassword(memberId, memberEmail);
+	   session.setAttribute("member", memberDto);
+	   
 	   if(memberIdCheck == 0) {
 		   return false;
-	   }else {
+	   }else {		   
+		   return true;
+	   }
+   }
+ //아이디 찾기 폰번호 유효성검사
+   @PostMapping("/auth/memberCheck4.do")
+   @ResponseBody
+   public boolean memberCheck4(String memberEmail, String memberPhone, HttpSession session) {
+	   System.out.println("회원 인증 요청이 들어옴!");
+	   System.out.println("회원 EMAIL : " + memberEmail );
+	   
+	   int memberIdCheck = memberService.memberCheckPhone(memberEmail, memberPhone);
+	   
+	   MemberDto memberDto = memberService.memberFindId(memberPhone, memberEmail);
+	   session.setAttribute("member", memberDto);
+	   
+	   if(memberIdCheck == 0) {
+		   return false;
+	   }else {		   
 		   return true;
 	   }
    }
@@ -162,15 +199,16 @@ public class MemberController {
 	public String findPasswordCtr(String memberId, String memberEmail, HttpSession session, Model model) {
 
 		log.info("Welcome MemberController findIdCtr!" + memberId + ", " + memberEmail);
-		MemberDto memberDto = new MemberDto();
-		session.setAttribute("member", memberDto);
+		
 		return "auth/FindPasswordResult";
 	}
 
 	// 비밀번호 변경
 	@RequestMapping(value = "/auth/changePassword.do", method = RequestMethod.POST)
-	public String memberPwdChange(MemberDto memberDto, Model model, HttpSession session) {
-		log.debug("Welcome BoardController memberPwdChange!");
+	public String memberPwdChange(MemberDto memberDto, @RequestParam("memberNo") int memberNo
+			, Model model) {
+		
+		log.debug("Welcome BoardController memberPwdChange!" + memberDto);
 
 		int resultNum = 0;
 

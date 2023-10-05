@@ -120,11 +120,23 @@
 	FROM MEMBER
 	WHERE MEMBER_ID = #{memberId}
 	</select>
+	
+	<select id="memberCheckEmail2" resultType="int">
+	SELECT COUNT(*)      
+	FROM MEMBER
+	WHERE MEMBER_EMAIL = #{memberEmail}
+	</select>
    
 	<select id="memberCheckEmail" parameterType="map" resultType="int">
     SELECT COUNT(*)
     FROM MEMBER
     WHERE MEMBER_EMAIL = #{memberEmail} AND MEMBER_ID = #{memberId}
+	</select>
+	
+	<select id="memberCheckPhone" parameterType="map" resultType="int">
+    SELECT COUNT(*)
+    FROM MEMBER
+    WHERE MEMBER_EMAIL = #{memberEmail} AND MEMBER_PHONE = #{memberPhone}
 	</select>
 
    <select id="memberFindPassword" parameterType="map"

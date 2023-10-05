@@ -60,5 +60,9 @@ public interface MemberService {
 
 	int memberCheckEmail(String memberEmail, String memberId);
 
+	int memberCheckEmail2(String memberEmail);
+
+	int memberCheckPhone(String memberEmail, String memberPhone);
+
 
 }

@@ -150,5 +150,15 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return memberDao.memberCheckEmail(memberEmail, memberId);
 	}
+	@Override
+	public int memberCheckEmail2(String memberEmail) {
+		// TODO Auto-generated method stub
+		return memberDao.memberCheckEmail2(memberEmail);
+	}
+	@Override
+	public int memberCheckPhone(String memberEmail, String memberPhone) {
+		// TODO Auto-generated method stub
+		return memberDao.memberCheckPhone(memberEmail, memberPhone);
+	}
    
 }

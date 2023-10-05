@@ -44,10 +44,11 @@ div {
 	height: 40px;
 	width: 300px;
 	margin-top: 3px;
+	padding-left: 10px;
 }
-#findIdBtn > button{
+#findIdBtn{
 	height: 40px;
-	width: 300px;
+	width: 100%;
 	margin-top: 40px;
 	border: none;
 	background-color: #FFC4A3; 
@@ -57,8 +58,14 @@ div {
 	color: red;
 	text-align: left;
 }
+p{
+	clear: both;
+	font-size: 14px;
+	float: left;
+}
 </style>
-
+<script type="text/javascript" src="/DEMO_Project/resources/js/jquery-3.7.1.js">
+</script>
 </head>
 
 <body>
@@ -71,19 +78,21 @@ div {
 			<div class="inputTagWrap">
 				<div id="inputEmailDiv" class="inputTagWrap">
 					<input id="inputEmail" name="memberEmail" type="text" 
-						placeholder="이메일을 입력해주세요."> 
+						placeholder="이메일을 입력해주세요." onblur="checkMemberEmail()"> 
 				</div>
+				<p id="emailCheck" style="color: red; display: none;">EMAIL이 일치하지 않습니다.</p>
 				<div id="inputPasswordDiv" class="inputTagWrap">
 					<input id="inputPhone" name="memberPhone" 
-						type="text" placeholder="전화번호를 입력해주세요.">
+						type="text" placeholder="전화번호를 입력해주세요." onblur="checkMemberPhone()">
 				</div>
+				<p id="phoneCheck" style="color: red; display: none;">정보가 일치하지 않습니다.</p>
 			<c:if test="${not empty findFail}">
 				<div id="warning">
 					정보가 일치하지 않습니다.
 				</div>
 			</c:if>
-			<div id="findIdBtn">
-				<button type="submit">확인</button>
+			<div id="findIdBtnDiv">
+				<button id="findIdBtn" type="submit">확인</button>
 			</div>
 		</div>
 	</form>
@@ -91,6 +100,67 @@ div {
 </body>
 	
 <script type="text/javascript">
+
+	//페이지가 로드될 때 초기 설정을 수행합니다.
+	$(document).ready(function() {
+	    // 초기에는 버튼을 비활성화합니다.
+	    var findIdBtn = document.getElementById("findIdBtn");
+	    
+	    findIdBtn.disabled = true;	    
+	    findIdBtn.style.backgroundColor = "#ccc";	    
+	});
+	
+	//이메일 입력란을 떠날 때마다 호출되는 함수
+	function checkMemberEmail() {
+	    var memberEmail = document.getElementById("inputEmail").value;	    
+	
+	    // Ajax를 사용하여 memberCheck3.do로 이동
+	    $.ajax({
+	        url: "/DEMO_Project/auth/memberCheck3.do",
+	        method: "POST",
+	        data: { memberEmail: memberEmail},
+	        success: function(response) {
+	            if (response === false) {
+	                document.getElementById("emailCheck").style.display = "block";
+	            } else {
+	                document.getElementById("emailCheck").style.display = "none";		            
+	            }
+	            
+	        },
+	        error: function() {
+	            alert('에러 발생');
+	        }
+	    });
+	}
+	
+	//전화번호 입력란을 떠날 때마다 호출되는 함수
+	function checkMemberPhone() {
+	    var memberPhone = document.getElementById("inputPhone").value;
+	    var memberEmail = document.getElementById("inputEmail").value;
+	
+	    // Ajax를 사용하여 memberCheck4.do로 이동
+	    $.ajax({
+	        url: "/DEMO_Project/auth/memberCheck4.do",
+	        method: "POST",
+	        data: { memberEmail: memberEmail, 
+	        	memberPhone: memberPhone},
+	        success: function(response) {
+	            if (response === false) {
+	                document.getElementById("phoneCheck").style.display = "block";
+	            } else {
+	                document.getElementById("phoneCheck").style.display = "none";
+	                var findIdBtn = document.getElementById("findIdBtn");
+	                findIdBtn.disabled = false;
+	                findIdBtn.style.backgroundColor = "#FFC4A3";
+		            
+	            }
+	            
+	        },
+	        error: function() {
+	            alert('에러 발생');
+	        }
+	    });
+	}
 	
 
 	
