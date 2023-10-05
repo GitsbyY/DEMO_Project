@@ -196,8 +196,8 @@
       SELECT MEMBER_CHARGE_AMOUNT, MEMBER_CHARGE_DATE 
       FROM MEMBER_CHARGE
       WHERE MEMBER_NO = #{memberNo}
+      ORDER BY MEMBER_CHARGE_DATE DESC
    </select>
-   
    
    <update id="memberPwdChange" parameterType="memberDto">
       UPDATE MEMBER

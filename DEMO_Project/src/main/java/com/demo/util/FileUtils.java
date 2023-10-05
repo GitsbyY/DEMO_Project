@@ -99,8 +99,10 @@ public class FileUtils {
 	       file.mkdirs(); //폴더를 만들어준다
 	    }
 	    
+	    //파일 하나 생성
        if(multfile.isEmpty() == false) {
           originalFileName = multfile.getOriginalFilename();
+          //파일 확장자명
           originalFileExtension
              = originalFileName.substring(originalFileName.lastIndexOf("."));
           //저장파일이름 무작위로 생성 

@@ -19,6 +19,10 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 	padding: 0;
 }
 
+#divContainer{
+	position:relative;
+}
+
 #firstTitle {
 	width: 400px;
 	display: block;
@@ -65,11 +69,42 @@ tr, td {
 	width: 200px;
 }
 
+#emoneyListDiv{
+	width: 480px;
+	height: 440px;
+}
+
 .emoneyListTitle {
-	width: 461px;
-	height: 51px;
+	width: 463px;
+	height: 100px;
 	font-size: 24px;
 	text-align: center;
+	padding-top: 10px;
+	position: absolute;
+    top: 63px;
+    right: 107px;
+}
+.emoneyListTableDiv{
+	width:100%;
+	height:370px;
+	overflow-y:auto;
+}
+
+.emoneyListTable{
+	width:100%;
+	border-collapse: collapse;
+	font-size: 24px;
+	text-align: center;
+}
+.emoneyListTr{
+	border-top: 1px solid black;
+}
+
+.emoneyListTr td:first-child{
+	width: 130px;
+	height: 51px;
+	border-collapse: collapse;
+	background-color: #DDDDDD;
 }
 
 .emonyList {
@@ -158,10 +193,17 @@ tr, td {
 		pattern="yy/MM/dd HH:mm:ss" var="formattedDateCharge" />
 
 	<div id='divContainer'>
-		<div class="title">
-			<div id="firstTitle"
-				style="color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG
-				FAMILY</div>
+		<div id="firstTitle"
+			style="color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;">DAENGDAENG
+			FAMILY</div>
+		<div class='emoneyListTitle'>
+			<div style='height:47px'>이머니 충전 내역</div>
+			<table class="emoneyListTable">
+				<tr class='emoneyListTr'>
+					<td>충전 금액</td>
+					<td style="background-color:white;width: 331px;">충전 날짜</td>
+				</tr>
+			</table>
 		</div>
 		<div id="infoContainer">
 			
@@ -272,18 +314,25 @@ tr, td {
 				</table>
 				
 			</div>
-			<div id="emoneyChargeList">
-				<table>
-					<tr>
-						<td colspan="2" class="emoneyListTitle">이머니 충전 내역</td>
-					</tr>
-					<c:forEach var="memberChargeDto" items="${memberChargeList}"
-						varStatus="loop">
-						<tr>
-							<td class="emonyList">${memberChargeList.MEMBER_CHARGE_AMOUNT}</td>
-							<td class="emonyList">${formattedDateCharge}</td>
-					</c:forEach>
-				</table>
+			<div id="emoneyListDiv">
+				<div class="emoneyListTableDiv">
+					<table class="emoneyListTable">
+						<tr class='emoneyListTr'>
+							<td>충전 금액</td>
+							<td>충전 날짜</td>
+						</tr>
+						<c:forEach var="memberChargeDto" items="${memberChargeDto}"
+							varStatus="loop">
+							<tr class='emoneyListTr'>
+								<td>${memberChargeDto.MEMBER_CHARGE_AMOUNT}</td>
+								<td>
+									<fmt:formatDate
+										pattern="yyyy-MM-dd HH:mm:ss"
+										value="${memberChargeDto.MEMBER_CHARGE_DATE}" />
+								</td>
+						</c:forEach>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -136,7 +137,9 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 				</div>
 				<div id="listColumn2" class="listColumn 
 					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
-						${orderDto.ORDER_CANCEL_DATE}
+						<fmt:formatDate
+										pattern="yyyy-MM-dd HH:mm:ss"
+										value="${orderDto.ORDER_CANCEL_DATE}" />
 				</div>
 				<div id="listColumn3" class="listColumn 
 					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">

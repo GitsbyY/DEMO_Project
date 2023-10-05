@@ -139,7 +139,7 @@ td input{
                   <td id="thirdTd" class="firstTd">작성자</td>   
                   <td id="nameTd">${sessionScope.member.memberName}</td>                        
                </tr>
-               <tr id=fourthTr">
+               <tr id="fourthTr">
                   <td id="fourthTd" class="firstTd">내용</td>   
                   <td id="contentInputTd">
                      <textarea id="contentInput" name="inquiryContent"></textarea>
