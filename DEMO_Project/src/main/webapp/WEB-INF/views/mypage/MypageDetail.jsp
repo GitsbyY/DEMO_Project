@@ -83,15 +83,19 @@ th, td {
 
 	<jsp:include page="/WEB-INF/views/asideMyPage.jsp" />
 	<fmt:formatDate value="${orderDto.ORDER_DATE}" pattern="yyyy/MM/dd" var="formattedDate" />
+	<fmt:formatDate value="${orderDto.ORDER_DATE}" pattern="yyyy/MM/dd HH:mm:SS" var="formattedDateDetail" />
 
 	<div id='divContainer'>
 		<div id="divTitle">주문 상세</div>
 		<div id='divDetailContainer'>
 
 			<div id="divTop">
-				<div>${orderDto.ORDER_DATE}&nbsp;&nbsp;|</div>
+				<div>&nbsp;${orderDto.PRODUCT_NAME}&nbsp;&nbsp;|</div>
+				<div>${formattedDateDetail}&nbsp;&nbsp;|</div>
 				<div>${orderDto.ORDER_NO}&nbsp;&nbsp;|</div>
-				<div>${orderDto.MEMBER_NO}&nbsp;&nbsp;|</div>
+				<c:if test="${sessionScope.member.memberNo == 1}">
+					<div>${orderDto.MEMBER_NO}&nbsp;&nbsp;|</div>
+				</c:if>
 				<div>${orderDto.MEMBER_ID}</div>
 			</div>
 
@@ -106,9 +110,13 @@ th, td {
 				<tbody>
 				 
 					<tr>
-						<th rowspan="2" style="border-right: 1px solid black;">
-							<img src="" alt="상품 이미지">
-							<input type="text" value="텍스트박스 내용">
+						<th rowspan="2" style="border-right: 1px solid black; display: table-cell; vertical-align: top;"">
+							<div id="productNameImg" style="text-align: left; margin-top: 10px; font-size: 20px;">
+								&nbsp;&nbsp;${orderDto.PRODUCT_NAME}
+							</div>
+							<div id="imgContainer" style="display: block; width : 300px; height: 120px;">
+								<img src="" alt="상품 이미지">
+							</div>
 						</th>
 						<th style="font-size: 24px; font-weight: bold;">${orderDto.PRODUCT_QUANTITY} 개</th>
 						<th rowspan="2" style="font-size: 24px; font-weight: bold; border-left: 1px solid black;">${orderDto.ORDER_STATUS}</th>
@@ -129,8 +137,11 @@ th, td {
 				<tr>
 					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px; width: 210px;">주문일자</th>
 					<th style="font-size: 24px; font-weight: bold; text-align: right; border-right: 1px solid black;  padding-right: 15px; width: 210px;">${formattedDate}</th>
-					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px; width: 210px;">결제일자</th>
-					<th style="font-size: 24px; font-weight: bold; text-align: right; width: 210px; padding-right: 10px;"></th>
+					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px; width: 210px;">요청사항</th>
+					<th style="font-size: 24px; font-weight: bold; text-align: right; width: 210px; padding-right: 10px;">
+						<c:if test="${empty orderDto.ORDER_REQUEST}">없음</c:if>
+						<c:if test="${not empty orderDto.ORDER_REQUEST}">${orderDto.ORDER_REQUEST}</c:if>
+					</th>
 				</tr>
 				<tr>
 					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px; width: 210px;">주문접수번호</th>
@@ -144,19 +155,27 @@ th, td {
 
 			<div id="divBottom">
 				<div style="text-align: right; margin-top: 4px;">
-				<form action="../order/orderCancelCtr.do"  onsubmit="return checkOrderStatus()" id="cancelForm" method="post">
-    				<input type="hidden" name="orderNo" value="${orderDto.ORDER_NO}">
-					<input type="submit" value="주문취소" 
-						style="width: 90px; height: 30px; font-size: 15px;">
-				</form>
+					<c:if test="${orderDto.ORDER_STATUS eq '미확정'}">
+						<!-- 주문 상태가 '취소'인 경우에만 아래 내용을 표시합니다. -->
+						<form action="../order/orderCancelCtr.do"
+							onsubmit="return checkOrderStatus()" id="cancelForm"
+							method="post">
+							<input type="hidden" name="orderNo" value="${orderDto.ORDER_NO}">
+							<input type="submit" value="주문취소"
+								style="width: 90px; height: 30px; font-size: 15px; 
+									font-weight: bold; background-color: #FF3200; color: white; border: none; border-radius: 3px;">
+						</form>
+					</c:if>
 				</div>
-				
+
 				<div style="margin-top: 40px;">
-					<input type="button" value="목록" 
-						style="width: 145px; height: 50px; font-size: 24px; font-weight: bold;" onclick="window.location.href='/DEMO_Project/mypage/mypage.do';">	
+					<input type="button" value="목록"
+						style="width: 145px; height: 50px; font-size: 24px; 
+							font-weight: bold; background-color: #FFC4A3; color: white; border: none; border-radius: 3px;"
+						onclick="window.location.href='/DEMO_Project/mypage/mypage.do';">
 				</div>
 			</div>
-			
+
 		</div>
 		
 	</div>

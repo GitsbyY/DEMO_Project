@@ -31,7 +31,6 @@ nav > ul > li > a {
     text-align: center;
     padding: 16px;
     text-decoration: none;
-     
 }
 
 nav > ul > li > a:hover { 
