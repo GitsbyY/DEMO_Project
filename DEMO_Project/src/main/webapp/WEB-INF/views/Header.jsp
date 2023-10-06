@@ -59,10 +59,10 @@
 				</div>
 
 				<div id="bottomRow">
-					<a href="#" id="curEMony" class="bottomRowButton">
+					<a href="#" class="bottomRowButton" id="curEmoney">
 						eMoney : ${sessionScope.member.memberPoint}
 					</a>
-					<a href="#" id="loginName" class="bottomRowButton"> 
+					<a href="#" class="bottomRowButton" id="memberNick" style="width: 90px;"> 
 						${sessionScope.member.memberName}님
 					</a>
 					<a href="<%=request.getContextPath()%>/auth/logout.do" 
@@ -76,11 +76,27 @@
 	<hr>
 </div>
 <script type="text/javascript">
+
 	function goHomeFnc() {
 
 		var url = '/DEMO_Project/auth/login.do';
 
 		location.href = url;
 	}
+	
+	document.addEventListener("DOMContentLoaded", function(){
+	
+		document.getElementById("curEmoney").addEventListener("click", function() {
+		    var memberNo = ${sessionScope.member.memberNo};
+		    var url = '/DEMO_Project/mypage/mypageProfilePayment.do?memberNo=' + memberNo;
+		    location.href = url;
+		});
+		
+		document.getElementById("memberNick").addEventListener("click", function() {
+		    var url = '/DEMO_Project/mypage/mypageProfile.do';
+		    location.href = url;
+		});
+		
+	});
 	
 </script>

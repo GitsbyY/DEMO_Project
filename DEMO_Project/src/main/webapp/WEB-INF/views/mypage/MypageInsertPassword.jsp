@@ -54,11 +54,12 @@ button {
 .passwordCheck {
 	width: 600px;
 	height: 300px;
-	border: 1px solid black;
 	background-color : #FFC4A3;
 	border-collapse: collapse;
 	font-size: 24px;
-	margin-bottom: 120px;
+	margin-bottom: 283px;
+	border: none;
+	border-radius: 3px;
 }
 
 .passwordCheckValueWrap {
@@ -70,6 +71,9 @@ button {
 	align-items: center;
 	margin-left: 90px;
 	margin-top: 100px;
+	border: none;
+	border-radius: 3px;
+	padding-top: 91px;
 }
 
 .passwordCheckName{
@@ -103,8 +107,10 @@ button {
 }
 
 .errTxtRed {
-	font-size: 11px;
-	margin-top: 1px;
+	font-size: 14px;
+	margin-top: 2px;
+	font-weight: bold;
+	text-align: right;
 }
 </style>
 <meta charset="UTF-8">
@@ -142,14 +148,14 @@ button {
 							<p class="errTxtRed" id="passwordCheckMessage"
 								aria-live="assertive"></p>
 						</div>
-					</div>
-
 						<div id="checkPasswordInfo">
 							<input id="submitButton" type="button" name="checkPassword" 
 								value="확인" onclick="checkPwdFnc()" />
 							<input id="hiddenPwd" type="hidden" value="${sessionScope.member.memberPassword}"/>
 							<input id="hiddenMemberNo" type="hidden" value="${sessionScope.member.memberNo}"/>
 						</div>
+						
+					</div>
 
 				</div>
 				
@@ -175,8 +181,8 @@ button {
 		if(password === inputPassword ){
 			location.href= url;
 		}else{
-			errTxt.style.color = red;
-			errTxt.value = "비밀번호가 일치하지 않습니다.";
+			errTxt.style.color = "red";
+			errTxt.innerHTML = "비밀번호가 일치하지 않습니다.";
 		}
 	}
 

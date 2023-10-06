@@ -84,6 +84,7 @@ th, td {
 	<jsp:include page="/WEB-INF/views/asideMyPage.jsp" />
 	<fmt:formatDate value="${orderDto.ORDER_DATE}" pattern="yyyy/MM/dd" var="formattedDate" />
 	<fmt:formatDate value="${orderDto.ORDER_DATE}" pattern="yyyy/MM/dd HH:mm:SS" var="formattedDateDetail" />
+	<fmt:formatNumber value="${orderDto.PRODUCT_PRICE}" pattern="#,###,###" var="formattedNumber" />
 
 	<div id='divContainer'>
 		<div id="divTitle">주문 상세</div>
@@ -122,7 +123,7 @@ th, td {
 						<th rowspan="2" style="font-size: 24px; font-weight: bold; border-left: 1px solid black;">${orderDto.ORDER_STATUS}</th>
 					</tr>
 					<tr>
-						<th style="font-size: 24px; font-weight: bold;">${orderDto.PRODUCT_PRICE}</th>
+						<th style="font-size: 24px; font-weight: bold;">${formattedNumber}</th>
 					</tr>
 			
 			</table>

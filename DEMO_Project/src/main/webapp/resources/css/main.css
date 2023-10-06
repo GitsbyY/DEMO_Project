@@ -89,10 +89,10 @@ button{
 	clear: both; /* 띄워진 요소들 아래로 내리기 */
 	float: right; /* 오른쪽으로 띄우기 */
 	margin-top: 40px; /*위에 마진 추가*/
-	margin-right : 15px;
+	margin-right : -45px;
 	font-size: 14px;
 	text-align: right;
-	margin-left: 10px;
+
 	width: 350px;
 }
 #timerElement{

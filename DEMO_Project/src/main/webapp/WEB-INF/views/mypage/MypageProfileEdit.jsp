@@ -93,7 +93,7 @@ button {
 	height: 50px;
 }
 
-.memberOrPet {
+.memberOrPetM {
 	background-color: #FFC4A3;
 	width: 200px;
 	height: 50px;
@@ -102,6 +102,17 @@ button {
 	color: white;
 	font-size: 24px;
 }
+
+.memberOrPetP {
+	background-color: #F0E1D9;
+	width: 200px;
+	height: 50px;
+	float: left;
+	text-align: center;
+	color: white;
+	font-size: 24px;
+}
+
 
 #buttonContainer {
 	display: flex;
@@ -179,8 +190,8 @@ button {
 
 		<div id="infoContainer">
 			<div id="memberOrPetContainer">
-				<button class="memberOrPet" style="border-right: 1px solid white;">회원</button>
-				<button class="memberOrPet"
+				<button class="memberOrPetM" style="border-right: 1px solid white;">회원</button>
+				<button class="memberOrPetP"
 					onclick="showPetInfo('${memberDto.MEMBER_NO}')">반려견</button>
 			</div>
 			<form action="./MypageProfileEditUpdateCtr.do" method="POST" id="memberUpdateForm">
