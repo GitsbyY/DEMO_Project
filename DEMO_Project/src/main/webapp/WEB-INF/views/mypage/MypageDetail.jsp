@@ -156,7 +156,7 @@ th, td {
 				
 				</tbody>
 			</table>
-			<c:if test='${sessionScope.member.memberNo != 1}'>
+			<c:if test="${sessionScope.member.memberNo != 1 && orderDto.ORDER_STATUS eq '확정'}">
 				<button type="button" onclick="goReviewFnc();">후기글쓰기</button>
 			</c:if>
 			
