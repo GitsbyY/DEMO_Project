@@ -7,7 +7,6 @@
 <head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style type="text/css">
-
 #title{	
 	width: 100%;
 	height: 700px;
@@ -34,6 +33,9 @@ table, tr, td{
 	border-left:thick;
 	border-right:thick;	
 }
+td{
+	height: 35px;
+}
 #memberInfo{
 	width: 100%;
 }
@@ -45,6 +47,7 @@ table tr td:first-child {
     width: 20%;
 	font-weight: bold;
 	text-align: right;
+	padding-right: 20px;
 	background-color: #D9D9D9;	
 }
 .redText{
@@ -52,6 +55,8 @@ table tr td:first-child {
 }
 #pointInput{
 	width: 70px;
+	height: 25px;
+	font-size: 16px;
 }
 #cancellation{
 	margin-top: 60px;
@@ -61,6 +66,7 @@ table tr td:first-child {
 	font-size: 20px;
 	margin-left: 30%;
 	float: left;
+	cursor: pointer;
 }
 #payment{
 	margin-top: 60px;
@@ -70,6 +76,15 @@ table tr td:first-child {
 	font-size: 20px;
 	margin-right: 30%;
 	float: right;
+	cursor: pointer;
+}
+.secondTd{
+	padding-left: 20px;
+}
+#inputMsg{
+	height: 25px;
+	width: 300px;
+	font-size:16px;
 }
 </style>
 <meta charset="UTF-8">
@@ -77,7 +92,7 @@ table tr td:first-child {
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/Header.jsp"/>
-	
+
 	<div id="mainContainer">
 		<form action='./paymentCtr.do' method='POST' id='paymentForm'>
 			<input type='hidden' name='productNo' value='${productNo}'>
@@ -98,7 +113,7 @@ table tr td:first-child {
 								</div>
 							</td>
 							<td>
-								<div>
+								<div class="secondTd">
 									${sessionScope.member.memberName}
 								</div>
 							</td>
@@ -110,7 +125,7 @@ table tr td:first-child {
 								</div>
 							</td>
 							<td>
-								<div>
+								<div class="secondTd">
 									${sessionScope.member.memberAddress}
 								</div>
 							</td>
@@ -122,7 +137,7 @@ table tr td:first-child {
 								</div>
 							</td>
 							<td>
-								<div>
+								<div class="secondTd">
 									${sessionScope.member.memberPhone}
 								</div>
 							</td>
@@ -134,8 +149,8 @@ table tr td:first-child {
 								</div>
 							</td>
 							<td>
-								<div>
-									<input type="text" name="orderRequest">
+								<div class="secondTd">
+									<input id='inputMsg' type="text" name="orderRequest">
 								</div>
 							</td>
 						</tr>
@@ -154,7 +169,7 @@ table tr td:first-child {
 							</td>
 							<td>
 								<div>
-									<span id="productSumPrice">
+									<span id="productSumPrice" class="secondTd">
 										<fmt:formatNumber value="${sumPrice}" type="number" />
 									</span>
 									원
@@ -168,7 +183,7 @@ table tr td:first-child {
 								</div>
 							</td>
 							<td>
-								<div>
+								<div class="secondTd">
 									<input id="pointInput" type="text">
 									<span class="redText">P</span>
 								</div>
@@ -190,7 +205,7 @@ table tr td:first-child {
 								</div>
 							</td>
 							<td>
-								<div>
+								<div class="secondTd">
 									E-money
 								</div>
 							</td>
@@ -214,7 +229,7 @@ table tr td:first-child {
 								</div>
 							</td>
 							<td>
-								<div class="redText">
+								<div class="redText secondTd">
 									<span id="paymentSumPrice">
 										<fmt:formatNumber value="${sumPrice}" type="number" />
 									</span>
@@ -243,14 +258,12 @@ table tr td:first-child {
 		</form>
 	</div>
 
-	
-	
+
+
 	<jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
 <script>
-
 	var pointInputObj = document.getElementById('pointInput');
-
 	pointInputObj.addEventListener('change', pointInputFnc);
 	
 	var numberPattern = /^[0-9]+$/;

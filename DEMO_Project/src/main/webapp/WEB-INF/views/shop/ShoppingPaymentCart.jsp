@@ -7,7 +7,6 @@
 <head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style type="text/css">
-
 #title{	
 	width: 100%;
 	height: 700px;
@@ -57,6 +56,7 @@ table tr td:first-child {
 #pointInput{
 	width: 70px;
 	height: 25px;
+	font-size: 16px;
 }
 #cancellation{
 	margin-top: 60px;
@@ -84,6 +84,7 @@ table tr td:first-child {
 #inputMsg{
 	height: 25px;
 	width: 300px;
+	font-size:16px;
 }
 </style>
 <meta charset="UTF-8">
