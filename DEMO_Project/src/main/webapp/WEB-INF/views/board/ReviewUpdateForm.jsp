@@ -98,7 +98,8 @@ td input{
    color: white;
    width: 80px;
    height: 30px;
-   font-size: 16px;   
+   font-size: 16px;
+   cursor: pointer;   
 }
 #petBreed{
    padding-left: 10px;
@@ -125,11 +126,11 @@ td input{
                <tr id="firstTr">
                   <td id="firstTd" class="firstTd">상품명</td>   
                   <td id="titleInputTd">
-                     ${memberInfo.PRODUCT_NAME}
+                     ${reviewDto.PRODUCT_NAME}
                   </td>
                   <td class="firstTd">견종</td>
                   <td id="petBreed">
-                     ${memberInfo.PET_BREED}
+                     ${memberInfo[0].PET_BREED}
                   </td>      
                </tr>
                <tr id="secondTr">
@@ -142,12 +143,12 @@ td input{
                   <td id="thirdTd" class="firstTd">작성자</td>   
                   <td id="nameTd" colspan="3">${sessionScope.member.memberName}</td>                        
                </tr>
-               <tr id=fourthTr">
+               <tr id="fourthTr">
                   <td id="fourthTd" class="firstTd">내용</td>   
                   <td id="contentInputTd" colspan="3">
-                     <textarea id="contentInput" type="text" name="reviewContent">${reviewDto.REVIEW_CONTENT}</textarea>
-                     <input type="hidden" name="reviewContent" value="${memberInfo.REVIEW_CONTENT}">
-                     <input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}">                  
+                     <textarea id="contentInput" name="reviewContent">${reviewDto.REVIEW_CONTENT}</textarea>
+                     <%-- <input type="hidden" name="reviewContent" value="${memberInfo[0].REVIEW_CONTENT}">
+                     <input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}">   --%>                
                   </td>
                </tr>            
             </table>

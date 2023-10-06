@@ -97,7 +97,7 @@ p{
    
    <form action="findPasswordCtr.do" method="post" onsubmit="">
       <div>
-         <h1 style="text-align: center; color: #FFC4A3;"
+         <h1 style="text-align: center; color: #FFC4A3; cursor: pointer;"
          	onclick="location.href='/DEMO_Project/auth/login.do'">DAENGDAENG</h1>
          <div id="findPasswordText">비밀번호 찾기</div>
          <div class="inputTagWrap">
@@ -168,12 +168,15 @@ p{
 	        success: function(response) {
 	            if (response === false) {
 	                document.getElementById("emailCheck").style.display = "block";
+	                var sendMailBtn = document.getElementById("sendMailBtn");
+	                sendMailBtn.disabled = true;
+	                sendMailBtn.style.backgroundColor = "#ccc";
 	            } else {
 	                document.getElementById("emailCheck").style.display = "none";
 	                var sendMailBtn = document.getElementById("sendMailBtn");
 		            sendMailBtn.disabled = false;
 		            sendMailBtn.style.backgroundColor = "#FFC4A3";
-		            
+		            sendMailBtn.style.cursor = "pointer";
 	            }
 	            
 	        },
@@ -196,6 +199,9 @@ p{
 	        success: function(response) {
 	            if (response === false) {
 	                document.getElementById("idCheck").style.display = "block";
+	                var sendMailBtn = document.getElementById("sendMailBtn");
+	                sendMailBtn.disabled = true;
+	                sendMailBtn.style.backgroundColor = "#ccc";
 	            } else {
 	                document.getElementById("idCheck").style.display = "none";
 	            }
@@ -221,7 +227,7 @@ p{
 			    var btn = document.getElementById("btn");
 	            btn.disabled = false;
 	            btn.style.backgroundColor = "#FFC4A3";
-				
+	            btn.style.cursor = "pointer";
 			},
 			error: function() {
 				alert('회원정보가 일치하지 않습니다.');
@@ -242,6 +248,7 @@ p{
             failMessage.style.display = "none";
             findPasswordBtn.disabled = false;
             findPasswordBtn.style.backgroundColor = "#FFC4A3";
+            findPasswordBtn.style.cursor = "pointer";
 
         } else {
             successMessage.style.display = "none";

@@ -81,6 +81,7 @@ table{
 	width: 65px;
 	margin-bottom: 30px;
 	height: 30px;
+	cursor: pointer;
 }
 #btnDiv{
    margin-top: 10px;
@@ -93,6 +94,7 @@ table{
    background-color: red;
    border:none;
    color: white;
+   cursor: pointer;
 }
 .noticeReplyDiv{
 	clear: both;
@@ -162,6 +164,9 @@ textarea {
 	font-size: 24px;
 	font-weight: bold;
 	margin-bottom: 10px;
+}
+#firstBtn{
+	cursor: pointer;
 }
 </style>
 <meta charset="UTF-8">
@@ -251,7 +256,7 @@ textarea {
 	      					style="background-color: red; display: none;" onclick="editFnc('noticeReplyDiv${loop.index}');">등록</button>							
 					</c:when>
 					<c:when test="${sessionScope.member.memberNo eq '1'}">
-						<input class="submit" type="button" value="삭제" 
+						<input style="cursor: pointer;" class="submit" type="button" value="삭제" 
 	      					onclick="noticeReplyDeleteFnc(${reply.NOTICE_REPLY_NO});">	      										
 					</c:when>
 					<c:otherwise>		

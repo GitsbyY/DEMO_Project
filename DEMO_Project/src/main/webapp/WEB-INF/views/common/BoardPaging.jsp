@@ -29,8 +29,10 @@ nav > ul > li > a {
     display: block;
     color: black; 
     text-align: center;
-    padding: 16px;
+    padding: 6px 14px;
     text-decoration: none;
+    border-radius: 5px;
+     
 }
 
 nav > ul > li > a:hover { 

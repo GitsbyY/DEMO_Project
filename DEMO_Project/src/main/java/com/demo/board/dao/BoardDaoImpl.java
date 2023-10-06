@@ -145,12 +145,13 @@ public class BoardDaoImpl implements BoardDao{
       // TODO Auto-generated method stub
       return sqlSession.delete(nameSpace + "noticeDeleteOne", no);
    }
-
 	
-   @Override public int reviewSelectTotalCount() {
-	   // TODO Auto-generated method stub 
+   
+   @Override
+	public int reviewSelectTotalCount(String search, String select) {
+		// TODO Auto-generated method stub
 	   return (int)sqlSession.selectOne(nameSpace + "reviewSelectTotalCount");
-   }
+	}
 	 
 
    @Override
@@ -285,6 +286,8 @@ public class BoardDaoImpl implements BoardDao{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(nameSpace + "memberInfoList", memberNo);
 	}
+
+	
 
 
 

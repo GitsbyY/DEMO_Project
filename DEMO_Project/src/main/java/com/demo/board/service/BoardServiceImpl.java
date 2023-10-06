@@ -158,11 +158,12 @@ public class BoardServiceImpl implements BoardService{
       // TODO Auto-generated method stub
       return boardDao.noticeDeleteOne(no);
    }
+   
    @Override
-   public int reviewSelectTotalCount() {
-      // TODO Auto-generated method stub
-      return boardDao.reviewSelectTotalCount();
-   }
+	public int reviewSelectTotalCount(String search, String select) {
+		// TODO Auto-generated method stub
+	   return boardDao.reviewSelectTotalCount(search, select);
+	}
    @Override
    public int inquiryDeleteOne(int no) {
       // TODO Auto-generated method stub
@@ -321,6 +322,7 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 		return boardDao.memberInfoList(memberNo);
 	}
+	
 
 
 	

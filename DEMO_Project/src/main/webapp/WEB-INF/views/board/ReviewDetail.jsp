@@ -105,6 +105,7 @@ table{
 	color: white;
 	width: 65px;
 	margin-bottom: 30px;
+	cursor: pointer;
 }
 .reviewReplyDiv{
 	clear: both;
@@ -228,14 +229,14 @@ textarea {
          <c:choose>            
             <c:when test="${sessionScope.member.memberNo eq reviewDto.MEMBER_NO}">
                <input type="hidden" name="no" value="${reviewDto.REVIEW_NO}">
-               <input class="rightBtn" type="submit" value="수정">
-               <input class="rightBtn" type="button" value="삭제" 
+               <input style="cursor: pointer;" class="rightBtn" type="submit" value="수정">
+               <input style="cursor: pointer;" class="rightBtn" type="button" value="삭제" 
                   onclick='pageMoveDeleteFnc(${reviewDto.REVIEW_NO});'>
             </c:when>
             <c:when test="${sessionScope.member.memberNo eq '1'}">
                <input type="hidden" name="no" value="${reviewDto.REVIEW_NO}">
                <input type="hidden" name="memberNo" value="${reviewDto.MEMBER_NO}">               
-               <input class="rightBtn" type="button" value="삭제" 
+               <input style="cursor: pointer;" class="rightBtn" type="button" value="삭제" 
                   onclick='pageMoveDeleteFnc(${reviewDto.REVIEW_NO});'>
             </c:when>
             <c:otherwise>
@@ -266,7 +267,7 @@ textarea {
 					<c:when test="${sessionScope.member.memberNo eq reply.MEMBER_NO}">
 						<input id="firstBtn" class="edit" type="button" value="삭제" 
 	      					onclick="reviewReplyDeleteFnc(${reply.REVIEW_REPLY_NO});" 
-	      					style="display: block;">
+	      					style="display: block; cursor: pointer;">
 	      				<button id="secondBtn" class="edit" type="button" 
 	      					style="display: block;" onclick="changeBtnFnc('reviewReplyDiv${loop.index}'); changeDivBorder('reviewReplyDiv${loop.index}'); activateTextarea('reviewReplyDiv${loop.index}');">수정</button>
 	      				<button id="thirdBtn" class="submit" type="button" 
@@ -275,7 +276,7 @@ textarea {
 	      					style="background-color: red; display: none;" onclick="editFnc('reviewReplyDiv${loop.index}');">등록</button>							
 					</c:when>
 					<c:when test="${sessionScope.member.memberNo eq '1'}">
-						<input class="submit" type="button" value="삭제" 
+						<input style="cursor: pointer;" class="submit" type="button" value="삭제" 
 	      					onclick="reviewReplyDeleteFnc(${reply.REVIEW_REPLY_NO});">	      										
 					</c:when>
 					<c:otherwise>		

@@ -41,8 +41,9 @@ div {
 }
 .inputTagWrap > #inputId, #inputPassword{
 	height: 40px;
-	width: 300px;
+	width: 290px;
 	margin-top: 3px;
+	padding-left: 10px;
 }
 #loginBtn > button{
 	height: 40px;
@@ -51,7 +52,8 @@ div {
 	border: none;
 	background-color: #FFC4A3;
 	font-size: 16px;
-	font-weight: bold; 
+	font-weight: bold;
+	cursor: pointer; 
 }
 .DaengBtn{
 	float: left;
@@ -105,7 +107,7 @@ button.DaengBtn:hover {
 	
 	<form action="loginCtr.do" method="post">
 		<div>
-			<h1 style="text-align: center; color: #FFC4A3;"
+			<h1 style="text-align: center; color: #FFC4A3; cursor: pointer;"
 				onclick="location.href='/DEMO_Project/auth/login.do'">DAENGDAENG</h1>
 			<div id="loginText">Login</div>
 			<div class="inputTagWrap">

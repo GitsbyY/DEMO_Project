@@ -52,7 +52,7 @@ div {
    font-size: 16px;   
 }
 #findPwdResult{
-   margin-top: 30px;   
+   margin-top: 5px;   
    height: 30px;
    font-weight: bold;
    font-size: 16px;
@@ -78,42 +78,11 @@ tr, td{
 </head>
 
 <body>
-   
-   <%-- <form action="changePassword.do" method="post">
-      <div>
-         <h1 style="text-align: center; color: #FFC4A3;">DAENGDAENG</h1>
-         <div id="findPwdText">비밀번호 변경</div>
-            <div id="findPwdResult">
-               <table>
-                  <tr>
-                     <td class="firstTd">변경 할 비밀번호</td>
-                     <td class="secondTd">
-                        <input id="changePwd" type="password" name="memberPassword" 
-                           placeholder="비밀번호를 입력해주세요">
-                        <input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}">   
-                     </td>
-                  </tr>
-                  <tr>
-                     <td class="firstTd">비밀번호 재입력</td>
-                     <td>
-                        <input id="checkPwd" type="password" 
-                           placeholder="비밀번호를 입력해주세요">
-                     </td>
-                  </tr>
-               
-               </table>
-               <div id="findPwdBtn">
-                  <button type="submit">비밀번호 변경</button>
-               </div>               
-            </div>
-                     
-         
-      </div>
-   </form> --%>
+  
    
    <form action="changePassword.do" method="post" onsubmit="return checkPasswords()">
         <div>
-            <h1 style="text-align: center; color: #FFC4A3;"
+            <h1 style="text-align: center; color: #FFC4A3; cursor: pointer;"
             	onclick="location.href='/DEMO_Project/auth/login.do'">DAENGDAENG</h1>
             <div id="findPwdText">비밀번호 변경</div>
             <div id="findPwdResult">
@@ -138,7 +107,7 @@ tr, td{
                 <p id="passwordMismatch" style="color: red; display: none; text-align: left;">
                 </p>
                 <div id="findPwdBtn">
-                    <button type="submit">비밀번호 변경</button>
+                    <button style="cursor: pointer;" type="submit">비밀번호 변경</button>
                 </div>               
             </div>
         </div>

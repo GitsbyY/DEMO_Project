@@ -123,7 +123,8 @@ a{
    color: white;
    width: 60px;
    height: 30px;
-   font-size: 16px;   
+   font-size: 16px;
+   cursor: pointer;   
 }
 #pageDiv{
    margin-top: 30px;

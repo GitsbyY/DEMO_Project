@@ -121,6 +121,7 @@ table {
    color: white;
    font-weight: bold;
    border: none;
+   cursor: pointer;
 }
 #listBtn{
 	background-color: #FFC4A3;
@@ -128,6 +129,7 @@ table {
 	font-weight: bold;
 	border: none;
 	width: 65px;
+	cursor: pointer;
 }
 
 #replyTableDiv {

@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -102,9 +103,9 @@ public class BoardController {
 		@RequestParam(defaultValue = "PRODUCT_NAME") String select,
 		Model model, HttpSession session) {
       // Log4j 
-      log.info("Welcome BoardController review!: {}", curPage);
+      log.info("Welcome BoardController review!: {}", curPage + ", " + search + ", " + select);
          
-      int totalCount = boardService.reviewSelectTotalCount();
+      int totalCount = boardService.reviewSelectTotalCount(search, select);
       
       BoardPaging boardPaging = new BoardPaging(totalCount, curPage);
       
@@ -320,7 +321,6 @@ public class BoardController {
             
       return "common/InquirySuccessPage";
    }
-   
    // 후기남겨요 수정 화면으로
    @RequestMapping(value = "/board/reviewupdate.do", method = RequestMethod.GET)
    public String reviewUpdate(@RequestParam(name = "no"
@@ -331,9 +331,10 @@ public class BoardController {
       
       int memberNo = memberDto.getMemberNo();
             
-      Map<String, Object> memberInfo = boardService.memberInfo(memberNo);
+//      Map<String, Object> memberInfo = boardService.memberInfo(memberNo);
+      List<MemberDto> memberInfoList = boardService.memberInfoList(memberNo);
       
-      model.addAttribute("memberInfo", memberInfo);
+      model.addAttribute("memberInfo", memberInfoList);
       
       Map<String, Object> resultMap = boardService.reviewSelectOne(no);
             
@@ -347,6 +348,34 @@ public class BoardController {
             
       return "board/ReviewUpdateForm";
    }
+   
+   
+   // 후기남겨요 수정 화면으로
+//   @RequestMapping(value = "/board/reviewupdate.do", method = RequestMethod.GET)
+//   public String reviewUpdate(@RequestParam(name = "no"
+//      , required = false, defaultValue = "0") int no, Model model, HttpSession session) {
+//      log.debug("Welcome BoardController reviewUpdate! - {}" + no);
+//      
+//      MemberDto memberDto = (MemberDto) session.getAttribute("member");
+//      
+//      int memberNo = memberDto.getMemberNo();
+//            
+//      Map<String, Object> memberInfo = boardService.memberInfo(memberNo);
+//      
+//      model.addAttribute("memberInfo", memberInfo);
+//      
+//      Map<String, Object> resultMap = boardService.reviewSelectOne(no);
+//            
+//      Map<String, Object> reviewDto 
+//      = (Map<String, Object>) resultMap.get("reviewDto");
+//      
+//      List<Map<String, Object>> fileList 
+//         = (List<Map<String, Object>>) resultMap.get("fileList");
+//      model.addAttribute("reviewDto", reviewDto);      
+//      model.addAttribute("fileList", fileList);
+//            
+//      return "board/ReviewUpdateForm";
+//   }
 
    
    // 공지사항 수정 화면으로
@@ -389,7 +418,7 @@ public class BoardController {
       return "board/InquiryUpdateForm";
    }
    
-   //후기남겨요 수정
+   //후기남겨요 수정   
    @RequestMapping(value = "/board/reviewUpdateCtr.do", method = RequestMethod.POST)
    public String reviewUpdateCtr(ReviewDto reviewDto
       , @RequestParam(value = "fileIdx", defaultValue = "-1") int fileIdx

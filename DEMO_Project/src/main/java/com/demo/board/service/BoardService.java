@@ -44,7 +44,7 @@ public interface BoardService {
    
    public int noticeDeleteOne(int no);
    
-   public int reviewSelectTotalCount();
+   public int reviewSelectTotalCount(String search, String select);
    
    public Map<String, Object> reviewSelectOne(int no);
    

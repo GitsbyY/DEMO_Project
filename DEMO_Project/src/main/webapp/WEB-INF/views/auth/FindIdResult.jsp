@@ -52,7 +52,8 @@ div {
 	margin-top: 40px;
 	border: none;
 	background-color: #FFC4A3;
-	float: left; 
+	float: left;
+	cursor: pointer; 
 }
 #warning{
 	font-size: 5px;
@@ -74,7 +75,7 @@ div {
 	
 	<form action="login.do" method="get">
 		<div>
-			<h1 style="text-align: center; color: #FFC4A3;"
+			<h1 style="text-align: center; color: #FFC4A3; cursor: pointer;"
 				onclick="location.href='/DEMO_Project/auth/login.do'">DAENGDAENG</h1>
 			<div id="findIdText">ID 찾기 결과</div>
 				<div id="findIdResult">

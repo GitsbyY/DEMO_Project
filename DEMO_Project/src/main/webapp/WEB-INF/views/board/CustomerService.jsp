@@ -109,6 +109,7 @@ table {
 	height: 30px;
 	font-size: 16px;
 	font-weight: bold;
+	cursor: pointer;
 }
 </style>
 <meta charset="UTF-8">

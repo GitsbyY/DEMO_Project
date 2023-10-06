@@ -98,7 +98,8 @@ td input{
    color: white;
    width: 60px;
    height: 30px;
-   font-size: 16px;   
+   font-size: 16px;
+   cursor: pointer;   
 }
 #petBreed{
    padding-left: 10px;
@@ -106,6 +107,7 @@ td input{
 select{
 	height: 30px;
 	font-size: 16px;
+	cursor: pointer;
 }
 </style>
 <meta charset="UTF-8">

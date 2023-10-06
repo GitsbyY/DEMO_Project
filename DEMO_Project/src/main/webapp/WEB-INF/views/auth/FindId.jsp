@@ -72,7 +72,7 @@ p{
 	
 	<form action="findIdCtr.do" method="post">
 		<div>
-			<h1 style="text-align: center; color: #FFC4A3;"
+			<h1 style="text-align: center; color: #FFC4A3; cursor: pointer;"
 				onclick="location.href='/DEMO_Project/auth/login.do'">DAENGDAENG</h1>
 			<div id="findIdText">ID 찾기</div>
 			<div class="inputTagWrap">
@@ -152,7 +152,8 @@ p{
 	                var findIdBtn = document.getElementById("findIdBtn");
 	                findIdBtn.disabled = false;
 	                findIdBtn.style.backgroundColor = "#FFC4A3";
-		            
+	                findIdBtn.style.cursor = "pointer";
+	                
 	            }
 	            
 	        },
