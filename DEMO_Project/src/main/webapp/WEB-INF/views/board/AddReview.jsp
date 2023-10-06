@@ -133,7 +133,11 @@ select{
                   	<select id="productSelect" name="productNo">
                   		<option>상품을 선택해주세요
                   		<c:forEach items="${memberInfoList}" var="memberInfoList">
-                  			<option value="${memberInfoList.PRODUCT_NO}">${memberInfoList.PRODUCT_NAME}                  			                 			
+                  			<option value="${memberInfoList.PRODUCT_NO}"
+                  			<c:if test="${productName eq memberInfoList.PRODUCT_NAME}">
+                  				selected
+                  			</c:if>
+                  			>${memberInfoList.PRODUCT_NAME}                  			                 			
                   		</c:forEach>                  		                  	
                   	</select>
                      <%-- ${memberInfo.PRODUCT_NAME} --%>

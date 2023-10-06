@@ -43,7 +43,7 @@ nav > ul > li > a:hover {
  }
 span{   
    color: red;
-} 
+}
 </style>
 
 <script type="text/javascript">

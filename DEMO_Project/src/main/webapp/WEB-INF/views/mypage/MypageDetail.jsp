@@ -86,7 +86,7 @@ th, td {
 	<fmt:formatDate value="${orderDto.ORDER_DATE}" pattern="yyyy/MM/dd HH:mm:SS" var="formattedDateDetail" />
 	<fmt:formatNumber value="${orderDto.PRODUCT_PRICE}" pattern="#,###,###" var="formattedNumber" />
 	<fmt:formatNumber value="${orderDto.PRODUCT_QUANTITY*orderDto.PRODUCT_PRICE}" pattern="#,###,###" var="formattedCapNumber" />
-
+	<input type='hidden' id='productName' value='${orderDto.PRODUCT_NAME}'>
 	<div id='divContainer'>
 		<div id="divTitle">주문 상세</div>
 		<div id='divDetailContainer'>
@@ -156,9 +156,12 @@ th, td {
 				
 				</tbody>
 			</table>
-
+			<c:if test='${sessionScope.member.memberNo != 1}'>
+				<button type="button" onclick="goReviewFnc();">후기글쓰기</button>
+			</c:if>
+			
+			
 			<div id="divBottom">
-				
 				<div style="text-align: right; margin-top: 4px;">
 					<c:if test="${orderDto.ORDER_STATUS eq '미확정'}">
 						<!-- 주문 상태가 '취소'인 경우에만 아래 내용을 표시합니다. -->
@@ -227,6 +230,11 @@ function checkOrderStatusConfirm() {
         alert("주문 취소가 불가능한 상태입니다.");
         return false; // 취소하지 않음
     }
+}
+
+function goReviewFnc(){
+	var productName = document.getElementById('productName').value;
+	location.href='/DEMO_Project/board/reviewadd.do?productName=' + productName;	
 }
 </script>
 </html>

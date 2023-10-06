@@ -12,7 +12,7 @@ nav > ul {
     list-style-type: none;
     padding: 0;
     overflow: hidden;
-    background-color: #333333;
+    background-color: white;
 /*     width: 1000px; */ /* 넓이를 주면 고정  */
     display: table; /* table을 주면  요소의 내용에 맞게 자동으로 크기 */
     margin-left: auto;
@@ -22,21 +22,28 @@ nav > ul {
 
 nav > ul > li {
    float: left;
+   margin-right: 10px;
 }
 
 nav > ul > li > a {
     display: block;
-    color: white; 
+    color: black; 
     text-align: center;
-    padding: 16px;
+    padding: 6px 14px;
     text-decoration: none;
+    border-radius: 5px;
+     
 }
 
 nav > ul > li > a:hover { 
-     color: #FFD9EC; 
-     background-color: #5D5D5D; 
-     font-weight: bold; 
- } 
+     color: black; 
+     background-color: white; 
+     font-weight: bold;
+     border: 1px solid gray; 
+ }
+span{   
+   color: red;
+}
 </style>
 
 <script type="text/javascript">
@@ -94,7 +101,7 @@ nav > ul > li > a:hover {
 				<li>
 					<a class='numClass' href="#" onclick="goPage(${num})"
 						 <c:if test="${num == pagingMap.shopPaging.curPage}">
-	               			style="background-color: red;"
+	               			style="background-color: #FFC4A3;"
 	           			</c:if>>
 	           			${num}
 	           		</a>

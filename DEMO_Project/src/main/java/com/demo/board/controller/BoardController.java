@@ -208,9 +208,10 @@ public class BoardController {
    
    // 후기남겨요 작성 페이지 이동
    @RequestMapping(value = "/board/reviewadd.do", method = RequestMethod.GET)
-   public String reviewAdd(Model model, HttpSession session) {
+   public String reviewAdd(@RequestParam(defaultValue = "") String productName
+		   ,Model model, HttpSession session) {
       log.debug("Welcome BoardController reviewAdd!");
-      
+      System.out.println(productName);
       MemberDto memberDto = (MemberDto) session.getAttribute("member");
       
       int memberNo = memberDto.getMemberNo();
@@ -218,8 +219,9 @@ public class BoardController {
 //      Map<String, Object> memberInfo = boardService.memberInfo(memberNo);
       
       List<MemberDto> memberInfoList = boardService.memberInfoList(memberNo);
-                  
+      
       model.addAttribute("memberInfoList", memberInfoList);
+      model.addAttribute("productName", productName);
 
       return "board/AddReview";
    }
