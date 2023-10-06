@@ -109,7 +109,7 @@ select{
 #adminBtn{
 	margin-top: 100px;
 	clear: right;
-	float: right;
+	float: right;	
 }
 .adminBtn{
 	width: 50px;
@@ -136,6 +136,10 @@ select{
 	min-height: 700px;
 	margin: 0px auto;
 	border: 1px solid black;
+}
+
+#productCategory{
+	cursor: pointer;
 }
 </style>
 <script type="text/javascript" src="/DEMO_Project/resources/js/jquery-3.7.1.js">
@@ -167,7 +171,7 @@ select{
 					<input type="file" name="file" id="fileInput" style="display:none"
 						onchange="fileSelected()">
 					<label for="fileInput" style="background-color: white;
-						border:2px solid black;">
+						border:2px solid black; cursor: pointer;">
 						이미지 첨부
 					</label>
 					
@@ -221,7 +225,7 @@ select{
 					<input id="imgName" name="pImgName" type="hidden" value="사진이름들어갈곳">
 					<div id="adminBtn">
 						<input class="adminBtn" type="button" value="등록"
-							onclick="submitForm();">
+							onclick="submitForm();" style="cursor: pointer;">
 					</div>
 				</div>
 			</div>

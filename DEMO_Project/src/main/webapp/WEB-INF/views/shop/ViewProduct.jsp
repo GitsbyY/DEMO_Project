@@ -115,6 +115,7 @@ select{
 	background-color: red;
 	border: none;
 	color: white;
+	cursor: pointer;
 }
 #productDetailText{
 	margin-bottom: 50px;
@@ -145,6 +146,7 @@ select{
 }
 #reviewSpan{
 	color: blue;
+	cursor: pointer;
 }
 #sumContainer{
 	width: 500px;
@@ -183,6 +185,7 @@ select{
 }
 .controlQuantity{
 	width:20px;
+	cursor: pointer;
 }
 .stockTr{
 	font-weight: normal;
@@ -202,6 +205,7 @@ select{
 	margin-right: 30px;
 	display:inline-block;
 	float:right;
+	cursor: pointer;
 }
 #paymentDiv{
 	padding-top:10px;
@@ -209,6 +213,7 @@ select{
 	width:150px;
 	height:40px;
 	float:right;
+	cursor: pointer;
 }
 
 .adminClass.updateClass{
@@ -275,7 +280,7 @@ select{
 					<input type="file" name="file" id="fileInput" style="display:none"
 						onchange="fileSelected()">
 					<label for="fileInput" class="updateClass" style="background-color: white;
-						border:2px solid black;">
+						border:2px solid black; cursor: pointer;">
 						이미지 첨부
 					</label>
 					

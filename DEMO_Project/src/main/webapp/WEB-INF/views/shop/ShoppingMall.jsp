@@ -9,8 +9,10 @@
 <link rel="stylesheet" type="text/css" href="/DEMO_Project/resources/css/main.css">
 <style type="text/css">
 
-#sortSelect{
-	margin-top:15px;
+#sortSelect{	
+	cursor: pointer;
+	height: 35px;
+	border-radius: 5px;
 }
 
 #search{
@@ -61,6 +63,7 @@
 	width: 50px;
 	height: 30px;
 	margin-left: 10px;
+	cursor: pointer;
 }
 
 #sortDiv {
@@ -79,6 +82,7 @@
 	border: 1px solid black;
 	text-align: center;
 	position: relative;
+	cursor: pointer;
 }
 
 .productImg{

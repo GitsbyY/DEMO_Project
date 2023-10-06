@@ -143,6 +143,7 @@ table tr td div {
 	vertical-align: middle;
 	font-size: 24px;
 	line-height: 5vh;
+	cursor: pointer;
 }
 #emptyCartDiv{
 	width:100%;
