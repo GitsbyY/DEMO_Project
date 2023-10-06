@@ -34,15 +34,17 @@
    border-top: thick;
    border-left:thick;
    border-right:thick;  
-   table-layout: fixed;
+   border-bottom:thick;
+   table-layout: fixed;   
    font-size: 30px;
    margin-bottom: 10px;
    width: 100%;   
 }
 #firstDiv{
    border-bottom: 2px solid black;
-   width: 150px;
-   display: block;     
+   width: 130px;
+   display: block;
+   font-weight: bold;     
 }
 #secondTh{      
 }
@@ -106,6 +108,12 @@ table{
    margin-top: 30px;
    clear: right;
 }
+.underline a {
+    text-decoration: underline; /* 밑줄 스타일 적용 */   
+}
+.titleText {
+    text-align: left; /* 텍스트를 왼쪽 정렬 */
+}
 </style>
 <meta charset="UTF-8">
 <title>공지사항 메인</title>
@@ -133,9 +141,10 @@ table{
             <c:forEach var="noticeDto" items="${noticeDtoList}">
             <tr>
                <td class="tdClass">${noticeDto.NOTICE_NO}</td>
-               <td>
+               <td onmouseover="underlineTitle(this)" 
+               		onmouseout="removeUnderlineTitle(this)" class="tdClass">
                      <a href='./listOne.do?no=${noticeDto.NOTICE_NO}'>
-                        ${noticeDto.NOTICE_TITLE}
+                        <p class="titleText">${noticeDto.NOTICE_TITLE}</p>
                      </a>
                </td>
                <td class="tdClass">${noticeDto.MEMBER_NAME}</td>
@@ -178,7 +187,13 @@ table{
    <jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
 <script type="text/javascript">
-   
+	function underlineTitle(element) {
+	    element.classList.add('underline'); // CSS 클래스 'underline' 추가
+	}
+	
+	function removeUnderlineTitle(element) {
+	    element.classList.remove('underline'); // CSS 클래스 'underline' 제거
+	}
 
 </script>
 </html>

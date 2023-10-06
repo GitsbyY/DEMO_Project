@@ -13,6 +13,7 @@
 	border-top: thick;
 	border-left: thick;
 	border-right: thick;
+	border-bottom: thick;
 	table-layout: fixed;
 	font-size: 30px;
 	margin-bottom: 10px;
@@ -23,6 +24,7 @@
 	border-bottom: 2px solid black;
 	width: 180px;
 	display: block;
+	font-weight: bold;
 }
 
 #secondTh {
@@ -109,7 +111,13 @@ table {
 	height: 30px;
 	font-size: 16px;
 	font-weight: bold;
-	cursor: pointer;
+	cursor: pointer;	
+}
+.titleText {
+    text-align: left; /* 텍스트를 왼쪽 정렬 */
+}
+.underline a {
+    text-decoration: underline; /* 밑줄 스타일 적용 */
 }
 </style>
 <meta charset="UTF-8">
@@ -145,8 +153,12 @@ table {
 							<tr>
 								<td class="tdClass">${inquiryDto.INQUIRY_NO}</td>
 								<td class="tdClass">${inquiryDto.INQUIRY_TYPE}</td>
-								<td><a href='./listOne2.do?no=${inquiryDto.INQUIRY_NO}'>
-										${inquiryDto.INQUIRY_TITLE} </a></td>
+								<td onmouseover="underlineTitle(this)" 
+									onmouseout="removeUnderlineTitle(this)" class="tdClass">
+									<a href='./listOne2.do?no=${inquiryDto.INQUIRY_NO}'>
+										<p class="titleText">${inquiryDto.INQUIRY_TITLE}</p>
+									</a>
+								</td>
 								<td class="tdClass">${inquiryDto.MEMBER_NAME}</td>
 								<td class="tdClass"><fmt:formatDate
 										pattern="yyyy-MM-dd HH:mm:ss"
@@ -241,4 +253,14 @@ table {
 
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
 </body>
+<script type="text/javascript">
+	//JavaScript 코드
+	function underlineTitle(element) {
+	    element.classList.add('underline'); // CSS 클래스 'underline' 추가
+	}
+	
+	function removeUnderlineTitle(element) {
+	    element.classList.remove('underline'); // CSS 클래스 'underline' 제거
+	}
+</script>
 </html>
