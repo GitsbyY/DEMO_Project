@@ -116,7 +116,9 @@ th, td {
 								&nbsp;&nbsp;${orderDto.PRODUCT_NAME}
 							</div>
 							<div id="imgContainer" style="display: block; width : 300px; height: 120px;">
-								<img src="" alt="상품 이미지">
+<!-- 								<img src="" alt="상품 이미지"> -->
+								<img alt="image not found" class="productImg" 
+								src="<c:url value='/image/Product/${orderDto.STORED_FILE_NAME}'/>">
 							</div>
 						</th>
 						<th style="font-size: 24px; font-weight: bold;">${orderDto.PRODUCT_QUANTITY} 개</th>

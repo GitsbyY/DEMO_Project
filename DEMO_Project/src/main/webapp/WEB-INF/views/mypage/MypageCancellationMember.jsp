@@ -94,14 +94,23 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 	text-align: right;
 	height: 40px;
 }
-#sortSelect{
-	width : 100px;
-	height: 24px;
-	font-size: 16px;
-}
-#search{
-	height: 20px;
-	font-size: 16px;
+#sortSelect{   
+   margin-top: 18px;
+   height: 40px;
+   width: 90px;
+   border-radius: 5px;
+   font-size: 16px;
+   font-weight: bold;
+ }
+#search{   
+   margin-top: 10px;
+   height: 35px;
+   width: 220px;
+   border-radius: 5px;
+   padding-left: 20px;
+   vertical-align: middle;
+   margin-bottom: 10px;
+   font-size: 16px; 
 }
 </style>
 <meta charset="UTF-8">
@@ -160,7 +169,7 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
     		<p style="font-size: 24px; margin-left: 10px; font-weight: bold;">취소내역이 없습니다.</p>
 		</c:if>
 		
-		<div id='searchDiv'>
+		<div id='searchDiv' style="position: relative;">
 			<form action="./cancelPageMember.do" method="post" id='myPageCancelSearchForm'>
 				
 				<select id="sortSelect" name="category">
@@ -168,11 +177,9 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 					<option value="productName">상품명</option>
 				</select>
 				
-				<input id="search" type="text" name="search"
-					placeholder="검색"
-					value="${myPagingmap.search}"/>
-		        <img src="/DEMO_Project/resources/img/Search.png"
-		        	alt="제출" id="searchButton" onclick="submitForm()"/>
+				<input id="search" type="text" name="search" placeholder="검색" value="${myPagingmap.search}"> 
+				<img src="/DEMO_Project/resources/img/Search.png" alt="제출" id="searchButton" 
+							style="position: absolute; right: 10px; top: 58.5%; cursor: pointer;" onclick="submitForm()">
 			</form>
 		</div>
 		

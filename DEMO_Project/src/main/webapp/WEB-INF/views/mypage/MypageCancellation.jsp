@@ -181,7 +181,7 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 				</select>
 				
 				<input id="search" type="text" name="search" placeholder="검색" value="${myPagingmap.search}"> 
-						<img src="/DEMO_Project/resources/img/Search.png" alt="제출" id="searchButton" 
+				<img src="/DEMO_Project/resources/img/Search.png" alt="제출" id="searchButton" 
 							style="position: absolute; right: 10px; top: 58.5%; cursor: pointer;" onclick="submitForm()">	
 				</form>
 		</div>

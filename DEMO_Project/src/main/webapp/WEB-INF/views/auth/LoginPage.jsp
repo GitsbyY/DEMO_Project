@@ -48,7 +48,7 @@ div {
 #loginBtn > button{
 	height: 40px;
 	width: 300px;
-	margin-top: 40px;
+	margin-top: 10px;
 	border: none;
 	background-color: #FFC4A3;
 	font-size: 16px;
@@ -105,7 +105,7 @@ button.DaengBtn:hover {
 
 <body>
 	
-	<form action="loginCtr.do" method="post">
+	<form action="loginCtr.do" method="post" style="margin-bottom: 470px;">
 		<div>
 			<h1 style="text-align: center; color: #FFC4A3; cursor: pointer;"
 				onclick="location.href='/DEMO_Project/auth/login.do'">DAENGDAENG</h1>
@@ -131,7 +131,7 @@ button.DaengBtn:hover {
 			<div id="loginBtn">
 				<button type="submit">DAENGDAENG 로그인</button>
 			</div>
-			<div class="DaengBtnWrap">
+			<div class="DaengBtnWrap" style="margin-top: 10px; margin-left: 3px;">
 				<div>
 					<button type="button" id="DaengJoinBtn" class="DaengBtn" 
 						onclick="joinFnc();">회원가입</button>
@@ -146,13 +146,13 @@ button.DaengBtn:hover {
 				</div>
 			</div>
 			
-			<div class="boxSnsJoin">
-				<div class="boxSnsLink" id="DaengNaverLoginBtn">
-					<button type="button">Naver 로그인</button>
-				</div>
-				<div class="boxSnsLink" id="DaengKakaoLoginBtn">
-					<button type="button">Kakao 로그인</button>
-				</div>
+<!-- 			<div class="boxSnsJoin"> -->
+<!-- 				<div class="boxSnsLink" id="DaengNaverLoginBtn"> -->
+<!-- 					<button type="button">Naver 로그인</button> -->
+<!-- 				</div> -->
+<!-- 				<div class="boxSnsLink" id="DaengKakaoLoginBtn"> -->
+<!-- 					<button type="button">Kakao 로그인</button> -->
+<!-- 				</div> -->
 			</div>
 		</div>
 	</form>
