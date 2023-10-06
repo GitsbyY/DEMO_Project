@@ -238,7 +238,7 @@
    
    <select id="memberInfoList" parameterType="int"
        resultType="map">
-         SELECT P.PRODUCT_NAME, T.PET_BREED, M.MEMBER_NO, P.PRODUCT_NO
+         SELECT P.PRODUCT_NAME, M.MEMBER_NO, T.PET_BREED, P.PRODUCT_NO, O.ORDER_STATUS
       FROM PET T JOIN MEMBER M
       ON T.MEMBER_NO = M.MEMBER_NO
       JOIN ORDER_LIST O
@@ -246,6 +246,8 @@
       JOIN PRODUCT P
       ON O.PRODUCT_NO = P.PRODUCT_NO
       WHERE M.MEMBER_NO = #{memberNo}
+      AND O.ORDER_STATUS = '확정'
+      GROUP BY P.PRODUCT_NAME, M.MEMBER_NO, T.PET_BREED, P.PRODUCT_NO, O.ORDER_STATUS
       
    </select>
    
