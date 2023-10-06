@@ -191,17 +191,20 @@
    </select>
    
    <select id="reviewSelectTotalCount" resultType="java.lang.Integer">
-      SELECT COUNT(*)
-      FROM REVIEW
-      <if test="select == 'PRODUCT_NAME'">
-      PRODUCT.PRODUCT_NAME LIKE '%'||#{search}||'%'
-      </if>
-		<if test="select == 'PET_BREED'">
-      PET.PET_BREED LIKE '%'||#{search}||'%'
-      </if>
-      <if test="select == 'REVIEW_TITLE'">
-      REVIEW.REVIEW_TITLE LIKE '%'||#{search}||'%'
-      </if>
+	SELECT COUNT(*) 
+   FROM REVIEW 
+   JOIN PRODUCT ON REVIEW.PRODUCT_NO = PRODUCT.PRODUCT_NO
+   JOIN MEMBER ON REVIEW.MEMBER_NO = MEMBER.MEMBER_NO
+   JOIN PET ON MEMBER.MEMBER_NO = PET.MEMBER_NO
+   <if test="select == 'PRODUCT_NAME'">
+      WHERE PRODUCT.PRODUCT_NAME LIKE '%'||#{search}||'%'
+   </if>
+   <if test="select == 'PET_BREED'">
+      WHERE PET.PET_BREED LIKE '%'||#{search}||'%'
+   </if>
+   <if test="select == 'REVIEW_TITLE'">
+      WHERE REVIEW.REVIEW_TITLE LIKE '%'||#{search}||'%'
+   </if>
    </select> 
   
    <select id="noticeSelectOne" parameterType="int"
