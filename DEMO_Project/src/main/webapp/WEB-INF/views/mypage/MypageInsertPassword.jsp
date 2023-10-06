@@ -88,14 +88,19 @@ button {
 	text-align: right;
 	font-size: 24px;
 	height: 25px;
+	border: none;
+	border-radius: 3px;
 }
 
 #submitButton{
-	border: none;
+	border: 1px solid white;
 	margin-left : 420px;
 	color: black;
+	font-size : 18px;
+	font-weight : bold;
 	border-radius: 3px;
-	background-color: #FFBA69;
+	background-color: white;
+	margin-right: 161px;
 }
 
 .errorOutline {
@@ -118,7 +123,7 @@ button {
 <link rel="stylesheet" type="text/css"
 	href="/DEMO_Project/resources/css/main.css">
 </head>
-<body>
+<body onload="focusInput()">
 	<jsp:include page="/WEB-INF/views/Header.jsp" />
 
 	<jsp:include page="/WEB-INF/views/asideMyPage.jsp" />
@@ -163,7 +168,13 @@ button {
 
 		</div>
 	</div>
-
+	
+<script type="text/javascript">
+function focusInput() {
+	document.getElementById("pwdCheck").style.outline = "none"; 
+	document.getElementById("pwdCheck").focus();
+}
+</script>
 
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
 </body>

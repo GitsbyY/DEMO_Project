@@ -148,7 +148,7 @@ th, td {
 				<div style="margin-top: 40px;">
 					<input type="button" value="목록" 
 						style="width: 145px; height: 50px; font-size: 24px; font-weight: bold; 
-							background-color: #FF3200; color: white; border: none; border-radius: 3px;"" 
+							background-color: #FFC4A3; color: white; border: none; border-radius: 3px;"" 
 							onclick="window.location.href='/DEMO_Project/mypage/cancelPageAdmin.do';">	
 				</div>
 			</div>

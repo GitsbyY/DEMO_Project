@@ -95,14 +95,23 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 	text-align: right;
 	height: 40px;
 }
-#sortSelect{
-	width : 100px;
-	height: 24px;
-	font-size: 16px;
-}
-#search{
-	height: 20px;
-	font-size: 16px;
+#sortSelect{   
+   margin-top: 18px;
+   height: 40px;
+   width: 90px;
+   border-radius: 5px;
+   font-size: 16px;
+   font-weight: bold;
+ }
+#search{   
+   margin-top: 10px;
+   height: 35px;
+   width: 220px;
+   border-radius: 5px;
+   padding-left: 20px;
+   vertical-align: middle;
+   margin-bottom: 10px;
+   font-size: 16px; 
 }
 </style>
 <meta charset="UTF-8">
@@ -131,9 +140,12 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 
 		<c:forEach var="orderDto" items="${orderList}" varStatus="loop">
 			<div class="listColumnContainer" onclick="mypageCancelFnc(${orderDto.ORDER_NO})">
+				<c:set var="orderRNUM" value="${orderDto.RNUM}" scope="page" />
+				<c:set var="total" value="${totalCount}" scope="page" />
+				<c:set var="result" value="${total - orderRNUM + 1}" scope="page" />
 				<div id="listColumn1" class="listColumn 
 					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
-						${totalCount - orderdto.RNUM + 1}
+						${result}
 				</div>
 				<div id="listColumn2" class="listColumn 
 					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
@@ -158,7 +170,7 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 			</div>
 		</c:forEach>
 		
-		<div id='searchDiv'>
+		<div id='searchDiv' style="position: relative;">
 			<form action="./cancelPageAdmin.do" method="post" id='myPageCancelSearchForm'>
 				
 				<select id="sortSelect" name="category">
@@ -168,12 +180,10 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 					<option value="productName">상품명</option>
 				</select>
 				
-				<input id="search" type="text" name="search"
-					placeholder="검색"
-					value="${myPagingmap.search}"/>
-		        <img src="/DEMO_Project/resources/img/Search.png"
-		        	alt="제출" id="searchButton" onclick="submitForm()" style="margin-top: 5px;"/>
-			</form>
+				<input id="search" type="text" name="search" placeholder="검색" value="${myPagingmap.search}"> 
+						<img src="/DEMO_Project/resources/img/Search.png" alt="제출" id="searchButton" 
+							style="position: absolute; right: 10px; top: 58.5%; cursor: pointer;" onclick="submitForm()">	
+				</form>
 		</div>
 		
 		<div id="pageStatus" style="margin-top: 50px;">

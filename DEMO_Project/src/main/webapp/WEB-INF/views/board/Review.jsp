@@ -154,7 +154,7 @@ a{
          </select>         
          <input id="search" type="text" name="search" placeholder="검색어 입력창">
          <img src="/DEMO_Project/resources/img/Search.png"
-		        	alt="제출" id="searchButton"/ style="position: absolute; 
+		        	alt="제출" id="searchButton" style="position: absolute; 
 		        	right: 10px; top: 55%; transform: translateY(-50%); cursor: pointer;">              
       </div>
       <div id="tableDiv">

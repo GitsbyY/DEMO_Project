@@ -254,7 +254,7 @@ button {
 <script type="text/javascript">
 
 function showMemberInfo(memberNo) {
-	
+
 	var url = 'MypageProfileEdit.do?memberNo=' + memberNo;
 	
     location.href= url;

@@ -156,6 +156,9 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 				</div>
 			</div>
 		</c:forEach>
+		<c:if test="${empty orderList}">
+    		<p style="font-size: 24px; margin-left: 10px; font-weight: bold;">취소내역이 없습니다.</p>
+		</c:if>
 		
 		<div id='searchDiv'>
 			<form action="./cancelPageMember.do" method="post" id='myPageCancelSearchForm'>
