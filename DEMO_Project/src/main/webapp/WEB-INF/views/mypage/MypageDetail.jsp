@@ -85,6 +85,7 @@ th, td {
 	<fmt:formatDate value="${orderDto.ORDER_DATE}" pattern="yyyy/MM/dd" var="formattedDate" />
 	<fmt:formatDate value="${orderDto.ORDER_DATE}" pattern="yyyy/MM/dd HH:mm:SS" var="formattedDateDetail" />
 	<fmt:formatNumber value="${orderDto.PRODUCT_PRICE}" pattern="#,###,###" var="formattedNumber" />
+	<fmt:formatNumber value="${orderDto.PRODUCT_QUANTITY*orderDto.PRODUCT_PRICE}" pattern="#,###,###" var="formattedCapNumber" />
 
 	<div id='divContainer'>
 		<div id="divTitle">주문 상세</div>
@@ -104,7 +105,7 @@ th, td {
 				<thead>
 					<tr style="border-bottom: 1px solid black;">
 						<th style="width: 413px; font-size: 24px; font-weight: bold;">상품</th>
-						<th style="width: 197px; font-size: 24px; font-weight: bold;">금액</th>
+						<th style="width: 197px; font-size: 24px; font-weight: bold;">제품 가격</th>
 						<th style="width: 242px; font-size: 24px; font-weight: bold;">진행 상태</th>
 					</tr>
 				</thead>
@@ -115,7 +116,7 @@ th, td {
 							<div id="productNameImg" style="text-align: left; margin-top: 10px; font-size: 20px;">
 								&nbsp;&nbsp;${orderDto.PRODUCT_NAME}
 							</div>
-							<div id="imgContainer" style="display: block; width : 300px; height: 120px;">
+							<div id="imgContainer" style="display: block; width : 300px; height: 120px; margin-left: 88px;">
 <!-- 								<img src="" alt="상품 이미지"> -->
 								<img alt="image not found" class="productImg" 
 								src="<c:url value='/image/Product/${orderDto.STORED_FILE_NAME}'/>">
@@ -149,24 +150,34 @@ th, td {
 				<tr>
 					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px; width: 210px;">주문접수번호</th>
 					<th style="font-size: 24px; font-weight: bold; text-align: right; border-right: 1px solid black; padding-right: 15px; width: 210px;">${orderDto.ORDER_NO}</th>
-					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px; width: 210px;">상품금액</th>
-					<th style="font-size: 24px; font-weight: bold; text-align: right; color: blue; width: 210px; padding-right: 10px;">${orderDto.PRODUCT_PRICE}</th>
+					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px; width: 210px;">결제금액</th>
+					<th style="font-size: 24px; font-weight: bold; text-align: right; color: blue; width: 210px; padding-right: 10px;">${formattedCapNumber}</th>
 				</tr>
 				
 				</tbody>
 			</table>
 
 			<div id="divBottom">
+				
 				<div style="text-align: right; margin-top: 4px;">
 					<c:if test="${orderDto.ORDER_STATUS eq '미확정'}">
 						<!-- 주문 상태가 '취소'인 경우에만 아래 내용을 표시합니다. -->
+						
 						<form action="../order/orderCancelCtr.do"
 							onsubmit="return checkOrderStatus()" id="cancelForm"
 							method="post">
 							<input type="hidden" name="orderNo" value="${orderDto.ORDER_NO}">
 							<input type="submit" value="주문취소"
 								style="width: 90px; height: 30px; font-size: 15px; 
-									font-weight: bold; background-color: #FF3200; color: white; border: none; border-radius: 3px;">
+									font-weight: bold; background-color: #FF3200; color: white; border: none; border-radius: 3px; float: right;">
+						</form>
+						<form action="../order/orderConfirmCtr.do"
+							onsubmit="return checkOrderStatusConfirm()" id="confirmForm"
+							method="post">
+							<input type="hidden" name="orderNo" value="${orderDto.ORDER_NO}">
+							<input type="submit" value="주문확정"
+								style="width: 90px; height: 30px; font-size: 15px; 
+									font-weight: bold; background-color: #FF3200; color: white; border: none; border-radius: 3px; margin-right: 10px;">
 						</form>
 					</c:if>
 				</div>
@@ -202,6 +213,20 @@ function checkOrderStatus() {
         return false; // 취소하지 않음
     }
 }
-
+function checkOrderStatusConfirm() {
+    var orderStatus = "${orderDto.ORDER_STATUS}";
+    var orderNo = "${orderDto.ORDER_NO}";
+    if (orderStatus === '미확정') {
+        var confirmConfirm = confirm("정말 주문을 확정하시겠습니까?");
+        if (confirmConfirm) {
+            return window.location.href = '../order/orderConfirmCtr.do?orderNo=' + orderNo;; // 주문 취소 처리 페이지로 이동
+        } else {
+            return false; // 취소하지 않음
+        }
+    } else {
+        alert("주문 취소가 불가능한 상태입니다.");
+        return false; // 취소하지 않음
+    }
+}
 </script>
 </html>

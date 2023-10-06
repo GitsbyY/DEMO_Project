@@ -19,6 +19,10 @@ public interface OrderDao {
 
 	int orderCancelInsert(int orderNo);
 
+	int orderConfirmUpdate(int orderNo);
+	
+	int orderConfirmInsert(int orderNo);
+
 	int cancelSelectListTotalCount(String category, String search);
 
 	int cancelSelectListTotalCountMember(String category, String search, int sessionMemberNo);
@@ -35,6 +39,7 @@ public interface OrderDao {
 	void insertOrder(OrderDto orderDto);
 
 	Map<String, Object> selectCartOne(int productNo, int memberNo);
+
 
 
 

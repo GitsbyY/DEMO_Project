@@ -20,6 +20,8 @@ public interface OrderService {
 	
 	boolean orderCancelUpdate(int orderNo);
 
+	boolean orderConfirmUpdate(int orderNo);
+
 	int cancelSelectListTotalCount(String category, String search);
 
 	int cancelSelectListTotalCountMember(String category, String search, int sessionMemberNo);
@@ -36,6 +38,7 @@ public interface OrderService {
 	boolean insertOrder(OrderDto orderDto);
 
 	boolean insertOrderList(List<String> productNos, OrderDto orderDto);
+
 
 
 

@@ -151,7 +151,21 @@
 		VALUES
 		(#{orderNo}, SYSDATE)
 	</insert>
+	
+	<update id="orderConfirmUpdate" parameterType="java.lang.Integer">
+		UPDATE ORDER_LIST
+		SET ORDER_STATUS = '확정'
+		WHERE ORDER_NO = #{orderNo}
+	</update>
 
+	<insert id="orderConfirmInsert" parameterType="java.lang.Integer">
+		INSERT INTO
+		ORDER_CONFIRM
+		(ORDER_NO, ORDER_CONFIRM_DATE)
+		VALUES
+		(#{orderNo}, SYSDATE)
+	</insert>
+	
 	<select id="cancelSelectList" parameterType="map"
 		resultType="map">
 		SELECT TL.RNUM, TL.ORDER_CANCEL_DATE, TL.ORDER_NO, TL.MEMBER_NO,
@@ -256,7 +270,7 @@
 		SELECT
 		OL.ORDER_DATE, OL.ORDER_NO, M.MEMBER_NO, M.MEMBER_ID
 		, P.PRODUCT_NAME, PD.IMG_NO, PD.PRODUCT_DETAIL_CONTENT
-		,PR.PRODUCT_PRICE, OL.ORDER_STATUS, OC.ORDER_CANCEL_DATE, I.STORED_FILE_NAME
+		,PR.PRODUCT_PRICE, OL.ORDER_STATUS, OC.ORDER_CANCEL_DATE, I.STORED_FILE_NAME, OL.PRODUCT_QUANTITY
 		FROM ORDER_LIST OL
 		JOIN MEMBER M ON OL.MEMBER_NO = M.MEMBER_NO
 		JOIN PRODUCT P ON OL.PRODUCT_NO = P.PRODUCT_NO

@@ -84,6 +84,8 @@ th, td {
 	<jsp:include page="/WEB-INF/views/asideMyPage.jsp" />
 	<fmt:formatDate value="${orderDto.ORDER_DATE}" pattern="yyyy/MM/dd" var="formattedDate" />
 	<fmt:formatDate value="${orderDto.ORDER_CANCEL_DATE}" pattern="yyyy/MM/dd" var="formattedCancelDate" />
+	<fmt:formatNumber value="${orderDto.PRODUCT_PRICE}" pattern="#,###,###" var="formattedNumber" />
+	<fmt:formatNumber value="${orderDto.PRODUCT_QUANTITY*orderDto.PRODUCT_PRICE}" pattern="#,###,###" var="formattedCapNumber" />
 
 	<div id='divContainer'>
 		<div id="divTitle">취소 상세</div>
@@ -101,7 +103,7 @@ th, td {
 				<thead>
 					<tr style="border-bottom: 1px solid black;">
 						<th style="width: 413px; font-size: 24px; font-weight: bold;">상품</th>
-						<th style="width: 197px; font-size: 24px; font-weight: bold;">금액</th>
+						<th style="width: 197px; font-size: 24px; font-weight: bold;">제품 가격</th>
 						<th style="width: 242px; font-size: 24px; font-weight: bold;">진행 상태</th>
 					</tr>
 				</thead>
@@ -109,14 +111,14 @@ th, td {
 				 
 					<tr>
 						<th rowspan="2" style="border-right: 1px solid black;">
-							<img src="" alt="상품 이미지">
-							<input type="text" value="텍스트박스 내용">
+							<img style="margin-top: 30px;" alt="image not found" class="productImg" 
+								src="<c:url value='/image/Product/${orderDto.STORED_FILE_NAME}'/>">
 						</th>
 						<th style="font-size: 24px; font-weight: bold;">1개</th>
 						<th rowspan="2" style="font-size: 24px; font-weight: bold; border-left: 1px solid black;">${orderDto.ORDER_STATUS}</th>
 					</tr>
 					<tr>
-						<th style="font-size: 24px; font-weight: bold;">${orderDto.PRODUCT_PRICE}</th>
+						<th style="font-size: 24px; font-weight: bold;">${formattedNumber}</th>
 					</tr>
 			
 			</table>
@@ -131,8 +133,8 @@ th, td {
 				<tr>
 					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px; width: 210px;">주문일자</th>
 					<th style="font-size: 24px; font-weight: bold; text-align: right; border-right: 1px solid black;  padding-right: 15px; width: 210px;">${formattedDate}</th>
-					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px; width: 210px;">결제일자</th>
-					<th style="font-size: 24px; font-weight: bold; text-align: right; width: 210px; padding-right: 10px;"></th>
+					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px; width: 210px;">취소금액</th>
+					<th style="font-size: 24px; font-weight: bold; text-align: right; width: 210px; padding-right: 10px; color: red;">${formattedCapNumber}</th>
 				</tr>
 				<tr>
 					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px; width: 210px;">주문접수번호</th>

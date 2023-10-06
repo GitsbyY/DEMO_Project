@@ -77,7 +77,20 @@ public class OrderDaoImpl implements OrderDao{
 		// TODO Auto-generated method stub
 		return (int)sqlSession.insert(nameSpace + "orderCancelInsert", orderNo);
 	}
+	
+	@Override
+	public int orderConfirmUpdate(int orderNo) {
+		// TODO Auto-generated method stub
+		return (int)sqlSession.update(nameSpace + "orderConfirmUpdate", orderNo);
+	}
 
+	@Override
+	public int orderConfirmInsert(int orderNo) {
+		// TODO Auto-generated method stub
+		return (int)sqlSession.insert(nameSpace + "orderConfirmInsert", orderNo);
+	}
+
+	
 	@Override
 	public int cancelSelectListTotalCount(String category, String search) {
 		// TODO Auto-generated method stub
@@ -230,6 +243,7 @@ public class OrderDaoImpl implements OrderDao{
 		map.put("memberNo", memberNo);
 		return sqlSession.selectOne("com.demo.product." + "selectCartOne", map);
 	}
+
 
 	
 

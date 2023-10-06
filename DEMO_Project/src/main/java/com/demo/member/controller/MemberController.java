@@ -385,11 +385,14 @@ public class MemberController {
 			model.addAttribute("result", "fail"); // 실패 시 'fail' 값을 모델에 추가
 		}
 		System.out.println(memberDto);
-
+		memberDto = (MemberDto) session.getAttribute("member");
 		session.setAttribute("myPageAside", "memberInfo");
-
+		if(memberDto.getMemberNo() != 1) {
+			return "redirect:/auth/logout.do";
+		}else {
+			return "redirect:/auth/mypageProfileAdmin.do";
+		}
 		// 로그인페이지로 이동 ->http://localhost:9080/DEMO_Project/auth/login.do
-		return "redirect:/auth/login.do";
 
 	}
 

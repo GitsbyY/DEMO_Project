@@ -251,6 +251,41 @@ public class OrderController {
 		}
 	}
 	
+	// 주문취소
+		@RequestMapping(value = "/order/orderConfirmCtr.do", method = RequestMethod.POST)
+		public String orderConfirm(@RequestParam(defaultValue = "-1") int orderNo, HttpSession session, Model model) {
+			System.out.println(orderNo);
+			try {
+
+				if (orderNo == -1) {
+					// 주문번호가 누락된 경우 처리
+					return "fail"; // 누락된 경우 'fail' 응답
+				}
+
+				// 주문 취소 로직을 처리하고 성공 여부를 확인합니다. upadte 와 insert 둘 다 필요하다.
+				boolean isConfirm = orderService.orderConfirmUpdate(orderNo);
+
+				System.out.println(orderNo);
+				if (isConfirm) {
+					model.addAttribute("result", "success"); // 성공 시 'success' 값을 모델에 추가
+				} else {
+					model.addAttribute("result", "fail"); // 실패 시 'fail' 값을 모델에 추가
+				}
+
+				Map<String, Object> orderDto = orderService.orderDetailSelectOne(orderNo);
+
+				model.addAttribute("orderDto", orderDto);
+				session.setAttribute("myPageAside", "order");
+
+//		        		return "redirect:/mypage/MypageDetail.do"; // 리다이렉트할 경로로 이동
+				return "mypage/MypageDetail";
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "fail"; // 예외 발생 시 'fail' 응답
+			}
+		}
+	
 	@RequestMapping(value = "/paymentCart.do", method = RequestMethod.POST)
 	public String paymentCart(@RequestParam("formData") String formData,
 				int sumPrice, Model model)
