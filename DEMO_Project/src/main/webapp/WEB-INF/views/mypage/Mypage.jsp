@@ -168,7 +168,7 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 						</div>
 					</div>
 				</c:forEach>
-				<form action="./mypageAdmin.do" method="post" id='myPageSearchForm'>
+				<form action="./mypageAdmin.do" method="post" id='pagingForm'>
 				<div id='searchDiv' style="position: relative;">
 						<select id="sortSelect" name="category">
 							<option value="productName"
@@ -211,17 +211,24 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
 </body>
 <script type="text/javascript">
-function mypageDetailFnc(no) {
 	
-	var url = './MypageDetail.do?orderNo=' + no;
+	document.getElementById("sortSelect").addEventListener("change", initializeValueFnc);
 	
-    location.href= url;
-	
-}
+	function initializeValueFnc() {
+		document.getElementById("search").value = "";
+	}
 
-function submitForm() {
-	document.getElementById("curPage").value = 1;
-    document.getElementById('myPageSearchForm').submit();
-}
+	function mypageDetailFnc(no) {
+		
+		var url = './MypageDetail.do?orderNo=' + no;
+		
+	    location.href= url;
+		
+	}
+	
+	function submitForm() {
+		document.getElementById("curPage").value = 1;
+	    document.getElementById('pagingForm').submit();
+	}
 </script>
 </html>

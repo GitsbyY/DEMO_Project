@@ -170,7 +170,7 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 						</div>
 					</div>
 				</c:forEach>
-				<form action="./mypageMember.do" method="post" id='myPageSearchForm'>
+				<form action="./mypageMember.do" method="post" id='pagingForm'>
 				<div id='searchDiv' style="position: relative;">
 					
 						
@@ -186,9 +186,13 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 								</c:if>
 								>주문번호</option>
 						</select>
-						<input id="search" type="text" name="search" placeholder="검색" value="${myPagingmap.search}"> 
-						<img src="/DEMO_Project/resources/img/Search.png" alt="제출" id="searchButton" 
-							style="position: absolute; right: 10px; top: 58.5%; cursor: pointer;" onclick="submitForm()">	
+						
+						<input id="search" type="text" name="search"
+							placeholder="검색"
+							value="${myPagingmap.search}"/>
+				        <img src="/DEMO_Project/resources/img/Search.png"
+				        	style="position: absolute; right: 10px; top: 58.5%; cursor: pointer;"
+				        	alt="제출" id="searchButton" onclick="submitForm()"/>
 					
 				</div>
 				
@@ -205,17 +209,23 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
 </body>
 <script type="text/javascript">
-function mypageDetailFnc(no) {
+	document.getElementById("sortSelect").addEventListener("change", initializeValueFnc);
 	
-	var url = './MypageDetail.do?orderNo=' + no;
+	function initializeValueFnc() {
+		document.getElementById("search").value = "";
+	}
 	
-    location.href= url;
+	function mypageDetailFnc(no) {
+		
+		var url = './MypageDetail.do?orderNo=' + no;
+		
+	    location.href= url;
+		
+	}
 	
-}
-
-function submitForm() {
-	document.getElementById("curPage").value = 1;
-    document.getElementById('myPageSearchForm').submit();
-}
+	function submitForm() {
+		document.getElementById("curPage").value = 1;
+	    document.getElementById('pagingForm').submit();
+	}
 </script>
 </html>

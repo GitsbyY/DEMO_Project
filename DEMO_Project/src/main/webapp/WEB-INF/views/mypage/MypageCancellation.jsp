@@ -192,16 +192,6 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 			</jsp:include>
 		</div>
 	</div>
-		
-		<div id="pageStatus" style="margin-top: 50px;">
-			<jsp:include page="/WEB-INF/views/common/MyPagePaging.jsp">
-				<jsp:param value="${myPagingmap}" name="myPagingmap"/>
-			</jsp:include>
-		</div>
-
-
-
-	
 <!-- 	정보를 넘기기 위해서 폼을 만들었다 -->
 
 			<form action="./cancelPageAdmin.do" id="pagingForm" method="post">

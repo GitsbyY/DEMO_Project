@@ -139,84 +139,102 @@ a{
    <jsp:include page="/WEB-INF/views/Header.jsp"/>
    
    <jsp:include page="/WEB-INF/views/asideShop.jsp"/>
-   
-   <div id='divContainer'>
-   <form action="./review.do" method="post">
-      <div id="titleDiv">         
-         <div id="firstDiv">후기남겨요</div>
-         <div id="secondDiv"></div>                           
-      </div>      
-      <div id="midDiv" style="position: relative;">
-         <select id="select" name="select">
-            <option class="optionTag" value="PRODUCT_NAME">상품</option>
-            <option class="optionTag" value="PET_BREED">견종</option>
-            <option class="optionTag" value="REVIEW_TITLE">제목</option>
-         </select>         
-         <input id="search" type="text" name="search" placeholder="검색어 입력창">
-         <img src="/DEMO_Project/resources/img/Search.png"
-		        	alt="제출" id="searchButton" style="position: absolute; 
-		        	right: 10px; top: 55%; transform: translateY(-50%); cursor: pointer;">              
-      </div>
-      <div id="tableDiv">
-         <table>
-            <tr>
-               <th id="listColumn1" class="listColumn">번호</th>
-               <th id="listColumn2" class="listColumn">상품</th>
-               <th id="listColumn3" class="listColumn">제목</th>
-               <th id="listColumn4" class="listColumn">작성자</th>
-               <th id="listColumn5" class="listColumn">견종</th>
-               <th id="listColumn6" class="listColumn">작성일</th>            
-            </tr>
-            
-            <c:forEach var="reviewDto" items="${reviewDtoList}">
-            <tr>
-               <td class="tdClass">${reviewDto.REVIEW_NO}</td>
-               <td class="tdClass">${reviewDto.PRODUCT_NAME}</td>
-               <td>
-                     <a href='./listOne3.do?no=${reviewDto.REVIEW_NO}'>
-                        ${reviewDto.REVIEW_TITLE}
-                     </a>
-               </td>
-               <td class="tdClass">${reviewDto.MEMBER_NAME}</td>
-               <td class="tdClass">${reviewDto.PET_BREED}</td>
-               <td class="tdClass">
-                  <fmt:formatDate pattern="yyyy-MM-dd" 
-                     value="${reviewDto.REVIEW_CRE_DATE}"/>
-               </td>            
-            </tr>            
-            </c:forEach>
-         </table>
-      </div>
-      </form>
-      <div id="writeBtnDiv">
-          <c:choose>            
-            <c:when test="${sessionScope.member.memberNo ne '1'}">
-               <input id="writeBtn" type="button" value="글쓰기" 
-                  onclick="location.href = '/DEMO_Project/board/reviewadd.do'">
-               <input type="hidden" name="reviewDto" value="${reviewDtoList}"> 
-            </c:when>
-            <c:otherwise>
-               
-            </c:otherwise>
-         </c:choose>
-           
-      </div>         
-      <div id="pageDiv">
-      <jsp:include page="/WEB-INF/views/common/BoardPaging.jsp">
-      <jsp:param value="${pagingMap}" name="pagingMap"/>
-      </jsp:include>
-      <form action="./review.do" id='pagingForm' method="post">
-      <input type="hidden" id='curPage' name='curPage' 
-         value="${pagingMap.boardPaging.curPage}">
-      </form>
-      </div>
-   </div>               
-   
-   
-   <jsp:include page="/WEB-INF/views/Footer.jsp"/>
+
+	<div id='divContainer'>
+		<form action="./review.do" id='pagingForm' method="post">
+			<div id="titleDiv">
+				<div id="firstDiv">후기남겨요</div>
+				<div id="secondDiv"></div>
+			</div>
+			<div id="midDiv" style="position: relative;">
+				<select id="select" name="select">
+					<!--             <option class="optionTag" value="PRODUCT_NAME">상품</option> -->
+					<!--             <option class="optionTag" value="PET_BREED">견종</option> -->
+					<!--             <option class="optionTag" value="REVIEW_TITLE">제목</option> -->
+					<option class="optionTag" value="PRODUCT_NAME"
+						<c:if test="${pagingMap.select eq 'PRODUCT_NAME'}">
+							selected
+						</c:if>
+					>상품</option>
+					<option class="optionTag" value="PET_BREED"
+						<c:if test="${pagingMap.select eq 'PET_BREED'}">
+							selected
+						</c:if>
+					>견종</option>
+					<option class="optionTag" value="REVIEW_TITLE"
+						<c:if test="${pagingMap.select eq 'REVIEW_TITLE'}">
+							selected
+						</c:if>
+					>제목</option>
+				</select>
+				<input id="search" type="text" name="search" placeholder="검색어 입력창"
+					value="${pagingMap.search}"> <img
+					src="/DEMO_Project/resources/img/Search.png" alt="제출"
+					id="searchButton"
+					style="position: absolute; right: 10px; top: 55%; transform: translateY(-50%); cursor: pointer;"
+					onclick="submitForm();">
+			</div>
+			<div id="tableDiv">
+				<table>
+					<tr>
+						<th id="listColumn1" class="listColumn">번호</th>
+						<th id="listColumn2" class="listColumn">상품</th>
+						<th id="listColumn3" class="listColumn">제목</th>
+						<th id="listColumn4" class="listColumn">작성자</th>
+						<th id="listColumn5" class="listColumn">견종</th>
+						<th id="listColumn6" class="listColumn">작성일</th>
+					</tr>
+
+					<c:forEach var="reviewDto" items="${reviewDtoList}">
+						<tr>
+							<td class="tdClass">${reviewDto.REVIEW_NO}</td>
+							<td class="tdClass">${reviewDto.PRODUCT_NAME}</td>
+							<td><a href='./listOne3.do?no=${reviewDto.REVIEW_NO}'>
+									${reviewDto.REVIEW_TITLE} </a></td>
+							<td class="tdClass">${reviewDto.MEMBER_NAME}</td>
+							<td class="tdClass">${reviewDto.PET_BREED}</td>
+							<td class="tdClass"><fmt:formatDate pattern="yyyy-MM-dd"
+									value="${reviewDto.REVIEW_CRE_DATE}" /></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+			<div id="writeBtnDiv">
+				<c:choose>
+					<c:when test="${sessionScope.member.memberNo ne '1'}">
+						<input id="writeBtn" type="button" value="글쓰기"
+							onclick="location.href = '/DEMO_Project/board/reviewadd.do'">
+						<input type="hidden" name="reviewDto" value="${reviewDtoList}">
+					</c:when>
+					<c:otherwise>
+	
+					</c:otherwise>
+				</c:choose>
+	
+			</div>
+			<div id="pageDiv">
+				<jsp:include page="/WEB-INF/views/common/BoardPaging.jsp">
+					<jsp:param value="${pagingMap}" name="pagingMap" />
+				</jsp:include>
+					<input type="hidden" id='curPage' name='curPage'
+						value="${pagingMap.boardPaging.curPage}">
+			</div>
+		</form>
+	</div>
+
+
+	<jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
 <script type="text/javascript">
-
-
+	document.getElementById("select").addEventListener("change", initializeValueFnc);
+	
+	function initializeValueFnc() {
+		document.getElementById("search").value = "";
+	}
+	
+	function submitForm() {
+		document.getElementById("curPage").value = 1;
+	    document.getElementById('pagingForm').submit();
+	}
 </script>
 </html>

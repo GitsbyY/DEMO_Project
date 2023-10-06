@@ -145,7 +145,7 @@ public class OrderController {
 
 		log.info("Welcome OrderController login!");
 
-		int totalCount = orderService.cancelSelectListTotalCount();
+		int totalCount = orderService.cancelSelectListTotalCount(category, search);
 
 		MyPagePaging myPagePaging = new MyPagePaging(totalCount, curPage);
 
@@ -174,19 +174,17 @@ public class OrderController {
 		public String myPageCancelMember(@RequestParam(defaultValue = "1") int curPage,
 				@RequestParam(defaultValue = "productName") String category, @RequestParam(defaultValue = "") String search,
 				HttpSession session, Model model) {
-
-			log.info("Welcome OrderController login!");
+			System.out.println("curPage: " + curPage);
+			log.info("/mypage/cancelPageMember.do");
 			
 			MemberDto memberDto = (MemberDto) session.getAttribute("member");
 			int sessionMemberNo = memberDto.getMemberNo();
 			
-			int totalCount = orderService.cancelSelectListTotalCountMember(sessionMemberNo);
-
+			int totalCount = orderService.cancelSelectListTotalCountMember(category, search, sessionMemberNo);
 			MyPagePaging myPagePaging = new MyPagePaging(totalCount, curPage);
 
 			int start = myPagePaging.getPageBegin();
 			int end = myPagePaging.getPageEnd();
-
 			List<Map<String, Object>> orderList = orderService.cancelSelectListMember(start, end, category, search, sessionMemberNo);
 
 			HashMap<String, Object> myPagingmap = new HashMap<>();

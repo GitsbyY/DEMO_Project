@@ -50,7 +50,7 @@
 			<if test="category == 'memberNo'">
 				WHERE OL.MEMBER_NO = #{search}
 			</if>
-			<if test="category == 'orderNo'">
+			<if test="category == 'orderNo' and search != ''">
 				WHERE OL.ORDER_NO = #{search}
 			</if>
 			<if test="category == 'memberId'">
@@ -79,7 +79,7 @@
 					JOIN PRODUCT P ON L.PRODUCT_NO = P.PRODUCT_NO
 					WHERE M.MEMBER_NO = #{sessionMemberNo}
 					ORDER BY ORDER_DATE DESC) OL
-			<if test="category == 'orderNo'">
+			<if test="category == 'orderNo' and search != ''">
 				WHERE OL.ORDER_NO = #{search}
 			</if>
 			<if test="category == 'productName'">
@@ -96,10 +96,10 @@
 		FROM ORDER_LIST OL
 		JOIN MEMBER M ON OL.MEMBER_NO = M.MEMBER_NO
 		JOIN PRODUCT P ON OL.PRODUCT_NO = P.PRODUCT_NO
-		<if test="category == 'memberNo'">
+		<if test="category == 'memberNo' and search != ''">
 			WHERE M.MEMBER_NO = #{search}
 		</if>
-		<if test="category == 'orderNo'">
+		<if test="category == 'orderNo' and search != ''">
 			WHERE OL.ORDER_NO = #{search}
 		</if>
 		<if test="category == 'memberId'">
@@ -117,7 +117,7 @@
 		JOIN MEMBER M ON OL.MEMBER_NO = M.MEMBER_NO
 		JOIN PRODUCT P ON OL.PRODUCT_NO = P.PRODUCT_NO
 		WHERE M.MEMBER_NO = #{sessionMemberNo}
-		<if test="category == 'orderNo'">
+		<if test="category == 'orderNo' and search != ''">
 			AND OL.ORDER_NO = #{search}
 		</if>
 		<if test="category == 'productName'">
@@ -154,82 +154,101 @@
 
 	<select id="cancelSelectList" parameterType="map"
 		resultType="map">
-		SELECT RNUM, ORDER_NO, MEMBER_NO,
-		MEMBER_ID, PRODUCT_NAME, ORDER_CANCEL_DATE, ORDER_STATUS
-		FROM (
-		SELECT ROWNUM AS RNUM, OL.ORDER_NO,
-		OL.MEMBER_NO, M.MEMBER_ID, P.PRODUCT_NAME
-		,OC.ORDER_CANCEL_DATE, OL.ORDER_STATUS
-		FROM
-		ORDER_LIST OL
-		JOIN MEMBER M ON OL.MEMBER_NO = M.MEMBER_NO
-		JOIN PRODUCT P ON OL.PRODUCT_NO = P.PRODUCT_NO
-		JOIN ORDER_CANCEL OC ON OL.ORDER_NO = OC.ORDER_NO
-		ORDER BY OC.ORDER_CANCEL_DATE
-		)
-		WHERE (ORDER_STATUS = '취소') AND (ROWNUM BETWEEN #{start} AND #{end})
-		AND
-		<if test="category == 'memberNo'">
-		 MEMBER_NO = TO_NUMBER(#{search})
-		</if>
-		<if test="category == 'orderNo'">
-		 ORDER_NO = TO_NUMBER(#{search})
-		</if>
-		<if test="category == 'memberId'">
-		 MEMBER_ID LIKE '%'||#{search}||'%'
-		</if>
-		<if test="category == 'productName'">
-		 PRODUCT_NAME LIKE '%'||#{search}||'%'
-		</if>
-		ORDER BY ORDER_CANCEL_DATE
+		SELECT TL.RNUM, TL.ORDER_CANCEL_DATE, TL.ORDER_NO, TL.MEMBER_NO,
+			TL.MEMBER_ID, TL.PRODUCT_NAME
+		FROM(
+			SELECT ROWNUM AS RNUM, OL.ORDER_CANCEL_DATE,
+				OL.ORDER_NO, OL.MEMBER_NO, OL.PRODUCT_NO,
+				OL.MEMBER_ID, OL.PRODUCT_NAME
+			FROM ( SELECT OC.ORDER_CANCEL_DATE, L.ORDER_NO,
+						M.MEMBER_NO, P.PRODUCT_NO, M.MEMBER_ID,
+						P.PRODUCT_NAME
+					FROM ORDER_LIST L
+					JOIN MEMBER M ON L.MEMBER_NO = M.MEMBER_NO
+					JOIN PRODUCT P ON L.PRODUCT_NO = P.PRODUCT_NO
+					JOIN ORDER_CANCEL OC ON L.ORDER_NO = OC.ORDER_NO
+					ORDER BY ORDER_DATE DESC) OL
+			<if test="category == 'memberNo' and search != ''">
+				WHERE OL.MEMBER_NO = #{search}
+			</if>
+			<if test="category == 'orderNo' and search != ''">
+				WHERE OL.ORDER_NO = #{search}
+			</if>
+			<if test="category == 'memberId'">
+				WHERE OL.MEMBER_ID LIKE '%'||#{search}||'%'
+			</if>
+			<if test="category == 'productName'">
+				WHERE OL.PRODUCT_NAME LIKE '%'||#{search}||'%'
+			</if>
+			) TL
+		WHERE (TL.RNUM BETWEEN #{start} AND #{end})
+		ORDER BY TL.RNUM ASC
 	</select>
 
 	<select id="cancelSelectListMember" parameterType="map"
 		resultType="map">
-		SELECT RNUM, ORDER_NO, MEMBER_NO,
-		MEMBER_ID, PRODUCT_NAME, ORDER_CANCEL_DATE, ORDER_STATUS
-		FROM (
-			SELECT ROWNUM AS RNUM, OL.ORDER_NO,
-			OL.MEMBER_NO, M.MEMBER_ID, P.PRODUCT_NAME
-			,OC.ORDER_CANCEL_DATE, OL.ORDER_STATUS
-			FROM
-			ORDER_LIST OL
-			JOIN MEMBER M ON OL.MEMBER_NO = M.MEMBER_NO
-			JOIN PRODUCT P ON OL.PRODUCT_NO = P.PRODUCT_NO
-			JOIN ORDER_CANCEL OC ON OL.ORDER_NO = OC.ORDER_NO
-			ORDER BY OC.ORDER_CANCEL_DATE
-		)
-		WHERE MEMBER_NO = #{sessionMemberNo} 
-		AND (ORDER_STATUS = '취소') AND (RNUM BETWEEN #{start} AND #{end})
-		AND
-		<if test="category == 'orderNo'">
-		 ORDER_NO = TO_NUMBER(#{search})
-		</if>
-		<if test="category == 'productName'">
-		 PRODUCT_NAME LIKE '%'||#{search}||'%'
-		</if>
-		ORDER BY ORDER_CANCEL_DATE
+		SELECT TL.RNUM, TL.ORDER_CANCEL_DATE, TL.ORDER_NO, TL.MEMBER_NO,
+			TL.MEMBER_ID, TL.PRODUCT_NAME
+		FROM(
+			SELECT ROWNUM AS RNUM, OL.ORDER_CANCEL_DATE,
+				OL.ORDER_NO, OL.MEMBER_NO, OL.PRODUCT_NO,
+				OL.MEMBER_ID, OL.PRODUCT_NAME
+			FROM ( SELECT OC.ORDER_CANCEL_DATE, L.ORDER_NO,
+						M.MEMBER_NO, P.PRODUCT_NO, M.MEMBER_ID,
+						P.PRODUCT_NAME
+					FROM ORDER_LIST L
+					JOIN MEMBER M ON L.MEMBER_NO = M.MEMBER_NO
+					JOIN PRODUCT P ON L.PRODUCT_NO = P.PRODUCT_NO
+					JOIN ORDER_CANCEL OC ON L.ORDER_NO = OC.ORDER_NO
+					WHERE M.MEMBER_NO = #{sessionMemberNo}
+					ORDER BY ORDER_DATE DESC
+					) OL
+			<if test="category == 'orderNo' and search != ''">
+				WHERE OL.ORDER_NO = #{search}
+			</if>
+			<if test="category == 'productName'">
+				WHERE OL.PRODUCT_NAME LIKE '%'||#{search}||'%'
+			</if>
+			) TL
+		WHERE (TL.RNUM BETWEEN #{start} AND #{end})
+		ORDER BY TL.RNUM ASC
 	</select>
 
-	<select id="cancelSelectListTotalCount"
+	<select id="cancelSelectListTotalCount" parameterType="map"
 		resultType="java.lang.Integer">
 		SELECT COUNT(*)
 		FROM ORDER_LIST OL
-		JOIN MEMBER M ON
-		OL.MEMBER_NO = M.MEMBER_NO
+		JOIN MEMBER M ON OL.MEMBER_NO = M.MEMBER_NO
 		JOIN PRODUCT P ON OL.PRODUCT_NO = P.PRODUCT_NO
 		JOIN ORDER_CANCEL OC ON OL.ORDER_NO = OC.ORDER_NO
+		<if test="category == 'memberNo' and search != ''">
+			WHERE M.MEMBER_NO = #{search}
+		</if>
+		<if test="category == 'orderNo' and search != ''">
+			WHERE OL.ORDER_NO = #{search}
+		</if>
+		<if test="category == 'memberId'">
+			WHERE M.MEMBER_ID LIKE '%'||#{search}||'%'
+		</if>
+		<if test="category == 'productName'">
+			WHERE P.PRODUCT_NAME LIKE '%'||#{search}||'%'
+		</if>
 	</select>
 	
-	<select id="cancelSelectListTotalCountMember"
+	<select id="cancelSelectListTotalCountMember" parameterType="map"
 		resultType="java.lang.Integer">
 		SELECT COUNT(*)
 		FROM ORDER_LIST OL
-		JOIN MEMBER M ON
-		OL.MEMBER_NO = M.MEMBER_NO
+		JOIN MEMBER M ON OL.MEMBER_NO = M.MEMBER_NO
 		JOIN PRODUCT P ON OL.PRODUCT_NO = P.PRODUCT_NO
 		JOIN ORDER_CANCEL OC ON OL.ORDER_NO = OC.ORDER_NO
-		WHERE M.MEMBER_NO = #{sessionMemberNo}
+		<if test="category == 'orderNo' and search != ''">
+			WHERE OL.ORDER_NO = #{search}
+		</if>
+		<if test="category == 'productName'">
+			WHERE P.PRODUCT_NAME LIKE '%'||#{search}||'%'
+		</if>
+		AND M.MEMBER_NO = #{sessionMemberNo}
 	</select>
 	
 

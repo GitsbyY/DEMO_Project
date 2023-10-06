@@ -79,19 +79,44 @@ public class OrderDaoImpl implements OrderDao{
 	}
 
 	@Override
-	public int cancelSelectListTotalCount() {
+	public int cancelSelectListTotalCount(String category, String search) {
 		// TODO Auto-generated method stub
-		return (int)sqlSession.selectOne(nameSpace + "cancelSelectListTotalCount");
+		Map<String, Object> map = new HashMap<String, Object>();
+				
+		if(category.equals("memberNo")||category.equals("orderNo")) {
+			try {
+				map.put("search", Integer.parseInt(search));
+			} catch (Exception e) {
+				// TODO: handle exception
+				map.put("search", "");
+			}
+		}else {
+			map.put("search", search);
+		}
+		map.put("category", category);
+		return (int)sqlSession.selectOne(nameSpace + "cancelSelectListTotalCount", map);
 	}
 
 	@Override
 	public List<Map<String, Object>> cancelSelectList(int start, int end, String category, String search) {
 		// TODO Auto-generated method stub
+		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("search", search);
+		
+		if(category.equals("orderNo")) {
+			try {
+				map.put("search", Integer.parseInt(search));
+			} catch (Exception e) {
+				// TODO: handle exception
+				map.put("search", "");
+			}
+		}else {
+			map.put("search", search);
+		}
+		map.put("category", category);
+		
 		map.put("start", start);
 		map.put("end", end);
-		map.put("category", category);
 		
 		return sqlSession.selectList(nameSpace + "cancelSelectList", map);
 	}
@@ -148,9 +173,23 @@ public class OrderDaoImpl implements OrderDao{
 	}
 
 	@Override
-	public int cancelSelectListTotalCountMember(int sessionMemberNo) {
+	public int cancelSelectListTotalCountMember(String category, String search, int sessionMemberNo) {
 		// TODO Auto-generated method stub
-		return (int)sqlSession.selectOne(nameSpace + "cancelSelectListTotalCountMember", sessionMemberNo);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(category.equals("orderNo")) {
+			try {
+				map.put("search", Integer.parseInt(search));
+			} catch (Exception e) {
+				// TODO: handle exception
+				map.put("search", "");
+			}
+		}else {
+			map.put("search", search);
+		}
+		map.put("category", category);
+		map.put("sessionMemberNo", sessionMemberNo);
+		return (int)sqlSession.selectOne(nameSpace + "cancelSelectListTotalCountMember", map);
 	}
 
 	@Override
@@ -158,10 +197,20 @@ public class OrderDaoImpl implements OrderDao{
 			int sessionMemberNo) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("search", search);
+		
+		if(category.equals("orderNo")) {
+			try {
+				map.put("search", Integer.parseInt(search));
+			} catch (Exception e) {
+				// TODO: handle exception
+				map.put("search", "");
+			}
+		}else {
+			map.put("search", search);
+		}
+		map.put("category", category);
 		map.put("start", start);
 		map.put("end", end);
-		map.put("category", category);
 		map.put("sessionMemberNo", sessionMemberNo);
 		
 		return sqlSession.selectList(nameSpace + "cancelSelectListMember", map);

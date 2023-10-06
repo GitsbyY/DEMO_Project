@@ -147,10 +147,14 @@ public class BoardDaoImpl implements BoardDao{
    }
 	
    
-   @Override
+	@Override
 	public int reviewSelectTotalCount(String search, String select) {
 		// TODO Auto-generated method stub
-	   return (int)sqlSession.selectOne(nameSpace + "reviewSelectTotalCount");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("select", select);
+
+		return (int) sqlSession.selectOne(nameSpace + "reviewSelectTotalCount", map);
 	}
 	 
 

@@ -135,89 +135,96 @@ html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 			<div id="listColumn5" class="listColumn">아이디</div>
 			<div id="listColumn6" class="listColumn">상품명</div>
 		</div>
-<!-- 		루프로하면 안된다 -->
+		<!-- 		루프로하면 안된다 -->
 
 		<c:forEach var="orderDto" items="${orderList}" varStatus="loop">
-			<div class="listColumnContainer" onclick="mypageCancelFnc(${orderDto.ORDER_NO})">
-				<div id="listColumn1" class="listColumn 
+			<div class="listColumnContainer"
+				onclick="mypageCancelFnc(${orderDto.ORDER_NO})">
+				<div id="listColumn1"
+					class="listColumn 
 					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
-						${totalCount - orderdto.RNUM + 1}
-				</div>
-				<div id="listColumn2" class="listColumn 
+					${totalCount - orderDto.RNUM + 1}</div>
+				<div id="listColumn2"
+					class="listColumn 
 					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
-						${orderDto.ORDER_CANCEL_DATE}
-				</div>
-				<div id="listColumn3" class="listColumn 
+					${orderDto.ORDER_CANCEL_DATE}</div>
+				<div id="listColumn3"
+					class="listColumn 
 					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
-						${orderDto.ORDER_NO}
-				</div>
-				<div id="listColumn4" class="listColumn 
+					${orderDto.ORDER_NO}</div>
+				<div id="listColumn4"
+					class="listColumn 
 					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
-						${orderDto.MEMBER_NO}
-				</div>
-				<div id="listColumn5" class="listColumn 
+					${orderDto.MEMBER_NO}</div>
+				<div id="listColumn5"
+					class="listColumn 
 					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
-						${orderDto.MEMBER_ID}
-				</div>
-				<div id="listColumn6" class="listColumn 
+					${orderDto.MEMBER_ID}</div>
+				<div id="listColumn6"
+					class="listColumn 
 					${loop.index % 2 == 0 ? 'listColumnEven' : 'listColumnOdd'}">
-						${orderDto.PRODUCT_NAME}
-				</div>
+					${orderDto.PRODUCT_NAME}</div>
 			</div>
 		</c:forEach>
 		<c:if test="${empty orderList}">
-    		<p style="font-size: 24px; margin-left: 10px; font-weight: bold;">취소내역이 없습니다.</p>
+			<p style="font-size: 24px; margin-left: 10px; font-weight: bold;">취소내역이
+				없습니다.</p>
 		</c:if>
-		
-		<div id='searchDiv' style="position: relative;">
-			<form action="./cancelPageMember.do" method="post" id='myPageCancelSearchForm'>
-				
+
+		<form action="./cancelPageMember.do" method="post"
+			id='pagingForm'>
+			<div id='searchDiv' style="position: relative;">
+
 				<select id="sortSelect" name="category">
-					<option value="orderNo">주문번호</option>
-					<option value="productName">상품명</option>
+					<option value="productName"
+						<c:if test="${myPagingmap.category eq 'productName'}">
+							selected
+						</c:if>
+						>상품명</option>
+						<option value="orderNo"
+						<c:if test="${myPagingmap.category eq 'orderNo'}">
+							selected
+						</c:if>
+						>주문번호</option>
 				</select>
-				
-				<input id="search" type="text" name="search" placeholder="검색" value="${myPagingmap.search}"> 
-				<img src="/DEMO_Project/resources/img/Search.png" alt="제출" id="searchButton" 
-							style="position: absolute; right: 10px; top: 58.5%; cursor: pointer;" onclick="submitForm()">
-			</form>
-		</div>
-		
-		<div id="pageStatus" style="margin-top: 50px;">
-			<jsp:include page="/WEB-INF/views/common/MyPagePaging.jsp">
-				<jsp:param value="${myPagingmap}" name="myPagingmap"/>
-			</jsp:include>
-		</div>
+				<input id="search" type="text" name="search" placeholder="검색"
+					value="${myPagingmap.search}" />
+					<img src="/DEMO_Project/resources/img/Search.png" alt="제출"
+					style="position: absolute; right: 10px; top: 58.5%; cursor: pointer;"
+					id="searchButton" onclick="submitForm()" />
+			</div>
+			<div id="pageStatus" style="margin-top: 50px;">
+				<jsp:include page="/WEB-INF/views/common/MyPagePaging.jsp">
+					<jsp:param value="${myPagingmap}" name="myPagingmap" />
+				</jsp:include>
+			</div>
+			<input type="hidden" id="curPage" name="curPage"
+				value="${myPagingmap.myPagePaging.curPage}">
+		</form>
+
 	</div>
-		
-		<div id="pageStatus" style="margin-top: 50px;">
-			<jsp:include page="/WEB-INF/views/common/MyPagePaging.jsp">
-				<jsp:param value="${myPagingmap}" name="myPagingmap"/>
-			</jsp:include>
-		</div>
 
-
-
-	
-<!-- 	정보를 넘기기 위해서 폼을 만들었다 -->
-
-			<form action="./cancelPageMember.do" id="pagingForm" method="post">
-		      <input type="hidden" id="curPage" name="curPage"
-		         value="${myPagingmap.myPagePaging.curPage}">
-		    </form>
 
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
 </body>
 <script type="text/javascript">
-function mypageCancelFnc(no) {
 	
-	var url = './MypageCancellationDetail.do?orderNo=' + no;
+	document.getElementById("sortSelect").addEventListener("change", initializeValueFnc);
 	
-    location.href= url;
+	function initializeValueFnc() {
+		document.getElementById("search").value = "";
+	}
 	
-}
-function submitForm() {
-    document.getElementById('myPageCancelSearchForm').submit();
-}
+	function mypageCancelFnc(no) {
+		
+		var url = './MypageCancellationDetail.do?orderNo=' + no;
+		
+	    location.href= url;
+		
+	}
+	function submitForm() {
+		document.getElementById("curPage").value = 1;
+	    document.getElementById('pagingForm').submit();
+	}
 </script>
 </html>

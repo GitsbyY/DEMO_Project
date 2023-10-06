@@ -57,9 +57,9 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public int cancelSelectListTotalCount() {
+	public int cancelSelectListTotalCount(String category, String search) {
 		// TODO Auto-generated method stub
-		return orderDao.cancelSelectListTotalCount();
+		return orderDao.cancelSelectListTotalCount(category, search);
 	}
 
 	@Override
@@ -88,9 +88,9 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public int cancelSelectListTotalCountMember(int sessionMemberNo) {
+	public int cancelSelectListTotalCountMember(String category, String search, int sessionMemberNo) {
 		// TODO Auto-generated method stub
-		return orderDao.cancelSelectListTotalCountMember(sessionMemberNo);
+		return orderDao.cancelSelectListTotalCountMember(category, search, sessionMemberNo);
 	}
 
 	@Override
