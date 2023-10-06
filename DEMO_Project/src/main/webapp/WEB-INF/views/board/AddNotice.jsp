@@ -90,6 +90,9 @@ td input{
    height: 30px;
    font-size: 16px;   
 }
+.pointerClass{
+	cursor: pointer;
+}
 </style>
 <meta charset="UTF-8">
 <title>공지사항 메인</title>
@@ -129,8 +132,8 @@ td input{
             </table>
          </div>
          <div id="btnDiv">
-            <input id="registrationBtn" type="button" value="등록" onclick="submitForm();">
-            <input id="cancellationBtn" type="button" value="취소" 
+            <input id="registrationBtn" class='pointerClass' type="button" value="등록" onclick="submitForm();">
+            <input id="cancellationBtn" class='pointerClass' type="button" value="취소" 
                onclick="location.href = 'javascript:window.history.back();'">   
          </div>
       </form>                          

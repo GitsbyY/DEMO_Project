@@ -127,7 +127,6 @@ select{
 	width: 700px;
 	height: 50px;
 	margin: 0px auto;
-	border: 1px solid black;
 	text-align: center;
 }
 
@@ -140,6 +139,12 @@ select{
 
 #productCategory{
 	cursor: pointer;
+}
+#registBtn{
+	float:right;
+	margin-top:20px;
+	width: 50px;
+	height: 30px;
 }
 </style>
 <script type="text/javascript" src="/DEMO_Project/resources/js/jquery-3.7.1.js">
@@ -231,7 +236,7 @@ select{
 			</div>
 			<div id="productDetailText">상품 상세 설명</div>
 			<div id="productDetailDivCtr">
-				<button id="registBtn" type="button"
+				<button id="registBtn" type="button" class="updateClass adminBtnClass"
 					onclick="registDetailFnc();">등록</button>
 			</div>
 			<input type="hidden" name="productDetailContent" id="productDetailInput">

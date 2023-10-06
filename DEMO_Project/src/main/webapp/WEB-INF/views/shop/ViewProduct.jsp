@@ -109,7 +109,7 @@ select{
 	clear: right;
 	float: right;
 }
-#adminBtn{
+.adminBtn{
 	width: 50px;
 	height: 30px;
 	background-color: red;
@@ -127,7 +127,6 @@ select{
 	width: 700px;
 	height: 50px;
 	margin: 0px auto;
-	border: 1px solid black;
 	text-align: center;
 }
 
@@ -146,8 +145,11 @@ select{
 }
 #reviewSpan{
 	color: blue;
+}
+.reviewClass{
 	cursor: pointer;
 }
+
 #sumContainer{
 	width: 500px;
 	height: 100px;
@@ -215,13 +217,11 @@ select{
 	float:right;
 	cursor: pointer;
 }
-
-.adminClass.updateClass{
-/* 	margin-top: 160px; */
-/* 	margin-righ: 5px; */
-}
-.updateBtn{
-
+#registBtn{
+	float:right;
+	margin-top:20px;
+	width: 50px;
+	height: 30px;
 }
 </style>
 <script type="text/javascript" src="/DEMO_Project/resources/js/jquery-3.7.1.js">
@@ -433,25 +433,25 @@ select{
 					</div>
 					<c:if test='${sessionScope.member.memberNo == 1}'>
 						<div id="controlDiv">
-							<input id="adminBtn" class="adminClass viewClass updateBtn"
+							<input class="adminClass viewClass updateBtn adminBtn"
 								type="button" value="수정"
 								onclick="updateProductFnc();">
-							<input id="adminBtn" class="adminClass updateClass" 
+							<input class="adminClass updateClass adminBtn" 
 								type="button" value="취소"
 								onclick="viewProductFnc();">
-							<input id="adminBtn" class="adminClass updateClass"
+							<input class="adminClass updateClass adminBtn"
 								type="button" value="등록"	onclick="submitForm();">
 						</div>
 					</c:if>
 				</div>
 			</div>
 			<div id="goReview" class="viewClass" onclick="goReviewFnc();">
-				<span>해당상품 후기 </span>
-				<span id="reviewSpan">보러가기</span>
+				<span class='reviewClass'>해당상품 후기 </span>
+				<span id="reviewSpan" class='reviewClass'>보러가기</span>
 			</div>
 			<div id="productDetailText">상품 상세 설명</div>
 			<div id="productDetailDivCtr" class="adminClass updateClass">
-				<button id="registBtn" type="button" class="updateClass"
+				<button id="registBtn" type="button" class="updateClass adminBtnClass"
 					onclick="registDetailFnc();">수정</button>
 			</div>
 			<input type="hidden" name="productDetailContent" id="productDetailInput">

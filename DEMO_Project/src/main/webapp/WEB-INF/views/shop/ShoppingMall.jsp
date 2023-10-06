@@ -32,6 +32,7 @@
     height: 45px;
     top: -2px;
     right: 5px;
+    cursor: pointer;
 }
 
 #select{

@@ -113,6 +113,7 @@ table tr td div {
 }
 #deleteBtn{
 	float:right;
+	padding: 3px;
 }
 
 #orderSumPriceDiv{
@@ -155,6 +156,12 @@ table tr td div {
 	width: 130px;
 	height: 100px;
 	display:inline-block;
+}
+.quantityClass{
+	width: 20px;
+	height: 20px;
+	background-color: #FFFFFF;
+	border: 1px solid black;
 }
 </style>
 <meta charset="UTF-8">
@@ -234,8 +241,10 @@ table tr td div {
 							</td>
 							<td>
 								<div class="cartListDiv productQuantityCtrDiv">
-									<button type="button" onclick="plusQuantityFnc(${loop.index});">+</button>
-									<button type="button" onclick="minusQuantityFnc(${loop.index});">-</button>
+									<button class='quantityClass' type="button"
+										onclick="plusQuantityFnc(${loop.index});">+</button>
+									<button class='quantityClass' type="button"
+										onclick="minusQuantityFnc(${loop.index});">-</button>
 								</div>
 							</td>
 						</tr>
@@ -259,7 +268,7 @@ table tr td div {
 			</div>
 	
 			<div id="deleteDiv" class="notEmptyCartClass">
-				<button id="deleteBtn" type="button" onclick="deleteFnc();">
+				<button id="deleteBtn" class='memberBtnClass' type="button" onclick="deleteFnc();">
 					선택 삭제
 				</button>
 			</div>
