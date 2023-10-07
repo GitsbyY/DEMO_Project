@@ -72,6 +72,10 @@ th, td {
 	padding: 10px;
 	text-align: center;
 }
+.productImg{
+	width:120px;
+	height:120px;
+}
 </style>
 <meta charset="UTF-8">
 <title>주문상세 페이지</title>
@@ -191,7 +195,7 @@ th, td {
 
 				<div style="margin-top: 40px;">
 					<input type="button" value="목록"
-						style="width: 145px; height: 50px; font-size: 24px; 
+						style="width: 145px; height: 50px; font-size: 24px; cursor:pointer; 
 							font-weight: bold; background-color: #FFC4A3; color: white; border: none; border-radius: 3px;"
 						onclick="window.location.href='/DEMO_Project/mypage/mypage.do';">
 				</div>

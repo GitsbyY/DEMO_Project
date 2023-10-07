@@ -514,7 +514,9 @@ public class MemberController {
 			model.addAttribute("result", "fail"); // 실패 시 'fail' 값을 모델에 추가
 		}
 		System.out.println(memberDto);
-
+		MemberDto sessionMemberDto = (MemberDto) session.getAttribute("member");
+		sessionMemberDto.setMemberEmoney(memberDto.getMemberEmoney());
+		session.setAttribute("member", sessionMemberDto);
 		session.setAttribute("myPageAside", "memberPay");
 
 //  		        		return "redirect:/mypage/MypageDetail.do"; // 리다이렉트할 경로로 이동

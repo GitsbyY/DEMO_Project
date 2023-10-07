@@ -37,6 +37,10 @@ public interface ProductService {
 
 	public boolean deleteProductList(List<String> productNos);
 
+	public void updateCartOne(int stock, int productNo, int memberNo);
+
+	public void deleteCartOne(String productNo, int memberNo);
+
 
 	
 	

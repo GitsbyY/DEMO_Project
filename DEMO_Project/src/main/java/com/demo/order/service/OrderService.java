@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.ui.Model;
 
+import com.demo.member.dto.MemberDto;
 import com.demo.order.dto.OrderDto;
 
 
@@ -37,7 +38,7 @@ public interface OrderService {
 
 	boolean insertOrder(OrderDto orderDto);
 
-	boolean insertOrderList(List<String> productNos, OrderDto orderDto);
+	Map<String, Object> selectCartOne(int productNo, int memberNo);
 
 
 

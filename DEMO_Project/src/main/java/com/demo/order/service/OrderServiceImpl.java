@@ -1,6 +1,5 @@
 package com.demo.order.service;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -9,10 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.demo.member.dao.MemberDao;
 import com.demo.order.dao.OrderDao;
 import com.demo.order.dto.OrderDto;
 import com.demo.product.dao.ProductDao;
-import com.demo.product.dto.CartDto;
 
 @Service
 public class OrderServiceImpl implements OrderService{
@@ -24,6 +23,9 @@ public class OrderServiceImpl implements OrderService{
 	public OrderDao orderDao;
 	@Autowired
 	public ProductDao productDao;
+	@Autowired
+	public MemberDao memberDao;
+	
 	@Override
 	public List<Map<String, Object>> orderSelectList(int start, int end, String category, String search) {
 		// TODO Auto-generated method stub
@@ -126,29 +128,11 @@ public class OrderServiceImpl implements OrderService{
 		}
 	}
 
+
 	@Override
-	public boolean insertOrderList(List<String> productNos,
-			OrderDto orderDto) {
+	public Map<String, Object> selectCartOne(int productNo, int memberNo) {
 		// TODO Auto-generated method stub
-		
-		try {
-			for (int i = 0; i < productNos.size(); i++) {
-				int productNo = Integer.parseInt(productNos.get(i));
-				Map <String, Object> map = orderDao.selectCartOne(productNo, orderDto.getMemberNo());
-				map.put("PRODUCT_QUANTITY", ((BigDecimal)map.get("PRODUCT_QUANTITY")).intValue());
-				orderDto.setProductQuantity((int) map.get("PRODUCT_QUANTITY"));
-				System.out.println("productNo: " + productNo);
-				orderDto.setProductNo(productNo);
-				System.out.println("????" + orderDto);
-				orderDao.insertOrder(orderDto);
-				productDao.deleteCartOne(productNos.get(i), orderDto.getMemberNo());
-			}
-			return true;
-		} catch (Exception e) {
-			// TODO: handle exception
-			return false;
-		}
-			
+		return orderDao.selectCartOne(productNo, memberNo);
 	}
 
 

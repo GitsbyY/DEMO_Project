@@ -171,10 +171,12 @@ tr, td {
 	margin: 30px auto;
 	padding-top: 10px;
 	text-align: center;
+	cursor: pointer;
 }
 #chargeAmount{
-/* 	border: none; */
-/* 	height: 30px; */
+	border: none;
+	height: 50px;
+	font-size: 20px;
 }
 </style>
 <meta charset="UTF-8">
@@ -319,7 +321,9 @@ tr, td {
 						<c:forEach var="memberChargeDto" items="${memberChargeDto}"
 							varStatus="loop">
 							<tr class='emoneyListTr'>
-								<td>${memberChargeDto.MEMBER_CHARGE_AMOUNT}</td>
+								<td>
+									<fmt:formatNumber value="${memberChargeDto.MEMBER_CHARGE_AMOUNT}" pattern="#,##0" />
+								</td>
 								<td>
 									<fmt:formatDate
 										pattern="yyyy-MM-dd HH:mm:ss"

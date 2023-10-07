@@ -106,7 +106,10 @@ table tr td div {
 	width: 70px;
 	text-align:left;
 }
-
+.productImg{
+	width: 160px;
+	height: 160px;
+}
 #deleteDiv{
 	height:200px;
 	padding:20px;
@@ -218,7 +221,7 @@ table tr td div {
 							</td>
 							<td>
 								<div class="cartListDiv imgDiv">
-									<img alt="image not found" id="productImg" 
+									<img alt="image not found" class="productImg" 
 										src="<c:url value='/image/Product/${cart.STORED_FILE_NAME}'/>">
 								</div>
 							</td>

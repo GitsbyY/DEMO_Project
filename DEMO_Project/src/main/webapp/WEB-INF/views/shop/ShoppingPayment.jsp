@@ -86,6 +86,78 @@ table tr td:first-child {
 	width: 300px;
 	font-size:16px;
 }
+#chargeBtn{
+	width: 70px;
+	height: 25px;
+	background-color: #DDDDDD;
+	font-size: 16px;
+	border: 1px solid black;
+}
+/* 모달 css 시작 */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* 모달 내용 스타일 */
+.modal-content {
+	background-color: #fefefe;
+	margin: 5% auto;
+	padding: 50px 20px 20px 20px;
+	border: 1px solid #888;
+	width: 500px;
+	height: 500px;
+	position: relative;
+	font-size: 28px;
+}
+.modalTitle{
+	width: 100%;
+	height: 50px;
+	text-align: center;
+	font-weight: bold;
+}
+.modalDiv{
+	margin: 20px auto;
+	width: 100%;
+	height: 50px;
+	text-align: center;
+	font-weight: bold;
+}
+.modalBtnDiv{
+	position: absolute;
+	padding-left: 100px;
+	top: 400px;
+}
+.modalBtn{
+	padding: 5px;
+	background-color: #DDDDDD;
+	border: none;
+	font-size: 28px;
+	margin: auto 10px;
+}
+/* 모달 닫기 버튼 스타일 */
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	position: absolute;
+	top: -1px;
+    right: 10px;
+}
+
+.close:hover, .close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
 </style>
 <meta charset="UTF-8">
 <title>주문결제</title>
@@ -95,8 +167,11 @@ table tr td:first-child {
 
 	<div id="mainContainer">
 		<form action='./paymentCtr.do' method='POST' id='paymentForm'>
-			<input type='hidden' name='productNo' value='${productNo}'>
-			<input type='hidden' name='productQuantity' value='${productQuantity}'>
+			<input type='hidden' id='productNo' name='productNo' value='${productNo}'>
+			<input type='hidden' id='stock' name='productQuantity' value='${productQuantity}'>
+			<input type='hidden' id='memberEmoney' value='${sessionScope.member.memberEmoney}'>
+			<input type='hidden' id='memberNo' value='${sessionScope.member.memberNo}'>
+			<input type='hidden' id='paymentPrice' name='paymentPrice' value=''>
 			<div id="title">
 				<div>	
 					<p id="maintitle">주문/결제</p>	
@@ -216,7 +291,8 @@ table tr td:first-child {
 										<fmt:formatNumber value="${sessionScope.member.memberEmoney}" type="number" />
 									</span>
 									원
-									<button type="button" id="chargeBtn">
+									<button type="button" id="chargeBtn"
+										onclick="chargePaymentFnc();">
 										충전하기
 									</button>
 								</div>
@@ -252,13 +328,52 @@ table tr td:first-child {
 					<input id="cancellation" type="button" value="취소"
 						onclick="cancelFnc(${productNo});">
 					<input id="payment" type="button" value="결제"
-						onclick="submitFnc();">
+						onclick="paymentFnc();">
 				</div>
 			</div>
 		</form>
 	</div>
 
-
+	<!-- 이머니부족 모달 -->
+	<div id="chargeModal" class="modal">
+	    <!-- 모달 내용 -->
+	    <div class="modal-content">
+	    	<div class='modalTitle'>
+	    		결제 실패
+	    	</div>
+	    	<div class='modalDiv'>
+	    		E-money가 부족합니다
+	    	</div>
+	    	<div class='modalBtnDiv'>
+	    		<button type='button' class='modalBtn'
+	    			onclick="closeModal()">취소</button>
+	    		<button type='button' class='modalBtn'
+	    			onclick='chargePaymentFnc();'>충전하러 가기</button>
+	    	</div>
+	        <span class="close" onclick="closeModal()">&times;</span>
+	    </div>
+	
+	</div>
+	
+	<!-- 재고부족 모달 -->
+	<div id="stockModal" class="modal">
+	    <!-- 모달 내용 -->
+	    <div class="modal-content">
+	    	<div class='modalTitle'>
+	    		결제 실패
+	    	</div>
+	    	<div class='modalDiv'>
+	    		남은 재고가 부족합니다
+	    	</div>
+	    	<div class='modalBtnDiv'>
+	    		<button type='button' class='modalBtn'
+	    			style='margin-left: 55px;'
+	    			onclick='goProductFnc();'>수량 변경하기</button>
+	    	</div>
+	        <span class="close" onclick="closeModal()">&times;</span>
+	    </div>
+	
+	</div>
 
 	<jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
@@ -273,7 +388,8 @@ table tr td:first-child {
 		var memberPointNum = parseInt(memberPointObj.replace(/[^0-9]/g, ''));
 		
 		var productSumPriceObj = document.getElementById('productSumPrice').innerText;
-		var productSumPriceNum = productSumPriceObj.replace(/[^0-9]/g, '');
+		var productSumPriceNum = parseInt(productSumPriceObj.replace(/[^0-9]/g, ''));
+		
 		
 		if(!numberPattern.test(pointInputObj.value)){
 	    	alert('숫자만 입력가능합니다.');
@@ -296,7 +412,56 @@ table tr td:first-child {
 		location.href='/DEMO_Project/shop/viewProduct.do?no=' + productNo;
 	}
 	
+	//모달 열기
+	function paymentFnc(){
+		var paymentSumPrice
+			= parseInt($('#paymentSumPrice').text().replace(/[^0-9]/g, ''));
+		if($('#memberEmoney').val() < paymentSumPrice){
+			document.getElementById('chargeModal').style.display = 'block';
+			return ;
+		}
+		checkStockFnc();
+	}
+	function chargePaymentFnc(){
+		location.href='/DEMO_Project/mypage/MypageProfilePaymentMemberDetail.do?memberNo=' + $('#memberNo').val();
+	}
+	//수량변경하러가기
+    function goProductFnc() {
+    	location.href='/DEMO_Project/shop/viewProduct.do?no=' + $('#productNo').val();
+    }
+    // 모달 닫기
+    function closeModal() {
+        document.getElementById('chargeModal').style.display = 'none';
+        document.getElementById('stockModal').style.display = 'none';
+    	
+    }
+    
+    function checkStockFnc() {
+    	
+		$.ajax({
+			url : "/DEMO_Project/checkStock.do",
+			method : "POST",
+			data : { stock: $('#stock').val(),
+					productNo: $('#productNo').val()},
+			
+			success: function(result) {
+				// 요청이 성공하면 결과를 화면에 표시
+				if(result){
+					submitFnc();
+				}else {
+					document.getElementById('stockModal').style.display = 'block';
+				}
+				
+			},
+			error: function() {
+				alert('결제 오류');
+             }
+		});
+	}
 	function submitFnc() {
+		var paymentSumPrice
+			= parseInt($('#paymentSumPrice').text().replace(/[^0-9]/g, ''));
+		$('#paymentPrice').val(paymentSumPrice);
 		$('#paymentForm').submit();
 	}
 </script>

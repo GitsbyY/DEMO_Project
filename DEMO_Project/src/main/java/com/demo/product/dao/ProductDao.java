@@ -38,6 +38,8 @@ public interface ProductDao {
 
 	void deleteCartOne(String productNoStr);
 
+	void updateCartOne(int stock, int productNo, int memberNo);
+
 
 
 	

@@ -147,6 +147,18 @@ public class ProductServiceImpl implements ProductService{
 			return false;
 		}
 	}
+
+	@Override
+	public void updateCartOne(int stock, int productNo, int memberNo) {
+		// TODO Auto-generated method stub
+		productDao.updateCartOne(stock, productNo, memberNo);
+	}
+
+	@Override
+	public void deleteCartOne(String productNo, int memberNo) {
+		// TODO Auto-generated method stub
+		productDao.deleteCartOne(productNo, memberNo);
+	}
 	
 
 	

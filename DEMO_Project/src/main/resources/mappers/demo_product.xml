@@ -228,6 +228,13 @@
 		WHERE MEMBER_NO = #{memberNo}
 		AND PRODUCT_NO = #{productNo}
 	</select>
+	
+	<update id="updateCartOne" parameterType="int">
+		UPDATE CART
+		SET PRODUCT_QUANTITY = #{stock}
+		WHERE MEMBER_NO = #{memberNo}
+		AND PRODUCT_NO = #{productNo}
+	</update>
 </mapper>
 
 

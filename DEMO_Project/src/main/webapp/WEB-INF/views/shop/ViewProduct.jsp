@@ -14,7 +14,7 @@ table tr td{
 }
 
 #routeDiv{
-	width: 200px;
+	width: 230px;
 	padding: 10px;
 	font-size: 14px;
 }
@@ -135,6 +135,7 @@ select{
 	min-height: 700px;
 	margin: 0px auto;
 	border: 1px solid black;
+	font-size: 28px;
 }
 
 #goReview{

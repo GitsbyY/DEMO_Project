@@ -72,6 +72,10 @@ th, td {
 	padding: 10px;
 	text-align: center;
 }
+.productImg{
+	width:120px;
+	height:120px;
+}
 </style>
 <meta charset="UTF-8">
 <title>주문상세 페이지</title>
@@ -111,8 +115,14 @@ th, td {
 				 
 					<tr>
 						<th rowspan="2" style="border-right: 1px solid black;">
-							<img style="margin-top: 30px;" alt="image not found" class="productImg" 
+							<div id="productNameImg" style="text-align: left; margin-top: 10px; font-size: 20px;">
+								&nbsp;&nbsp;${orderDto.PRODUCT_NAME}
+							</div>
+							<div id="imgContainer" style="display: block; width : 300px; height: 120px; margin-left: 88px;">
+<!-- 								<img src="" alt="상품 이미지"> -->
+								<img alt="image not found" class="productImg" 
 								src="<c:url value='/image/Product/${orderDto.STORED_FILE_NAME}'/>">
+							</div>
 						</th>
 						<th style="font-size: 24px; font-weight: bold;">1개</th>
 						<th rowspan="2" style="font-size: 24px; font-weight: bold; border-left: 1px solid black;">${orderDto.ORDER_STATUS}</th>
@@ -150,7 +160,7 @@ th, td {
 				<div style="margin-top: 40px;">
 					<input type="button" value="목록" 
 						style="width: 145px; height: 50px; font-size: 24px; font-weight: bold; 
-							background-color: #FFC4A3; color: white; border: none; border-radius: 3px;"" 
+							background-color: #FFC4A3; color: white; border: none; border-radius: 3px; cursor:pointer;" 
 							onclick="window.location.href='/DEMO_Project/mypage/cancelPageAdmin.do';">	
 				</div>
 			</div>

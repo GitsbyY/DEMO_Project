@@ -1,6 +1,7 @@
 package com.demo.order.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,13 +13,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.demo.member.dto.MemberDto;
+import com.demo.member.service.MemberService;
 import com.demo.order.dto.OrderDto;
 import com.demo.order.service.OrderService;
+import com.demo.product.service.ProductService;
 import com.demo.util.MyPagePaging;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -32,6 +37,12 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 
+	@Autowired
+	private MemberService memberService;
+	
+	@Autowired
+	private ProductService productService;
+	
 	// 마이페이지 처음
 	@RequestMapping(value = "/mypage/mypage.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String myPage(HttpSession session) {
@@ -336,9 +347,39 @@ public class OrderController {
 	    orderDto.setMemberNo(memberDto.getMemberNo());
 	    System.out.println(orderDto);
 	    
-	    boolean result
-	    	= orderService.insertOrderList(productNos, orderDto);
-	    
+	    int sumPrice = 0;
+	    boolean result;
+	    try {
+			for (int i = 0; i < productNos.size(); i++) {
+				int productNo = Integer.parseInt(productNos.get(i));
+				Map <String, Object> map = orderService.selectCartOne(productNo, orderDto.getMemberNo());
+				map.put("PRODUCT_QUANTITY",
+						((BigDecimal)map.get("PRODUCT_QUANTITY")).intValue());
+				map.put("PRODUCT_PRICE",
+						((BigDecimal)map.get("PRODUCT_PRICE")).intValue());
+				orderDto.setProductQuantity((int) map.get("PRODUCT_QUANTITY"));
+				System.out.println("productNo: " + productNo);
+				orderDto.setProductNo(productNo);
+				System.out.println("????" + orderDto);
+				//주문 내역 추가
+				orderService.insertOrder(orderDto);
+				//회원 결제금액 추가
+				int quantity = (int) map.get("PRODUCT_QUANTITY");
+				int price = (int) map.get("PRODUCT_PRICE");
+				sumPrice += quantity * price;
+				//장바구니 상품 삭제
+				productService.deleteCartOne(productNos.get(i), orderDto.getMemberNo());
+			}
+			//상품 결제
+			memberDto.setMemberEmoney(memberDto.getMemberEmoney() - sumPrice);
+			memberService.memberEmoneyUpdate(memberDto);
+			memberDto.setMemberPoint(memberDto.getMemberEmoney() + (int)(sumPrice*0.05));
+			memberService.memberPointUpdate(memberDto);
+			result = true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			result = false;
+		}
 	    // 여기서 productNos를 사용하여 필요한 로직 수행
 	    model.addAttribute("orderDto", orderDto);
 	    if(result == true) {
@@ -350,18 +391,24 @@ public class OrderController {
 	
 	@RequestMapping(value = "/paymentCtr.do",
 			method = {RequestMethod.POST })
-	public String paymentCtr(OrderDto orderDto,
+	public String paymentCtr(OrderDto orderDto,int paymentPrice,
 			HttpSession session, Model model) {
 		System.out.println(orderDto);
 		
 		MemberDto memberDto
-		= (MemberDto) session.getAttribute("member");
+			= (MemberDto) session.getAttribute("member");
 		
 		orderDto.setMemberNo(memberDto.getMemberNo());
 		
 		boolean result = orderService.insertOrder(orderDto);
-		System.out.println("orderNo: " + orderDto.getOrderNo());
+		int afterEmoney = memberDto.getMemberEmoney() - paymentPrice;
+		memberDto.setMemberEmoney(afterEmoney);
+		memberService.memberEmoneyUpdate(memberDto);
+		memberDto.setMemberPoint(memberDto.getMemberEmoney() + (int)(paymentPrice*0.05));
+		memberService.memberPointUpdate(memberDto);
 		model.addAttribute("orderDto", orderDto);
+		session.setAttribute("member", memberDto);
+		
 		if(result == true) {
 			return "common/successPayment";
 		}else {
@@ -369,4 +416,51 @@ public class OrderController {
 		}
 	    
 	}
+	
+	@PostMapping("/checkStock.do")
+	   @ResponseBody
+	   public boolean checkStock(int stock,int productNo) {
+		   System.out.println("checkStock");
+		   Map<String,Object> map = 
+				   productService.selectProductOne(productNo);
+		   map.put("PRODUCT_STOCK", ((BigDecimal)map.get("PRODUCT_STOCK")).intValue());
+		   if(stock < (int)map.get("PRODUCT_STOCK")) {
+			   return true;
+		   }else {
+			   return false;
+		   }
+	   }
+	   
+	   @PostMapping("/checkStockCart.do")
+	   @ResponseBody
+	   public Map<String, Object> checkStock(List<String> productNos,
+			   HttpSession session) {
+		   System.out.println("productNos");
+		   MemberDto memberDto
+			= (MemberDto) session.getAttribute("member");
+		   int productNo;
+		   Map<String, Object> resultMap = new HashMap<String, Object>();
+		   resultMap.put("result", true);
+		   for (int i = 0; i < productNos.size(); i++) {
+			   productNo = Integer.parseInt(productNos.get(i));
+			   Map <String,Object> cartMap
+			   	= orderService.selectCartOne(productNo, memberDto.getMemberNo());
+			   cartMap.put("PRODUCT_STOCK", ((BigDecimal)cartMap.get("PRODUCT_STOCK")).intValue());
+			   Map<String,Object> productMap = 
+					   productService.selectProductOne(productNo);
+			   productMap.put("PRODUCT_STOCK", ((BigDecimal)productMap.get("PRODUCT_STOCK")).intValue());
+			   
+			   if((int)cartMap.get("PRODUCT_STOCK") > (int)productMap.get("PRODUCT_STOCK")) {
+				   System.out.println("재고 부족!");
+				   resultMap.put("result", false);
+				   resultMap.put("productName", productMap.get("PRODUCT_NAME"));
+				   productService.updateCartOne((int)productMap.get("PRODUCT_STOCK"),
+						   productNo, memberDto.getMemberNo());
+				   break;
+			   }
+			}
+		   
+		   
+		   return resultMap;
+	   }
 }
