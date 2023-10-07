@@ -40,6 +40,7 @@ div {
 	margin-top: 30px;
 	text-align: left;
 	color: #FFC4A3;
+	font-weight: bold;
 }
 .inputTagWrap > #inputEmail, #inputPhone{
 	height: 40px;
@@ -47,13 +48,14 @@ div {
 	margin-top: 3px;
 }
 #findIdBtn > button{
-	height: 40px;
-	width: 300px;
+	height: 50px;
+	width: 100%;
 	margin-top: 40px;
 	border: none;
 	background-color: #FFC4A3;
 	float: left;
-	cursor: pointer; 
+	cursor: pointer;
+	font-weight: bold; 
 }
 #warning{
 	font-size: 5px;
@@ -75,7 +77,7 @@ div {
 	
 	<form action="login.do" method="get">
 		<div>
-			<h1 style="text-align: center; color: #FFC4A3; cursor: pointer;"
+			<h1 style="text-align: center; color: #FFC4A3; cursor: pointer; font-size: 54px;" 
 				onclick="location.href='/DEMO_Project/auth/login.do'">DAENGDAENG</h1>
 			<div id="findIdText">ID 찾기 결과</div>
 				<div id="findIdResult">

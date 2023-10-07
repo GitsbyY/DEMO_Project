@@ -39,19 +39,21 @@ div {
 	margin-top: 30px;
 	text-align: left;
 	color: #FFC4A3;
+	font-weight: bold;
 }
 .inputTagWrap > #inputEmail, #inputPhone{
-	height: 40px;
-	width: 300px;
+	height: 50px;
+	width: 362px;
 	margin-top: 3px;
 	padding-left: 10px;
 }
 #findIdBtn{
-	height: 40px;
+	height: 50px;
 	width: 100%;
 	margin-top: 40px;
 	border: none;
-	background-color: #FFC4A3; 
+	background-color: #FFC4A3;
+	font-weight: bold; 
 }
 #warning{
 	font-size: 5px;
@@ -72,7 +74,7 @@ p{
 	
 	<form action="findIdCtr.do" method="post">
 		<div>
-			<h1 style="text-align: center; color: #FFC4A3; cursor: pointer;"
+			<h1 style="text-align: center; color: #FFC4A3; cursor: pointer; font-size: 54px;" 
 				onclick="location.href='/DEMO_Project/auth/login.do'">DAENGDAENG</h1>
 			<div id="findIdText">ID 찾기</div>
 			<div class="inputTagWrap">

@@ -39,37 +39,41 @@ div {
    margin-top: 30px;
    text-align: left;
    color: #FFC4A3;
+   font-weight: bold;
+   margin-bottom: 20px;
 }
 #findPwdBtn{
    text-align: center;
 }
 #findPwdBtn > button{
-   height: 40px;
-   width: 150px;
+   height: 50px;
+   width: 250px;
    margin-top: 40px;
    border: none;
    background-color: #FFC4A3;
-   font-size: 16px;   
+   font-size: 16px;
+   font-weight: bold;   
 }
 #findPwdResult{
    margin-top: 5px;   
-   height: 30px;
+   height: 400px;
    font-weight: bold;
    font-size: 16px;
 }
 table {
    width: 500px;
-   border: 2px solid black;
+   border: none;
    border-collapse: collapse;
 }
 tr, td{
    height: 50px;      
 }
 #changePwd, #checkPwd{
-   height: 35px;
-   width: 250px;
-   text-align: center;
+   height: 40px;
+   width: 220px;
+   text-align: left;
    font-size: 15px;
+   padding-left: 10px;
 }
 .secondTd{   
 }
@@ -82,13 +86,13 @@ tr, td{
    
    <form action="changePassword.do" method="post" onsubmit="return checkPasswords()">
         <div>
-            <h1 style="text-align: center; color: #FFC4A3; cursor: pointer;"
+            <h1 style="text-align: center; color: #FFC4A3; cursor: pointer; font-size: 54px;" 
             	onclick="location.href='/DEMO_Project/auth/login.do'">DAENGDAENG</h1>
             <div id="findPwdText">비밀번호 변경</div>
             <div id="findPwdResult">
                 <table>
                     <tr>
-                        <td class="firstTd">변경 할 비밀번호</td>
+                        <td class="firstTd" style="height: 20px;">변경 할 비밀번호</td>
                         <td class="secondTd">
                             <input id="changePwd" type="password" name="memberPassword" 
                                 placeholder="비밀번호를 입력해주세요">
