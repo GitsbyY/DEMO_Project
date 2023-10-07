@@ -113,11 +113,11 @@ table {
 	font-weight: bold;
 	cursor: pointer;	
 }
+.underline a {
+    text-decoration: underline; /* 밑줄 스타일 적용 */   
+}
 .titleText {
     text-align: left; /* 텍스트를 왼쪽 정렬 */
-}
-.underline a {
-    text-decoration: underline; /* 밑줄 스타일 적용 */
 }
 </style>
 <meta charset="UTF-8">
@@ -160,9 +160,10 @@ table {
 									</a>
 								</td>
 								<td class="tdClass">${inquiryDto.MEMBER_NAME}</td>
-								<td class="tdClass"><fmt:formatDate
-										pattern="yyyy-MM-dd HH:mm:ss"
-										value="${inquiryDto.INQUIRY_CRE_DATE}" /></td>
+								<td class="tdClass">
+									<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
+										value="${inquiryDto.INQUIRY_CRE_DATE}" />
+								</td>
 								<td class="tdClass"><c:choose>
 										<c:when test="${inquiryDto.INQUIRY_IS_REPLY eq 'N'}">
                               답변 대기중
@@ -198,8 +199,12 @@ table {
 								<tr>
 									<td class="tdClass">${inquiryDto.INQUIRY_NO}</td>
 									<td class="tdClass">${inquiryDto.INQUIRY_TYPE}</td>
-									<td><a href='./listOne2.do?no=${inquiryDto.INQUIRY_NO}'>
-											${inquiryDto.INQUIRY_TITLE} </a></td>
+									<td onmouseover="underlineTitle(this)" 
+										onmouseout="removeUnderlineTitle(this)" class="tdClass">
+										<a href='./listOne2.do?no=${inquiryDto.INQUIRY_NO}'>
+											<p class="titleText">${inquiryDto.INQUIRY_TITLE}</p>
+										</a>
+									</td>
 									<td class="tdClass">${inquiryDto.MEMBER_NAME}</td>
 									<td class="tdClass"><fmt:formatDate
 											pattern="yyyy-MM-dd HH:mm:ss"

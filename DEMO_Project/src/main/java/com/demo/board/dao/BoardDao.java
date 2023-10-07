@@ -83,6 +83,10 @@ public interface BoardDao {
    public void noticeReplyEdit(NoticeReplyDto noticeReplyDto);
    
    List<MemberDto> memberInfoList(int memberNo);
+   
+   public int inquirySelectTotalCount(int memberNo);
+   
+   Map<String, Object> inquirySelectList(int start, int end, int memberNo);
      
    
 

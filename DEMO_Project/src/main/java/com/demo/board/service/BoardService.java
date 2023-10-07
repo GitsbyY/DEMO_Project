@@ -88,6 +88,10 @@ public interface BoardService {
 
 	public List<MemberDto> memberInfoList(int memberNo);
 
+	public int inquirySelectTotalCount(int memberNo);
+
+	public Map<String, Object> inquirySelectList(int start, int end, int memberNo);
+
 	
 	
 

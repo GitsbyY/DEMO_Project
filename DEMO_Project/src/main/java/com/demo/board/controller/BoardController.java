@@ -73,27 +73,86 @@ public class BoardController {
       // Log4j 
       log.info("Welcome BoardController list!: {}", curPage);
          
-      int totalCount = boardService.inquirySelectTotalCount();
+      int totalCount;
       
-      BoardPaging boardPaging = new BoardPaging(totalCount, curPage);
+      MemberDto memberDto = (MemberDto)session.getAttribute("member");
       
-      int start = boardPaging.getPageBegin();
-      int end = boardPaging.getPageEnd();
+      int memberNo = memberDto.getMemberNo();
       
-      Map<String, Object> inquiryList = boardService.inquirySelectList(start, end);
-      List<InquiryDto> inquiryDtoList = (List<InquiryDto>) inquiryList.get("inquiryList");
-      
-      HashMap<String, Object> pagingMap = new HashMap<>();
-      pagingMap.put("totalCount", totalCount);
-      pagingMap.put("boardPaging", boardPaging);
-      
-      model.addAttribute("inquiryDtoList", inquiryDtoList);
-      model.addAttribute("pagingMap", pagingMap);
-      
-      session.setAttribute("customAside", "inquiry");
-      
+      if (memberNo == 1) {
+          // 관리자인 경우
+          totalCount = boardService.inquirySelectTotalCount();
+          
+          BoardPaging boardPaging = new BoardPaging(totalCount, curPage);
+          
+          int start = boardPaging.getPageBegin();
+          int end = boardPaging.getPageEnd();
+          
+          Map<String, Object> inquiryList = boardService.inquirySelectList(start, end);
+          List<InquiryDto> inquiryDtoList = (List<InquiryDto>) inquiryList.get("inquiryList");
+          
+          HashMap<String, Object> pagingMap = new HashMap<>();
+          pagingMap.put("totalCount", totalCount);
+          pagingMap.put("boardPaging", boardPaging);
+          
+          model.addAttribute("inquiryDtoList", inquiryDtoList);
+          model.addAttribute("pagingMap", pagingMap);
+          
+          session.setAttribute("customAside", "inquiry");
+      } 
+      else {
+          // 일반 회원인 경우
+          totalCount = boardService.inquirySelectTotalCount(memberNo);
+          
+          BoardPaging boardPaging = new BoardPaging(totalCount, curPage);
+          
+          int start = boardPaging.getPageBegin();
+          int end = boardPaging.getPageEnd();
+          
+          Map<String, Object> inquiryList = boardService.inquirySelectList(start, end, memberNo);
+          List<InquiryDto> inquiryDtoList = (List<InquiryDto>) inquiryList.get("inquiryList");
+          
+          HashMap<String, Object> pagingMap = new HashMap<>();
+          pagingMap.put("totalCount", totalCount);
+          pagingMap.put("boardPaging", boardPaging);
+          
+          model.addAttribute("inquiryDtoList", inquiryDtoList);
+          model.addAttribute("pagingMap", pagingMap);
+          
+          session.setAttribute("customAside", "inquiry");
+      }            
       return "board/CustomerService";
    }
+   
+   // 상담문의 화면으로 이동
+//   @RequestMapping(value = "/board/customerService.do", 
+//         method = {RequestMethod.GET, RequestMethod.POST})
+//   public String inquiryList(@RequestParam(defaultValue = "1") int curPage, Model model
+//         , HttpSession session) {
+//      // Log4j 
+//      log.info("Welcome BoardController list!: {}", curPage);
+//         
+//      int totalCount = boardService.inquirySelectTotalCount();
+//      
+//      BoardPaging boardPaging = new BoardPaging(totalCount, curPage);
+//      
+//      int start = boardPaging.getPageBegin();
+//      int end = boardPaging.getPageEnd();
+//      
+//      Map<String, Object> inquiryList = boardService.inquirySelectList(start, end);
+//      List<InquiryDto> inquiryDtoList = (List<InquiryDto>) inquiryList.get("inquiryList");
+//      
+//      HashMap<String, Object> pagingMap = new HashMap<>();
+//      pagingMap.put("totalCount", totalCount);
+//      pagingMap.put("boardPaging", boardPaging);
+//      
+//      model.addAttribute("inquiryDtoList", inquiryDtoList);
+//      model.addAttribute("pagingMap", pagingMap);
+//      
+//      session.setAttribute("customAside", "inquiry");
+//      
+//      return "board/CustomerService";
+//   }
    
    // 후기남겨요 화면으로 이동
    @RequestMapping(value = "/board/review.do", 

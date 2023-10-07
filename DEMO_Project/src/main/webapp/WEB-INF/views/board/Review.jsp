@@ -76,7 +76,7 @@ table{
 }
 #firstDiv{
    border-bottom: 2px solid black;
-   width: 160px;
+   width: 150px;
    display: block;
    font-weight: bold;     
 }

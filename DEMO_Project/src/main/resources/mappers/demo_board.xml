@@ -159,6 +159,47 @@
   SUBQUERY.RNUM BETWEEN #{start} AND #{end}
    </select>
    
+   
+   <select id="inquirySelectList2" parameterType="map" resultType="map">   
+     SELECT 
+     SUBQUERY.INQUIRY_NO, 
+     SUBQUERY.MEMBER_NO, 
+     SUBQUERY.INQUIRY_TYPE, 
+     SUBQUERY.MEMBER_NAME, 
+     SUBQUERY.INQUIRY_CRE_DATE, 
+     SUBQUERY.INQUIRY_TITLE, 
+     SUBQUERY.INQUIRY_CONTENT, 
+     SUBQUERY.INQUIRY_IS_REPLY, 
+     SUBQUERY.REPLY_CONTENT,
+     SUBQUERY.REPLY_CRE_DATE
+   FROM (
+     SELECT 
+    I.INQUIRY_NO, 
+    I.MEMBER_NO, 
+    I.INQUIRY_TYPE, 
+    I.MEMBER_NAME, 
+    I.INQUIRY_CRE_DATE, 
+    I.INQUIRY_TITLE, 
+    I.INQUIRY_CONTENT, 
+    I.INQUIRY_IS_REPLY, 
+    R.REPLY_CRE_DATE, 
+    R.REPLY_MEMBER_NAME, 
+    R.REPLY_TITLE, 
+    R.REPLY_CONTENT,
+    ROW_NUMBER() OVER (ORDER BY I.INQUIRY_CRE_DATE DESC) AS RNUM
+     FROM 
+    INQUIRY I
+     LEFT JOIN 
+    REPLY R 
+     ON 
+    I.INQUIRY_NO = R.INQUIRY_NO
+    WHERE I.MEMBER_NO = #{memberNo}
+   ) SUBQUERY
+   WHERE 
+  SUBQUERY.RNUM BETWEEN #{start} AND #{end}
+   </select>
+   
+   
 	<select id="list" parameterType="map" resultType="map">
 	
 	SELECT REVIEW_REPLY_NO, REVIEW_REPLY.MEMBER_NO, REVIEW_NO, REVIEW_REPLY_CONTENT, REVIEW_REPLY_CRE_DATE, MEMBER.MEMBER_NAME
@@ -186,6 +227,12 @@
    <select id="inquirySelectTotalCount" resultType="java.lang.Integer">
       SELECT COUNT(*)
       FROM INQUIRY
+   </select>
+   
+   <select id="inquirySelectTotalCount2" resultType="java.lang.Integer">
+      SELECT COUNT(*)
+      FROM INQUIRY
+      WHERE MEMBER_NO = #{memberNo}
    </select>
    
    <select id="reviewSelectTotalCount" resultType="java.lang.Integer">

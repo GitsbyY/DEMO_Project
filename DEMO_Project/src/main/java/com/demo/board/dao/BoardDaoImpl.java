@@ -291,6 +291,28 @@ public class BoardDaoImpl implements BoardDao{
 		return sqlSession.selectList(nameSpace + "memberInfoList", memberNo);
 	}
 
+	@Override
+	public int inquirySelectTotalCount(int memberNo) {
+		// TODO Auto-generated method stub
+		return (int)sqlSession.selectOne(nameSpace + "inquirySelectTotalCount2", memberNo);
+	}
+
+	@Override
+	public Map<String, Object> inquirySelectList(int start, int end, int memberNo) {
+		HashMap<String, Object> resultMap = new HashMap<>();
+	    HashMap<String, Object> map = new HashMap<String, Object>();
+	    map.put("start", start);
+	    map.put("end", end);
+	    map.put("memberNo", memberNo);
+
+	    List<NoticeDto> inquiryList = sqlSession.selectList(nameSpace + "inquirySelectList2", map);
+	       
+	    resultMap.put("inquiryList", inquiryList);
+	    // 여기에 필요한 다른 데이터들을 추가할 수 있습니다.
+
+	    return resultMap;
+	}
+
 	
 
 

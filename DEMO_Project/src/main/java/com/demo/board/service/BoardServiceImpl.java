@@ -322,6 +322,16 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 		return boardDao.memberInfoList(memberNo);
 	}
+	@Override
+	public int inquirySelectTotalCount(int memberNo) {
+		// TODO Auto-generated method stub
+		return boardDao.inquirySelectTotalCount(memberNo);
+	}
+	@Override
+	public Map<String, Object> inquirySelectList(int start, int end, int memberNo) {
+		// TODO Auto-generated method stub
+		return boardDao.inquirySelectList(start, end, memberNo);
+	}
 	
 
 

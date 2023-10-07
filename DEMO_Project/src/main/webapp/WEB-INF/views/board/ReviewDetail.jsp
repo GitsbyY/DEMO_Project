@@ -12,7 +12,8 @@
    border-collapse: collapse;
    border-top: thick;
    border-left:thick;
-   border-right:thick;  
+   border-right:thick;
+   border-bottom:thick; 
    table-layout: fixed;
    font-size: 30px;
    margin-bottom: 10px;
@@ -21,7 +22,8 @@
 #firstDiv{
    border-bottom: 2px solid black;
    width: 150px;
-   display: block;     
+   display: block;
+   font-weight: bold;     
 }
 #secondTh{      
 }

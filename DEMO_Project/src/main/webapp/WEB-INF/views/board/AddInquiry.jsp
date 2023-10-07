@@ -12,7 +12,8 @@
    border-collapse: collapse;
    border-top: thick;
    border-left:thick;
-   border-right:thick;  
+   border-right:thick;
+   border-bottom:thick;  
    table-layout: fixed;
    font-size: 30px;
    margin-bottom: 10px;
@@ -21,7 +22,8 @@
 #firstDiv{
    border-bottom: 2px solid black;
    width: 180px;
-   display: block;     
+   display: block;
+   font-weight: bold;     
 }
 #secondTh{      
 }
@@ -50,7 +52,7 @@ table{
    text-align: center;
    font-weight: bold;
    border-right: 1px solid black;
-   background-color: #FFC4A3;
+   background-color: #FFC4A3;  
 }
 #fourthTr{
    height: 400px;

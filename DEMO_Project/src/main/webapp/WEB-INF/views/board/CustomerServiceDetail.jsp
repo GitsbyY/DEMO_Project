@@ -13,6 +13,7 @@
    border-top: thick;
    border-left: thick;
    border-right: thick;
+   border-bottom: thick;
    table-layout: fixed;
    font-size: 30px;
    margin-bottom: 10px;
@@ -23,6 +24,7 @@
    border-bottom: 2px solid black;
    width: 180px;
    display: block;
+   font-weight: bold;
 }
 
 #secondTh {
