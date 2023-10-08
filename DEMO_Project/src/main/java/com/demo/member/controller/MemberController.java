@@ -501,6 +501,7 @@ public class MemberController {
 
 		System.out.println(memberDto);
 		// 포인트 변화를 추가한다. update/select
+		System.out.println("?????????????????????" + chargeAmount);
 		try {
 			if(chargeAmount != 0) {
 				System.out.println("멤버충전이요");

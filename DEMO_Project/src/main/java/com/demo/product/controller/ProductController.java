@@ -224,4 +224,32 @@ public class ProductController {
 			return "common/failDeleteProduct";
 		}
 	}
+    
+    @ResponseBody
+    @RequestMapping(value = "/bestProductDiv.do",
+			method = { RequestMethod.GET, RequestMethod.POST })
+	public List<Map<String, Object>> bestProductDiv(HttpSession session, Model model) {
+
+		List<Map<String, Object>> productList
+			= productService.productSelectList(1, 3, "", "", "orderDESC");
+		System.out.println(productList.get(0).get("PRODUCT_NAME"));
+		System.out.println(productList.size());
+		model.addAttribute("productList", productList);
+		
+		return productList;
+	}
+    
+    @ResponseBody
+    @RequestMapping(value = "/lastestProductDiv.do",
+    method = { RequestMethod.GET, RequestMethod.POST })
+    public List<Map<String, Object>> lastestProductDiv(HttpSession session, Model model) {
+    	
+    	List<Map<String, Object>> productList
+    	= productService.productSelectList(1, 3, "", "", "lastest");
+    	System.out.println(productList.get(0).get("PRODUCT_NAME"));
+    	System.out.println(productList.size());
+    	model.addAttribute("productList", productList);
+    	
+    	return productList;
+    }
 }

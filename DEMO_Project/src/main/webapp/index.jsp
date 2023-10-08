@@ -10,21 +10,31 @@
 <style>
 #bannerImg{
 	width:100%;
+	cursor: pointer;
 }
 #imgDiv{
 	padding-top: 30px;
 }
-.productDiv{
+.productDivClass{
 	height:350px;
 	border: 1px solid black;
 	display:inline-block;
 }
-#bestProductDive{
-	width:49%;
+#bestProductDiv{
+	width:40%;
+	height: 340px;
+	padding: 0px 50px;
 }
-#lastestProductDive{
-	width:49%;
+#lastestProductDiv{
+	width:40%;
 	float:right;
+	height: 340px;
+	padding: 0px 50px;
+}
+.productDivTitle{
+	padding-top:20px;
+	text-align:center;
+	font-size: 20px;
 }
 </style>
 </head>
@@ -38,17 +48,20 @@
 
 	<div id='mainContainer'>
 		<div id='imgDiv'>
-			<img id='bannerImg' src='/DEMO_Project/resources/img/banner.png' alt='배너 없음'>
+			<img id='bannerImg' src='/DEMO_Project/resources/img/banner.png' alt='배너 없음'
+				onclick='location.href="./shop/viewProduct.do?no=1"'>
 		</div>
 		
 		<hr>
 		
-		<div id='bestProductDive' class='productDiv'>
-			
+		<div id='bestProductDiv' class='productDivClass'>
+			<div class='productDivTitle'>댕댕 베스트 상품</div>
+			<jsp:include page="/WEB-INF/views/bestProductDiv.jsp"/>
 		</div>
 		
-		<div id='lastestProductDive' class='productDiv'>
-			
+		<div id='lastestProductDiv' class='productDivClass'>
+			<div class='productDivTitle'>댕댕 최신 상품</div>
+			<jsp:include page="/WEB-INF/views/lastestProductDiv.jsp"/>
 		</div>
 		
 	</div>
