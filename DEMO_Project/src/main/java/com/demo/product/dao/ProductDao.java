@@ -40,6 +40,8 @@ public interface ProductDao {
 
 	void updateCartOne(int stock, int productNo, int memberNo);
 
+	void updateProductStock(int productNo, int quantity);
+
 
 
 	

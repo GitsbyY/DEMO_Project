@@ -109,6 +109,7 @@ table tr td div {
 .productImg{
 	width: 160px;
 	height: 160px;
+	cursor: pointer;
 }
 #deleteDiv{
 	height:200px;
@@ -222,7 +223,8 @@ table tr td div {
 							<td>
 								<div class="cartListDiv imgDiv">
 									<img alt="image not found" class="productImg" 
-										src="<c:url value='/image/Product/${cart.STORED_FILE_NAME}'/>">
+										src="<c:url value='/image/Product/${cart.STORED_FILE_NAME}'/>"
+											onclick="location.href='/DEMO_Project/shop/viewProduct.do?no=${cart.PRODUCT_NO}'">
 								</div>
 							</td>
 							<td>

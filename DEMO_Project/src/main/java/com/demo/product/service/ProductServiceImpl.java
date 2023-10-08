@@ -159,6 +159,12 @@ public class ProductServiceImpl implements ProductService{
 		// TODO Auto-generated method stub
 		productDao.deleteCartOne(productNo, memberNo);
 	}
+
+	@Override
+	public void updateProductStock(int productNo, int quantity) {
+		// TODO Auto-generated method stub
+		productDao.updateProductStock(productNo, quantity);
+	}
 	
 
 	

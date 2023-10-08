@@ -437,16 +437,16 @@ table tr td:first-child {
     }
     
     function checkStockFnc() {
-    	
 		$.ajax({
 			url : "/DEMO_Project/checkStock.do",
 			method : "POST",
 			data : { stock: $('#stock').val(),
 					productNo: $('#productNo').val()},
 			
-			success: function(result) {
+			success: function(resultMap) {
 				// 요청이 성공하면 결과를 화면에 표시
-				if(result){
+				var result = resultMap.result;
+				if(result === "true"){
 					submitFnc();
 				}else {
 					document.getElementById('stockModal').style.display = 'block';

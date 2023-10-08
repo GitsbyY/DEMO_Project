@@ -75,6 +75,7 @@ th, td {
 .productImg{
 	width:120px;
 	height:120px;
+	cursor: pointer;
 }
 </style>
 <meta charset="UTF-8">
@@ -121,7 +122,8 @@ th, td {
 							<div id="imgContainer" style="display: block; width : 300px; height: 120px; margin-left: 88px;">
 <!-- 								<img src="" alt="상품 이미지"> -->
 								<img alt="image not found" class="productImg" 
-								src="<c:url value='/image/Product/${orderDto.STORED_FILE_NAME}'/>">
+									src="<c:url value='/image/Product/${orderDto.STORED_FILE_NAME}'/>"
+										onclick="goProductFnc(${orderDto.PRODUCT_NO});">
 							</div>
 						</th>
 						<th style="font-size: 24px; font-weight: bold;">1개</th>
@@ -173,6 +175,8 @@ th, td {
 	<jsp:include page="/WEB-INF/views/Footer.jsp" />
 </body>
 <script type="text/javascript">
-
+function goProductFnc(no){
+	location.href='/DEMO_Project/shop/viewProduct.do?no=' + no;
+}
 </script>
 </html>

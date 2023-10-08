@@ -168,6 +168,7 @@ table tr td:first-child {
 		<form action='./paymentCartCtr.do' method='post' id='paymentForm'>
 			<input type="hidden" id="formData" name="formData" value="">
 			<input type="hidden" name="sumPrice" value="${sumPrice}">
+			<input type='hidden' id='memberEmoney' value='${sessionScope.member.memberEmoney}'>
 			
 			<c:forEach var="product" items="${productNos}" varStatus="loop">
 				<input type="hidden" id="productNoId${loop.index}"
@@ -329,7 +330,7 @@ table tr td:first-child {
 					<input id="cancellation" type="button" value="취소"
 						onclick="cancelFnc();">
 					<input id="payment" type="button" value="결제"
-						onclick="submitFnc();">
+						onclick="paymentFnc();">
 				</div>
 			</div>
 		</form>
@@ -445,18 +446,18 @@ table tr td:first-child {
         $.ajax({
             url: "/DEMO_Project/checkStockCart.do",
             method: "POST",
-            data: { productNos: checkedProductNos }, // 수정: 변수명 수정
+            contentType: "application/json",  // JSON 데이터를 전송함을 명시
+            data: JSON.stringify({ productNos: checkedProductNos }),
 
             success: function (resultMap) {
                 // 요청이 성공하면 결과를 화면에 표시
                 var result = resultMap.result;
-                
                 if (result == "true") {
                 	submitFnc();
                 } else {
                 	var productName = resultMap.productName;
-                	var text = "죄송합니다.<br>" + productName
-                				+ "가 재고가 부족하여 고객님의 장바구니에 최대 수량으로 맞췄습니다.<br>"
+                	var text = "죄송합니다.\n" + productName
+                				+ "의 재고가 부족하여 고객님의 장바구니에 수량을 변경하였습니다.\n"
                 				+ "다시 결제해 주세요."
                 	$('#stockModalDiv').text(text);
                     document.getElementById('stockModal').style.display = 'block';

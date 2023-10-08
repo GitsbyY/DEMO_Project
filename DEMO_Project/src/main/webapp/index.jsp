@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Hello Spring</title>
+<title>DAENGDAENG</title>
 <link rel="stylesheet" type="text/css" href="/DEMO_Project/resources/css/main.css">
 <style>
 #bannerImg{

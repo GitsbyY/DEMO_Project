@@ -75,6 +75,7 @@ th, td {
 .productImg{
 	width:120px;
 	height:120px;
+	cursor: pointer;
 }
 </style>
 <meta charset="UTF-8">
@@ -122,8 +123,10 @@ th, td {
 							</div>
 							<div id="imgContainer" style="display: block; width : 300px; height: 120px; margin-left: 88px;">
 <!-- 								<img src="" alt="상품 이미지"> -->
+								<a href="/DEMO_Project/shop/viewProduct.do?no=${orderDto.PRODUCT_NO}">
 								<img alt="image not found" class="productImg" 
-								src="<c:url value='/image/Product/${orderDto.STORED_FILE_NAME}'/>">
+									src="<c:url value='/image/Product/${orderDto.STORED_FILE_NAME}'/>"
+										onclick="goProductFnc(${orderDto.PRODUCT_NO});">
 							</div>
 						</th>
 						<th style="font-size: 24px; font-weight: bold;">${orderDto.PRODUCT_QUANTITY} 개</th>
@@ -243,6 +246,10 @@ function checkOrderStatusConfirm() {
 function goReviewFnc(){
 	var productName = document.getElementById('productName').value;
 	location.href='/DEMO_Project/board/reviewadd.do?productName=' + productName;	
+}
+
+function goProductFnc(no){
+	location.href='/DEMO_Project/shop/viewProduct.do?no=' + no;
 }
 </script>
 </html>

@@ -41,6 +41,8 @@ public interface ProductService {
 
 	public void deleteCartOne(String productNo, int memberNo);
 
+	public void updateProductStock(int productNo, int quantity);
+
 
 	
 	

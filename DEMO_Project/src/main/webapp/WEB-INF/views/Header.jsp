@@ -62,6 +62,7 @@
 					<a href="#" class="bottomRowButton" id="curEmoney">
 						eMoney : 
 						<fmt:formatNumber value="${sessionScope.member.memberEmoney}" pattern="#,##0" />
+						원
 					</a>
 					<a href="#" class="bottomRowButton" id="memberNick" style="width: 90px;"> 
 						${sessionScope.member.memberName}님

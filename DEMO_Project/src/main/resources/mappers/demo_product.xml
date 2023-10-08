@@ -235,6 +235,12 @@
 		WHERE MEMBER_NO = #{memberNo}
 		AND PRODUCT_NO = #{productNo}
 	</update>
+	
+	<update id="updateProductStock" parameterType="int">
+		UPDATE PRODUCT
+		SET PRODUCT_STOCK = PRODUCT_STOCK - #{quantity}
+		WHERE PRODUCT_NO = #{productNo}
+	</update>
 </mapper>
 
 

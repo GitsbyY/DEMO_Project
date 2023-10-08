@@ -150,6 +150,15 @@ public class ProductDaoImpl implements ProductDao{
 		sqlSession.update(nameSpace + "updateCartOne", map);
 	}
 
+	@Override
+	public void updateProductStock(int productNo, int quantity) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("quantity", quantity);
+		map.put("productNo", productNo);
+		sqlSession.update(nameSpace + "updateProductStock", map);
+	}
+
 	
 
 }
