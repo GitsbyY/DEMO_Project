@@ -82,6 +82,7 @@
       ) NOTICE 
       JOIN MEMBER ON NOTICE.MEMBER_NO = MEMBER.MEMBER_NO
       WHERE NOTICE.RNUM BETWEEN #{start} AND #{end}
+      ORDER BY NOTICE_CRE_DATE DESC
    </select>
 
 	<select id="reviewSelectList" parameterType="map"
