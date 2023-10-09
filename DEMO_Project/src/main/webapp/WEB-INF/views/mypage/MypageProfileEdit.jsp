@@ -279,7 +279,7 @@ button {
 
 				<form action="./MypageProfileEditDeleteCtr.do" method="POST" id="memberDeleteForm">
 					<div id="deleteInfo">
-					<input type="hidden" value="${sessionScope.member.memberNo}" name="memberNo" id="deleteMemberNo"/>
+					<input type="hidden" value="${memberDto.MEMBER_NO}" name="memberNo" id="deleteMemberNo"/>
 						<input type="submit" name="deleteMemberInfo" value="탈퇴" onclick="return confirmDelete();" />
 					</div>
 				</form>

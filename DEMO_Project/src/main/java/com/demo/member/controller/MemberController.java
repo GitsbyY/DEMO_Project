@@ -372,28 +372,31 @@ public class MemberController {
 		}
 
 	// 회원탈퇴   ./MypageProfileEditDeleteCtr.do  ./MypageProfileEditDeleteCtr.do
-	@RequestMapping(value = "/mypage/MypageProfileEditDeleteCtr.do", method = RequestMethod.POST)
-	public String memberDelete(MemberDto memberDto, HttpSession session, Model model) {
-
+	@RequestMapping(value = "/mypage/MypageProfileEditDeleteCtr.do",
+			method = RequestMethod.POST)
+	public String memberDelete(String memberNo,
+			HttpSession session, Model model) {
+		
+		int mNo = Integer.parseInt(memberNo);
+		MemberDto memberDto = new MemberDto();
+		memberDto.setMemberNo(mNo);
 		System.out.println(memberDto);
-
+		
+		memberService.memberInfoDelete(memberDto);
+		model.addAttribute("result", "success"); // 성공 시 'success' 값을 모델에 추가
 		try {
-			memberService.memberInfoDelete(memberDto);
-			model.addAttribute("result", "success"); // 성공 시 'success' 값을 모델에 추가
 		} catch (Exception e) {
 			// TODO: handle exception
 			model.addAttribute("result", "fail"); // 실패 시 'fail' 값을 모델에 추가
 		}
-		System.out.println(memberDto);
-		memberDto = (MemberDto) session.getAttribute("member");
 		session.setAttribute("myPageAside", "memberInfo");
-		if(memberDto.getMemberNo() != 1) {
-			return "redirect:/auth/logout.do";
-		}else {
-			return "redirect:/auth/mypageProfileAdmin.do";
+		
+		MemberDto sessionMemberDto
+			= (MemberDto) session.getAttribute("member");
+		if(sessionMemberDto.getMemberNo() != 1) {
+			 session.removeAttribute("member");
 		}
-		// 로그인페이지로 이동 ->http://localhost:9080/DEMO_Project/auth/login.do
-
+		return "common/successDeleteMember";
 	}
 
 	// 회원정보 상세 화면(pet)
