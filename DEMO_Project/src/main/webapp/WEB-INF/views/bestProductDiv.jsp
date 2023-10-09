@@ -1,34 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
-<script type="text/javascript" src="/DEMO_Project/resources/js/jquery-3.7.1.js">
-
-</script>
-
-<style type="text/css">
-.productDiv{
-	float: left;
-	margin: 15px 10px;
-	padding: 10px;
-	width: 130px;
-	height: 230px;
-	border: 1px solid black;
-	text-align: center;
-	position: relative;
-	cursor: pointer;
-}
-.productImg{
-	width: 130px;
-	height: 130px;
-}
-.productNameDiv{
-	white-space: nowrap;        /* 줄 바꿈 금지 */
-    overflow: hidden;           /* 넘치는 부분 감춤 */
-    text-overflow: ellipsis;
-}
-</style>
+    
    <nav class='productNav1'>
    </nav>
   
@@ -50,7 +22,7 @@
 	                var productDiv = '<div class="productDiv" onclick="viewProduct(' + productDto.PRODUCT_NO + ')">' +
 	                    '<img alt="image not found" class="productImg" src="' + imageUrl + '" /><br/>' +
 	                    '<div class="productNameDiv">' + productDto.PRODUCT_NAME + '</div>' +
-	                    '<div>' + new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(productDto.PRODUCT_PRICE) + '원</div>' +
+	                    '<div>' + new Intl.NumberFormat().format(productDto.PRODUCT_PRICE) + '원</div>' +
 	                    '<div>남은수량:' + productDto.PRODUCT_STOCK + '개</div>' +
 	                    '</div>';
 	

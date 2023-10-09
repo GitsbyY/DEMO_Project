@@ -92,8 +92,7 @@ button{
 	margin-right : -45px;
 	font-size: 14px;
 	text-align: right;
-
-	width: 350px;
+	width: 400px;
 }
 #timerElement{
 	float: left; /* 왼쪽으로 띄우기 */
