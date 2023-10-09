@@ -135,6 +135,7 @@ select{
 	min-height: 700px;
 	margin: 0px auto;
 	border: 1px solid black;
+	font-size: 28px;
 }
 
 #productCategory{

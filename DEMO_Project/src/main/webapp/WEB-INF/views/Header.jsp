@@ -67,7 +67,7 @@
 					<a href="#" class="bottomRowButton" id="memberNick" style="width: 90px;"> 
 						${sessionScope.member.memberName}님
 					</a>
-					<a href="<%=request.getContextPath()%>/auth/logout.do" 
+					<a href="#" onclick="logoutFnc();"
 					id="logoutButton" class="bottomRowButton">
 						로그아웃
 					</a>
@@ -79,11 +79,13 @@
 </div>
 <script type="text/javascript">
 
-	function goHomeFnc() {
-
-		var url = '/DEMO_Project/auth/login.do';
-
-		location.href = url;
+	function logoutFnc() {
+		var result = confirm("로그아웃 하시겠습니까?");
+		
+		if(result){
+			location.href = '/DEMO_Project/auth/login.do';
+		}
+		
 	}
 	
 	document.addEventListener("DOMContentLoaded", function(){

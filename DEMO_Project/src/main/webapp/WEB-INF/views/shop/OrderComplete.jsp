@@ -77,6 +77,7 @@ table tr td:first-child {
 	height:150px;
 	float:left;
 	margin: auto 50px;
+	cursor: pointer;
 }
 #shopCtrContainer{
 	height:300px;
@@ -116,7 +117,8 @@ table tr td:first-child {
 			</div>
 			<div id='productDiv'>
 				<img id="productImg" alt="이미지가 없습니다."
-		        		src="<c:url value='/image/Product/${productDto.STORED_FILE_NAME}'/>">
+		        		src="<c:url value='/image/Product/${productDto.STORED_FILE_NAME}'/>"
+		        		onclick="goProductFnc(${productDto.PRODUCT_NO});">
         		<div id='productInfoDiv'>
         			${productDto.PRODUCT_NAME}<br>
         			<br>
@@ -278,7 +280,10 @@ table tr td:first-child {
 </body>
 <script>
 	function goOrderListFnc(orderNo) {
-		location.href='/DEMO_Project/mypage/MypageDetail.do?orderNo=' + orderNo
+		location.href='/DEMO_Project/mypage/MypageDetail.do?orderNo=' + orderNo;
+	}
+	function goProductFnc(productNo) {
+		location.href='/DEMO_Project/shop/viewProduct.do?no=' + productNo;
 	}
 </script>
 </html>

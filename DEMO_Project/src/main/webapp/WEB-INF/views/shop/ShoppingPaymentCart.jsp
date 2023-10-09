@@ -169,7 +169,7 @@ table tr td:first-child {
 			<input type="hidden" id="formData" name="formData" value="">
 			<input type="hidden" name="sumPrice" value="${sumPrice}">
 			<input type='hidden' id='memberEmoney' value='${sessionScope.member.memberEmoney}'>
-			
+			<input type='hidden' id='memberNo' value='${sessionScope.member.memberNo}'>
 			<c:forEach var="product" items="${productNos}" varStatus="loop">
 				<input type="hidden" id="productNoId${loop.index}"
 					name="product" value="${product}">

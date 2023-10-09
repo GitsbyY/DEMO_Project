@@ -59,6 +59,9 @@
     overflow: hidden;           /* 넘치는 부분 감춤 */
     text-overflow: ellipsis;
 }
+.marginTag{
+	margin: 20px auto;
+}
 </style>
 </head>
 <body>
@@ -75,7 +78,7 @@
 				onclick='location.href="./shop/viewProduct.do?no=1"'>
 		</div>
 		
-		<hr>
+		<hr class='marginTag'>
 		
 		<div id='bestProductDiv' class='productDivClass'>
 			<div class='productDivTitle'>댕댕 베스트 상품</div>
@@ -86,7 +89,6 @@
 			<div class='productDivTitle'>댕댕 최신 상품</div>
 			<jsp:include page="/WEB-INF/views/lastestProductDiv.jsp"/>
 		</div>
-		
 	</div>
 	
 	<jsp:include page="/WEB-INF/views/Footer.jsp"/>
