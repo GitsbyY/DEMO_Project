@@ -104,6 +104,7 @@ div {
 	font-size: 5px;
 	color: red;
 	text-align: left;
+	margin-left: 82px;
 }
 
 button.DaengBtn:hover {
