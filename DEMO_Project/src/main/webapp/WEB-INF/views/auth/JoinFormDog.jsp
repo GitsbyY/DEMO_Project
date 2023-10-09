@@ -14,7 +14,7 @@
 
 <body>
 <div>
-	<h1 style="text-align: left; color: #FFC4A3; margin-top: 50px; margin-bottom: 30px;"
+	<h1 style="text-align: left; color: #FFC4A3; margin-top: 50px; margin-bottom: 30px; cursor: pointer;"
 		onclick="location.href='/DEMO_Project/auth/login.do'">DAENGDAENG</h1>
 	<div class="formContainerDog">
 		<form action="addpCtr.do" method="post">
@@ -348,8 +348,10 @@
 	function changeDogPillSelect() {
 		if(document.getElementById("dogPillSelect").value === "미정"){
 			$('#dogVacDateDiv').css('display', 'none');
+			$('#selectedVacDateText').css('display', 'none');
 		}else{
 			$('#dogVacDateDiv').css('display', 'flex');
+			$('#selectedVacDateText').css('display', 'block');
 		}
 		updateSubmitButton();
 	}

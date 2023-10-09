@@ -376,7 +376,7 @@ textarea {
 	}
 	
 	function goBack() {
-		window.history.back();
+		location.href='/DEMO_Project/board/announcement.do';
 	}
 	
 	function pageMoveDeleteFnc(no) {

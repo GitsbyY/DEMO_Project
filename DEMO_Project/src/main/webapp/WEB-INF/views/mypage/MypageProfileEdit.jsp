@@ -352,7 +352,8 @@ button {
 	        return false;
 	    }
 
-	    if (!blankCheck.test(inputElement.value)) {
+	    // 주소 필드에 대해서만 공백 체크를 무시
+	    if (inputElement.id !== "memberAddress" && !blankCheck.test(inputElement.value)) {
 	        inputElement.classList.add("errorOutline");
 	        errMsgElement.style.color = "red";
 	        errMsgElement.textContent = errorMessage.noSpace;

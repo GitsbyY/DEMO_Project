@@ -337,7 +337,7 @@ td input {
 <script type="text/javascript">   
    
    function goBack() {
-      window.history.back();
+	   location.href='/DEMO_Project/board/customerService.do';
    }
    
    function pageMoveDeleteFnc(no) {      

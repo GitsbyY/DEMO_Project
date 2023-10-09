@@ -397,7 +397,7 @@ textarea {
 	}
 
 	function goBack() {
-		window.history.back();
+		location.href='/DEMO_Project/board/review.do';
 	}
    
 	function pageMoveDeleteFnc(no) {
