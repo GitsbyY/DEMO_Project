@@ -261,7 +261,7 @@ table tr td:first-child {
 							</td>
 							<td>
 								<div class="secondTd">
-									<input id="pointInput" type="text">
+									<input id="pointInput" name='pointInput' type="text">
 									<span class="redText">P</span>
 								</div>
 							</td>

@@ -335,8 +335,9 @@ public class OrderController {
 	
 	@RequestMapping(value = "/paymentCartCtr.do", method = RequestMethod.POST)
 	public String paymentCartCtr(@RequestParam("formData") String formData,
-			OrderDto orderDto, HttpSession session, Model model)
-			throws JsonParseException, JsonMappingException, IOException{
+			String pointInput, OrderDto orderDto,
+			HttpSession session, Model model)
+		throws JsonParseException, JsonMappingException, IOException{
 	    // JSON 문자열을 Map으로 변환
 	    ObjectMapper objectMapper = new ObjectMapper();
 	    Map<String, Object> data = objectMapper.readValue(formData, Map.class);
@@ -344,6 +345,11 @@ public class OrderController {
 	    // Map에서 productNos를 꺼내서 사용
 	    List<String> productNos = (List<String>) data.get("productNos");
 	    
+	    if (pointInput.trim().length() == 0) {
+			pointInput = "0";
+		}
+		int point = Integer.parseInt(pointInput);
+		
 	    MemberDto memberDto
 		= (MemberDto) session.getAttribute("member");
 	    orderDto.setMemberNo(memberDto.getMemberNo());
@@ -374,10 +380,17 @@ public class OrderController {
 				//상품 재고 변경
 				productService.updateProductStock(productNo, quantity);
 			}
+			//총 상품금액
+			model.addAttribute("sumPrice", sumPrice);
+			
+			sumPrice = sumPrice - point;
+			//총 결제금액
+			model.addAttribute("paymentPrice", sumPrice);
+			
 			//상품 결제
 			memberDto.setMemberEmoney(memberDto.getMemberEmoney() - sumPrice);
 			memberService.memberEmoneyUpdate(memberDto);
-			memberDto.setMemberPoint(memberDto.getMemberEmoney() + (int)(sumPrice*0.05));
+			memberDto.setMemberPoint(memberDto.getMemberPoint() + (int)(sumPrice*0.05) - point);
 			memberService.memberPointUpdate(memberDto);
 			result = true;
 		} catch (Exception e) {
@@ -389,7 +402,6 @@ public class OrderController {
     	
 		model.addAttribute("productDto", productDto);
 		model.addAttribute("productCount", productNos.size()-1);
-	    model.addAttribute("paymentPrice", sumPrice);
 	    model.addAttribute("orderDto", orderDto);
 	    
 	    session.setAttribute("member", memberDto);
@@ -403,8 +415,13 @@ public class OrderController {
 	@RequestMapping(value = "/paymentCtr.do",
 			method = {RequestMethod.POST })
 	public String paymentCtr(OrderDto orderDto,int paymentPrice,
-			HttpSession session, Model model) {
+			String pointInput, HttpSession session, Model model) {
 		System.out.println(orderDto);
+		
+		if (pointInput.trim().length() == 0) {
+			pointInput = "0";
+		}
+		int point = Integer.parseInt(pointInput);
 		
 		MemberDto memberDto
 			= (MemberDto) session.getAttribute("member");
@@ -415,7 +432,7 @@ public class OrderController {
 		int afterEmoney = memberDto.getMemberEmoney() - paymentPrice;
 		memberDto.setMemberEmoney(afterEmoney);
 		memberService.memberEmoneyUpdate(memberDto);
-		memberDto.setMemberPoint(memberDto.getMemberEmoney() + (int)(paymentPrice*0.05));
+		memberDto.setMemberPoint(memberDto.getMemberPoint() + (int)(paymentPrice*0.05) - point);
 		memberService.memberPointUpdate(memberDto);
 		productService.updateProductStock(orderDto.getProductNo(), orderDto.getProductQuantity());
 		//상품 정보
@@ -425,8 +442,12 @@ public class OrderController {
 		model.addAttribute("orderDto", orderDto);
 		session.setAttribute("member", memberDto);
 		
+		//총 결제금액
 		model.addAttribute("paymentPrice", paymentPrice);
 		
+		paymentPrice = paymentPrice + point;
+		//총 상품금액
+		model.addAttribute("sumPrice", paymentPrice);
 		if(result == true) {
 			return "shop/OrderComplete";
 		}else {

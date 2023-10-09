@@ -198,7 +198,7 @@ table tr td:first-child {
 						<td>
 							<div>
 								<span id="productSumPrice" class="secondTd">
-									<fmt:formatNumber value="${productDto.PRODUCT_PRICE * orderDto.productQuantity}" type="number" />
+									<fmt:formatNumber value="${sumPrice}" type="number" />
 								</span>
 								원
 							</div>
@@ -263,7 +263,7 @@ table tr td:first-child {
 				<div class="emptyCartClass empty">
 				</div>
 				<div class="shopCtrDiv"
-					onclick="location.href='./shop.do'">
+					onclick="goOrderListFnc(${orderDto.orderNo});">
 					주문내역
 				</div>
 				<div class="shopCtrDiv notEmptyCartClass"
@@ -277,5 +277,8 @@ table tr td:first-child {
 	<jsp:include page="/WEB-INF/views/Footer.jsp"/>
 </body>
 <script>
+	function goOrderListFnc(orderNo) {
+		location.href='/DEMO_Project/mypage/MypageDetail.do?orderNo=' + orderNo
+	}
 </script>
 </html>
