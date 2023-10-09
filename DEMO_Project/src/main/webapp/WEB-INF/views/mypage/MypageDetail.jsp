@@ -88,7 +88,7 @@ th, td {
 
 	<jsp:include page="/WEB-INF/views/asideMyPage.jsp" />
 	<fmt:formatDate value="${orderDto.ORDER_DATE}" pattern="yyyy/MM/dd" var="formattedDate" />
-	<fmt:formatDate value="${orderDto.ORDER_DATE}" pattern="yyyy/MM/dd HH:mm:SS" var="formattedDateDetail" />
+	<fmt:formatDate value="${orderDto.ORDER_DATE}" pattern="yyyy-MM-dd HH:mm:SS" var="formattedDateDetail" />
 	<fmt:formatNumber value="${orderDto.PRODUCT_PRICE}" pattern="#,###,###" var="formattedNumber" />
 	<fmt:formatNumber value="${orderDto.PRODUCT_QUANTITY*orderDto.PRODUCT_PRICE}" pattern="#,###,###" var="formattedCapNumber" />
 	<input type='hidden' id='productName' value='${orderDto.PRODUCT_NAME}'>

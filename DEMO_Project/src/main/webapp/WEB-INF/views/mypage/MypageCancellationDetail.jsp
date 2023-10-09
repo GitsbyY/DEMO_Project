@@ -97,9 +97,9 @@ th, td {
 		<div id='divDetailContainer'>
 
 			<div id="divTop">
-				<div>${orderDto.ORDER_DATE}&nbsp;&nbsp;|</div>
+				<div><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${orderDto.ORDER_DATE}" />&nbsp;&nbsp;|</div>
 				<div>${orderDto.ORDER_NO}&nbsp;&nbsp;|</div>
-				<div>${orderDto.ORDER_CANCEL_DATE}&nbsp;&nbsp;|</div>
+				<div><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${orderDto.ORDER_CANCEL_DATE}" />&nbsp;&nbsp;|</div>
 				<div>${orderDto.MEMBER_NO}&nbsp;&nbsp;|</div>
 				<div>${orderDto.MEMBER_ID}</div>
 			</div>
