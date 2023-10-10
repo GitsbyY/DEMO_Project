@@ -79,7 +79,7 @@ tr, td {
     font-size: 24px;
     text-align: center;
     position: absolute;
-    right: 85px;
+    right: 87px;
 }
 
 .emoneyListTableDiv{
