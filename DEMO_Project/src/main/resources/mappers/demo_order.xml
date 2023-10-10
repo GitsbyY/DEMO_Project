@@ -46,7 +46,7 @@
 					FROM ORDER_LIST L
 					JOIN MEMBER M ON L.MEMBER_NO = M.MEMBER_NO
 					JOIN PRODUCT P ON L.PRODUCT_NO = P.PRODUCT_NO
-					ORDER BY ORDER_DATE DESC) OL
+					ORDER BY L.ORDER_DATE DESC, L.ORDER_NO DESC) OL
 			<if test="category == 'memberNo'">
 				WHERE OL.MEMBER_NO = #{search}
 			</if>
@@ -78,7 +78,7 @@
 					JOIN MEMBER M ON L.MEMBER_NO = M.MEMBER_NO
 					JOIN PRODUCT P ON L.PRODUCT_NO = P.PRODUCT_NO
 					WHERE M.MEMBER_NO = #{sessionMemberNo}
-					ORDER BY ORDER_DATE DESC) OL
+					ORDER BY ORDER_DATE DESC, L.ORDER_NO DESC) OL
 			<if test="category == 'orderNo' and search != ''">
 				WHERE OL.ORDER_NO = #{search}
 			</if>
