@@ -49,36 +49,36 @@
 					</div>
 					<div class="selectDogType">
 						<select id="dogTypeSelect" name="petBreed">
-							<option value="poodle">푸들</option>
-							<option value="maltese">말티즈</option>
-							<option value="bulldog">불독</option>
-							<option value="dachshund">닥스훈트</option>
-							<option value="jindo">진돗개</option>
-							<option value="spitz">스피츠</option>
-							<option value="yorkshireterrier">요크셔 테리어</option>
-							<option value="shihTzu">시츄</option>
-							<option value="chihuahua">치와와</option>
-							<option value="pomeranian">포메라니안</option>
-							<option value="shibaInu">시바 이누</option>
-							<option value="bully">불리</option>
-							<option value="cockerSpaniel">코커 스패니얼</option>
-							<option value="japaneseSpitz">일본 스피츠</option>
-							<option value="schnauzer">슈나우저</option>
-							<option value="goldenRetriever">골든 리트리버</option>
-							<option value="labrador">래브라도 리트리버</option>
-							<option value="beagle">비글</option>
-							<option value="pug">퍼그</option>
-							<option value="boxer">복서</option>
-							<option value="doberman">도베르만 핀셔</option>
-							<option value="samoyed">사모예드</option>
-							<option value="cockerspaniel">잉글리시 코커 스패니얼</option>
-							<option value="siberianHusky">시베리안 허스키</option>
-							<option value="whippet">위펫</option>
-							<option value="akita">아키타</option>
-							<option value="chowChow">차우차우</option>
-							<option value="borderCollie">보더 콜리</option>
-							<option value="berneseMountainDog">버니즈 마운틴 독</option>
-							<option value="newfoundland">뉴펀들랜드</option>
+							<option value="푸들">푸들</option>
+							<option value="말티즈">말티즈</option>
+							<option value="불독">불독</option>
+							<option value="닥스훈트">닥스훈트</option>
+							<option value="진돗개">진돗개</option>
+							<option value="스피츠">스피츠</option>
+							<option value="요크셔 테리어">요크셔 테리어</option>
+							<option value="시츄">시츄</option>
+							<option value="치와와">치와와</option>
+							<option value="포메라니안">포메라니안</option>
+							<option value="시바 이누">시바 이누</option>
+							<option value="불리">불리</option>
+							<option value="코커 스패니얼">코커 스패니얼</option>
+							<option value="일본 스피츠">일본 스피츠</option>
+							<option value="슈나우저">슈나우저</option>
+							<option value="골든 리트리버">골든 리트리버</option>
+							<option value="래브라도 리트리버">래브라도 리트리버</option>
+							<option value="비글">비글</option>
+							<option value="퍼그">퍼그</option>
+							<option value="복서">복서</option>
+							<option value="도베르만 핀셔">도베르만 핀셔</option>
+							<option value="사모예드">사모예드</option>
+							<option value="잉글리시 코커 스패니얼">잉글리시 코커 스패니얼</option>
+							<option value="시베리안 허스키">시베리안 허스키</option>
+							<option value="위펫">위펫</option>
+							<option value="아키타">아키타</option>
+							<option value="차우차우">차우차우</option>
+							<option value="보더 콜리">보더 콜리</option>
+							<option value="버니즈 마운틴 독">버니즈 마운틴 독</option>
+							<option value="뉴펀들랜드">뉴펀들랜드</option>
 							<option value="other">기타</option>
 						</select>
 						<!-- 기타 견종을 입력할 수 있는 input 태그 -->
@@ -357,5 +357,19 @@
 	}
 	
 	changeDogPillSelect();
+	
+	// select 요소와 input 요소에 대한 참조를 가져옵니다.
+	var selectElement = document.getElementById("dogTypeSelect");
+	var inputElement = document.getElementById("otherDogTypeInput");
+
+	// select 요소의 값이 "other"로 변경될 때마다 input 요소의 값을 select 요소의 값으로 설정합니다.
+	selectElement.addEventListener("change", function() {
+	    if (selectElement.value === "other") {
+	        inputElement.style.display = "block"; // input 요소를 보이게 만듭니다.
+	        inputElement.value = ""; // 기존의 입력값을 초기화합니다.
+	    } else {
+	        inputElement.style.display = "none"; // input 요소를 숨깁니다.
+	    }
+	});
 </script>
 </html>
