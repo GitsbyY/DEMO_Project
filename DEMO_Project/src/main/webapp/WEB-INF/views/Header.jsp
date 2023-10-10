@@ -65,7 +65,7 @@
 						원
 					</a>
 					<a href="#" class="bottomRowButton" id="memberNick" style="width: 90px;"> 
-						${sessionScope.member.memberName}님
+						${sessionScope.member.memberNickName}님
 					</a>
 					<a href="#" onclick="logoutFnc();"
 					id="logoutButton" class="bottomRowButton">
