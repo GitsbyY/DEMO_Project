@@ -282,6 +282,8 @@ public class BoardController {
       model.addAttribute("memberInfoList", memberInfoList);
       model.addAttribute("productName", productName);
 
+      session.setAttribute("customAside", "review");
+      
       return "board/AddReview";
    }
 
