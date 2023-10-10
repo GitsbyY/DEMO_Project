@@ -73,16 +73,15 @@ tr, td {
 	width: 480px;
 	height: 440px;
 }
-
 .emoneyListTitle {
-	width: 481px;
-	height: 100px;
-	font-size: 24px;
-	text-align: center;
-	position: absolute;
-    right: 91px;
-
+    width: 480px;
+    height: 100px;
+    font-size: 24px;
+    text-align: center;
+    position: absolute;
+    right: 85px;
 }
+
 .emoneyListTableDiv{
 	width:100%;
 	height:370px;
