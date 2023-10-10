@@ -85,7 +85,7 @@ button {
 
 .passwordCheckValueInput {
 	width: 300px;
-	text-align: right;
+	text-align: left;
 	font-size: 24px;
 	height: 25px;
 	border: none;
