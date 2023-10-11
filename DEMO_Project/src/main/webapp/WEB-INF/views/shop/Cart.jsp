@@ -236,7 +236,7 @@ table tr td div {
 							<td>
 								<input type="hidden" value="${cart.PRODUCT_PRICE}" id="priceId${loop.index}">
 								<div class="cartListDiv productSumpriceDiv" id="sumPriceId${loop.index}">
-									<fmt:formatNumber value="${cart.PRODUCT_PRICE * cart.PRODUCT_QUANTITY}" type="number" />
+									<fmt:formatNumber value="${cart.PRODUCT_PRICE * cart.PRODUCT_QUANTITY}" type="number" />원
 								</div>
 							</td>
 							<td>

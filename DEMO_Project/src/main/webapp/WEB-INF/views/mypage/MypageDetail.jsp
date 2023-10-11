@@ -87,7 +87,7 @@ th, td {
 	<jsp:include page="/WEB-INF/views/Header.jsp" />
 
 	<jsp:include page="/WEB-INF/views/asideMyPage.jsp" />
-	<fmt:formatDate value="${orderDto.ORDER_DATE}" pattern="yyyy/MM/dd" var="formattedDate" />
+	<fmt:formatDate value="${orderDto.ORDER_DATE}" pattern="yyyy/MM/dd HH:mm:SS" var="formattedDate" />
 	<fmt:formatDate value="${orderDto.ORDER_DATE}" pattern="yyyy-MM-dd HH:mm:SS" var="formattedDateDetail" />
 	<fmt:formatNumber value="${orderDto.PRODUCT_PRICE}" pattern="#,###,###" var="formattedNumber" />
 	<fmt:formatNumber value="${orderDto.PRODUCT_QUANTITY*orderDto.PRODUCT_PRICE}" pattern="#,###,###" var="formattedCapNumber" />
@@ -95,16 +95,6 @@ th, td {
 	<div id='divContainer'>
 		<div id="divTitle">주문 상세</div>
 		<div id='divDetailContainer'>
-
-			<div id="divTop">
-				<div>&nbsp;${orderDto.PRODUCT_NAME}&nbsp;&nbsp;|</div>
-				<div>${formattedDateDetail}&nbsp;&nbsp;|</div>
-				<div>${orderDto.ORDER_NO}&nbsp;&nbsp;|</div>
-				<c:if test="${sessionScope.member.memberNo == 1}">
-					<div>${orderDto.MEMBER_NO}&nbsp;&nbsp;|</div>
-				</c:if>
-				<div>${orderDto.MEMBER_ID}</div>
-			</div>
 
 			<table id="firstTable">
 				<thead>
@@ -133,7 +123,7 @@ th, td {
 						<th rowspan="2" style="font-size: 24px; font-weight: bold; border-left: 1px solid black;">${orderDto.ORDER_STATUS}</th>
 					</tr>
 					<tr>
-						<th style="font-size: 24px; font-weight: bold;">${formattedNumber}</th>
+						<th style="font-size: 24px; font-weight: bold;">${formattedNumber}원</th>
 					</tr>
 			
 			</table>
@@ -158,7 +148,7 @@ th, td {
 					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px; width: 210px;">주문접수번호</th>
 					<th style="font-size: 24px; font-weight: bold; text-align: right; border-right: 1px solid black; padding-right: 15px; width: 210px;">${orderDto.ORDER_NO}</th>
 					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px; width: 210px;">결제금액</th>
-					<th style="font-size: 24px; font-weight: bold; text-align: right; color: blue; width: 210px; padding-right: 10px;">${formattedCapNumber}</th>
+					<th style="font-size: 24px; font-weight: bold; text-align: right; color: blue; width: 210px; padding-right: 10px;">${formattedCapNumber}원</th>
 				</tr>
 				
 				</tbody>

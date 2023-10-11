@@ -87,22 +87,14 @@ th, td {
 	<jsp:include page="/WEB-INF/views/Header.jsp" />
 
 	<jsp:include page="/WEB-INF/views/asideMyPage.jsp" />
-	<fmt:formatDate value="${orderDto.ORDER_DATE}" pattern="yyyy/MM/dd" var="formattedDate" />
-	<fmt:formatDate value="${orderDto.ORDER_CANCEL_DATE}" pattern="yyyy/MM/dd" var="formattedCancelDate" />
+	<fmt:formatDate value="${orderDto.ORDER_DATE}" pattern="yyyy/MM/dd HH:mm:SS" var="formattedDate" />
+	<fmt:formatDate value="${orderDto.ORDER_CANCEL_DATE}" pattern="yyyy/MM/dd HH:mm:SS" var="formattedCancelDate" />
 	<fmt:formatNumber value="${orderDto.PRODUCT_PRICE}" pattern="#,###,###" var="formattedNumber" />
 	<fmt:formatNumber value="${orderDto.PRODUCT_QUANTITY*orderDto.PRODUCT_PRICE}" pattern="#,###,###" var="formattedCapNumber" />
 
 	<div id='divContainer'>
 		<div id="divTitle">취소 상세</div>
 		<div id='divDetailContainer'>
-
-			<div id="divTop">
-				<div><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${orderDto.ORDER_DATE}" />&nbsp;&nbsp;|</div>
-				<div>${orderDto.ORDER_NO}&nbsp;&nbsp;|</div>
-				<div><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${orderDto.ORDER_CANCEL_DATE}" />&nbsp;&nbsp;|</div>
-				<div>${orderDto.MEMBER_NO}&nbsp;&nbsp;|</div>
-				<div>${orderDto.MEMBER_ID}</div>
-			</div>
 
 			<table id="firstTable">
 				<thead>
@@ -130,7 +122,7 @@ th, td {
 						<th rowspan="2" style="font-size: 24px; font-weight: bold; border-left: 1px solid black;">${orderDto.ORDER_STATUS}</th>
 					</tr>
 					<tr>
-						<th style="font-size: 24px; font-weight: bold;">${formattedNumber}</th>
+						<th style="font-size: 24px; font-weight: bold;">${formattedNumber}원</th>
 					</tr>
 			
 			</table>
@@ -146,7 +138,7 @@ th, td {
 					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px; width: 210px;">주문일자</th>
 					<th style="font-size: 24px; font-weight: bold; text-align: right; border-right: 1px solid black;  padding-right: 15px; width: 210px;">${formattedDate}</th>
 					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px; width: 210px;">취소금액</th>
-					<th style="font-size: 24px; font-weight: bold; text-align: right; width: 210px; padding-right: 10px; color: red;">${formattedCapNumber}</th>
+					<th style="font-size: 24px; font-weight: bold; text-align: right; width: 210px; padding-right: 10px; color: red;">${formattedCapNumber}원</th>
 				</tr>
 				<tr>
 					<th style="font-size: 24px; font-weight: bold; text-align: left; padding-left: 10px; width: 210px;">주문접수번호</th>
