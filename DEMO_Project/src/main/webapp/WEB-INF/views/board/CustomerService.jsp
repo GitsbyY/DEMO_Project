@@ -178,6 +178,11 @@ table {
 							</tr>
 						</c:forEach>
 					</table>
+					<c:if test="${empty inquiryDtoList}">
+						<p style="font-size: 24px; margin-left: 10px; text-align: center;  
+							font-weight: bold;">문의내역이
+							없습니다.</p>
+					</c:if>
 				</div>
 			</c:when>
 			<c:otherwise>
@@ -226,6 +231,11 @@ table {
 							</c:if>
 						</c:forEach>
 					</table>
+					<c:if test="${empty inquiryDtoList}">
+						<p style="font-size: 24px; margin-left: 10px; text-align: center; 
+							font-weight: bold;">문의내역이
+							없습니다.</p>
+					</c:if>
 				</div>
 			</c:otherwise>
 		</c:choose>

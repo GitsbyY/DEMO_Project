@@ -182,6 +182,10 @@ tr, td {
 	width: 100px;
 	text-align: left;
 }
+#pointEmoneyInput{
+	width: 100px;
+	text-align: left;
+}
 </style>
 <meta charset="UTF-8">
 <title>마이댕댕 메인</title>
@@ -283,8 +287,8 @@ tr, td {
 								<input type="hidden" name="memberNo" value="${memberDto.MEMBER_NO}" />
 								<c:if test="${sessionScope.member.memberNo == 1}">
 									<input type="text" class="infoTabalTdDataInput" id="pointEmoneyInput" 
-										name="memberEmoney" value="${memberDto.MEMBER_EMONEY}" style="text-align: right;" />
-									<input type="button" value="수정" onclick="checkEmoneyStatus();">
+										name="memberEmoney" value="${memberDto.MEMBER_EMONEY}"/>원
+									<input type="button" value="수정" style="float: right;" onclick="checkEmoneyStatus();">
 								</c:if>
 								<c:if test="${sessionScope.member.memberNo != 1}">
 									<div class="infoTabalTdDataInput" style="text-align: left; border:none; 
