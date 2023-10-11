@@ -181,6 +181,7 @@ aside{
 	background-color: red;
 	border: none;
 	color: white;
+	cursor: pointer;
 }
 
 .memberBtnClass{

@@ -280,8 +280,7 @@ select{
 					<br/>
 					<input type="file" name="file" id="fileInput" style="display:none"
 						onchange="fileSelected()">
-					<label for="fileInput" class="updateClass" style="background-color: white;
-						border:2px solid black; cursor: pointer;">
+					<label for="fileInput" class="updateClass adminBtnClass">
 						이미지 첨부
 					</label>
 					

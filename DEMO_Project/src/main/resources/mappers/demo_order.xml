@@ -181,7 +181,7 @@
 					JOIN MEMBER M ON L.MEMBER_NO = M.MEMBER_NO
 					JOIN PRODUCT P ON L.PRODUCT_NO = P.PRODUCT_NO
 					JOIN ORDER_CANCEL OC ON L.ORDER_NO = OC.ORDER_NO
-					ORDER BY ORDER_DATE DESC) OL
+					ORDER BY OC.ORDER_CANCEL_DATE DESC) OL
 			<if test="category == 'memberNo' and search != ''">
 				WHERE OL.MEMBER_NO = #{search}
 			</if>
@@ -215,7 +215,7 @@
 					JOIN PRODUCT P ON L.PRODUCT_NO = P.PRODUCT_NO
 					JOIN ORDER_CANCEL OC ON L.ORDER_NO = OC.ORDER_NO
 					WHERE M.MEMBER_NO = #{sessionMemberNo}
-					ORDER BY ORDER_DATE DESC
+					ORDER BY OC.ORDER_CANCEL_DATE DESC
 					) OL
 			<if test="category == 'orderNo' and search != ''">
 				WHERE OL.ORDER_NO = #{search}
