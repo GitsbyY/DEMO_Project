@@ -38,3 +38,12 @@ Eclipse
 <h4>| 유효준   | https://github.com/GitsbyY    |</h4>
 <h4>| 임정빈   | https://github.com/jbn750     |</h4>
 <h4>| 김태규   | https://github.com/ktg8377    |</h4>
+
+<h3>## 📄 프로젝트 ppt</h3>
+[팀프로젝트_DAENGDAENG.pptx](https://github.com/user-attachments/files/16647105/_DAENGDAENG.pptx)
+
+<h3>## ✒️ 프로젝트 폴더</h3>
+zip파일을 C드라이브에 압축을 푼다.
+경로: "C:\\DEMO\\image"
+
+[DEMO.zip](https://github.com/user-attachments/files/16647101/DEMO.zip)
